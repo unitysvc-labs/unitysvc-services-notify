@@ -1,0 +1,59 @@
+{
+  "currency": "USD",
+  "display_name": "Google Chat Notifications (Bring Your Own Webhook)",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for Google Chat notification delivery",
+      "file_path": "../../docs/connectivity-gchat.sh.j2",
+      "is_active": true,
+      "is_public": false,
+      "meta": {
+        "test": {
+          "status": "skip"
+        }
+      },
+      "mime_type": "bash"
+    },
+    "How to use this service": {
+      "category": "getting_started",
+      "description": "Guide to configuring your Google Chat webhook for notifications",
+      "file_path": "../../docs/description-gchat.md",
+      "is_active": true,
+      "is_public": true,
+      "mime_type": "markdown"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Example code to send a Google Chat notification",
+      "file_path": "../../docs/code-example-gchat.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "test": {
+          "status": "skip"
+        }
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "description": "Free — customer provides own Google Chat webhook URL",
+    "price": "0",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "enrollment_vars": {
+      "GCHAT_WEBHOOK_URL": ""
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-04-27T00:00:00Z",
+  "user_access_interfaces": {
+    "notify_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/notify/gchat"
+    }
+  }
+}
