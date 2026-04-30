@@ -30,5 +30,10 @@
       "access_method": "http",
       "base_url": "${API_GATEWAY_BASE_URL}/notify/opsgenie"
     }
+  },
+  "service_options": {
+    "ops_testing_parameters": {
+      "api_key_secret": "OPSGENIE_API_KEY"
+    }
   }
 }

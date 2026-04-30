@@ -30,5 +30,10 @@
       "access_method": "http",
       "base_url": "${API_GATEWAY_BASE_URL}/notify/twitch"
     }
+  },
+  "service_options": {
+    "ops_testing_parameters": {
+      "api_key_secret": "TWITCH_BOT_TOKEN"
+    }
   }
 }

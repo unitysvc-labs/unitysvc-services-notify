@@ -30,5 +30,10 @@
       "access_method": "http",
       "base_url": "${API_GATEWAY_BASE_URL}/notify/gchat"
     }
+  },
+  "service_options": {
+    "ops_testing_parameters": {
+      "api_key_secret": "GOOGLE_CHAT_WEBHOOK_URL"
+    }
   }
 }
