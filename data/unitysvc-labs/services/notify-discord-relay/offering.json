@@ -3,10 +3,10 @@
     "notification",
     "messaging"
   ],
-  "description": "Send messages to Discord channels using your own Discord Bot. Bring your bot token; the gateway translates POST /send into Discord REST API calls.",
-  "name": "notify-discord-byok",
+  "description": "Multi-enrollment Discord notification relay. Each enrollment connects a different Discord bot. Customers provide the secret name as a parameter, enabling multiple bot configurations under a single account.",
+  "name": "notify-discord-relay",
   "payout_price": {
-    "description": "No platform commission — customer uses own Discord bot",
+    "description": "Pricing per notification sent",
     "percentage": "100.00",
     "type": "revenue_share"
   },
@@ -16,14 +16,14 @@
   "tags": [
     "notify",
     "discord",
-    "byok",
+    "relay",
     "messaging"
   ],
-  "time_created": "2026-04-27T00:00:00Z",
+  "time_created": "2026-04-29T00:00:00Z",
   "upstream_access_config": {
     "Notify Worker": {
       "access_method": "http",
-      "api_key": "${ customer_secrets.DISCORD_BOT_TOKEN }",
+      "api_key": "${ customer_secrets.{{ params.bot_token_secret }} ?? }",
       "base_url": "${NOTIFY_WORKER_BASE_URL}",
       "routing_key": {
         "channel": "discord"

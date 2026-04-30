@@ -3,10 +3,10 @@
     "notification",
     "messaging"
   ],
-  "description": "Send messages to Google Chat spaces using your own Google Chat webhook. Bring your webhook URL; the gateway translates POST /send into Google Chat API calls.",
-  "name": "notify-gchat-byok",
+  "description": "Send messages to Microsoft Teams channels using your own incoming webhook. Bring your webhook URL; the gateway translates POST /send into Teams webhook API calls.",
+  "name": "notify-teams-byok",
   "payout_price": {
-    "description": "No platform commission — customer uses own Google Chat webhook",
+    "description": "No platform commission — customer uses own Teams webhook",
     "percentage": "100.00",
     "type": "revenue_share"
   },
@@ -15,18 +15,18 @@
   "status": "ready",
   "tags": [
     "notify",
-    "gchat",
+    "teams",
     "byok",
     "messaging"
   ],
-  "time_created": "2026-04-27T00:00:00Z",
+  "time_created": "2026-04-29T00:00:00Z",
   "upstream_access_config": {
     "Notify Worker": {
       "access_method": "http",
-      "api_key": "${ customer_secrets.GOOGLE_CHAT_WEBHOOK_URL }",
+      "api_key": "${ customer_secrets.TEAMS_WEBHOOK_URL }",
       "base_url": "${NOTIFY_WORKER_BASE_URL}",
       "routing_key": {
-        "channel": "gchat"
+        "channel": "teams"
       }
     }
   }

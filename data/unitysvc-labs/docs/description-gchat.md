@@ -6,7 +6,7 @@ Send messages to Google Chat spaces via the UnitySVC gateway using your own Goog
 
 1. **Create an incoming webhook** in your Google Chat space: open the space → Manage webhooks → Add webhook.
 2. Copy the full webhook URL (e.g. `https://chat.googleapis.com/v1/spaces/.../messages?key=...`).
-3. **Enroll** using your webhook URL — stored as `GCHAT_WEBHOOK_URL` in your secrets.
+3. **Enroll** using your webhook URL — stored as `GOOGLE_CHAT_WEBHOOK_URL` in your secrets.
 
 ## API
 

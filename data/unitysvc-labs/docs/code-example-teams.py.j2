@@ -12,7 +12,7 @@ response = requests.post(
         "Content-Type": "application/json",
     },
     json={
-        "target": "channel:987654321",  # your Discord channel ID
+        "target": "",  # unused — webhook is scoped to a specific Teams channel
         "message": "Hello from UnitySVC!",
         "format": "text",
     },

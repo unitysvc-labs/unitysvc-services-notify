@@ -1,11 +1,11 @@
 {
   "currency": "USD",
-  "display_name": "Discord Notifications (Bring Your Own Bot)",
+  "display_name": "Microsoft Teams Notifications (Bring Your Own Webhook)",
   "documents": {
     "Connectivity test": {
       "category": "connectivity_test",
-      "description": "Connectivity test for Discord notification delivery",
-      "file_path": "../../docs/connectivity-discord.sh.j2",
+      "description": "Connectivity test for Teams notification delivery",
+      "file_path": "../../docs/connectivity-teams.sh.j2",
       "is_active": true,
       "is_public": false,
       "meta": {
@@ -17,16 +17,16 @@
     },
     "How to use this service": {
       "category": "getting_started",
-      "description": "Guide to configuring your Discord bot for notifications",
-      "file_path": "../../docs/description-discord.md",
+      "description": "Guide to configuring your Teams incoming webhook",
+      "file_path": "../../docs/description-teams.md",
       "is_active": true,
       "is_public": true,
       "mime_type": "markdown"
     },
     "Python code example": {
       "category": "code_example",
-      "description": "Example code to send a Discord notification",
-      "file_path": "../../docs/code-example-discord.py.j2",
+      "description": "Example code to send a Teams notification",
+      "file_path": "../../docs/code-example-teams.py.j2",
       "is_active": true,
       "is_public": true,
       "meta": {
@@ -38,22 +38,22 @@
     }
   },
   "list_price": {
-    "description": "Free — customer provides own Discord bot token",
+    "description": "Free — customer provides own Teams webhook URL",
     "price": "0",
     "type": "constant"
   },
   "schema": "listing_v1",
   "service_options": {
     "enrollment_vars": {
-      "DISCORD_BOT_TOKEN": ""
+      "TEAMS_WEBHOOK_URL": ""
     }
   },
   "status": "ready",
-  "time_created": "2026-04-27T00:00:00Z",
+  "time_created": "2026-04-29T00:00:00Z",
   "user_access_interfaces": {
     "notify_gateway": {
       "access_method": "http",
-      "base_url": "${API_GATEWAY_BASE_URL}/notify/discord"
+      "base_url": "${API_GATEWAY_BASE_URL}/notify/teams"
     }
   }
 }

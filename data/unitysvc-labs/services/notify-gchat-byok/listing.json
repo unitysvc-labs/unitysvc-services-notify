@@ -45,7 +45,7 @@
   "schema": "listing_v1",
   "service_options": {
     "enrollment_vars": {
-      "GCHAT_WEBHOOK_URL": ""
+      "GOOGLE_CHAT_WEBHOOK_URL": ""
     }
   },
   "status": "ready",

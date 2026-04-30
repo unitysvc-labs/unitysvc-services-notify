@@ -1,12 +1,13 @@
-# Discord Notifications (Bring Your Own Webhook)
+# Discord Notifications (Bring Your Own Bot)
 
-Send messages to Discord channels via the UnitySVC gateway using your own Discord webhook URL.
+Send messages to Discord channels and users via the UnitySVC gateway using your own Discord Bot.
 
 ## Prerequisites
 
-1. **Create a Webhook** in your Discord server: go to channel settings → Integrations → Webhooks → New Webhook.
-2. Copy the full webhook URL (e.g. `https://discord.com/api/webhooks/...`).
-3. **Enroll** using your webhook URL — stored as `DISCORD_WEBHOOK_URL` in your secrets.
+1. **Create a Discord Application** at [discord.com/developers/applications](https://discord.com/developers/applications).
+2. Go to **Bot** → **Add Bot** → **Reset Token** and copy the bot token.
+3. Under **OAuth2 → URL Generator**, select `bot` scope + `Send Messages` permission, then invite the bot to your server.
+4. **Enroll** using your bot token — stored as `DISCORD_BOT_TOKEN` in your secrets.
 
 ## API
 
@@ -14,19 +15,23 @@ Send a message via `POST /send`:
 
 ```json
 {
-  "target": "",
-  "message": "Hello from UnitySVC!",
+  "target": "channel:987654321",
+  "message": "Deployment complete!",
   "format": "text"
 }
 ```
 
-| Field     | Type   | Required | Description                                                   |
-|-----------|--------|----------|---------------------------------------------------------------|
-| `target`  | string | no       | Leave empty — the webhook already targets a specific channel  |
-| `message` | string | yes      | Message content (plain text or Discord markdown)              |
-| `format`  | string | no       | `text` (default) or `markdown`                                |
+| Field     | Type   | Required | Description                                                           |
+|-----------|--------|----------|-----------------------------------------------------------------------|
+| `target`  | string | yes      | `channel:<channel_id>` or `user:<user_id>` (DM)                       |
+| `message` | string | yes      | Message content (plain text or Discord markdown)                      |
+| `format`  | string | no       | `text` (default) or `markdown`                                        |
+
+## Getting Channel and User IDs
+
+Enable **Developer Mode** in Discord (Settings → App Settings → Advanced), then right-click any channel or user to copy its ID.
 
 ## Notes
 
-- Discord webhooks send to a fixed channel. To send to multiple channels, enroll multiple times with different webhook URLs.
-- Discord supports markdown formatting natively — use `format: "markdown"` to enable it.
+- The bot must be a member of the server and have **Send Messages** permission in the target channel.
+- For DMs, use `user:<user_id>` — the user must have previously messaged your bot.
