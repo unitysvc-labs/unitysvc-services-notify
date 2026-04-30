@@ -23,11 +23,6 @@
     "type": "constant"
   },
   "schema": "listing_v1",
-  "service_options": {
-    "enrollment_vars": {
-      "WEBEX_BOT_TOKEN": ""
-    }
-  },
   "status": "ready",
   "time_created": "2026-04-29T00:00:00Z",
   "user_access_interfaces": {
