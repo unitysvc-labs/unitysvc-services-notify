@@ -1,0 +1,33 @@
+{
+  "capabilities": [
+    "notification",
+    "messaging"
+  ],
+  "description": "Send push notifications to Android and web apps using your own Firebase Cloud Messaging (FCM) project. Bring your credentials; the gateway translates POST /send into Firebase Cloud Messaging (FCM) API calls.",
+  "name": "notify-fcm-byok",
+  "payout_price": {
+    "description": "No platform commission \u2014 customer uses own Firebase Cloud Messaging (FCM) account",
+    "percentage": "100.00",
+    "type": "revenue_share"
+  },
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notify",
+    "fcm",
+    "byok",
+    "messaging"
+  ],
+  "time_created": "2026-04-29T00:00:00Z",
+  "upstream_access_config": {
+    "Notify Worker": {
+      "access_method": "http",
+      "api_key": "${ customer_secrets.FCM_SERVER_KEY }",
+      "base_url": "${NOTIFY_WORKER_BASE_URL}",
+      "routing_key": {
+        "channel": "fcm"
+      }
+    }
+  }
+}

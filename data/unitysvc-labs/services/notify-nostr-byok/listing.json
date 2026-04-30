@@ -1,0 +1,59 @@
+{
+  "currency": "USD",
+  "display_name": "Nostr Notifications (Bring Your Own Nostr Key)",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for Nostr notification delivery",
+      "file_path": "../../docs/connectivity-nostr.sh.j2",
+      "is_active": true,
+      "is_public": false,
+      "meta": {
+        "test": {
+          "status": "skip"
+        }
+      },
+      "mime_type": "bash"
+    },
+    "How to use this service": {
+      "category": "getting_started",
+      "description": "Guide to configuring your Nostr account for notifications",
+      "file_path": "../../docs/description-nostr.md",
+      "is_active": true,
+      "is_public": true,
+      "mime_type": "markdown"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Example code to send a Nostr notification",
+      "file_path": "../../docs/code-example-nostr.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "test": {
+          "status": "skip"
+        }
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "description": "Free \u2014 customer provides own Nostr credentials",
+    "price": "0",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "enrollment_vars": {
+      "NOSTR_PRIVATE_KEY": ""
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-04-29T00:00:00Z",
+  "user_access_interfaces": {
+    "notify_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/notify/nostr"
+    }
+  }
+}

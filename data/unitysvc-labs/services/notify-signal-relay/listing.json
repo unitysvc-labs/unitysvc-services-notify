@@ -1,0 +1,91 @@
+{
+  "currency": "USD",
+  "display_name": "Signal Notifications (Multi-Enrollment Relay)",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for Signal relay delivery",
+      "file_path": "../../docs/connectivity-signal.sh.j2",
+      "is_active": true,
+      "is_public": false,
+      "meta": {
+        "test": {
+          "status": "skip"
+        }
+      },
+      "mime_type": "bash"
+    },
+    "How to use this service": {
+      "category": "getting_started",
+      "description": "Guide to configuring your Signal account for multi-enrollment relay",
+      "file_path": "../../docs/description-signal.md",
+      "is_active": true,
+      "is_public": true,
+      "mime_type": "markdown"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Example code to send a Signal notification",
+      "file_path": "../../docs/code-example-signal.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "test": {
+          "status": "skip"
+        }
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "auth_token_secret": "SIGNAL_AUTH_TOKEN",
+      "server_url": "http://signal-cli-rest-api:8080"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-04-29T00:00:00Z",
+  "user_access_interfaces": {
+    "notify_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/notify/signal-relay/{{ enrollment_vars.code }}"
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure which customer secret holds your Signal credentials",
+    "properties": {
+      "auth_token_secret": {
+        "description": "Name of your customer secret containing the signal-cli REST API auth token",
+        "title": "Auth Token Secret Name",
+        "type": "string"
+      },
+      "server_url": {
+        "description": "URL of your signal-cli-rest-api instance (e.g. http://signal-cli:8080)",
+        "title": "signal-cli Server URL",
+        "type": "string"
+      }
+    },
+    "required": [
+      "auth_token_secret",
+      "server_url"
+    ],
+    "title": "Signal Relay Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "auth_token_secret": {
+      "ui:description": "Enter the name of the secret that stores your Signal auth credential",
+      "ui:placeholder": "MY_SIGNAL_AUTH_TOKEN"
+    },
+    "server_url": {
+      "ui:description": "URL of your signal-cli-rest-api instance (e.g. http://signal-cli:8080)",
+      "ui:placeholder": "http://signal-cli-rest-api:8080"
+    }
+  }
+}

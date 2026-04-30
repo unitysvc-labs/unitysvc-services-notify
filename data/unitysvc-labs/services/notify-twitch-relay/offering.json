@@ -1,0 +1,34 @@
+{
+  "capabilities": [
+    "notification",
+    "messaging"
+  ],
+  "description": "Multi-enrollment Twitch notification relay. Each enrollment connects a different Twitch account. Customers provide the secret name as a parameter, enabling multiple configurations under a single account.",
+  "name": "notify-twitch-relay",
+  "payout_price": {
+    "description": "Pricing per notification sent",
+    "percentage": "100.00",
+    "type": "revenue_share"
+  },
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notify",
+    "twitch",
+    "relay",
+    "messaging"
+  ],
+  "time_created": "2026-04-29T00:00:00Z",
+  "upstream_access_config": {
+    "Notify Worker": {
+      "access_method": "http",
+      "api_key": "${ customer_secrets.{{ params.bot_token_secret }} ?? }",
+      "base_url": "${NOTIFY_WORKER_BASE_URL}",
+      "routing_key": {
+        "channel": "twitch",
+        "twitch_channel": "{{ params.twitch_channel }}"
+      }
+    }
+  }
+}

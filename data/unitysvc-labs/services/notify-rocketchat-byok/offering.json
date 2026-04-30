@@ -1,0 +1,33 @@
+{
+  "capabilities": [
+    "notification",
+    "messaging"
+  ],
+  "description": "Send messages to Rocket.Chat channels using your own incoming webhook URL. Bring your credentials; the gateway translates POST /send into Rocket.Chat API calls.",
+  "name": "notify-rocketchat-byok",
+  "payout_price": {
+    "description": "No platform commission \u2014 customer uses own Rocket.Chat account",
+    "percentage": "100.00",
+    "type": "revenue_share"
+  },
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notify",
+    "rocketchat",
+    "byok",
+    "messaging"
+  ],
+  "time_created": "2026-04-29T00:00:00Z",
+  "upstream_access_config": {
+    "Notify Worker": {
+      "access_method": "http",
+      "api_key": "${ customer_secrets.ROCKETCHAT_WEBHOOK_URL }",
+      "base_url": "${NOTIFY_WORKER_BASE_URL}",
+      "routing_key": {
+        "channel": "rocketchat"
+      }
+    }
+  }
+}

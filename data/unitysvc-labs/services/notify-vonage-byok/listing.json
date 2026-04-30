@@ -1,0 +1,61 @@
+{
+  "currency": "USD",
+  "display_name": "Vonage SMS Notifications (Bring Your Own Vonage Account)",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for Vonage SMS notification delivery",
+      "file_path": "../../docs/connectivity-vonage.sh.j2",
+      "is_active": true,
+      "is_public": false,
+      "meta": {
+        "test": {
+          "status": "skip"
+        }
+      },
+      "mime_type": "bash"
+    },
+    "How to use this service": {
+      "category": "getting_started",
+      "description": "Guide to configuring your Vonage SMS account for notifications",
+      "file_path": "../../docs/description-vonage.md",
+      "is_active": true,
+      "is_public": true,
+      "mime_type": "markdown"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Example code to send a Vonage SMS notification",
+      "file_path": "../../docs/code-example-vonage.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "test": {
+          "status": "skip"
+        }
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "description": "Free \u2014 customer provides own Vonage SMS credentials",
+    "price": "0",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "enrollment_vars": {
+      "VONAGE_API_KEY": "",
+      "VONAGE_API_SECRET": "",
+      "VONAGE_FROM_NUMBER": ""
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-04-29T00:00:00Z",
+  "user_access_interfaces": {
+    "notify_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/notify/vonage"
+    }
+  }
+}

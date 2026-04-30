@@ -1,0 +1,33 @@
+{
+  "capabilities": [
+    "notification",
+    "messaging"
+  ],
+  "description": "Send messages to KakaoTalk users using your own KakaoTalk Business Channel. Bring your credentials; the gateway translates POST /send into KakaoTalk API calls.",
+  "name": "notify-kakaotalk-byok",
+  "payout_price": {
+    "description": "No platform commission \u2014 customer uses own KakaoTalk account",
+    "percentage": "100.00",
+    "type": "revenue_share"
+  },
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notify",
+    "kakaotalk",
+    "byok",
+    "messaging"
+  ],
+  "time_created": "2026-04-29T00:00:00Z",
+  "upstream_access_config": {
+    "Notify Worker": {
+      "access_method": "http",
+      "api_key": "${ customer_secrets.KAKAO_ACCESS_TOKEN }",
+      "base_url": "${NOTIFY_WORKER_BASE_URL}",
+      "routing_key": {
+        "channel": "kakaotalk"
+      }
+    }
+  }
+}

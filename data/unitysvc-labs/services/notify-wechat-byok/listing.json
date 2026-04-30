@@ -1,0 +1,61 @@
+{
+  "currency": "USD",
+  "display_name": "WeChat (WeCom) Notifications (Bring Your Own WeCom App)",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for WeChat (WeCom) notification delivery",
+      "file_path": "../../docs/connectivity-wechat.sh.j2",
+      "is_active": true,
+      "is_public": false,
+      "meta": {
+        "test": {
+          "status": "skip"
+        }
+      },
+      "mime_type": "bash"
+    },
+    "How to use this service": {
+      "category": "getting_started",
+      "description": "Guide to configuring your WeChat (WeCom) account for notifications",
+      "file_path": "../../docs/description-wechat.md",
+      "is_active": true,
+      "is_public": true,
+      "mime_type": "markdown"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Example code to send a WeChat (WeCom) notification",
+      "file_path": "../../docs/code-example-wechat.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "test": {
+          "status": "skip"
+        }
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "description": "Free \u2014 customer provides own WeChat (WeCom) credentials",
+    "price": "0",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "enrollment_vars": {
+      "WECHAT_CORP_ID": "",
+      "WECHAT_CORP_SECRET": "",
+      "WECHAT_AGENT_ID": ""
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-04-29T00:00:00Z",
+  "user_access_interfaces": {
+    "notify_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/notify/wechat"
+    }
+  }
+}
