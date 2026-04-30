@@ -3,17 +3,7 @@
   "display_name": "Feishu / Lark Notifications (Bring Your Own Feishu/Lark Bot Webhook)",
   "documents": {
     "Connectivity test": {
-      "category": "connectivity_test",
-      "description": "Connectivity test for Feishu / Lark notification delivery",
-      "file_path": "../../docs/connectivity-feishu.sh.j2",
-      "is_active": true,
-      "is_public": false,
-      "meta": {
-        "test": {
-          "status": "skip"
-        }
-      },
-      "mime_type": "bash"
+      "$doc_preset": "notification_connectivity"
     },
     "How to use this service": {
       "category": "getting_started",
@@ -24,17 +14,7 @@
       "mime_type": "markdown"
     },
     "Python code example": {
-      "category": "code_example",
-      "description": "Example code to send a Feishu / Lark notification",
-      "file_path": "../../docs/code-example-feishu.py.j2",
-      "is_active": true,
-      "is_public": true,
-      "meta": {
-        "test": {
-          "status": "skip"
-        }
-      },
-      "mime_type": "python"
+      "$doc_preset": "notification_code_example"
     }
   },
   "list_price": {
