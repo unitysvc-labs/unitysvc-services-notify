@@ -1,0 +1,34 @@
+{
+  "capabilities": [
+    "notification",
+    "messaging"
+  ],
+  "description": "Multi-enrollment Matrix notification relay. Each enrollment connects a different Matrix account. Customers provide the access token secret name and homeserver URL as parameters, enabling multiple Matrix identities under a single account.",
+  "name": "notify-matrix-relay",
+  "payout_price": {
+    "description": "Pricing per notification sent",
+    "percentage": "100.00",
+    "type": "revenue_share"
+  },
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notify",
+    "matrix",
+    "relay",
+    "messaging"
+  ],
+  "time_created": "2026-04-29T00:00:00Z",
+  "upstream_access_config": {
+    "Notify Worker": {
+      "access_method": "http",
+      "api_key": "${ customer_secrets.{{ params.access_token_secret }} ?? }",
+      "base_url": "${NOTIFY_WORKER_BASE_URL}",
+      "routing_key": {
+        "channel": "matrix",
+        "homeserver": "{{ params.homeserver_url }}"
+      }
+    }
+  }
+}
