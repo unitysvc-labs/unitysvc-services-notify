@@ -33,7 +33,7 @@
   },
   "service_options": {
     "ops_testing_parameters": {
-      "api_key_secret": "DISCORD_BOT_TOKEN"
+      "api_key_secret": "DISCORD_WEBHOOK_URL"
     }
   }
 }

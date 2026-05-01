@@ -23,7 +23,7 @@
   "upstream_access_config": {
     "Notify Worker": {
       "access_method": "http",
-      "api_key": "${ customer_secrets.DISCORD_BOT_TOKEN }",
+      "api_key": "${ customer_secrets.DISCORD_WEBHOOK_URL }",
       "base_url": "${NOTIFY_WORKER_BASE_URL}",
       "routing_key": {
         "channel": "discord"
