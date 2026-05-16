@@ -33,7 +33,7 @@
   },
   "service_options": {
     "ops_testing_parameters": {
-      "api_key_secret": "GOOGLE_CHAT_WEBHOOK_URL"
+      "base_url_secret": "GOOGLE_CHAT_WEBHOOK_URL"
     }
   }
 }

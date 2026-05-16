@@ -1,7 +1,8 @@
 from notify_worker.channels.base import ChannelHandler
 from notify_worker.channels.discord import DiscordHandler
+from notify_worker.channels.slack import SlackHandler
 from notify_worker.channels.apprise_handler import (
-    SlackHandler, TelegramHandler, GotifyHandler, GchatHandler, TeamsHandler,
+    TelegramHandler, GotifyHandler, GchatHandler, TeamsHandler,
     PushoverHandler, MattermostHandler, RocketchatHandler, LineHandler,
     TwilioHandler, VonageHandler, OpsgenieHandler, PagerdutyHandler,
     OnesignalHandler, WebexHandler, ViberHandler, MatrixHandler, FeishuHandler,

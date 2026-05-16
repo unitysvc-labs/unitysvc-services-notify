@@ -1,10 +1,10 @@
 {
   "currency": "USD",
-  "display_name": "Discord Notifications (Bring Your Own Webhook)",
+  "display_name": "Discord Notifications (Mock)",
   "documents": {
     "Connectivity test": {
       "category": "connectivity_test",
-      "description": "Verify Discord notification delivery via the UnitySVC gateway",
+      "description": "Verify Discord notification delivery via the mock upstream",
       "file_path": "../../docs/connectivity-discord.sh",
       "is_active": true,
       "is_public": false,
@@ -12,7 +12,7 @@
     },
     "How to use this service": {
       "category": "getting_started",
-      "description": "Guide to configuring your Discord incoming webhook for notifications",
+      "description": "Mock Discord webhook service for testing pipeline responses",
       "file_path": "../../docs/description-discord.md",
       "is_active": true,
       "is_public": true,
@@ -20,7 +20,7 @@
     },
     "Python code example": {
       "category": "code_example",
-      "description": "Python example: send a Discord notification through the UnitySVC gateway",
+      "description": "Python example: send a Discord notification through the mock gateway",
       "file_path": "../../docs/code-example-discord.py",
       "is_active": true,
       "is_public": true,
@@ -28,22 +28,22 @@
     }
   },
   "list_price": {
-    "description": "Free \u2014 customer provides own Discord incoming webhook",
+    "description": "Free — mock testing service",
     "price": "0",
     "type": "constant"
   },
   "schema": "listing_v1",
   "status": "ready",
-  "time_created": "2026-04-27T00:00:00Z",
+  "time_created": "2026-05-11T00:00:00Z",
   "user_access_interfaces": {
     "notify_gateway": {
       "access_method": "http",
-      "base_url": "${API_GATEWAY_BASE_URL}/notify/discord"
+      "base_url": "${API_GATEWAY_BASE_URL}/notify/discord-mock"
     }
   },
   "service_options": {
     "ops_testing_parameters": {
-      "base_url_secret": "DISCORD_WEBHOOK_URL"
+      "base_url_secret": "DISCORD_MOCK_WEBHOOK_URL"
     }
   }
 }

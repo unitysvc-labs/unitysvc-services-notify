@@ -1,24 +1,34 @@
 {
   "currency": "USD",
-  "display_name": "Slack Notifications (Bring Your Own Bot)",
+  "display_name": "Slack Notifications (Bring Your Own Webhook)",
   "documents": {
     "Connectivity test": {
-      "$doc_preset": "notification_connectivity"
+      "category": "connectivity_test",
+      "description": "Verify Slack notification delivery via the UnitySVC gateway",
+      "file_path": "../../docs/connectivity-slack.sh",
+      "is_active": true,
+      "is_public": false,
+      "mime_type": "bash"
     },
     "How to use this service": {
       "category": "getting_started",
-      "description": "Guide to configuring your Slack bot for notifications",
+      "description": "Guide to configuring your Slack incoming webhook for notifications",
       "file_path": "../../docs/description-slack.md",
       "is_active": true,
       "is_public": true,
       "mime_type": "markdown"
     },
     "Python code example": {
-      "$doc_preset": "notification_code_example"
+      "category": "code_example",
+      "description": "Python example: send a Slack notification through the UnitySVC gateway",
+      "file_path": "../../docs/code-example-slack.py",
+      "is_active": true,
+      "is_public": true,
+      "mime_type": "python"
     }
   },
   "list_price": {
-    "description": "Free \u2014 customer provides own Slack bot token",
+    "description": "Free \u2014 customer provides own Slack incoming webhook",
     "price": "0",
     "type": "constant"
   },
@@ -33,7 +43,7 @@
   },
   "service_options": {
     "ops_testing_parameters": {
-      "api_key_secret": "SLACK_BOT_TOKEN"
+      "base_url_secret": "SLACK_WEBHOOK_URL"
     }
   }
 }
