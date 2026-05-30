@@ -1,0 +1,78 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP -> OneSignal (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_onesignal",
+        "webhook_path": "/api/v1/notifications"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_onesignal",
+        "webhook_path": "/api/v1/notifications"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_onesignal",
+        "webhook_path": "/api/v1/notifications"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "api_key_secret": "ONESIGNAL_REST_API_KEY",
+      "app_id_secret": "ONESIGNAL_APP_ID"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-onesignal-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your OneSignal endpoint for this enrollment",
+    "properties": {
+      "api_key_secret": {
+        "description": "Name of the customer secret containing your OneSignal REST API key",
+        "title": "REST API Key Secret Name",
+        "type": "string"
+      },
+      "app_id_secret": {
+        "description": "Name of the customer secret containing your OneSignal App ID",
+        "title": "App ID Secret Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "api_key_secret",
+      "app_id_secret"
+    ],
+    "title": "OneSignal Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "api_key_secret": {
+      "ui:description": "Enter the name of the customer secret holding your OneSignal REST API key",
+      "ui:placeholder": "ONESIGNAL_REST_API_KEY"
+    },
+    "app_id_secret": {
+      "ui:description": "Enter the name of the customer secret holding your OneSignal App ID",
+      "ui:placeholder": "ONESIGNAL_APP_ID"
+    }
+  }
+}

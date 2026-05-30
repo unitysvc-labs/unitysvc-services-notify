@@ -1,0 +1,48 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-Opsgenie transformer (multi-enrollment). Each enrollment targets a different Opsgenie endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Opsgenie-native message, and delivers it to the customer's own Opsgenie endpoint.",
+  "name": "msg-to-opsgenie-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "alerting",
+    "incident",
+    "notification",
+    "ops",
+    "opsgenie",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://api.opsgenie.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"message\":{* _escape_json(_body.title) *},\"description\":{* _escape_json(_body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Authorization": "GenieKey ${ customer_secrets.{{ params.api_key_secret }} }",
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/v2/alerts"
+          }
+        }
+      }
+    }
+  }
+}

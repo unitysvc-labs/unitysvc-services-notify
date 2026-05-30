@@ -4,19 +4,19 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "name": "notify_relay_connectivity_json",
+        "name": "notify_relay_connectivity_pagerduty",
         "webhook_path": "/v2/enqueue"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_py_json",
+        "name": "notify_relay_code_example_py_pagerduty",
         "webhook_path": "/v2/enqueue"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_sh_json",
+        "name": "notify_relay_code_example_sh_pagerduty",
         "webhook_path": "/v2/enqueue"
       }
     }

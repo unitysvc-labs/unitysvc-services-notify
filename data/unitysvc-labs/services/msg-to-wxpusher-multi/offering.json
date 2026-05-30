@@ -1,0 +1,46 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-WxPusher transformer (multi-enrollment). Each enrollment targets a different WxPusher endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a WxPusher-native message, and delivers it to the customer's own WxPusher endpoint.",
+  "name": "msg-to-wxpusher-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "push",
+    "smtp",
+    "transformer",
+    "wechat",
+    "wxpusher"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://wxpusher.zjiecode.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"appToken\":${ customer_secrets.{{ params.token_secret }} },\"contentType\":1,\"uids\":[${ customer_secrets.{{ params.uid_secret }} }],\"content\":{* _escape_json(_body.title..\": \".._body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/api/send/message"
+          }
+        }
+      }
+    }
+  }
+}

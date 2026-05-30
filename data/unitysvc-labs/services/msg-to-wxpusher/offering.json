@@ -1,0 +1,46 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-WxPusher transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a WxPusher-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "name": "msg-to-wxpusher",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "push",
+    "smtp",
+    "transformer",
+    "wechat",
+    "wxpusher"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://wxpusher.zjiecode.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"appToken\":${ service_secrets.WXPUSHER_APP_TOKEN },\"contentType\":1,\"uids\":[${ service_secrets.WXPUSHER_UID }],\"content\":{* _escape_json(_body.title..\": \".._body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/api/send/message"
+          }
+        }
+      }
+    }
+  }
+}

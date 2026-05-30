@@ -1,0 +1,89 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP -> Pushjet (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_pushjet",
+        "webhook_path": "/message"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_pushjet",
+        "webhook_path": "/message"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_pushjet",
+        "webhook_path": "/message"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "token_secret": "PUSHJET_TOKEN",
+      "webhook_base_url_secret": "PUSHJET_WEBHOOK_BASE_URL",
+      "webhook_path_secret": "PUSHJET_WEBHOOK_PATH"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-pushjet-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your Pushjet endpoint for this enrollment",
+    "properties": {
+      "token_secret": {
+        "description": "Name of the customer secret containing your Pushjet service token",
+        "title": "Service Token Secret Name",
+        "type": "string"
+      },
+      "webhook_base_url_secret": {
+        "description": "Name of the customer secret containing the base URL of your Pushjet server (e.g. https://hooks.slack.com)",
+        "title": "Webhook Base URL Secret Name",
+        "type": "string"
+      },
+      "webhook_path_secret": {
+        "description": "Name of the customer secret containing the webhook path (e.g. /message)",
+        "title": "Webhook Path Secret Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_base_url_secret",
+      "webhook_path_secret",
+      "token_secret"
+    ],
+    "title": "Pushjet Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "token_secret": {
+      "ui:description": "Enter the name of the customer secret holding your Pushjet service token",
+      "ui:placeholder": "PUSHJET_TOKEN"
+    },
+    "webhook_base_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds the base URL (scheme + host) of your Pushjet webhook",
+      "ui:placeholder": "MY_PUSHJET_BASE_URL"
+    },
+    "webhook_path_secret": {
+      "ui:description": "Enter the name of the customer secret that holds the webhook path",
+      "ui:placeholder": "MY_PUSHJET_PATH"
+    }
+  }
+}

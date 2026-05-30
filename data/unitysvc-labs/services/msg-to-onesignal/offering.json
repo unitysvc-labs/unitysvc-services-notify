@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-OneSignal transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a OneSignal-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "name": "msg-to-onesignal",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "mobile",
+    "notification",
+    "onesignal",
+    "push",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://onesignal.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"app_id\":${ service_secrets.ONESIGNAL_APP_ID },\"included_segments\":[\"All\"],\"headings\":{\"en\":{* _escape_json(_body.title) *}},\"contents\":{\"en\":{* _escape_json(_body.body) *}}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Authorization": "Key=${ service_secrets.API_KEY }",
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/api/v1/notifications"
+          }
+        }
+      }
+    }
+  }
+}

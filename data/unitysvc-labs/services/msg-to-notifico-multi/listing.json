@@ -1,0 +1,78 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP -> Notifico (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_slack",
+        "webhook_path": "/h/{project}/{hook}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_slack",
+        "webhook_path": "/h/{project}/{hook}"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_slack",
+        "webhook_path": "/h/{project}/{hook}"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "webhook_base_url_secret": "NOTIFICO_WEBHOOK_BASE_URL",
+      "webhook_path_secret": "NOTIFICO_WEBHOOK_PATH"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-notifico-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your Notifico endpoint for this enrollment",
+    "properties": {
+      "webhook_base_url_secret": {
+        "description": "Name of the customer secret containing the base URL of your Notifico server (e.g. https://hooks.slack.com)",
+        "title": "Webhook Base URL Secret Name",
+        "type": "string"
+      },
+      "webhook_path_secret": {
+        "description": "Name of the customer secret containing the webhook path (e.g. /h/{project}/{hook})",
+        "title": "Webhook Path Secret Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_base_url_secret",
+      "webhook_path_secret"
+    ],
+    "title": "Notifico Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "webhook_base_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds the base URL (scheme + host) of your Notifico webhook",
+      "ui:placeholder": "MY_NOTIFICO_BASE_URL"
+    },
+    "webhook_path_secret": {
+      "ui:description": "Enter the name of the customer secret that holds the webhook path",
+      "ui:placeholder": "MY_NOTIFICO_PATH"
+    }
+  }
+}

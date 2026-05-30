@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-Pushbullet transformer (multi-enrollment). Each enrollment targets a different Pushbullet endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Pushbullet-native message, and delivers it to the customer's own Pushbullet endpoint.",
+  "name": "msg-to-pushbullet-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "mobile",
+    "notification",
+    "push",
+    "pushbullet",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://api.pushbullet.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"type\":\"note\",\"title\":{* _escape_json(_body.title) *},\"body\":{* _escape_json(_body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Access-Token": "${ customer_secrets.{{ params.api_key_secret }} }",
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/v2/pushes"
+          }
+        }
+      }
+    }
+  }
+}

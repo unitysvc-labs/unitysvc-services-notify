@@ -153,19 +153,20 @@ TIER1: list[dict] = [
         credential_params=[],
         tags=["chat", "workplace", "google"],
     ),
-    dict(
-        channel_id="zulip",
-        display="Zulip",
-        tier=1,
-        # form-encoded API (type/to/content); no JSON body transformer
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/api/v1/messages",
-        auth_header=None,
-        credential_params=[],
-        tags=["chat", "self-hosted"],
-    ),
+    # REMOVED: form-encoded body (type/to/content) — cannot be natively supported
+    # dict(
+    #     channel_id="zulip",
+    #     display="Zulip",
+    #     tier=1,
+    #     # form-encoded API (type/to/content); no JSON body transformer
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/api/v1/messages",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["chat", "self-hosted"],
+    # ),
     dict(
         channel_id="webex",
         display="Webex",
@@ -301,80 +302,99 @@ TIER2: list[dict] = [
         channel_id="pushbullet",
         display="Pushbullet",
         tier=2,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
+        body_type="pushbullet",
+        has_transformer=True,
+        fixed_base_url="https://api.pushbullet.com",
         webhook_path="/v2/pushes",
-        auth_header=None,
-        credential_params=[],
+        auth_header=dict(name="Access-Token", prefix=""),
+        credential_params=[
+            dict(
+                param="api_key_secret",
+                default_secret="PUSHBULLET_TOKEN",
+                title="API Key Secret Name",
+                description="Name of the customer secret containing your Pushbullet access token",
+                ui_description="Enter the name of the customer secret holding your Pushbullet access token",
+            ),
+        ],
         tags=["push", "mobile"],
     ),
-    dict(
-        channel_id="join",
-        display="Join",
-        tier=2,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/_ah/api/messaging/v1/sendPush",
-        auth_header=None,
-        credential_params=[],
-        tags=["push", "android"],
-    ),
-    dict(
-        channel_id="prowl",
-        display="Prowl",
-        tier=2,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/publicapi/add",
-        auth_header=None,
-        credential_params=[],
-        tags=["push", "ios"],
-    ),
+    # REMOVED: requires OAuth2 token per device — cannot be natively supported
+    # dict(
+    #     channel_id="join",
+    #     display="Join",
+    #     tier=2,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/_ah/api/messaging/v1/sendPush",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["push", "android"],
+    # ),
+    # REMOVED: form-encoded body (application/x-www-form-urlencoded) — cannot be natively supported
+    # dict(
+    #     channel_id="prowl",
+    #     display="Prowl",
+    #     tier=2,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/publicapi/add",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["push", "ios"],
+    # ),
     dict(
         channel_id="pushjet",
         display="Pushjet",
         tier=2,
-        body_type="json",
-        has_transformer=False,
+        body_type="pushjet",
+        has_transformer=True,
         fixed_base_url=None,
         webhook_path="/message",
         auth_header=None,
-        credential_params=[],
+        credential_params=[
+            dict(
+                param="token_secret",
+                default_secret="PUSHJET_TOKEN",
+                title="Service Token Secret Name",
+                description="Name of the customer secret containing your Pushjet service token",
+                ui_description="Enter the name of the customer secret holding your Pushjet service token",
+            ),
+        ],
         tags=["push", "self-hosted"],
     ),
     dict(
         channel_id="simplepush",
         display="SimplePush",
         tier=2,
-        body_type="json",
-        has_transformer=False,
+        body_type="simplepush",
+        has_transformer=True,
         fixed_base_url=None,
-        webhook_path="/send",
+        webhook_path="/send/{key}",
         auth_header=None,
         credential_params=[],
         tags=["push"],
     ),
-    dict(
-        channel_id="notica",
-        display="Notica",
-        tier=2,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/{token}",
-        auth_header=None,
-        credential_params=[],
-        tags=["push"],
-    ),
+    # REMOVED: service shut down (notica.us offline) — cannot be natively supported
+    # dict(
+    #     channel_id="notica",
+    #     display="Notica",
+    #     tier=2,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/{token}",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["push"],
+    # ),
     dict(
         channel_id="notifico",
         display="Notifico",
         tier=2,
         body_type="slack",
-        has_transformer=False,
+        has_transformer=True,
         fixed_base_url=None,
         webhook_path="/h/{project}/{hook}",
         auth_header=None,
@@ -385,10 +405,10 @@ TIER2: list[dict] = [
         channel_id="serverchan",
         display="ServerChan",
         tier=2,
-        body_type="json",
-        has_transformer=False,
+        body_type="serverchan",
+        has_transformer=True,
         fixed_base_url=None,
-        webhook_path="/{token}.send",
+        webhook_path="/{sendkey}.send",
         auth_header=None,
         credential_params=[],
         tags=["push", "wechat"],
@@ -397,36 +417,67 @@ TIER2: list[dict] = [
         channel_id="wxpusher",
         display="WxPusher",
         tier=2,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
+        body_type="wxpusher",
+        has_transformer=True,
+        fixed_base_url="https://wxpusher.zjiecode.com",
         webhook_path="/api/send/message",
         auth_header=None,
-        credential_params=[],
+        credential_params=[
+            dict(
+                param="token_secret",
+                default_secret="WXPUSHER_APP_TOKEN",
+                title="App Token Secret Name",
+                description="Name of the customer secret containing your WxPusher app token",
+                ui_description="Enter the name of the customer secret holding your WxPusher app token",
+            ),
+            dict(
+                param="uid_secret",
+                default_secret="WXPUSHER_UID",
+                title="UID Secret Name",
+                description="Name of the customer secret containing the WxPusher recipient UID",
+                ui_description="Enter the name of the customer secret holding the WxPusher recipient UID",
+            ),
+        ],
         tags=["push", "wechat"],
     ),
-    dict(
-        channel_id="fcm",
-        display="Firebase Cloud Messaging",
-        tier=2,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/v1/projects/{project}/messages:send",
-        auth_header=None,
-        credential_params=[],
-        tags=["push", "firebase", "google", "mobile"],
-    ),
+    # REMOVED: requires OAuth2 bearer token (not a static API key) — cannot be natively supported
+    # dict(
+    #     channel_id="fcm",
+    #     display="Firebase Cloud Messaging",
+    #     tier=2,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/v1/projects/{project}/messages:send",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["push", "firebase", "google", "mobile"],
+    # ),
     dict(
         channel_id="onesignal",
         display="OneSignal",
         tier=2,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
+        body_type="onesignal",
+        has_transformer=True,
+        fixed_base_url="https://onesignal.com",
         webhook_path="/api/v1/notifications",
-        auth_header=None,
-        credential_params=[],
+        auth_header=dict(name="Authorization", prefix="Key="),
+        credential_params=[
+            dict(
+                param="api_key_secret",
+                default_secret="ONESIGNAL_REST_API_KEY",
+                title="REST API Key Secret Name",
+                description="Name of the customer secret containing your OneSignal REST API key",
+                ui_description="Enter the name of the customer secret holding your OneSignal REST API key",
+            ),
+            dict(
+                param="app_id_secret",
+                default_secret="ONESIGNAL_APP_ID",
+                title="App ID Secret Name",
+                description="Name of the customer secret containing your OneSignal App ID",
+                ui_description="Enter the name of the customer secret holding your OneSignal App ID",
+            ),
+        ],
         tags=["push", "mobile"],
     ),
 ]
@@ -438,32 +489,48 @@ TIER3: list[dict] = [
         channel_id="pagerduty",
         display="PagerDuty",
         tier=3,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
+        body_type="pagerduty",
+        has_transformer=True,
+        fixed_base_url="https://events.pagerduty.com",
         webhook_path="/v2/enqueue",
         auth_header=None,
-        credential_params=[],
+        credential_params=[
+            dict(
+                param="routing_key_secret",
+                default_secret="PAGERDUTY_ROUTING_KEY",
+                title="Routing Key Secret Name",
+                description="Name of the customer secret containing your PagerDuty Events API v2 routing key",
+                ui_description="Enter the name of the customer secret holding your PagerDuty routing key",
+            ),
+        ],
         tags=["incident", "ops", "alerting"],
     ),
     dict(
         channel_id="opsgenie",
         display="Opsgenie",
         tier=3,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
+        body_type="opsgenie",
+        has_transformer=True,
+        fixed_base_url="https://api.opsgenie.com",
         webhook_path="/v2/alerts",
-        auth_header=None,
-        credential_params=[],
+        auth_header=dict(name="Authorization", prefix="GenieKey "),
+        credential_params=[
+            dict(
+                param="api_key_secret",
+                default_secret="OPSGENIE_API_KEY",
+                title="API Key Secret Name",
+                description="Name of the customer secret containing your Opsgenie API key",
+                ui_description="Enter the name of the customer secret holding your Opsgenie API key",
+            ),
+        ],
         tags=["incident", "ops", "alerting"],
     ),
     dict(
         channel_id="pagertree",
         display="PagerTree",
         tier=3,
-        body_type="json",
-        has_transformer=False,
+        body_type="pagertree",
+        has_transformer=True,
         fixed_base_url=None,
         webhook_path="/integration/{token}",
         auth_header=None,
@@ -474,10 +541,10 @@ TIER3: list[dict] = [
         channel_id="spikesh",
         display="Spike.sh",
         tier=3,
-        body_type="json",
-        has_transformer=False,
+        body_type="spikesh",
+        has_transformer=True,
         fixed_base_url=None,
-        webhook_path="/v1/notify",
+        webhook_path="/api/{token}",
         auth_header=None,
         credential_params=[],
         tags=["incident", "ops", "alerting"],
@@ -486,8 +553,8 @@ TIER3: list[dict] = [
         channel_id="signl4",
         display="SIGNL4",
         tier=3,
-        body_type="json",
-        has_transformer=False,
+        body_type="signl4",
+        has_transformer=True,
         fixed_base_url=None,
         webhook_path="/webhook/{token}",
         auth_header=None,
@@ -498,26 +565,27 @@ TIER3: list[dict] = [
         channel_id="victorops",
         display="VictorOps",
         tier=3,
-        body_type="json",
-        has_transformer=False,
+        body_type="victorops",
+        has_transformer=True,
         fixed_base_url=None,
         webhook_path="/integrations/generic/{api_id}/alert/{routing_key}",
         auth_header=None,
         credential_params=[],
         tags=["incident", "ops", "alerting"],
     ),
-    dict(
-        channel_id="jira",
-        display="Jira",
-        tier=3,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/rest/api/2/issue",
-        auth_header=None,
-        credential_params=[],
-        tags=["incident", "issue-tracking", "atlassian"],
-    ),
+    # REMOVED: requires Basic Auth with base64(email:api_token) — cannot be natively computed
+    # dict(
+    #     channel_id="jira",
+    #     display="Jira",
+    #     tier=3,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/rest/api/2/issue",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["incident", "issue-tracking", "atlassian"],
+    # ),
 ]
 
 # -- Tier 4 -- Transactional email APIs ----------------------------------------
@@ -550,18 +618,19 @@ def _email_credential_params(cid: str, display: str) -> list[dict]:
 
 
 TIER4_EMAIL: list[dict] = [
-    dict(
-        channel_id="mailgun",
-        display="Mailgun",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/v3/{domain}/messages",
-        auth_header=None,
-        credential_params=[],
-        tags=["email", "transactional"],
-    ),
+    # REMOVED: form-encoded body (multipart/form-data) — cannot be natively supported
+    # dict(
+    #     channel_id="mailgun",
+    #     display="Mailgun",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/v3/{domain}/messages",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["email", "transactional"],
+    # ),
     dict(
         channel_id="sendgrid",
         display="SendGrid",
@@ -574,18 +643,19 @@ TIER4_EMAIL: list[dict] = [
         credential_params=_email_credential_params("SENDGRID", "SendGrid"),
         tags=["email", "transactional"],
     ),
-    dict(
-        channel_id="ses",
-        display="Amazon SES",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/v2/email/outbound-emails",
-        auth_header=None,
-        credential_params=[],
-        tags=["email", "transactional", "aws"],
-    ),
+    # REMOVED: requires AWS SigV4 request signing — cannot be natively supported
+    # dict(
+    #     channel_id="ses",
+    #     display="Amazon SES",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/v2/email/outbound-emails",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["email", "transactional", "aws"],
+    # ),
     dict(
         channel_id="brevo",
         display="Brevo",
@@ -626,12 +696,12 @@ TIER4_EMAIL: list[dict] = [
         channel_id="sparkpost",
         display="SparkPost",
         tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
+        body_type="sparkpost_email",
+        has_transformer=True,
+        fixed_base_url="https://api.sparkpost.com",
         webhook_path="/api/v1/transmissions",
-        auth_header=None,
-        credential_params=[],
+        auth_header=dict(name="Authorization", prefix=""),
+        credential_params=_email_credential_params("SPARKPOST", "SparkPost"),
         tags=["email", "transactional"],
     ),
     dict(
@@ -646,47 +716,50 @@ TIER4_EMAIL: list[dict] = [
         credential_params=_email_credential_params("SMTP2GO", "SMTP2GO"),
         tags=["email", "transactional"],
     ),
-    dict(
-        channel_id="o365",
-        display="Office 365",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/v1.0/users/{user}/sendMail",
-        auth_header=None,
-        credential_params=[],
-        tags=["email", "transactional", "microsoft"],
-    ),
+    # REMOVED: requires OAuth2 bearer token (Microsoft Graph) — cannot be natively supported
+    # dict(
+    #     channel_id="o365",
+    #     display="Office 365",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/v1.0/users/{user}/sendMail",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["email", "transactional", "microsoft"],
+    # ),
 ]
 
 # -- Tier 4 -- SMS / messaging APIs --------------------------------------------
 
 TIER4_SMS: list[dict] = [
-    dict(
-        channel_id="twilio",
-        display="Twilio",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/2010-04-01/Accounts/{sid}/Messages.json",
-        auth_header=None,
-        credential_params=[],
-        tags=["sms", "messaging"],
-    ),
-    dict(
-        channel_id="sns",
-        display="Amazon SNS",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/",
-        auth_header=None,
-        credential_params=[],
-        tags=["messaging", "aws", "push"],
-    ),
+    # REMOVED: form-encoded body (application/x-www-form-urlencoded) — cannot be natively supported
+    # dict(
+    #     channel_id="twilio",
+    #     display="Twilio",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/2010-04-01/Accounts/{sid}/Messages.json",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["sms", "messaging"],
+    # ),
+    # REMOVED: requires AWS SigV4 request signing — cannot be natively supported
+    # dict(
+    #     channel_id="sns",
+    #     display="Amazon SNS",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["messaging", "aws", "push"],
+    # ),
     dict(
         channel_id="messagebird",
         display="MessageBird",
@@ -721,42 +794,45 @@ TIER4_SMS: list[dict] = [
         ],
         tags=["sms", "messaging"],
     ),
-    dict(
-        channel_id="clicksend",
-        display="ClickSend",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/v3/sms/send",
-        auth_header=None,
-        credential_params=[],
-        tags=["sms", "messaging"],
-    ),
-    dict(
-        channel_id="bulksms",
-        display="BulkSMS",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/v1/messages",
-        auth_header=None,
-        credential_params=[],
-        tags=["sms", "messaging"],
-    ),
-    dict(
-        channel_id="threema",
-        display="Threema",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/send_simple",
-        auth_header=None,
-        credential_params=[],
-        tags=["sms", "messaging", "encrypted"],
-    ),
+    # REMOVED: requires Basic Auth with base64(username:password) — cannot be natively computed
+    # dict(
+    #     channel_id="clicksend",
+    #     display="ClickSend",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/v3/sms/send",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["sms", "messaging"],
+    # ),
+    # REMOVED: requires Basic Auth with base64(username:password) — cannot be natively computed
+    # dict(
+    #     channel_id="bulksms",
+    #     display="BulkSMS",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/v1/messages",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["sms", "messaging"],
+    # ),
+    # REMOVED: form-encoded body (application/x-www-form-urlencoded) — cannot be natively supported
+    # dict(
+    #     channel_id="threema",
+    #     display="Threema",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/send_simple",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["sms", "messaging", "encrypted"],
+    # ),
     dict(
         channel_id="whatsapp",
         display="WhatsApp",
@@ -784,18 +860,19 @@ TIER4_SMS: list[dict] = [
         ],
         tags=["messaging", "meta"],
     ),
-    dict(
-        channel_id="signal",
-        display="Signal",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/v2/send",
-        auth_header=None,
-        credential_params=[],
-        tags=["messaging", "encrypted"],
-    ),
+    # REMOVED: requires running signal-cli daemon — cannot be natively supported
+    # dict(
+    #     channel_id="signal",
+    #     display="Signal",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/v2/send",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["messaging", "encrypted"],
+    # ),
     dict(
         channel_id="line",
         display="LINE",
@@ -823,18 +900,19 @@ TIER4_SMS: list[dict] = [
         ],
         tags=["messaging", "asia"],
     ),
-    dict(
-        channel_id="viber",
-        display="Viber",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="/pa/send_message",
-        auth_header=None,
-        credential_params=[],
-        tags=["messaging"],
-    ),
+    # REMOVED: no standard public REST API — cannot be natively supported
+    # dict(
+    #     channel_id="viber",
+    #     display="Viber",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="/pa/send_message",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["messaging"],
+    # ),
     dict(
         channel_id="groupme",
         display="GroupMe",
@@ -855,18 +933,19 @@ TIER4_SMS: list[dict] = [
         ],
         tags=["messaging", "chat"],
     ),
-    dict(
-        channel_id="kakaotalk",
-        display="KakaoTalk",
-        tier=4,
-        body_type="json",
-        has_transformer=False,
-        fixed_base_url=None,
-        webhook_path="",
-        auth_header=None,
-        credential_params=[],
-        tags=["messaging", "asia"],
-    ),
+    # REMOVED: no standard public REST API — cannot be natively supported
+    # dict(
+    #     channel_id="kakaotalk",
+    #     display="KakaoTalk",
+    #     tier=4,
+    #     body_type="json",
+    #     has_transformer=False,
+    #     fixed_base_url=None,
+    #     webhook_path="",
+    #     auth_header=None,
+    #     credential_params=[],
+    #     tags=["messaging", "asia"],
+    # ),
     dict(
         channel_id="wechat",
         display="WeChat Work",
@@ -980,6 +1059,70 @@ BODY_TYPE_TEMPLATES: dict[str, str] = {
         '"title":{* _escape_json(_body.title) *},'
         '"from":{* _escape_json(_body.from) *}}'
     ),
+    # Pushbullet: auth via Access-Token header; no body credentials.
+    "pushbullet": (
+        '{"type":"note","title":{* _escape_json(_body.title) *},"body":{* _escape_json(_body.body) *}}'
+    ),
+    # Pushjet fixed (msg-to-pushjet): operator-managed service secrets.
+    "pushjet": (
+        '{"message":{* _escape_json(_body.body) *},"priority":5,"token":${ service_secrets.PUSHJET_TOKEN }}'
+    ),
+    # Pushjet multi (msg-to-pushjet-multi): per-enrollment customer secrets.
+    "pushjet_multi": (
+        '{"message":{* _escape_json(_body.body) *},"priority":5,"token":${ customer_secrets.{{ params.token_secret }} }}'
+    ),
+    # SimplePush: key in URL path; body is combined title+body.
+    "simplepush": (
+        '{"msg":{* _escape_json(_body.title..": ".._body.body) *},"event":{* _escape_json(_body.title) *}}'
+    ),
+    # ServerChan: sendkey in URL path; body is title+desp.
+    "serverchan": (
+        '{"title":{* _escape_json(_body.title) *},"desp":{* _escape_json(_body.body) *}}'
+    ),
+    # WxPusher fixed (msg-to-wxpusher): operator-managed service secrets.
+    "wxpusher": (
+        '{"appToken":${ service_secrets.WXPUSHER_APP_TOKEN },"contentType":1,"uids":[${ service_secrets.WXPUSHER_UID }],"content":{* _escape_json(_body.title..": ".._body.body) *}}'
+    ),
+    # WxPusher multi (msg-to-wxpusher-multi): per-enrollment customer secrets.
+    "wxpusher_multi": (
+        '{"appToken":${ customer_secrets.{{ params.token_secret }} },"contentType":1,"uids":[${ customer_secrets.{{ params.uid_secret }} }],"content":{* _escape_json(_body.title..": ".._body.body) *}}'
+    ),
+    # OneSignal fixed (msg-to-onesignal): operator-managed service secrets.
+    "onesignal": (
+        '{"app_id":${ service_secrets.ONESIGNAL_APP_ID },"included_segments":["All"],"headings":{"en":{* _escape_json(_body.title) *}},"contents":{"en":{* _escape_json(_body.body) *}}}'
+    ),
+    # OneSignal multi (msg-to-onesignal-multi): per-enrollment customer secrets.
+    "onesignal_multi": (
+        '{"app_id":${ customer_secrets.{{ params.app_id_secret }} },"included_segments":["All"],"headings":{"en":{* _escape_json(_body.title) *}},"contents":{"en":{* _escape_json(_body.body) *}}}'
+    ),
+    # PagerDuty fixed (msg-to-pagerduty): operator-managed service secrets.
+    "pagerduty": (
+        '{"routing_key":${ service_secrets.PAGERDUTY_ROUTING_KEY },"event_action":"trigger","payload":{"summary":{* _escape_json(_body.title) *},"severity":"error","source":{* _escape_json(_body.from) *},"custom_details":{"body":{* _escape_json(_body.body) *}}}}'
+    ),
+    # PagerDuty multi (msg-to-pagerduty-multi): per-enrollment customer secrets.
+    "pagerduty_multi": (
+        '{"routing_key":${ customer_secrets.{{ params.routing_key_secret }} },"event_action":"trigger","payload":{"summary":{* _escape_json(_body.title) *},"severity":"error","source":{* _escape_json(_body.from) *},"custom_details":{"body":{* _escape_json(_body.body) *}}}}'
+    ),
+    # Opsgenie: auth via GenieKey header; no body credentials.
+    "opsgenie": (
+        '{"message":{* _escape_json(_body.title) *},"description":{* _escape_json(_body.body) *}}'
+    ),
+    # PagerTree: token in URL path; body is event alert.
+    "pagertree": (
+        '{"event_type":"alert","title":{* _escape_json(_body.title) *},"description":{* _escape_json(_body.body) *}}'
+    ),
+    # Spike.sh: token in URL path; body is title+message.
+    "spikesh": (
+        '{"title":{* _escape_json(_body.title) *},"message":{* _escape_json(_body.body) *}}'
+    ),
+    # SIGNL4: token in URL path; body is Title+Message.
+    "signl4": (
+        '{"Title":{* _escape_json(_body.title) *},"Message":{* _escape_json(_body.body) *}}'
+    ),
+    # VictorOps: api_id and routing_key in URL path; body is alert.
+    "victorops": (
+        '{"message_type":"INFO","entity_display_name":{* _escape_json(_body.title) *},"state_message":{* _escape_json(_body.body) *}}'
+    ),
     # -- Email body types --
     # Fixed variants use service_secrets; multi variants use customer_secrets via params.
     "resend_email": (
@@ -1044,6 +1187,16 @@ BODY_TYPE_TEMPLATES: dict[str, str] = {
         '"to":[${ customer_secrets.{{ params.to_email_secret }} }],'
         '"subject":{* _escape_json(_body.title) *},'
         '"text_body":{* _escape_json(_body.body) *}}'
+    ),
+    # SparkPost fixed (msg-to-sparkpost): operator-managed service secrets.
+    "sparkpost_email": (
+        '{"recipients":[{"address":{"email":${ service_secrets.EMAIL_TO }}}],'
+        '"content":{"from":${ service_secrets.EMAIL_FROM },"subject":{* _escape_json(_body.title) *},"text":{* _escape_json(_body.body) *}}}'
+    ),
+    # SparkPost multi (msg-to-sparkpost-multi): per-enrollment customer secrets.
+    "sparkpost_email_multi": (
+        '{"recipients":[{"address":{"email":${ customer_secrets.{{ params.to_email_secret }} }}}],'
+        '"content":{"from":${ customer_secrets.{{ params.from_email_secret }} },"subject":{* _escape_json(_body.title) *},"text":{* _escape_json(_body.body) *}}}'
     ),
     # -- SMS / messaging body types --
     "messagebird_sms": (

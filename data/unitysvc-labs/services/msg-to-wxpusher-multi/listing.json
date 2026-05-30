@@ -1,0 +1,78 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP -> WxPusher (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_wxpusher",
+        "webhook_path": "/api/send/message"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_wxpusher",
+        "webhook_path": "/api/send/message"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_wxpusher",
+        "webhook_path": "/api/send/message"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "token_secret": "WXPUSHER_APP_TOKEN",
+      "uid_secret": "WXPUSHER_UID"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-wxpusher-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your WxPusher endpoint for this enrollment",
+    "properties": {
+      "token_secret": {
+        "description": "Name of the customer secret containing your WxPusher app token",
+        "title": "App Token Secret Name",
+        "type": "string"
+      },
+      "uid_secret": {
+        "description": "Name of the customer secret containing the WxPusher recipient UID",
+        "title": "UID Secret Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "token_secret",
+      "uid_secret"
+    ],
+    "title": "WxPusher Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "token_secret": {
+      "ui:description": "Enter the name of the customer secret holding your WxPusher app token",
+      "ui:placeholder": "WXPUSHER_APP_TOKEN"
+    },
+    "uid_secret": {
+      "ui:description": "Enter the name of the customer secret holding the WxPusher recipient UID",
+      "ui:placeholder": "WXPUSHER_UID"
+    }
+  }
+}

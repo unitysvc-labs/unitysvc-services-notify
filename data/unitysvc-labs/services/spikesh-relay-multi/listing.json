@@ -4,20 +4,20 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "name": "notify_relay_connectivity_json",
-        "webhook_path": "/v1/notify"
+        "name": "notify_relay_connectivity_spikesh",
+        "webhook_path": "/api/{token}"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_py_json",
-        "webhook_path": "/v1/notify"
+        "name": "notify_relay_code_example_py_spikesh",
+        "webhook_path": "/api/{token}"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_sh_json",
-        "webhook_path": "/v1/notify"
+        "name": "notify_relay_code_example_sh_spikesh",
+        "webhook_path": "/api/{token}"
       }
     }
   },

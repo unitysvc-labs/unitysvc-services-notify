@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-VictorOps transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a VictorOps-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "name": "msg-to-victorops",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "alerting",
+    "incident",
+    "notification",
+    "ops",
+    "smtp",
+    "transformer",
+    "victorops"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "${ service_secrets.WEBHOOK_BASE_URL }",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"message_type\":\"INFO\",\"entity_display_name\":{* _escape_json(_body.title) *},\"state_message\":{* _escape_json(_body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/integrations/generic/{api_id}/alert/{routing_key}"
+          }
+        }
+      }
+    }
+  }
+}

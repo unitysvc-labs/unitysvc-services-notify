@@ -1,0 +1,67 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP -> Pushbullet (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_pushbullet",
+        "webhook_path": "/v2/pushes"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_pushbullet",
+        "webhook_path": "/v2/pushes"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_pushbullet",
+        "webhook_path": "/v2/pushes"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "api_key_secret": "PUSHBULLET_TOKEN"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-pushbullet-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your Pushbullet endpoint for this enrollment",
+    "properties": {
+      "api_key_secret": {
+        "description": "Name of the customer secret containing your Pushbullet access token",
+        "title": "API Key Secret Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "api_key_secret"
+    ],
+    "title": "Pushbullet Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "api_key_secret": {
+      "ui:description": "Enter the name of the customer secret holding your Pushbullet access token",
+      "ui:placeholder": "PUSHBULLET_TOKEN"
+    }
+  }
+}

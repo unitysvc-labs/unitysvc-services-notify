@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-PagerDuty transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a PagerDuty-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "name": "msg-to-pagerduty",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "alerting",
+    "incident",
+    "notification",
+    "ops",
+    "pagerduty",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://events.pagerduty.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"routing_key\":${ service_secrets.PAGERDUTY_ROUTING_KEY },\"event_action\":\"trigger\",\"payload\":{\"summary\":{* _escape_json(_body.title) *},\"severity\":\"error\",\"source\":{* _escape_json(_body.from) *},\"custom_details\":{\"body\":{* _escape_json(_body.body) *}}}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/v2/enqueue"
+          }
+        }
+      }
+    }
+  }
+}

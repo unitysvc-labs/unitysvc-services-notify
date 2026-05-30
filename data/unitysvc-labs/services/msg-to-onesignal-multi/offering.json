@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-OneSignal transformer (multi-enrollment). Each enrollment targets a different OneSignal endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a OneSignal-native message, and delivers it to the customer's own OneSignal endpoint.",
+  "name": "msg-to-onesignal-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "mobile",
+    "notification",
+    "onesignal",
+    "push",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://onesignal.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"app_id\":${ customer_secrets.{{ params.app_id_secret }} },\"included_segments\":[\"All\"],\"headings\":{\"en\":{* _escape_json(_body.title) *}},\"contents\":{\"en\":{* _escape_json(_body.body) *}}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Authorization": "Key=${ customer_secrets.{{ params.api_key_secret }} }",
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/api/v1/notifications"
+          }
+        }
+      }
+    }
+  }
+}
