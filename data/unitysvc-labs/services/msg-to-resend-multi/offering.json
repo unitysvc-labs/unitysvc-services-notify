@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "https://api.resend.com",
+      "base_url": "${ secrets.RESEND_BASE_URL ?? http://localhost:8100/mock/resend }",
       "is_active": true,
       "is_primary": true,
       "raw": {
@@ -33,7 +33,7 @@
           "proxy_rewrite": {
             "headers": {
               "set": {
-                "Authorization": "Bearer ${ customer_secrets.{{ params.api_key_secret }} }",
+                "Authorization": "Bearer ${ customer_secrets.{{ params.api_key_secret }} ?? test_key }",
                 "Content-Type": "application/json"
               }
             },

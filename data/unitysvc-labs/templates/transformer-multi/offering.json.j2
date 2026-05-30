@@ -12,7 +12,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": {% if fixed_base_url %}"{{ fixed_base_url }}"{% else %}"${ customer_secrets.{{ '{{' }} params.webhook_base_url_secret {{ '}}' }} }"{% endif %},
+      "base_url": {% if fixed_base_url %}"${ secrets.{{ channel_id | upper }}_BASE_URL ?? http://localhost:8100/mock/{{ channel_id }} }"{% else %}"${ customer_secrets.{{ '{{' }} params.webhook_base_url_secret {{ '}}' }} ?? http://localhost:8100/mock/{{ channel_id }} }"{% endif %},
       "is_active": true,
       "is_primary": true,
       "raw": {
@@ -27,12 +27,12 @@
             "headers": {
               "set": {
                 "Content-Type": "application/json"{% if auth_header %},
-                "{{ auth_header.name }}": "{{ auth_header.prefix }}${ customer_secrets.{{ '{{' }} params.api_key_secret {{ '}}' }} }"{% endif %}
+                "{{ auth_header.name }}": "{{ auth_header.prefix }}${ customer_secrets.{{ '{{' }} params.api_key_secret {{ '}}' }} ?? test_key }"{% endif %}
 
               }
             },
             "method": "POST",
-            "uri": {% if fixed_base_url %}"{{ webhook_path }}"{% else %}"${ customer_secrets.{{ '{{' }} params.webhook_path_secret {{ '}}' }} }"{% endif %}
+            "uri": {% if fixed_base_url %}"{{ webhook_path }}"{% else %}"${ customer_secrets.{{ '{{' }} params.webhook_path_secret {{ '}}' }} ?? {{ webhook_path }} }"{% endif %}
           }
         }
       }

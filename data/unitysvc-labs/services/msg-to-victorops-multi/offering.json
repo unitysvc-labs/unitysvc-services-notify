@@ -20,7 +20,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ customer_secrets.{{ params.webhook_base_url_secret }} }",
+      "base_url": "${ customer_secrets.{{ params.webhook_base_url_secret }} ?? http://localhost:8100/mock/victorops }",
       "is_active": true,
       "is_primary": true,
       "raw": {
@@ -38,7 +38,7 @@
               }
             },
             "method": "POST",
-            "uri": "${ customer_secrets.{{ params.webhook_path_secret }} }"
+            "uri": "${ customer_secrets.{{ params.webhook_path_secret }} ?? /integrations/generic/{api_id}/alert/{routing_key} }"
           }
         }
       }

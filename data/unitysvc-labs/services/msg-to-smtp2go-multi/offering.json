@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "https://api.smtp2go.com",
+      "base_url": "${ secrets.SMTP2GO_BASE_URL ?? http://localhost:8100/mock/smtp2go }",
       "is_active": true,
       "is_primary": true,
       "raw": {

@@ -12,7 +12,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ customer_secrets.{{ secret_env }} }",
+      "base_url": "${ customer_secrets.{{ secret_env }} ?? http://localhost:8100/mock/{{ channel_id }} }",
       "is_active": true,
       "is_primary": true
     }

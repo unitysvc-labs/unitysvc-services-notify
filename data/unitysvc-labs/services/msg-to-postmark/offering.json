@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "https://api.postmarkapp.com",
+      "base_url": "${ secrets.POSTMARK_BASE_URL ?? http://localhost:8100/mock/postmark }",
       "is_active": true,
       "is_primary": true,
       "raw": {
@@ -34,7 +34,7 @@
             "headers": {
               "set": {
                 "Content-Type": "application/json",
-                "X-Postmark-Server-Token": "${ service_secrets.API_KEY }"
+                "X-Postmark-Server-Token": "${ secrets.POSTMARK_API_KEY ?? test_key }"
               }
             },
             "method": "POST",

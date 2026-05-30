@@ -12,7 +12,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": {% if fixed_base_url %}"{{ fixed_base_url }}"{% else %}"${ service_secrets.WEBHOOK_BASE_URL }"{% endif %},
+      "base_url": "${ secrets.{{ channel_id | upper }}_BASE_URL ?? http://localhost:8100/mock/{{ channel_id }} }",
       "is_active": true,
       "is_primary": true,
       "raw": {
@@ -27,7 +27,7 @@
             "headers": {
               "set": {
                 "Content-Type": "application/json"{% if auth_header %},
-                "{{ auth_header.name }}": "{{ auth_header.prefix }}${ service_secrets.API_KEY }"{% endif %}
+                "{{ auth_header.name }}": "{{ auth_header.prefix }}${ secrets.{{ channel_id | upper }}_API_KEY ?? test_key }"{% endif %}
 
               }
             },

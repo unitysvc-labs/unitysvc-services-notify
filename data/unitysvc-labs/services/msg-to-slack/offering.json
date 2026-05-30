@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ service_secrets.WEBHOOK_BASE_URL }",
+      "base_url": "${ secrets.SLACK_BASE_URL ?? http://localhost:8100/mock/slack }",
       "is_active": true,
       "is_primary": true,
       "raw": {

@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ customer_secrets.{{ params.webhook_base_url_secret }} }",
+      "base_url": "${ customer_secrets.{{ params.webhook_base_url_secret }} ?? http://localhost:8100/mock/whatsapp }",
       "is_active": true,
       "is_primary": true,
       "raw": {
@@ -33,12 +33,12 @@
           "proxy_rewrite": {
             "headers": {
               "set": {
-                "Authorization": "Bearer ${ customer_secrets.{{ params.api_key_secret }} }",
+                "Authorization": "Bearer ${ customer_secrets.{{ params.api_key_secret }} ?? test_key }",
                 "Content-Type": "application/json"
               }
             },
             "method": "POST",
-            "uri": "${ customer_secrets.{{ params.webhook_path_secret }} }"
+            "uri": "${ customer_secrets.{{ params.webhook_path_secret }} ?? /v17.0/{phone_number_id}/messages }"
           }
         }
       }
