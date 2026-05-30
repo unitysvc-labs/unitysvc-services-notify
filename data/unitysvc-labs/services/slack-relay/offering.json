@@ -1,0 +1,26 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Slack notification relay. Forwards any HTTP POST body to the Slack webhook URL stored in the customer secret `SLACK_WEBHOOK_URL`. No body transformation \u2014 the customer sends the exact payload Slack expects.",
+  "name": "slack-relay",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "chat",
+    "notification",
+    "relay",
+    "slack",
+    "workplace"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.SLACK_WEBHOOK_URL }",
+      "is_active": true,
+      "is_primary": true
+    }
+  }
+}

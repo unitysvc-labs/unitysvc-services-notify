@@ -1,0 +1,41 @@
+{
+  "currency": "USD",
+  "display_name": "{{ channel_display }} Relay",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "notify_relay_connectivity_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_py_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_sh_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"
+      }
+    }
+  },
+  "list_price": {
+    "description": "{{ price_description }}",
+    "price": "{{ price }}",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {}
+  },
+  "status": "ready",
+  "time_created": "{{ time_created }}",
+  "user_access_interfaces": {
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/{{ name }}"
+    }
+  }
+}

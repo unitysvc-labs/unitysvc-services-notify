@@ -1,0 +1,79 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP \u2192 Rocket.Chat (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_slack",
+        "webhook_path": "/hooks/{token}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_slack",
+        "webhook_path": "/hooks/{token}"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_slack",
+        "webhook_path": "/hooks/{token}"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "webhook_base_url": "https://mock.unitysvc.dev",
+      "webhook_path": "/hooks/{token}"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-rocketchat-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your Rocket.Chat webhook for this enrollment",
+    "properties": {
+      "webhook_base_url": {
+        "description": "Base URL of the Rocket.Chat server (e.g. https://hooks.slack.com)",
+        "format": "uri",
+        "title": "Webhook Base URL",
+        "type": "string"
+      },
+      "webhook_path": {
+        "description": "Webhook path (e.g. /hooks/{token})",
+        "title": "Webhook Path",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_base_url",
+      "webhook_path"
+    ],
+    "title": "Rocket.Chat Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "webhook_base_url": {
+      "ui:description": "Enter the base URL (scheme + host) of your Rocket.Chat webhook",
+      "ui:placeholder": "https://..."
+    },
+    "webhook_path": {
+      "ui:description": "Enter the webhook path portion",
+      "ui:placeholder": "/hooks/{token}"
+    }
+  }
+}

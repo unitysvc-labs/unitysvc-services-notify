@@ -1,0 +1,65 @@
+{
+  "currency": "USD",
+  "display_name": "Ryver Relay (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "notify_relay_connectivity_ryver",
+        "webhook_path": "/application/webhook/{token}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_py_ryver",
+        "webhook_path": "/application/webhook/{token}"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_sh_ryver",
+        "webhook_path": "/application/webhook/{token}"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "webhook_url": "https://mock.unitysvc.dev/application/webhook/{token}"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/ryver-relay-multi"
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure the Ryver webhook URL for this enrollment",
+    "properties": {
+      "webhook_url": {
+        "description": "Full Ryver incoming webhook URL",
+        "format": "uri",
+        "title": "Webhook URL",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_url"
+    ],
+    "title": "Ryver Relay Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "webhook_url": {
+      "ui:description": "Paste your Ryver incoming webhook URL here",
+      "ui:placeholder": "https://..."
+    }
+  }
+}

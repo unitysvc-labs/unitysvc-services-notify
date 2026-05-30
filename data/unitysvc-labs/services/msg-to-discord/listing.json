@@ -1,0 +1,41 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP \u2192 Discord",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_discord",
+        "webhook_path": "/api/webhooks/{id}/{token}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_discord",
+        "webhook_path": "/api/webhooks/{id}/{token}"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_discord",
+        "webhook_path": "/api/webhooks/{id}/{token}"
+      }
+    }
+  },
+  "list_price": {
+    "description": "Free \u2014 webhook URL pre-configured",
+    "price": "0",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-discord"
+      }
+    }
+  }
+}

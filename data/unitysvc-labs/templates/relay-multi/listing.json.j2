@@ -1,0 +1,65 @@
+{
+  "currency": "USD",
+  "display_name": "{{ channel_display }} Relay (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "notify_relay_connectivity_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_py_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_sh_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"
+      }
+    }
+  },
+  "list_price": {
+    "description": "{{ price_description }}",
+    "price": "{{ price }}",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "webhook_url": "https://mock.unitysvc.dev{{ webhook_path }}"
+    }
+  },
+  "status": "ready",
+  "time_created": "{{ time_created }}",
+  "user_access_interfaces": {
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/{{ name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure the {{ channel_display }} webhook URL for this enrollment",
+    "properties": {
+      "webhook_url": {
+        "description": "Full {{ channel_display }} incoming webhook URL",
+        "format": "uri",
+        "title": "Webhook URL",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_url"
+    ],
+    "title": "{{ channel_display }} Relay Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "webhook_url": {
+      "ui:description": "Paste your {{ channel_display }} incoming webhook URL here",
+      "ui:placeholder": "https://..."
+    }
+  }
+}

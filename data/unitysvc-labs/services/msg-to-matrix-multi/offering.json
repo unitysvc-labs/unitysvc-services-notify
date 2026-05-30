@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-Matrix transformer (multi-enrollment). Each enrollment targets a different Matrix webhook URL, provided by the customer. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Matrix-native message, and delivers it to the customer's own Matrix webhook.",
+  "name": "msg-to-matrix-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "chat",
+    "matrix",
+    "notification",
+    "open-protocol",
+    "self-hosted",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "{{ enrollment_vars.webhook_base_url }}",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"msgtype\":\"m.text\",\"body\":{* _escape_json(_body.title..\"\n\n\".._body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "{{ enrollment_vars.webhook_path }}"
+          }
+        }
+      }
+    }
+  }
+}

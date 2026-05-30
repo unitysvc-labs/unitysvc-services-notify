@@ -1,0 +1,26 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Pushbullet notification relay (multi-enrollment). Each enrollment targets a different Pushbullet webhook URL, supplied by the customer as an enrollment parameter. No body transformation \u2014 the customer sends the exact payload Pushbullet expects.",
+  "name": "pushbullet-relay-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "mobile",
+    "notification",
+    "push",
+    "pushbullet",
+    "relay"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "{{ enrollment_vars.webhook_url }}",
+      "is_active": true,
+      "is_primary": true
+    }
+  }
+}

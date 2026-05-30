@@ -1,0 +1,65 @@
+{
+  "currency": "USD",
+  "display_name": "Amazon SNS Relay (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "notify_relay_connectivity_json",
+        "webhook_path": "/"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_py_json",
+        "webhook_path": "/"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_sh_json",
+        "webhook_path": "/"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "webhook_url": "https://mock.unitysvc.dev/"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/sns-relay-multi"
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure the Amazon SNS webhook URL for this enrollment",
+    "properties": {
+      "webhook_url": {
+        "description": "Full Amazon SNS incoming webhook URL",
+        "format": "uri",
+        "title": "Webhook URL",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_url"
+    ],
+    "title": "Amazon SNS Relay Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "webhook_url": {
+      "ui:description": "Paste your Amazon SNS incoming webhook URL here",
+      "ui:placeholder": "https://..."
+    }
+  }
+}

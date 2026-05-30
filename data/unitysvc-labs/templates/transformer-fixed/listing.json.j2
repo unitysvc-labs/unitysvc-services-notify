@@ -1,0 +1,47 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP → {{ channel_display }}",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"{% if chat_id_param %},
+        "chat_id": ""{% endif %}
+
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"{% if chat_id_param %},
+        "chat_id": ""{% endif %}
+
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"{% if chat_id_param %},
+        "chat_id": ""{% endif %}
+
+      }
+    }
+  },
+  "list_price": {
+    "description": "{{ price_description }}",
+    "price": "{{ price }}",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "status": "ready",
+  "time_created": "{{ time_created }}",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "{{ name }}"
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-Webex transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a Webex-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "name": "msg-to-webex",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "chat",
+    "cisco",
+    "notification",
+    "smtp",
+    "transformer",
+    "webex",
+    "workplace"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "${ service_secrets.WEBHOOK_BASE_URL }",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"text\":{* _escape_json(_body.title..\": \".._body.body) *},\"username\":{* _escape_json(_body.from) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/v1/webhooks/incoming/{token}"
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,6 +6,10 @@ status = "ready"
 terms_of_service = "https://unitysvc.com/terms/"
 time_created = "2026-04-27T00:00:00Z"
 
+[services_populator]
+command = "scripts/update_services.py"
+requirements = ["unitysvc-sellers"]
+
 [documents."UnitySVC Labs Logo"]
 mime_type = "svg"
 category = "logo"

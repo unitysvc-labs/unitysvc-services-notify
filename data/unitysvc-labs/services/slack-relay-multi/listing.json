@@ -1,0 +1,65 @@
+{
+  "currency": "USD",
+  "display_name": "Slack Relay (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "notify_relay_connectivity_slack",
+        "webhook_path": "/services/{a}/{b}/{c}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_py_slack",
+        "webhook_path": "/services/{a}/{b}/{c}"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_sh_slack",
+        "webhook_path": "/services/{a}/{b}/{c}"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "webhook_url": "https://mock.unitysvc.dev/services/{a}/{b}/{c}"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/slack-relay-multi"
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure the Slack webhook URL for this enrollment",
+    "properties": {
+      "webhook_url": {
+        "description": "Full Slack incoming webhook URL",
+        "format": "uri",
+        "title": "Webhook URL",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_url"
+    ],
+    "title": "Slack Relay Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "webhook_url": {
+      "ui:description": "Paste your Slack incoming webhook URL here",
+      "ui:placeholder": "https://..."
+    }
+  }
+}

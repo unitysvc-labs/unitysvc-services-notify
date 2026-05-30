@@ -1,0 +1,46 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-Discord transformer (multi-enrollment). Each enrollment targets a different Discord webhook URL, provided by the customer. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Discord-native message, and delivers it to the customer's own Discord webhook.",
+  "name": "msg-to-discord-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "chat",
+    "discord",
+    "gaming",
+    "notification",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "{{ enrollment_vars.webhook_base_url }}",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"embeds\":[{\"title\":{* _escape_json(_body.title) *},\"description\":{* _escape_json(_body.body) *},\"footer\":{\"text\":{* _escape_json(\"from \".._body.from) *}}}]}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "{{ enrollment_vars.webhook_path }}"
+          }
+        }
+      }
+    }
+  }
+}

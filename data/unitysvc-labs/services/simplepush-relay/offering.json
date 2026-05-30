@@ -1,0 +1,25 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SimplePush notification relay. Forwards any HTTP POST body to the SimplePush webhook URL stored in the customer secret `SIMPLEPUSH_WEBHOOK_URL`. No body transformation \u2014 the customer sends the exact payload SimplePush expects.",
+  "name": "simplepush-relay",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "push",
+    "relay",
+    "simplepush"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.SIMPLEPUSH_WEBHOOK_URL }",
+      "is_active": true,
+      "is_primary": true
+    }
+  }
+}

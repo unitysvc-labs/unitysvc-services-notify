@@ -1,0 +1,93 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP \u2192 Telegram (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "chat_id": "",
+        "name": "transform_notify_connectivity_telegram",
+        "webhook_path": "/bot{token}/sendMessage"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "chat_id": "",
+        "name": "transform_notify_code_example_py_telegram",
+        "webhook_path": "/bot{token}/sendMessage"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "chat_id": "",
+        "name": "transform_notify_code_example_sh_telegram",
+        "webhook_path": "/bot{token}/sendMessage"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "chat_id": "test-chat-id",
+      "webhook_base_url": "https://mock.unitysvc.dev",
+      "webhook_path": "/bot{token}/sendMessage"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-telegram-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your Telegram webhook for this enrollment",
+    "properties": {
+      "chat_id": {
+        "description": "Target chat or channel ID (required by Telegram)",
+        "title": "Chat ID",
+        "type": "string"
+      },
+      "webhook_base_url": {
+        "description": "Base URL of the Telegram server (e.g. https://hooks.slack.com)",
+        "format": "uri",
+        "title": "Webhook Base URL",
+        "type": "string"
+      },
+      "webhook_path": {
+        "description": "Webhook path (e.g. /bot{token}/sendMessage)",
+        "title": "Webhook Path",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_base_url",
+      "webhook_path",
+      "chat_id"
+    ],
+    "title": "Telegram Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "chat_id": {
+      "ui:description": "Your Telegram chat or channel ID",
+      "ui:placeholder": "123456789"
+    },
+    "webhook_base_url": {
+      "ui:description": "Enter the base URL (scheme + host) of your Telegram webhook",
+      "ui:placeholder": "https://..."
+    },
+    "webhook_path": {
+      "ui:description": "Enter the webhook path portion",
+      "ui:placeholder": "/bot{token}/sendMessage"
+    }
+  }
+}

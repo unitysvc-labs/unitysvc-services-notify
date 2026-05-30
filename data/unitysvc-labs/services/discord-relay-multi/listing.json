@@ -1,0 +1,65 @@
+{
+  "currency": "USD",
+  "display_name": "Discord Relay (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "notify_relay_connectivity_discord",
+        "webhook_path": "/api/webhooks/{id}/{token}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_py_discord",
+        "webhook_path": "/api/webhooks/{id}/{token}"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_sh_discord",
+        "webhook_path": "/api/webhooks/{id}/{token}"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "webhook_url": "https://mock.unitysvc.dev/api/webhooks/{id}/{token}"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/discord-relay-multi"
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure the Discord webhook URL for this enrollment",
+    "properties": {
+      "webhook_url": {
+        "description": "Full Discord incoming webhook URL",
+        "format": "uri",
+        "title": "Webhook URL",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_url"
+    ],
+    "title": "Discord Relay Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "webhook_url": {
+      "ui:description": "Paste your Discord incoming webhook URL here",
+      "ui:placeholder": "https://..."
+    }
+  }
+}

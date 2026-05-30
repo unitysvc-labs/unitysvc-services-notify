@@ -1,0 +1,27 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Opsgenie notification relay. Forwards any HTTP POST body to the Opsgenie webhook URL stored in the customer secret `OPSGENIE_WEBHOOK_URL`. No body transformation \u2014 the customer sends the exact payload Opsgenie expects.",
+  "name": "opsgenie-relay",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "alerting",
+    "incident",
+    "notification",
+    "ops",
+    "opsgenie",
+    "relay"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.OPSGENIE_WEBHOOK_URL }",
+      "is_active": true,
+      "is_primary": true
+    }
+  }
+}

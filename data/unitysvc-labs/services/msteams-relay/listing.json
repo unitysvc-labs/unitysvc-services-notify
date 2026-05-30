@@ -1,0 +1,41 @@
+{
+  "currency": "USD",
+  "display_name": "Microsoft Teams Relay",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "notify_relay_connectivity_msteams",
+        "webhook_path": "/webhookb2/{rest}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_py_msteams",
+        "webhook_path": "/webhookb2/{rest}"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_sh_msteams",
+        "webhook_path": "/webhookb2/{rest}"
+      }
+    }
+  },
+  "list_price": {
+    "description": "Free \u2014 webhook URL stored as customer secret",
+    "price": "0",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {}
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/msteams-relay"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "currency": "USD",
+  "display_name": "SparkPost Relay",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "notify_relay_connectivity_json",
+        "webhook_path": "/api/v1/transmissions"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_py_json",
+        "webhook_path": "/api/v1/transmissions"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_sh_json",
+        "webhook_path": "/api/v1/transmissions"
+      }
+    }
+  },
+  "list_price": {
+    "description": "Free \u2014 webhook URL stored as customer secret",
+    "price": "0",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {}
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/sparkpost-relay"
+    }
+  }
+}

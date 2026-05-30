@@ -1,0 +1,65 @@
+{
+  "currency": "USD",
+  "display_name": "WhatsApp Relay (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "notify_relay_connectivity_json",
+        "webhook_path": "/v17.0/{phone_id}/messages"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_py_json",
+        "webhook_path": "/v17.0/{phone_id}/messages"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "notify_relay_code_example_sh_json",
+        "webhook_path": "/v17.0/{phone_id}/messages"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "webhook_url": "https://mock.unitysvc.dev/v17.0/{phone_id}/messages"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/whatsapp-relay-multi"
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure the WhatsApp webhook URL for this enrollment",
+    "properties": {
+      "webhook_url": {
+        "description": "Full WhatsApp incoming webhook URL",
+        "format": "uri",
+        "title": "Webhook URL",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_url"
+    ],
+    "title": "WhatsApp Relay Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "webhook_url": {
+      "ui:description": "Paste your WhatsApp incoming webhook URL here",
+      "ui:placeholder": "https://..."
+    }
+  }
+}

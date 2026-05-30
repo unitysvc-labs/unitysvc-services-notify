@@ -1,0 +1,39 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-{{ channel_display }} transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a {{ channel_display }}-native message before forwarding to the pre-configured webhook. No customer secrets required — the webhook URL is registered by the service operator.",
+  "name": "{{ name }}",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": {{ tags | tojson }},
+  "time_created": "{{ time_created }}",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "${ service_secrets.WEBHOOK_BASE_URL }",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": {{ lua_template | tojson }}
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "{{ webhook_path }}"
+          }
+        }
+      }
+    }
+  }
+}

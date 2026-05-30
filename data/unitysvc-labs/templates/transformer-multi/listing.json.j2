@@ -1,0 +1,100 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP → {{ channel_display }} (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"{% if chat_id_param %},
+        "chat_id": ""{% endif %}
+
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"{% if chat_id_param %},
+        "chat_id": ""{% endif %}
+
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_{{ body_type }}",
+        "webhook_path": "{{ webhook_path }}"{% if chat_id_param %},
+        "chat_id": ""{% endif %}
+
+      }
+    }
+  },
+  "list_price": {
+    "description": "{{ price_description }}",
+    "price": "{{ price }}",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "webhook_base_url": "https://mock.unitysvc.dev",
+      "webhook_path": "{{ webhook_path }}"{% if chat_id_param %},
+      "chat_id": "test-chat-id"{% endif %}
+
+    }
+  },
+  "status": "ready",
+  "time_created": "{{ time_created }}",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "{{ name }}"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your {{ channel_display }} webhook for this enrollment",
+    "properties": {
+      "webhook_base_url": {
+        "description": "Base URL of the {{ channel_display }} server (e.g. https://hooks.slack.com)",
+        "format": "uri",
+        "title": "Webhook Base URL",
+        "type": "string"
+      },
+      "webhook_path": {
+        "description": "Webhook path (e.g. {{ webhook_path }})",
+        "title": "Webhook Path",
+        "type": "string"
+      }{% if chat_id_param %},
+      "chat_id": {
+        "description": "Target chat or channel ID (required by {{ channel_display }})",
+        "title": "Chat ID",
+        "type": "string"
+      }{% endif %}
+
+    },
+    "required": [
+      "webhook_base_url",
+      "webhook_path"{% if chat_id_param %},
+      "chat_id"{% endif %}
+
+    ],
+    "title": "{{ channel_display }} Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "webhook_base_url": {
+      "ui:description": "Enter the base URL (scheme + host) of your {{ channel_display }} webhook",
+      "ui:placeholder": "https://..."
+    },
+    "webhook_path": {
+      "ui:description": "Enter the webhook path portion",
+      "ui:placeholder": "{{ webhook_path }}"
+    }{% if chat_id_param %},
+    "chat_id": {
+      "ui:description": "Your {{ channel_display }} chat or channel ID",
+      "ui:placeholder": "123456789"
+    }{% endif %}
+
+  }
+}

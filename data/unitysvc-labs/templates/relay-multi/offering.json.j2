@@ -1,0 +1,20 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "{{ channel_display }} notification relay (multi-enrollment). Each enrollment targets a different {{ channel_display }} webhook URL, supplied by the customer as an enrollment parameter. No body transformation — the customer sends the exact payload {{ channel_display }} expects.",
+  "name": "{{ name }}",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": {{ tags | tojson }},
+  "time_created": "{{ time_created }}",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "{{ '{{' }} enrollment_vars.webhook_url {{ '}}' }}",
+      "is_active": true,
+      "is_primary": true
+    }
+  }
+}

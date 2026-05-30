@@ -1,0 +1,41 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP \u2192 Mattermost",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_slack",
+        "webhook_path": "/hooks/{key}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_slack",
+        "webhook_path": "/hooks/{key}"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_slack",
+        "webhook_path": "/hooks/{key}"
+      }
+    }
+  },
+  "list_price": {
+    "description": "Free \u2014 webhook URL pre-configured",
+    "price": "0",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-mattermost"
+      }
+    }
+  }
+}

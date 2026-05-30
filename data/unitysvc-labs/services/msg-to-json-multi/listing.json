@@ -1,0 +1,79 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP \u2192 JSON Webhook (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_json",
+        "webhook_path": ""
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_json",
+        "webhook_path": ""
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_json",
+        "webhook_path": ""
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "webhook_base_url": "https://mock.unitysvc.dev",
+      "webhook_path": ""
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-json-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your JSON Webhook webhook for this enrollment",
+    "properties": {
+      "webhook_base_url": {
+        "description": "Base URL of the JSON Webhook server (e.g. https://hooks.slack.com)",
+        "format": "uri",
+        "title": "Webhook Base URL",
+        "type": "string"
+      },
+      "webhook_path": {
+        "description": "Webhook path (e.g. )",
+        "title": "Webhook Path",
+        "type": "string"
+      }
+    },
+    "required": [
+      "webhook_base_url",
+      "webhook_path"
+    ],
+    "title": "JSON Webhook Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "webhook_base_url": {
+      "ui:description": "Enter the base URL (scheme + host) of your JSON Webhook webhook",
+      "ui:placeholder": "https://..."
+    },
+    "webhook_path": {
+      "ui:description": "Enter the webhook path portion",
+      "ui:placeholder": ""
+    }
+  }
+}
