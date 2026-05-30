@@ -29,7 +29,7 @@
   "schema": "listing_v1",
   "service_options": {
     "ops_testing_parameters": {
-      "webhook_url": "https://mock.unitysvc.dev/hooks/{key}"
+      "webhook_url_secret": "MATTERMOST_WEBHOOK_URL"
     }
   },
   "status": "ready",
@@ -41,25 +41,24 @@
     }
   },
   "user_parameters_schema": {
-    "description": "Configure the Mattermost webhook URL for this enrollment",
+    "description": "Configure the Mattermost webhook for this enrollment",
     "properties": {
-      "webhook_url": {
-        "description": "Full Mattermost incoming webhook URL",
-        "format": "uri",
-        "title": "Webhook URL",
+      "webhook_url_secret": {
+        "description": "Name of the customer secret containing your Mattermost incoming webhook URL",
+        "title": "Webhook URL Secret Name",
         "type": "string"
       }
     },
     "required": [
-      "webhook_url"
+      "webhook_url_secret"
     ],
     "title": "Mattermost Relay Configuration",
     "type": "object"
   },
   "user_parameters_ui_schema": {
-    "webhook_url": {
-      "ui:description": "Paste your Mattermost incoming webhook URL here",
-      "ui:placeholder": "https://..."
+    "webhook_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds your Mattermost webhook URL",
+      "ui:placeholder": "MATTERMOST_WEBHOOK_URL"
     }
   }
 }

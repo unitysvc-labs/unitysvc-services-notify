@@ -1,0 +1,78 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP -> LINE (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_line_msg",
+        "webhook_path": "/v2/bot/message/push"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_line_msg",
+        "webhook_path": "/v2/bot/message/push"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_line_msg",
+        "webhook_path": "/v2/bot/message/push"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "api_key_secret": "LINE_CHANNEL_ACCESS_TOKEN",
+      "to_id_secret": "LINE_TO_ID"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-line-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your LINE endpoint for this enrollment",
+    "properties": {
+      "api_key_secret": {
+        "description": "Name of the customer secret containing your LINE Channel Access Token",
+        "title": "Channel Access Token Secret Name",
+        "type": "string"
+      },
+      "to_id_secret": {
+        "description": "Name of the customer secret containing the target user or group ID",
+        "title": "Recipient ID Secret Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "api_key_secret",
+      "to_id_secret"
+    ],
+    "title": "LINE Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "api_key_secret": {
+      "ui:description": "Enter the name of the customer secret holding your LINE Channel Access Token",
+      "ui:placeholder": "LINE_CHANNEL_ACCESS_TOKEN"
+    },
+    "to_id_secret": {
+      "ui:description": "Enter the name of the customer secret holding the target user or group ID",
+      "ui:placeholder": "LINE_TO_ID"
+    }
+  }
+}

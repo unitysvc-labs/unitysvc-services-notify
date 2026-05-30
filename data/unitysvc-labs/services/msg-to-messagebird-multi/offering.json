@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-MessageBird transformer (multi-enrollment). Each enrollment targets a different MessageBird endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a MessageBird-native message, and delivers it to the customer's own MessageBird endpoint.",
+  "name": "msg-to-messagebird-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "messagebird",
+    "messaging",
+    "notification",
+    "sms",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://rest.messagebird.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"originator\":${ customer_secrets.{{ params.from_id_secret }} },\"recipients\":[${ customer_secrets.{{ params.to_phone_secret }} }],\"body\":{* _escape_json(_body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Authorization": "AccessKey ${ customer_secrets.{{ params.api_key_secret }} }",
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/v2/send"
+          }
+        }
+      }
+    }
+  }
+}

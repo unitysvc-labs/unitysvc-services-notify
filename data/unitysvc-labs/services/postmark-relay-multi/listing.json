@@ -4,19 +4,19 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "name": "notify_relay_connectivity_json",
+        "name": "notify_relay_connectivity_postmark_email",
         "webhook_path": "/email"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_py_json",
+        "name": "notify_relay_code_example_py_postmark_email",
         "webhook_path": "/email"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_sh_json",
+        "name": "notify_relay_code_example_sh_postmark_email",
         "webhook_path": "/email"
       }
     }
@@ -29,7 +29,7 @@
   "schema": "listing_v1",
   "service_options": {
     "ops_testing_parameters": {
-      "webhook_url": "https://mock.unitysvc.dev/email"
+      "webhook_url_secret": "POSTMARK_WEBHOOK_URL"
     }
   },
   "status": "ready",
@@ -41,25 +41,24 @@
     }
   },
   "user_parameters_schema": {
-    "description": "Configure the Postmark webhook URL for this enrollment",
+    "description": "Configure the Postmark webhook for this enrollment",
     "properties": {
-      "webhook_url": {
-        "description": "Full Postmark incoming webhook URL",
-        "format": "uri",
-        "title": "Webhook URL",
+      "webhook_url_secret": {
+        "description": "Name of the customer secret containing your Postmark incoming webhook URL",
+        "title": "Webhook URL Secret Name",
         "type": "string"
       }
     },
     "required": [
-      "webhook_url"
+      "webhook_url_secret"
     ],
     "title": "Postmark Relay Configuration",
     "type": "object"
   },
   "user_parameters_ui_schema": {
-    "webhook_url": {
-      "ui:description": "Paste your Postmark incoming webhook URL here",
-      "ui:placeholder": "https://..."
+    "webhook_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds your Postmark webhook URL",
+      "ui:placeholder": "POSTMARK_WEBHOOK_URL"
     }
   }
 }

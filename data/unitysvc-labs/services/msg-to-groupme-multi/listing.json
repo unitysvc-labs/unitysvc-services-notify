@@ -1,0 +1,67 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP -> GroupMe (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_groupme_msg",
+        "webhook_path": "/v3/bots/post"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_groupme_msg",
+        "webhook_path": "/v3/bots/post"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_groupme_msg",
+        "webhook_path": "/v3/bots/post"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "bot_id_secret": "GROUPME_BOT_ID"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-groupme-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your GroupMe endpoint for this enrollment",
+    "properties": {
+      "bot_id_secret": {
+        "description": "Name of the customer secret containing the GroupMe bot ID",
+        "title": "Bot ID Secret Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "bot_id_secret"
+    ],
+    "title": "GroupMe Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "bot_id_secret": {
+      "ui:description": "Enter the name of the customer secret holding the GroupMe bot ID",
+      "ui:placeholder": "GROUPME_BOT_ID"
+    }
+  }
+}

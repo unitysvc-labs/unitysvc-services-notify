@@ -1,24 +1,21 @@
 {
   "currency": "USD",
-  "display_name": "SMTP \u2192 Telegram (Multi-Enrollment)",
+  "display_name": "SMTP -> Telegram (Multi-Enrollment)",
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "chat_id": "",
         "name": "transform_notify_connectivity_telegram",
         "webhook_path": "/bot{token}/sendMessage"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "chat_id": "",
         "name": "transform_notify_code_example_py_telegram",
         "webhook_path": "/bot{token}/sendMessage"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "chat_id": "",
         "name": "transform_notify_code_example_sh_telegram",
         "webhook_path": "/bot{token}/sendMessage"
       }
@@ -32,9 +29,9 @@
   "schema": "listing_v1",
   "service_options": {
     "ops_testing_parameters": {
-      "chat_id": "test-chat-id",
-      "webhook_base_url": "https://mock.unitysvc.dev",
-      "webhook_path": "/bot{token}/sendMessage"
+      "chat_id_secret": "TELEGRAM_CHAT_ID",
+      "webhook_base_url_secret": "TELEGRAM_WEBHOOK_BASE_URL",
+      "webhook_path_secret": "TELEGRAM_WEBHOOK_PATH"
     }
   },
   "status": "ready",
@@ -49,45 +46,44 @@
     }
   },
   "user_parameters_schema": {
-    "description": "Configure your Telegram webhook for this enrollment",
+    "description": "Configure your Telegram endpoint for this enrollment",
     "properties": {
-      "chat_id": {
-        "description": "Target chat or channel ID (required by Telegram)",
-        "title": "Chat ID",
+      "chat_id_secret": {
+        "description": "Name of the customer secret containing the Telegram chat or channel ID",
+        "title": "Chat ID Secret Name",
         "type": "string"
       },
-      "webhook_base_url": {
-        "description": "Base URL of the Telegram server (e.g. https://hooks.slack.com)",
-        "format": "uri",
-        "title": "Webhook Base URL",
+      "webhook_base_url_secret": {
+        "description": "Name of the customer secret containing the base URL of your Telegram server (e.g. https://hooks.slack.com)",
+        "title": "Webhook Base URL Secret Name",
         "type": "string"
       },
-      "webhook_path": {
-        "description": "Webhook path (e.g. /bot{token}/sendMessage)",
-        "title": "Webhook Path",
+      "webhook_path_secret": {
+        "description": "Name of the customer secret containing the webhook path (e.g. /bot{token}/sendMessage)",
+        "title": "Webhook Path Secret Name",
         "type": "string"
       }
     },
     "required": [
-      "webhook_base_url",
-      "webhook_path",
-      "chat_id"
+      "webhook_base_url_secret",
+      "webhook_path_secret",
+      "chat_id_secret"
     ],
     "title": "Telegram Transformer Configuration",
     "type": "object"
   },
   "user_parameters_ui_schema": {
-    "chat_id": {
-      "ui:description": "Your Telegram chat or channel ID",
-      "ui:placeholder": "123456789"
+    "chat_id_secret": {
+      "ui:description": "Enter the name of the customer secret that holds your Telegram chat or channel ID",
+      "ui:placeholder": "TELEGRAM_CHAT_ID"
     },
-    "webhook_base_url": {
-      "ui:description": "Enter the base URL (scheme + host) of your Telegram webhook",
-      "ui:placeholder": "https://..."
+    "webhook_base_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds the base URL (scheme + host) of your Telegram webhook",
+      "ui:placeholder": "MY_TELEGRAM_BASE_URL"
     },
-    "webhook_path": {
-      "ui:description": "Enter the webhook path portion",
-      "ui:placeholder": "/bot{token}/sendMessage"
+    "webhook_path_secret": {
+      "ui:description": "Enter the name of the customer secret that holds the webhook path",
+      "ui:placeholder": "MY_TELEGRAM_PATH"
     }
   }
 }

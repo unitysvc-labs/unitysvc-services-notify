@@ -4,21 +4,18 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "chat_id": "",
         "name": "transform_notify_connectivity_telegram",
         "webhook_path": "/bot{token}/sendMessage"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "chat_id": "",
         "name": "transform_notify_code_example_py_telegram",
         "webhook_path": "/bot{token}/sendMessage"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "chat_id": "",
         "name": "transform_notify_code_example_sh_telegram",
         "webhook_path": "/bot{token}/sendMessage"
       }

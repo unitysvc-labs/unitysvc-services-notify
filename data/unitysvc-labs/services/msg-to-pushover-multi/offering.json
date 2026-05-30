@@ -1,0 +1,46 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-Pushover transformer (multi-enrollment). Each enrollment targets a different Pushover endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Pushover-native message, and delivers it to the customer's own Pushover endpoint.",
+  "name": "msg-to-pushover-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "mobile",
+    "notification",
+    "push",
+    "pushover",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://api.pushover.net",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"token\":${ customer_secrets.{{ params.token_secret }} },\"user\":${ customer_secrets.{{ params.user_secret }} },\"message\":{* _escape_json(_body.title..\"\n\n\".._body.body) *},\"title\":{* _escape_json(_body.title) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/1/messages.json"
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,20 +4,20 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "name": "notify_relay_connectivity_json",
-        "webhook_path": ""
+        "name": "notify_relay_connectivity_feishu_msg",
+        "webhook_path": "/open-apis/bot/v2/hook/{key}"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_py_json",
-        "webhook_path": ""
+        "name": "notify_relay_code_example_py_feishu_msg",
+        "webhook_path": "/open-apis/bot/v2/hook/{key}"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_sh_json",
-        "webhook_path": ""
+        "name": "notify_relay_code_example_sh_feishu_msg",
+        "webhook_path": "/open-apis/bot/v2/hook/{key}"
       }
     }
   },
@@ -29,7 +29,7 @@
   "schema": "listing_v1",
   "service_options": {
     "ops_testing_parameters": {
-      "webhook_url": "https://mock.unitysvc.dev"
+      "webhook_url_secret": "FEISHU_WEBHOOK_URL"
     }
   },
   "status": "ready",
@@ -41,25 +41,24 @@
     }
   },
   "user_parameters_schema": {
-    "description": "Configure the Feishu / Lark webhook URL for this enrollment",
+    "description": "Configure the Feishu / Lark webhook for this enrollment",
     "properties": {
-      "webhook_url": {
-        "description": "Full Feishu / Lark incoming webhook URL",
-        "format": "uri",
-        "title": "Webhook URL",
+      "webhook_url_secret": {
+        "description": "Name of the customer secret containing your Feishu / Lark incoming webhook URL",
+        "title": "Webhook URL Secret Name",
         "type": "string"
       }
     },
     "required": [
-      "webhook_url"
+      "webhook_url_secret"
     ],
     "title": "Feishu / Lark Relay Configuration",
     "type": "object"
   },
   "user_parameters_ui_schema": {
-    "webhook_url": {
-      "ui:description": "Paste your Feishu / Lark incoming webhook URL here",
-      "ui:placeholder": "https://..."
+    "webhook_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds your Feishu / Lark webhook URL",
+      "ui:placeholder": "FEISHU_WEBHOOK_URL"
     }
   }
 }

@@ -1,0 +1,46 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-GroupMe transformer (multi-enrollment). Each enrollment targets a different GroupMe endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a GroupMe-native message, and delivers it to the customer's own GroupMe endpoint.",
+  "name": "msg-to-groupme-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "chat",
+    "groupme",
+    "messaging",
+    "notification",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://api.groupme.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"bot_id\":${ customer_secrets.{{ params.bot_id_secret }} },\"text\":{* _escape_json(_body.title..\": \".._body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/v3/bots/post"
+          }
+        }
+      }
+    }
+  }
+}

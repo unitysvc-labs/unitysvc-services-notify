@@ -1,0 +1,41 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP \u2192 WhatsApp",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_whatsapp_msg",
+        "webhook_path": "/v17.0/{phone_number_id}/messages"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_whatsapp_msg",
+        "webhook_path": "/v17.0/{phone_number_id}/messages"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_whatsapp_msg",
+        "webhook_path": "/v17.0/{phone_number_id}/messages"
+      }
+    }
+  },
+  "list_price": {
+    "description": "Free \u2014 webhook URL pre-configured",
+    "price": "0",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-whatsapp"
+      }
+    }
+  }
+}

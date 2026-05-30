@@ -4,20 +4,20 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "name": "notify_relay_connectivity_json",
-        "webhook_path": "/v17.0/{phone_id}/messages"
+        "name": "notify_relay_connectivity_whatsapp_msg",
+        "webhook_path": "/v17.0/{phone_number_id}/messages"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_py_json",
-        "webhook_path": "/v17.0/{phone_id}/messages"
+        "name": "notify_relay_code_example_py_whatsapp_msg",
+        "webhook_path": "/v17.0/{phone_number_id}/messages"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_sh_json",
-        "webhook_path": "/v17.0/{phone_id}/messages"
+        "name": "notify_relay_code_example_sh_whatsapp_msg",
+        "webhook_path": "/v17.0/{phone_number_id}/messages"
       }
     }
   },

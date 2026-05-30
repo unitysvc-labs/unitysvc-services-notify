@@ -29,7 +29,7 @@
   "schema": "listing_v1",
   "service_options": {
     "ops_testing_parameters": {
-      "webhook_url": "https://mock.unitysvc.dev/webhook/{token}"
+      "webhook_url_secret": "SIGNL4_WEBHOOK_URL"
     }
   },
   "status": "ready",
@@ -41,25 +41,24 @@
     }
   },
   "user_parameters_schema": {
-    "description": "Configure the SIGNL4 webhook URL for this enrollment",
+    "description": "Configure the SIGNL4 webhook for this enrollment",
     "properties": {
-      "webhook_url": {
-        "description": "Full SIGNL4 incoming webhook URL",
-        "format": "uri",
-        "title": "Webhook URL",
+      "webhook_url_secret": {
+        "description": "Name of the customer secret containing your SIGNL4 incoming webhook URL",
+        "title": "Webhook URL Secret Name",
         "type": "string"
       }
     },
     "required": [
-      "webhook_url"
+      "webhook_url_secret"
     ],
     "title": "SIGNL4 Relay Configuration",
     "type": "object"
   },
   "user_parameters_ui_schema": {
-    "webhook_url": {
-      "ui:description": "Paste your SIGNL4 incoming webhook URL here",
-      "ui:placeholder": "https://..."
+    "webhook_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds your SIGNL4 webhook URL",
+      "ui:placeholder": "SIGNL4_WEBHOOK_URL"
     }
   }
 }

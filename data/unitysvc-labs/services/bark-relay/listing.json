@@ -4,20 +4,20 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "name": "notify_relay_connectivity_json",
-        "webhook_path": "/push"
+        "name": "notify_relay_connectivity_bark",
+        "webhook_path": "/{device_key}"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_py_json",
-        "webhook_path": "/push"
+        "name": "notify_relay_code_example_py_bark",
+        "webhook_path": "/{device_key}"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_sh_json",
-        "webhook_path": "/push"
+        "name": "notify_relay_code_example_sh_bark",
+        "webhook_path": "/{device_key}"
       }
     }
   },

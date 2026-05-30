@@ -1,0 +1,89 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP -> Postmark (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_postmark_email",
+        "webhook_path": "/email"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_postmark_email",
+        "webhook_path": "/email"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_postmark_email",
+        "webhook_path": "/email"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "api_key_secret": "POSTMARK_API_KEY",
+      "from_email_secret": "POSTMARK_FROM_EMAIL",
+      "to_email_secret": "POSTMARK_TO_EMAIL"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-postmark-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your Postmark endpoint for this enrollment",
+    "properties": {
+      "api_key_secret": {
+        "description": "Name of the customer secret containing your Postmark API key",
+        "title": "API Key Secret Name",
+        "type": "string"
+      },
+      "from_email_secret": {
+        "description": "Name of the customer secret containing the sender email address",
+        "title": "From Address Secret Name",
+        "type": "string"
+      },
+      "to_email_secret": {
+        "description": "Name of the customer secret containing the recipient email address",
+        "title": "To Address Secret Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "api_key_secret",
+      "from_email_secret",
+      "to_email_secret"
+    ],
+    "title": "Postmark Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "api_key_secret": {
+      "ui:description": "Enter the name of the customer secret holding your Postmark API key",
+      "ui:placeholder": "POSTMARK_API_KEY"
+    },
+    "from_email_secret": {
+      "ui:description": "Enter the name of the customer secret holding the sender email address",
+      "ui:placeholder": "POSTMARK_FROM_EMAIL"
+    },
+    "to_email_secret": {
+      "ui:description": "Enter the name of the customer secret holding the recipient email address",
+      "ui:placeholder": "POSTMARK_TO_EMAIL"
+    }
+  }
+}

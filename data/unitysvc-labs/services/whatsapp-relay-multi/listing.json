@@ -4,20 +4,20 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "name": "notify_relay_connectivity_json",
-        "webhook_path": "/v17.0/{phone_id}/messages"
+        "name": "notify_relay_connectivity_whatsapp_msg",
+        "webhook_path": "/v17.0/{phone_number_id}/messages"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_py_json",
-        "webhook_path": "/v17.0/{phone_id}/messages"
+        "name": "notify_relay_code_example_py_whatsapp_msg",
+        "webhook_path": "/v17.0/{phone_number_id}/messages"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_sh_json",
-        "webhook_path": "/v17.0/{phone_id}/messages"
+        "name": "notify_relay_code_example_sh_whatsapp_msg",
+        "webhook_path": "/v17.0/{phone_number_id}/messages"
       }
     }
   },
@@ -29,7 +29,7 @@
   "schema": "listing_v1",
   "service_options": {
     "ops_testing_parameters": {
-      "webhook_url": "https://mock.unitysvc.dev/v17.0/{phone_id}/messages"
+      "webhook_url_secret": "WHATSAPP_WEBHOOK_URL"
     }
   },
   "status": "ready",
@@ -41,25 +41,24 @@
     }
   },
   "user_parameters_schema": {
-    "description": "Configure the WhatsApp webhook URL for this enrollment",
+    "description": "Configure the WhatsApp webhook for this enrollment",
     "properties": {
-      "webhook_url": {
-        "description": "Full WhatsApp incoming webhook URL",
-        "format": "uri",
-        "title": "Webhook URL",
+      "webhook_url_secret": {
+        "description": "Name of the customer secret containing your WhatsApp incoming webhook URL",
+        "title": "Webhook URL Secret Name",
         "type": "string"
       }
     },
     "required": [
-      "webhook_url"
+      "webhook_url_secret"
     ],
     "title": "WhatsApp Relay Configuration",
     "type": "object"
   },
   "user_parameters_ui_schema": {
-    "webhook_url": {
-      "ui:description": "Paste your WhatsApp incoming webhook URL here",
-      "ui:placeholder": "https://..."
+    "webhook_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds your WhatsApp webhook URL",
+      "ui:placeholder": "WHATSAPP_WEBHOOK_URL"
     }
   }
 }

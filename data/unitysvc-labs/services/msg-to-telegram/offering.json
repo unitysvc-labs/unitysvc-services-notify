@@ -27,7 +27,7 @@
           "body_transformer": {
             "request": {
               "input_format": "json",
-              "template": "{\"chat_id\":{* _escape_json(enrollment_vars.chat_id) *},\"text\":{* _escape_json(_body.title..\"\n\n\".._body.body) *}}"
+              "template": "{\"chat_id\":${ service_secrets.TELEGRAM_CHAT_ID },\"text\":{* _escape_json(_body.title..\"\\n\\n\".._body.body) *}}"
             }
           },
           "proxy_rewrite": {

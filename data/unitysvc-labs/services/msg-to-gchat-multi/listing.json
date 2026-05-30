@@ -1,6 +1,6 @@
 {
   "currency": "USD",
-  "display_name": "SMTP \u2192 Google Chat (Multi-Enrollment)",
+  "display_name": "SMTP -> Google Chat (Multi-Enrollment)",
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
@@ -29,8 +29,8 @@
   "schema": "listing_v1",
   "service_options": {
     "ops_testing_parameters": {
-      "webhook_base_url": "https://mock.unitysvc.dev",
-      "webhook_path": "/v1/spaces/{space}/messages"
+      "webhook_base_url_secret": "GCHAT_WEBHOOK_BASE_URL",
+      "webhook_path_secret": "GCHAT_WEBHOOK_PATH"
     }
   },
   "status": "ready",
@@ -45,35 +45,34 @@
     }
   },
   "user_parameters_schema": {
-    "description": "Configure your Google Chat webhook for this enrollment",
+    "description": "Configure your Google Chat endpoint for this enrollment",
     "properties": {
-      "webhook_base_url": {
-        "description": "Base URL of the Google Chat server (e.g. https://hooks.slack.com)",
-        "format": "uri",
-        "title": "Webhook Base URL",
+      "webhook_base_url_secret": {
+        "description": "Name of the customer secret containing the base URL of your Google Chat server (e.g. https://hooks.slack.com)",
+        "title": "Webhook Base URL Secret Name",
         "type": "string"
       },
-      "webhook_path": {
-        "description": "Webhook path (e.g. /v1/spaces/{space}/messages)",
-        "title": "Webhook Path",
+      "webhook_path_secret": {
+        "description": "Name of the customer secret containing the webhook path (e.g. /v1/spaces/{space}/messages)",
+        "title": "Webhook Path Secret Name",
         "type": "string"
       }
     },
     "required": [
-      "webhook_base_url",
-      "webhook_path"
+      "webhook_base_url_secret",
+      "webhook_path_secret"
     ],
     "title": "Google Chat Transformer Configuration",
     "type": "object"
   },
   "user_parameters_ui_schema": {
-    "webhook_base_url": {
-      "ui:description": "Enter the base URL (scheme + host) of your Google Chat webhook",
-      "ui:placeholder": "https://..."
+    "webhook_base_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds the base URL (scheme + host) of your Google Chat webhook",
+      "ui:placeholder": "MY_GCHAT_BASE_URL"
     },
-    "webhook_path": {
-      "ui:description": "Enter the webhook path portion",
-      "ui:placeholder": "/v1/spaces/{space}/messages"
+    "webhook_path_secret": {
+      "ui:description": "Enter the name of the customer secret that holds the webhook path",
+      "ui:placeholder": "MY_GCHAT_PATH"
     }
   }
 }

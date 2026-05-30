@@ -1,0 +1,78 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP -> Pushover (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_pushover",
+        "webhook_path": "/1/messages.json"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_pushover",
+        "webhook_path": "/1/messages.json"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_pushover",
+        "webhook_path": "/1/messages.json"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "token_secret": "PUSHOVER_TOKEN",
+      "user_secret": "PUSHOVER_USER"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-pushover-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your Pushover endpoint for this enrollment",
+    "properties": {
+      "token_secret": {
+        "description": "Name of the customer secret containing your Pushover application token",
+        "title": "App Token Secret Name",
+        "type": "string"
+      },
+      "user_secret": {
+        "description": "Name of the customer secret containing your Pushover user key",
+        "title": "User Key Secret Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "token_secret",
+      "user_secret"
+    ],
+    "title": "Pushover Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "token_secret": {
+      "ui:description": "Enter the name of the customer secret that holds your Pushover app token",
+      "ui:placeholder": "PUSHOVER_TOKEN"
+    },
+    "user_secret": {
+      "ui:description": "Enter the name of the customer secret that holds your Pushover user key",
+      "ui:placeholder": "PUSHOVER_USER"
+    }
+  }
+}

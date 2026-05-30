@@ -4,19 +4,19 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "name": "notify_relay_connectivity_json",
+        "name": "notify_relay_connectivity_groupme_msg",
         "webhook_path": "/v3/bots/post"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_py_json",
+        "name": "notify_relay_code_example_py_groupme_msg",
         "webhook_path": "/v3/bots/post"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_sh_json",
+        "name": "notify_relay_code_example_sh_groupme_msg",
         "webhook_path": "/v3/bots/post"
       }
     }

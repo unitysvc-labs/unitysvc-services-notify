@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-{{ channel_display }} transformer (multi-enrollment). Each enrollment targets a different {{ channel_display }} webhook URL, provided by the customer. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a {{ channel_display }}-native message, and delivers it to the customer's own {{ channel_display }} webhook.",
+  "description": "SMTP-to-{{ channel_display }} transformer (multi-enrollment). Each enrollment targets a different {{ channel_display }} endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a {{ channel_display }}-native message, and delivers it to the customer's own {{ channel_display }} endpoint.",
   "name": "{{ name }}",
   "schema": "offering_v1",
   "service_type": "notification",
@@ -12,7 +12,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "{{ '{{' }} enrollment_vars.webhook_base_url {{ '}}' }}",
+      "base_url": {% if fixed_base_url %}"{{ fixed_base_url }}"{% else %}"${ customer_secrets.{{ '{{' }} params.webhook_base_url_secret {{ '}}' }} }"{% endif %},
       "is_active": true,
       "is_primary": true,
       "raw": {
@@ -26,11 +26,13 @@
           "proxy_rewrite": {
             "headers": {
               "set": {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json"{% if auth_header %},
+                "{{ auth_header.name }}": "{{ auth_header.prefix }}${ customer_secrets.{{ '{{' }} params.api_key_secret {{ '}}' }} }"{% endif %}
+
               }
             },
             "method": "POST",
-            "uri": "{{ '{{' }} enrollment_vars.webhook_path {{ '}}' }}"
+            "uri": {% if fixed_base_url %}"{{ webhook_path }}"{% else %}"${ customer_secrets.{{ '{{' }} params.webhook_path_secret {{ '}}' }} }"{% endif %}
           }
         }
       }

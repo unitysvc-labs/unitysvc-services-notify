@@ -12,7 +12,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ service_secrets.WEBHOOK_BASE_URL }",
+      "base_url": {% if fixed_base_url %}"{{ fixed_base_url }}"{% else %}"${ service_secrets.WEBHOOK_BASE_URL }"{% endif %},
       "is_active": true,
       "is_primary": true,
       "raw": {
@@ -26,7 +26,9 @@
           "proxy_rewrite": {
             "headers": {
               "set": {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json"{% if auth_header %},
+                "{{ auth_header.name }}": "{{ auth_header.prefix }}${ service_secrets.API_KEY }"{% endif %}
+
               }
             },
             "method": "POST",

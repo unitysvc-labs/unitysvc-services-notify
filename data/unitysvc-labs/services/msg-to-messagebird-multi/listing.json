@@ -1,0 +1,89 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP -> MessageBird (Multi-Enrollment)",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_messagebird_sms",
+        "webhook_path": "/v2/send"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_messagebird_sms",
+        "webhook_path": "/v2/send"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_messagebird_sms",
+        "webhook_path": "/v2/send"
+      }
+    }
+  },
+  "list_price": {
+    "description": "$0.001 per notification sent",
+    "price": "0.001",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "service_options": {
+    "ops_testing_parameters": {
+      "api_key_secret": "MESSAGEBIRD_API_KEY",
+      "from_id_secret": "MESSAGEBIRD_ORIGINATOR",
+      "to_phone_secret": "MESSAGEBIRD_TO_PHONE"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-messagebird-multi"
+      }
+    }
+  },
+  "user_parameters_schema": {
+    "description": "Configure your MessageBird endpoint for this enrollment",
+    "properties": {
+      "api_key_secret": {
+        "description": "Name of the customer secret containing your MessageBird API key",
+        "title": "API Key Secret Name",
+        "type": "string"
+      },
+      "from_id_secret": {
+        "description": "Name of the customer secret containing the sender ID or phone number",
+        "title": "Originator Secret Name",
+        "type": "string"
+      },
+      "to_phone_secret": {
+        "description": "Name of the customer secret containing the recipient phone number",
+        "title": "Recipient Phone Secret Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "api_key_secret",
+      "from_id_secret",
+      "to_phone_secret"
+    ],
+    "title": "MessageBird Transformer Configuration",
+    "type": "object"
+  },
+  "user_parameters_ui_schema": {
+    "api_key_secret": {
+      "ui:description": "Enter the name of the customer secret holding your MessageBird API key",
+      "ui:placeholder": "MESSAGEBIRD_API_KEY"
+    },
+    "from_id_secret": {
+      "ui:description": "Enter the name of the customer secret holding the sender ID or phone number",
+      "ui:placeholder": "MESSAGEBIRD_ORIGINATOR"
+    },
+    "to_phone_secret": {
+      "ui:description": "Enter the name of the customer secret holding the recipient phone number",
+      "ui:placeholder": "MESSAGEBIRD_TO_PHONE"
+    }
+  }
+}

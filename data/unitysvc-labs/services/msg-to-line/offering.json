@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-LINE transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a LINE-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "name": "msg-to-line",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "asia",
+    "line",
+    "messaging",
+    "notification",
+    "smtp",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://api.line.me",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"to\":${ service_secrets.TO_ID },\"messages\":[{\"type\":\"text\",\"text\":{* _escape_json(_body.title..\"\\n\\n\".._body.body) *}}]}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Authorization": "Bearer ${ service_secrets.API_KEY }",
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/v2/bot/message/push"
+          }
+        }
+      }
+    }
+  }
+}

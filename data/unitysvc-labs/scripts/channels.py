@@ -2,31 +2,50 @@
 Channel catalog for unitysvc-labs notification services.
 
 Each entry defines one upstream notification channel.  The `update_services.py`
-script expands each entry into 2–4 service definitions:
+script expands each entry into 2-4 service definitions:
 
   {channel_id}-relay          free, customer stores webhook URL as a fixed-name secret
-  {channel_id}-relay-multi    $0.001/use, customer provides webhook URL at enrollment
-  msg-to-{channel_id}         free, SMTP→upstream transformer (has_transformer only)
-  msg-to-{channel_id}-multi   $0.001/use, transformer, customer webhook (has_transformer only)
+  {channel_id}-relay-multi    $0.001/use, customer provides webhook URL via params+secrets
+  msg-to-{channel_id}         free, SMTP->upstream transformer (has_transformer only)
+  msg-to-{channel_id}-multi   $0.001/use, transformer, customer provides creds at enrollment
 
 Field reference
 ---------------
-channel_id      str   kebab-case service prefix (e.g. "discord")
-display         str   human-readable channel name
-tier            int   1=chat-webhooks, 2=mobile-push, 3=incident-ops, 4=email/SMS
-body_type       str   upstream body shape; determines Lua transformer template
-                      one of: discord | slack | telegram | msteams | matrix |
-                               ryver | ntfy | gotify | json
-has_transformer bool  True → also generate msg-to-* transformer service pair
-webhook_path    str   default webhook_path for connectivity tests / code examples
-                      (only meaningful for relay; transformer uses a fixed URI in offering)
-chat_id_param   bool  True → telegram-family: requires chat_id enrollment param
-tags            list  extra listing tags beyond [channel_id, "notification"]
+channel_id        str        kebab-case service prefix (e.g. "discord")
+display           str        human-readable channel name
+tier              int        1=chat-webhooks, 2=mobile-push, 3=incident-ops, 4=email/SMS
+body_type         str        upstream body shape; determines Lua transformer template
+                             one of: discord | slack | telegram | msteams | matrix |
+                                      ryver | ntfy | gotify | bark | json |
+                                      pushover (fixed) | pushover_multi |
+                                      resend_email | postmark_email | sendgrid_email |
+                                      brevo_email | smtp2go_email |
+                                      messagebird_sms | whatsapp_msg | line_msg |
+                                      groupme_msg | wechat_work | feishu_msg
+has_transformer   bool       True -> also generate msg-to-* transformer service pair
+fixed_base_url    str|None   When set, the transformer uses this hardcoded base URL
+                             instead of a customer-secret-backed URL.  Use for APIs
+                             where the endpoint is fixed and only the body credentials
+                             vary per customer (e.g. Pushover, Bark).
+webhook_path      str        default path for connectivity tests / fixed-variant URI
+auth_header       dict|None  Authorization header injected into proxy_rewrite headers.
+                             dict has keys: name (header name), prefix (value prefix).
+                             None if auth is embedded in the body or URL.
+                             Examples:
+                               dict(name="Authorization", prefix="Bearer ")
+                               dict(name="X-Postmark-Server-Token", prefix="")
+                               dict(name="api-key", prefix="")
+credential_params list[dict] Extra body-level credential params for transformer services.
+                             Each dict: {param, default_secret, title, description,
+                             ui_description}.  Empty for webhook-style channels.
+                             For multi: resolved via ${ customer_secrets.{{ params.X }} }
+                             For fixed: resolved via ${ service_secrets.DEFAULT_SECRET }
+tags              list       extra listing tags beyond [channel_id, "notification"]
 """
 
 from __future__ import annotations
 
-# ── Tier 1 – Chat / generic webhooks ──────────────────────────────────────────
+# -- Tier 1 -- Chat / generic webhooks -----------------------------------------
 
 TIER1: list[dict] = [
     dict(
@@ -35,8 +54,10 @@ TIER1: list[dict] = [
         tier=1,
         body_type="discord",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/api/webhooks/{id}/{token}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "gaming"],
     ),
     dict(
@@ -45,8 +66,10 @@ TIER1: list[dict] = [
         tier=1,
         body_type="slack",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/services/{a}/{b}/{c}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "workplace"],
     ),
     dict(
@@ -55,8 +78,18 @@ TIER1: list[dict] = [
         tier=1,
         body_type="telegram",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/bot{token}/sendMessage",
-        chat_id_param=True,
+        auth_header=None,
+        credential_params=[
+            dict(
+                param="chat_id_secret",
+                default_secret="TELEGRAM_CHAT_ID",
+                title="Chat ID Secret Name",
+                description="Name of the customer secret containing the Telegram chat or channel ID",
+                ui_description="Enter the name of the customer secret that holds your Telegram chat or channel ID",
+            ),
+        ],
         tags=["chat", "messaging"],
     ),
     dict(
@@ -65,9 +98,11 @@ TIER1: list[dict] = [
         tier=1,
         body_type="msteams",
         has_transformer=True,
+        fixed_base_url=None,
         # webhookb2 format (connector cards)
         webhook_path="/webhookb2/{rest}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "workplace", "microsoft"],
     ),
     dict(
@@ -76,8 +111,10 @@ TIER1: list[dict] = [
         tier=1,
         body_type="slack",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/hooks/{key}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "workplace", "self-hosted"],
     ),
     dict(
@@ -86,9 +123,10 @@ TIER1: list[dict] = [
         tier=1,
         body_type="matrix",
         has_transformer=True,
-        # room_id encoded as enrollment param; relay path uses token
+        fixed_base_url=None,
         webhook_path="/_matrix/client/v3/rooms/{room}/send/m.room.message/{txn}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "open-protocol", "self-hosted"],
     ),
     dict(
@@ -97,8 +135,10 @@ TIER1: list[dict] = [
         tier=1,
         body_type="slack",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/hooks/{token}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "self-hosted"],
     ),
     dict(
@@ -107,8 +147,10 @@ TIER1: list[dict] = [
         tier=1,
         body_type="slack",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/v1/spaces/{space}/messages",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "workplace", "google"],
     ),
     dict(
@@ -118,8 +160,10 @@ TIER1: list[dict] = [
         # form-encoded API (type/to/content); no JSON body transformer
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/api/v1/messages",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "self-hosted"],
     ),
     dict(
@@ -128,8 +172,10 @@ TIER1: list[dict] = [
         tier=1,
         body_type="slack",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/v1/webhooks/incoming/{token}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "workplace", "cisco"],
     ),
     dict(
@@ -138,8 +184,10 @@ TIER1: list[dict] = [
         tier=1,
         body_type="slack",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/hooks/sendMessage/{token}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "workplace"],
     ),
     dict(
@@ -148,8 +196,10 @@ TIER1: list[dict] = [
         tier=1,
         body_type="ryver",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/application/webhook/{token}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["chat", "workplace"],
     ),
     dict(
@@ -158,13 +208,15 @@ TIER1: list[dict] = [
         tier=1,
         body_type="json",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["webhook", "generic"],
     ),
 ]
 
-# ── Tier 2 – Mobile / desktop push ────────────────────────────────────────────
+# -- Tier 2 -- Mobile / desktop push -------------------------------------------
 
 TIER2: list[dict] = [
     dict(
@@ -173,8 +225,10 @@ TIER2: list[dict] = [
         tier=2,
         body_type="ntfy",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/{topic}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "self-hosted"],
     ),
     dict(
@@ -183,19 +237,65 @@ TIER2: list[dict] = [
         tier=2,
         body_type="gotify",
         has_transformer=True,
+        fixed_base_url=None,
         webhook_path="/message",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "self-hosted"],
     ),
     dict(
         channel_id="pushover",
         display="Pushover",
         tier=2,
-        body_type="json",
-        has_transformer=False,
+        # Fixed variant uses service_secrets; multi uses customer_secrets via params.
+        # Separate body_type keys handle the two cases (see BODY_TYPE_TEMPLATES below).
+        body_type="pushover",
+        has_transformer=True,
+        fixed_base_url="https://api.pushover.net",
         webhook_path="/1/messages.json",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[
+            dict(
+                param="token_secret",
+                default_secret="PUSHOVER_TOKEN",
+                title="App Token Secret Name",
+                description=(
+                    "Name of the customer secret containing your Pushover "
+                    "application token"
+                ),
+                ui_description=(
+                    "Enter the name of the customer secret that holds your "
+                    "Pushover app token"
+                ),
+            ),
+            dict(
+                param="user_secret",
+                default_secret="PUSHOVER_USER",
+                title="User Key Secret Name",
+                description=(
+                    "Name of the customer secret containing your Pushover user key"
+                ),
+                ui_description=(
+                    "Enter the name of the customer secret that holds your "
+                    "Pushover user key"
+                ),
+            ),
+        ],
         tags=["push", "mobile"],
+    ),
+    dict(
+        channel_id="bark",
+        display="Bark",
+        tier=2,
+        body_type="bark",
+        has_transformer=True,
+        # Base URL is conventionally https://api.day.app but can be self-hosted.
+        # Device key goes in the URL path -- customers supply both via secrets.
+        fixed_base_url=None,
+        webhook_path="/{device_key}",
+        auth_header=None,
+        credential_params=[],
+        tags=["push", "ios"],
     ),
     dict(
         channel_id="pushbullet",
@@ -203,19 +303,11 @@ TIER2: list[dict] = [
         tier=2,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v2/pushes",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "mobile"],
-    ),
-    dict(
-        channel_id="bark",
-        display="Bark",
-        tier=2,
-        body_type="json",
-        has_transformer=False,
-        webhook_path="/push",
-        chat_id_param=False,
-        tags=["push", "ios"],
     ),
     dict(
         channel_id="join",
@@ -223,8 +315,10 @@ TIER2: list[dict] = [
         tier=2,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/_ah/api/messaging/v1/sendPush",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "android"],
     ),
     dict(
@@ -233,8 +327,10 @@ TIER2: list[dict] = [
         tier=2,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/publicapi/add",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "ios"],
     ),
     dict(
@@ -243,8 +339,10 @@ TIER2: list[dict] = [
         tier=2,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/message",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "self-hosted"],
     ),
     dict(
@@ -253,8 +351,10 @@ TIER2: list[dict] = [
         tier=2,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/send",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push"],
     ),
     dict(
@@ -263,8 +363,10 @@ TIER2: list[dict] = [
         tier=2,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/{token}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push"],
     ),
     dict(
@@ -273,8 +375,10 @@ TIER2: list[dict] = [
         tier=2,
         body_type="slack",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/h/{project}/{hook}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "irc", "chat"],
     ),
     dict(
@@ -283,8 +387,10 @@ TIER2: list[dict] = [
         tier=2,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/{token}.send",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "wechat"],
     ),
     dict(
@@ -293,8 +399,10 @@ TIER2: list[dict] = [
         tier=2,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/api/send/message",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "wechat"],
     ),
     dict(
@@ -303,8 +411,10 @@ TIER2: list[dict] = [
         tier=2,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v1/projects/{project}/messages:send",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "firebase", "google", "mobile"],
     ),
     dict(
@@ -313,13 +423,15 @@ TIER2: list[dict] = [
         tier=2,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/api/v1/notifications",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["push", "mobile"],
     ),
 ]
 
-# ── Tier 3 – Incident / ops alerting ──────────────────────────────────────────
+# -- Tier 3 -- Incident / ops alerting -----------------------------------------
 
 TIER3: list[dict] = [
     dict(
@@ -328,8 +440,10 @@ TIER3: list[dict] = [
         tier=3,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v2/enqueue",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["incident", "ops", "alerting"],
     ),
     dict(
@@ -338,8 +452,10 @@ TIER3: list[dict] = [
         tier=3,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v2/alerts",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["incident", "ops", "alerting"],
     ),
     dict(
@@ -348,8 +464,10 @@ TIER3: list[dict] = [
         tier=3,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/integration/{token}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["incident", "ops", "alerting"],
     ),
     dict(
@@ -358,8 +476,10 @@ TIER3: list[dict] = [
         tier=3,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v1/notify",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["incident", "ops", "alerting"],
     ),
     dict(
@@ -368,8 +488,10 @@ TIER3: list[dict] = [
         tier=3,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/webhook/{token}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["incident", "ops", "alerting", "mobile"],
     ),
     dict(
@@ -378,8 +500,10 @@ TIER3: list[dict] = [
         tier=3,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/integrations/generic/{api_id}/alert/{routing_key}",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["incident", "ops", "alerting"],
     ),
     dict(
@@ -388,13 +512,42 @@ TIER3: list[dict] = [
         tier=3,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/rest/api/2/issue",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["incident", "issue-tracking", "atlassian"],
     ),
 ]
 
-# ── Tier 4 – Transactional email APIs ─────────────────────────────────────────
+# -- Tier 4 -- Transactional email APIs ----------------------------------------
+
+def _email_credential_params(cid: str, display: str) -> list[dict]:
+    """Standard credential params for email transformer channels."""
+    return [
+        dict(
+            param="api_key_secret",
+            default_secret=f"{cid}_API_KEY",
+            title="API Key Secret Name",
+            description=f"Name of the customer secret containing your {display} API key",
+            ui_description=f"Enter the name of the customer secret holding your {display} API key",
+        ),
+        dict(
+            param="from_email_secret",
+            default_secret=f"{cid}_FROM_EMAIL",
+            title="From Address Secret Name",
+            description="Name of the customer secret containing the sender email address",
+            ui_description="Enter the name of the customer secret holding the sender email address",
+        ),
+        dict(
+            param="to_email_secret",
+            default_secret=f"{cid}_TO_EMAIL",
+            title="To Address Secret Name",
+            description="Name of the customer secret containing the recipient email address",
+            ui_description="Enter the name of the customer secret holding the recipient email address",
+        ),
+    ]
+
 
 TIER4_EMAIL: list[dict] = [
     dict(
@@ -403,18 +556,22 @@ TIER4_EMAIL: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v3/{domain}/messages",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["email", "transactional"],
     ),
     dict(
         channel_id="sendgrid",
         display="SendGrid",
         tier=4,
-        body_type="json",
-        has_transformer=False,
+        body_type="sendgrid_email",
+        has_transformer=True,
+        fixed_base_url="https://api.sendgrid.com",
         webhook_path="/v3/mail/send",
-        chat_id_param=False,
+        auth_header=dict(name="Authorization", prefix="Bearer "),
+        credential_params=_email_credential_params("SENDGRID", "SendGrid"),
         tags=["email", "transactional"],
     ),
     dict(
@@ -423,38 +580,46 @@ TIER4_EMAIL: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v2/email/outbound-emails",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["email", "transactional", "aws"],
     ),
     dict(
         channel_id="brevo",
         display="Brevo",
         tier=4,
-        body_type="json",
-        has_transformer=False,
+        body_type="brevo_email",
+        has_transformer=True,
+        fixed_base_url="https://api.brevo.com",
         webhook_path="/v3/smtp/email",
-        chat_id_param=False,
+        auth_header=dict(name="api-key", prefix=""),
+        credential_params=_email_credential_params("BREVO", "Brevo"),
         tags=["email", "transactional"],
     ),
     dict(
         channel_id="postmark",
         display="Postmark",
         tier=4,
-        body_type="json",
-        has_transformer=False,
+        body_type="postmark_email",
+        has_transformer=True,
+        fixed_base_url="https://api.postmarkapp.com",
         webhook_path="/email",
-        chat_id_param=False,
+        auth_header=dict(name="X-Postmark-Server-Token", prefix=""),
+        credential_params=_email_credential_params("POSTMARK", "Postmark"),
         tags=["email", "transactional"],
     ),
     dict(
         channel_id="resend",
         display="Resend",
         tier=4,
-        body_type="json",
-        has_transformer=False,
+        body_type="resend_email",
+        has_transformer=True,
+        fixed_base_url="https://api.resend.com",
         webhook_path="/emails",
-        chat_id_param=False,
+        auth_header=dict(name="Authorization", prefix="Bearer "),
+        credential_params=_email_credential_params("RESEND", "Resend"),
         tags=["email", "transactional"],
     ),
     dict(
@@ -463,18 +628,22 @@ TIER4_EMAIL: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/api/v1/transmissions",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["email", "transactional"],
     ),
     dict(
         channel_id="smtp2go",
         display="SMTP2GO",
         tier=4,
-        body_type="json",
-        has_transformer=False,
+        body_type="smtp2go_email",
+        has_transformer=True,
+        fixed_base_url="https://api.smtp2go.com",
         webhook_path="/v3/email/send",
-        chat_id_param=False,
+        auth_header=None,  # API key is in the request body
+        credential_params=_email_credential_params("SMTP2GO", "SMTP2GO"),
         tags=["email", "transactional"],
     ),
     dict(
@@ -483,13 +652,15 @@ TIER4_EMAIL: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v1.0/users/{user}/sendMail",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["email", "transactional", "microsoft"],
     ),
 ]
 
-# ── Tier 4 – SMS / messaging APIs ─────────────────────────────────────────────
+# -- Tier 4 -- SMS / messaging APIs --------------------------------------------
 
 TIER4_SMS: list[dict] = [
     dict(
@@ -498,8 +669,10 @@ TIER4_SMS: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/2010-04-01/Accounts/{sid}/Messages.json",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["sms", "messaging"],
     ),
     dict(
@@ -508,18 +681,44 @@ TIER4_SMS: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["messaging", "aws", "push"],
     ),
     dict(
         channel_id="messagebird",
         display="MessageBird",
         tier=4,
-        body_type="json",
-        has_transformer=False,
-        webhook_path="/messages",
-        chat_id_param=False,
+        body_type="messagebird_sms",
+        has_transformer=True,
+        fixed_base_url="https://rest.messagebird.com",
+        webhook_path="/v2/send",
+        auth_header=dict(name="Authorization", prefix="AccessKey "),
+        credential_params=[
+            dict(
+                param="api_key_secret",
+                default_secret="MESSAGEBIRD_API_KEY",
+                title="API Key Secret Name",
+                description="Name of the customer secret containing your MessageBird API key",
+                ui_description="Enter the name of the customer secret holding your MessageBird API key",
+            ),
+            dict(
+                param="from_id_secret",
+                default_secret="MESSAGEBIRD_ORIGINATOR",
+                title="Originator Secret Name",
+                description="Name of the customer secret containing the sender ID or phone number",
+                ui_description="Enter the name of the customer secret holding the sender ID or phone number",
+            ),
+            dict(
+                param="to_phone_secret",
+                default_secret="MESSAGEBIRD_TO_PHONE",
+                title="Recipient Phone Secret Name",
+                description="Name of the customer secret containing the recipient phone number",
+                ui_description="Enter the name of the customer secret holding the recipient phone number",
+            ),
+        ],
         tags=["sms", "messaging"],
     ),
     dict(
@@ -528,8 +727,10 @@ TIER4_SMS: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v3/sms/send",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["sms", "messaging"],
     ),
     dict(
@@ -538,8 +739,10 @@ TIER4_SMS: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v1/messages",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["sms", "messaging"],
     ),
     dict(
@@ -548,18 +751,37 @@ TIER4_SMS: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/send_simple",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["sms", "messaging", "encrypted"],
     ),
     dict(
         channel_id="whatsapp",
         display="WhatsApp",
         tier=4,
-        body_type="json",
-        has_transformer=False,
-        webhook_path="/v17.0/{phone_id}/messages",
-        chat_id_param=False,
+        body_type="whatsapp_msg",
+        has_transformer=True,
+        fixed_base_url=None,
+        webhook_path="/v17.0/{phone_number_id}/messages",
+        auth_header=dict(name="Authorization", prefix="Bearer "),
+        credential_params=[
+            dict(
+                param="api_key_secret",
+                default_secret="WHATSAPP_ACCESS_TOKEN",
+                title="Access Token Secret Name",
+                description="Name of the customer secret containing your WhatsApp Cloud API access token",
+                ui_description="Enter the name of the customer secret holding your WhatsApp Cloud API access token",
+            ),
+            dict(
+                param="to_phone_secret",
+                default_secret="WHATSAPP_TO_PHONE",
+                title="Recipient Phone Secret Name",
+                description="Name of the customer secret containing the recipient phone number",
+                ui_description="Enter the name of the customer secret holding the recipient phone number",
+            ),
+        ],
         tags=["messaging", "meta"],
     ),
     dict(
@@ -568,18 +790,37 @@ TIER4_SMS: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/v2/send",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["messaging", "encrypted"],
     ),
     dict(
         channel_id="line",
         display="LINE",
         tier=4,
-        body_type="json",
-        has_transformer=False,
+        body_type="line_msg",
+        has_transformer=True,
+        fixed_base_url="https://api.line.me",
         webhook_path="/v2/bot/message/push",
-        chat_id_param=False,
+        auth_header=dict(name="Authorization", prefix="Bearer "),
+        credential_params=[
+            dict(
+                param="api_key_secret",
+                default_secret="LINE_CHANNEL_ACCESS_TOKEN",
+                title="Channel Access Token Secret Name",
+                description="Name of the customer secret containing your LINE Channel Access Token",
+                ui_description="Enter the name of the customer secret holding your LINE Channel Access Token",
+            ),
+            dict(
+                param="to_id_secret",
+                default_secret="LINE_TO_ID",
+                title="Recipient ID Secret Name",
+                description="Name of the customer secret containing the target user or group ID",
+                ui_description="Enter the name of the customer secret holding the target user or group ID",
+            ),
+        ],
         tags=["messaging", "asia"],
     ),
     dict(
@@ -588,18 +829,30 @@ TIER4_SMS: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="/pa/send_message",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["messaging"],
     ),
     dict(
         channel_id="groupme",
         display="GroupMe",
         tier=4,
-        body_type="json",
-        has_transformer=False,
+        body_type="groupme_msg",
+        has_transformer=True,
+        fixed_base_url="https://api.groupme.com",
         webhook_path="/v3/bots/post",
-        chat_id_param=False,
+        auth_header=None,  # bot_id is in the request body
+        credential_params=[
+            dict(
+                param="bot_id_secret",
+                default_secret="GROUPME_BOT_ID",
+                title="Bot ID Secret Name",
+                description="Name of the customer secret containing the GroupMe bot ID",
+                ui_description="Enter the name of the customer secret holding the GroupMe bot ID",
+            ),
+        ],
         tags=["messaging", "chat"],
     ),
     dict(
@@ -608,43 +861,54 @@ TIER4_SMS: list[dict] = [
         tier=4,
         body_type="json",
         has_transformer=False,
+        fixed_base_url=None,
         webhook_path="",
-        chat_id_param=False,
+        auth_header=None,
+        credential_params=[],
         tags=["messaging", "asia"],
     ),
     dict(
         channel_id="wechat",
         display="WeChat Work",
         tier=4,
-        body_type="json",
-        has_transformer=False,
-        webhook_path="",
-        chat_id_param=False,
+        body_type="wechat_work",
+        has_transformer=True,
+        fixed_base_url=None,
+        webhook_path="/cgi-bin/webhook/send",
+        auth_header=None,  # auth key is in the webhook URL
+        credential_params=[],
         tags=["messaging", "workplace", "china"],
     ),
     dict(
         channel_id="feishu",
         display="Feishu / Lark",
         tier=4,
-        body_type="json",
-        has_transformer=False,
-        webhook_path="",
-        chat_id_param=False,
+        body_type="feishu_msg",
+        has_transformer=True,
+        fixed_base_url=None,
+        webhook_path="/open-apis/bot/v2/hook/{key}",
+        auth_header=None,  # auth key is in the webhook URL
+        credential_params=[],
         tags=["chat", "workplace", "china"],
     ),
 ]
 
-# ── Combined catalog ───────────────────────────────────────────────────────────
+# -- Combined catalog ----------------------------------------------------------
 
 ALL_CHANNELS: list[dict] = TIER1 + TIER2 + TIER3 + TIER4_EMAIL + TIER4_SMS
 
 # Channels that get transformer service pair (msg-to-*)
 TRANSFORMER_CHANNELS = [ch for ch in ALL_CHANNELS if ch["has_transformer"]]
 
-# Body-type → Lua template string
+# Body-type -> Lua template string
 # _body is the decoded canonical envelope: {title, body, from}
 # Uses resty.template syntax: {* expr *} for raw output, {{ expr }} for escaped.
 # _escape_json() produces a JSON-safe double-quoted string (including the quotes).
+#
+# For credential-injecting body types:
+#   "fixed" variant  -> ${ service_secrets.NAME }   (operator-managed)
+#   "multi" variant  -> ${ customer_secrets.{{ params.NAME }} }  (per-enrollment)
+# The _multi suffix selects the multi variant when present; fallback to base key.
 BODY_TYPE_TEMPLATES: dict[str, str] = {
     "discord": (
         '{"embeds":[{"title":{* _escape_json(_body.title) *},'
@@ -655,10 +919,15 @@ BODY_TYPE_TEMPLATES: dict[str, str] = {
         '{"text":{* _escape_json(_body.title..": ".._body.body) *},'
         '"username":{* _escape_json(_body.from) *}}'
     ),
+    # telegram fixed (msg-to-telegram): operator-managed service secrets.
     "telegram": (
-        # chat_id is injected from enrollment_vars at service definition time
-        '{"chat_id":{* _escape_json(enrollment_vars.chat_id) *},'
-        '"text":{* _escape_json(_body.title.."\n\n".._body.body) *}}'
+        '{"chat_id":${ service_secrets.TELEGRAM_CHAT_ID },'
+        '"text":{* _escape_json(_body.title.."\\n\\n".._body.body) *}}'
+    ),
+    # telegram multi (msg-to-telegram-multi): per-enrollment customer secrets.
+    "telegram_multi": (
+        '{"chat_id":${ customer_secrets.{{ params.chat_id_secret }} },'
+        '"text":{* _escape_json(_body.title.."\\n\\n".._body.body) *}}'
     ),
     "msteams": (
         '{"@type":"MessageCard","@context":"http://schema.org/extensions",'
@@ -684,9 +953,140 @@ BODY_TYPE_TEMPLATES: dict[str, str] = {
         '"title":{* _escape_json(_body.title) *},'
         '"priority":5}'
     ),
+    # Bark: device key in URL path (webhook_path_secret); body is title+body only.
+    "bark": (
+        '{"title":{* _escape_json(_body.title) *},'
+        '"body":{* _escape_json(_body.body) *}}'
+    ),
+    # Pushover fixed (msg-to-pushover): operator-managed service secrets.
+    "pushover": (
+        '{"token":${ service_secrets.PUSHOVER_TOKEN },'
+        '"user":${ service_secrets.PUSHOVER_USER },'
+        '"message":{* _escape_json(_body.title.."\n\n".._body.body) *},'
+        '"title":{* _escape_json(_body.title) *}}'
+    ),
+    # Pushover multi (msg-to-pushover-multi): per-enrollment customer secrets.
+    # {{ params.X }} is expanded by Jinja2 at enrollment time (before gateway
+    # processes the offering), then ${ customer_secrets.NAME } is resolved at
+    # request time.
+    "pushover_multi": (
+        '{"token":${ customer_secrets.{{ params.token_secret }} },'
+        '"user":${ customer_secrets.{{ params.user_secret }} },'
+        '"message":{* _escape_json(_body.title.."\n\n".._body.body) *},'
+        '"title":{* _escape_json(_body.title) *}}'
+    ),
     "json": (
         '{"message":{* _escape_json(_body.body) *},'
         '"title":{* _escape_json(_body.title) *},'
         '"from":{* _escape_json(_body.from) *}}'
+    ),
+    # -- Email body types --
+    # Fixed variants use service_secrets; multi variants use customer_secrets via params.
+    "resend_email": (
+        '{"from":${ service_secrets.EMAIL_FROM },'
+        '"to":[${ service_secrets.EMAIL_TO }],'
+        '"subject":{* _escape_json(_body.title) *},'
+        '"text":{* _escape_json(_body.body) *}}'
+    ),
+    "resend_email_multi": (
+        '{"from":${ customer_secrets.{{ params.from_email_secret }} },'
+        '"to":[${ customer_secrets.{{ params.to_email_secret }} }],'
+        '"subject":{* _escape_json(_body.title) *},'
+        '"text":{* _escape_json(_body.body) *}}'
+    ),
+    "postmark_email": (
+        '{"From":${ service_secrets.EMAIL_FROM },'
+        '"To":${ service_secrets.EMAIL_TO },'
+        '"Subject":{* _escape_json(_body.title) *},'
+        '"TextBody":{* _escape_json(_body.body) *}}'
+    ),
+    "postmark_email_multi": (
+        '{"From":${ customer_secrets.{{ params.from_email_secret }} },'
+        '"To":${ customer_secrets.{{ params.to_email_secret }} },'
+        '"Subject":{* _escape_json(_body.title) *},'
+        '"TextBody":{* _escape_json(_body.body) *}}'
+    ),
+    "sendgrid_email": (
+        '{"personalizations":[{"to":[{"email":${ service_secrets.EMAIL_TO }}]}],'
+        '"from":{"email":${ service_secrets.EMAIL_FROM }},'
+        '"subject":{* _escape_json(_body.title) *},'
+        '"content":[{"type":"text/plain","value":{* _escape_json(_body.body) *}}]}'
+    ),
+    "sendgrid_email_multi": (
+        '{"personalizations":[{"to":[{"email":${ customer_secrets.{{ params.to_email_secret }} }}]}],'
+        '"from":{"email":${ customer_secrets.{{ params.from_email_secret }} }},'
+        '"subject":{* _escape_json(_body.title) *},'
+        '"content":[{"type":"text/plain","value":{* _escape_json(_body.body) *}}]}'
+    ),
+    "brevo_email": (
+        '{"sender":{"email":${ service_secrets.EMAIL_FROM }},'
+        '"to":[{"email":${ service_secrets.EMAIL_TO }}],'
+        '"subject":{* _escape_json(_body.title) *},'
+        '"textContent":{* _escape_json(_body.body) *}}'
+    ),
+    "brevo_email_multi": (
+        '{"sender":{"email":${ customer_secrets.{{ params.from_email_secret }} }},'
+        '"to":[{"email":${ customer_secrets.{{ params.to_email_secret }} }}],'
+        '"subject":{* _escape_json(_body.title) *},'
+        '"textContent":{* _escape_json(_body.body) *}}'
+    ),
+    # smtp2go: api_key in body (auth_header=None)
+    "smtp2go_email": (
+        '{"api_key":${ service_secrets.API_KEY },'
+        '"sender":${ service_secrets.EMAIL_FROM },'
+        '"to":[${ service_secrets.EMAIL_TO }],'
+        '"subject":{* _escape_json(_body.title) *},'
+        '"text_body":{* _escape_json(_body.body) *}}'
+    ),
+    "smtp2go_email_multi": (
+        '{"api_key":${ customer_secrets.{{ params.api_key_secret }} },'
+        '"sender":${ customer_secrets.{{ params.from_email_secret }} },'
+        '"to":[${ customer_secrets.{{ params.to_email_secret }} }],'
+        '"subject":{* _escape_json(_body.title) *},'
+        '"text_body":{* _escape_json(_body.body) *}}'
+    ),
+    # -- SMS / messaging body types --
+    "messagebird_sms": (
+        '{"originator":${ service_secrets.FROM_ID },'
+        '"recipients":[${ service_secrets.TO_PHONE }],'
+        '"body":{* _escape_json(_body.body) *}}'
+    ),
+    "messagebird_sms_multi": (
+        '{"originator":${ customer_secrets.{{ params.from_id_secret }} },'
+        '"recipients":[${ customer_secrets.{{ params.to_phone_secret }} }],'
+        '"body":{* _escape_json(_body.body) *}}'
+    ),
+    "whatsapp_msg": (
+        '{"messaging_product":"whatsapp","recipient_type":"individual",'
+        '"to":${ service_secrets.TO_PHONE },'
+        '"type":"text","text":{"preview_url":false,"body":{* _escape_json(_body.body) *}}}'
+    ),
+    "whatsapp_msg_multi": (
+        '{"messaging_product":"whatsapp","recipient_type":"individual",'
+        '"to":${ customer_secrets.{{ params.to_phone_secret }} },'
+        '"type":"text","text":{"preview_url":false,"body":{* _escape_json(_body.body) *}}}'
+    ),
+    "line_msg": (
+        '{"to":${ service_secrets.TO_ID },'
+        '"messages":[{"type":"text","text":{* _escape_json(_body.title.."\\n\\n".._body.body) *}}]}'
+    ),
+    "line_msg_multi": (
+        '{"to":${ customer_secrets.{{ params.to_id_secret }} },'
+        '"messages":[{"type":"text","text":{* _escape_json(_body.title.."\\n\\n".._body.body) *}}]}'
+    ),
+    "groupme_msg": (
+        '{"bot_id":${ service_secrets.BOT_ID },'
+        '"text":{* _escape_json(_body.title..": ".._body.body) *}}'
+    ),
+    "groupme_msg_multi": (
+        '{"bot_id":${ customer_secrets.{{ params.bot_id_secret }} },'
+        '"text":{* _escape_json(_body.title..": ".._body.body) *}}'
+    ),
+    # Webhook-style (auth in URL, no body credentials) -- same template for fixed and multi
+    "wechat_work": (
+        '{"msgtype":"text","text":{"content":{* _escape_json(_body.title.."\\n\\n".._body.body) *}}}'
+    ),
+    "feishu_msg": (
+        '{"msg_type":"text","content":{"text":{* _escape_json(_body.title.."\\n\\n".._body.body) *}}}'
     ),
 }

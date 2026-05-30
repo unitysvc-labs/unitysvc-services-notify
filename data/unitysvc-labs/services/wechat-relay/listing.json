@@ -4,20 +4,20 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "name": "notify_relay_connectivity_json",
-        "webhook_path": ""
+        "name": "notify_relay_connectivity_wechat_work",
+        "webhook_path": "/cgi-bin/webhook/send"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_py_json",
-        "webhook_path": ""
+        "name": "notify_relay_code_example_py_wechat_work",
+        "webhook_path": "/cgi-bin/webhook/send"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_sh_json",
-        "webhook_path": ""
+        "name": "notify_relay_code_example_sh_wechat_work",
+        "webhook_path": "/cgi-bin/webhook/send"
       }
     }
   },

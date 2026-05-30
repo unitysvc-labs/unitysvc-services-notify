@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "Notica notification relay (multi-enrollment). Each enrollment targets a different Notica webhook URL, supplied by the customer as an enrollment parameter. No body transformation \u2014 the customer sends the exact payload Notica expects.",
+  "description": "Notica notification relay (multi-enrollment). Each enrollment targets a different Notica webhook URL, stored as a customer secret. No body transformation \u2014 the customer sends the exact payload Notica expects.",
   "name": "notica-relay-multi",
   "schema": "offering_v1",
   "service_type": "notification",
@@ -17,7 +17,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "{{ enrollment_vars.webhook_url }}",
+      "base_url": "${ customer_secrets.{{ params.webhook_url_secret }} }",
       "is_active": true,
       "is_primary": true
     }

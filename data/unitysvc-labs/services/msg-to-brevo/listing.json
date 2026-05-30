@@ -1,0 +1,41 @@
+{
+  "currency": "USD",
+  "display_name": "SMTP \u2192 Brevo",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "transform_notify_connectivity_brevo_email",
+        "webhook_path": "/v3/smtp/email"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_py_brevo_email",
+        "webhook_path": "/v3/smtp/email"
+      }
+    },
+    "cURL code example": {
+      "$doc_preset": {
+        "name": "transform_notify_code_example_sh_brevo_email",
+        "webhook_path": "/v3/smtp/email"
+      }
+    }
+  },
+  "list_price": {
+    "description": "Free \u2014 webhook URL pre-configured",
+    "price": "0",
+    "type": "constant"
+  },
+  "schema": "listing_v1",
+  "status": "ready",
+  "time_created": "2026-06-01T00:00:00Z",
+  "user_access_interfaces": {
+    "smtp_gateway": {
+      "access_method": "smtp",
+      "base_url": "${SMTP_GATEWAY_BASE_URL}",
+      "routing_key": {
+        "username": "msg-to-brevo"
+      }
+    }
+  }
+}

@@ -4,20 +4,20 @@
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
-        "name": "notify_relay_connectivity_json",
-        "webhook_path": ""
+        "name": "notify_relay_connectivity_wechat_work",
+        "webhook_path": "/cgi-bin/webhook/send"
       }
     },
     "Python code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_py_json",
-        "webhook_path": ""
+        "name": "notify_relay_code_example_py_wechat_work",
+        "webhook_path": "/cgi-bin/webhook/send"
       }
     },
     "cURL code example": {
       "$doc_preset": {
-        "name": "notify_relay_code_example_sh_json",
-        "webhook_path": ""
+        "name": "notify_relay_code_example_sh_wechat_work",
+        "webhook_path": "/cgi-bin/webhook/send"
       }
     }
   },
@@ -29,7 +29,7 @@
   "schema": "listing_v1",
   "service_options": {
     "ops_testing_parameters": {
-      "webhook_url": "https://mock.unitysvc.dev"
+      "webhook_url_secret": "WECHAT_WEBHOOK_URL"
     }
   },
   "status": "ready",
@@ -41,25 +41,24 @@
     }
   },
   "user_parameters_schema": {
-    "description": "Configure the WeChat Work webhook URL for this enrollment",
+    "description": "Configure the WeChat Work webhook for this enrollment",
     "properties": {
-      "webhook_url": {
-        "description": "Full WeChat Work incoming webhook URL",
-        "format": "uri",
-        "title": "Webhook URL",
+      "webhook_url_secret": {
+        "description": "Name of the customer secret containing your WeChat Work incoming webhook URL",
+        "title": "Webhook URL Secret Name",
         "type": "string"
       }
     },
     "required": [
-      "webhook_url"
+      "webhook_url_secret"
     ],
     "title": "WeChat Work Relay Configuration",
     "type": "object"
   },
   "user_parameters_ui_schema": {
-    "webhook_url": {
-      "ui:description": "Paste your WeChat Work incoming webhook URL here",
-      "ui:placeholder": "https://..."
+    "webhook_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds your WeChat Work webhook URL",
+      "ui:placeholder": "WECHAT_WEBHOOK_URL"
     }
   }
 }

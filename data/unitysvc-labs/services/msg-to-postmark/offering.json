@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-Postmark transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a Postmark-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "name": "msg-to-postmark",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "email",
+    "notification",
+    "postmark",
+    "smtp",
+    "transactional",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://api.postmarkapp.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"From\":${ service_secrets.EMAIL_FROM },\"To\":${ service_secrets.EMAIL_TO },\"Subject\":{* _escape_json(_body.title) *},\"TextBody\":{* _escape_json(_body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json",
+                "X-Postmark-Server-Token": "${ service_secrets.API_KEY }"
+              }
+            },
+            "method": "POST",
+            "uri": "/email"
+          }
+        }
+      }
+    }
+  }
+}

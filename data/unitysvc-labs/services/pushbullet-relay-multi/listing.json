@@ -29,7 +29,7 @@
   "schema": "listing_v1",
   "service_options": {
     "ops_testing_parameters": {
-      "webhook_url": "https://mock.unitysvc.dev/v2/pushes"
+      "webhook_url_secret": "PUSHBULLET_WEBHOOK_URL"
     }
   },
   "status": "ready",
@@ -41,25 +41,24 @@
     }
   },
   "user_parameters_schema": {
-    "description": "Configure the Pushbullet webhook URL for this enrollment",
+    "description": "Configure the Pushbullet webhook for this enrollment",
     "properties": {
-      "webhook_url": {
-        "description": "Full Pushbullet incoming webhook URL",
-        "format": "uri",
-        "title": "Webhook URL",
+      "webhook_url_secret": {
+        "description": "Name of the customer secret containing your Pushbullet incoming webhook URL",
+        "title": "Webhook URL Secret Name",
         "type": "string"
       }
     },
     "required": [
-      "webhook_url"
+      "webhook_url_secret"
     ],
     "title": "Pushbullet Relay Configuration",
     "type": "object"
   },
   "user_parameters_ui_schema": {
-    "webhook_url": {
-      "ui:description": "Paste your Pushbullet incoming webhook URL here",
-      "ui:placeholder": "https://..."
+    "webhook_url_secret": {
+      "ui:description": "Enter the name of the customer secret that holds your Pushbullet webhook URL",
+      "ui:placeholder": "PUSHBULLET_WEBHOOK_URL"
     }
   }
 }

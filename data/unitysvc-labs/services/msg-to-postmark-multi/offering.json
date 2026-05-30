@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-Postmark transformer (multi-enrollment). Each enrollment targets a different Postmark endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Postmark-native message, and delivers it to the customer's own Postmark endpoint.",
+  "name": "msg-to-postmark-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "email",
+    "notification",
+    "postmark",
+    "smtp",
+    "transactional",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://api.postmarkapp.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"From\":${ customer_secrets.{{ params.from_email_secret }} },\"To\":${ customer_secrets.{{ params.to_email_secret }} },\"Subject\":{* _escape_json(_body.title) *},\"TextBody\":{* _escape_json(_body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json",
+                "X-Postmark-Server-Token": "${ customer_secrets.{{ params.api_key_secret }} }"
+              }
+            },
+            "method": "POST",
+            "uri": "/email"
+          }
+        }
+      }
+    }
+  }
+}

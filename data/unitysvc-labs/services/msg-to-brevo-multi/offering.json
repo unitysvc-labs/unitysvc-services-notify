@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-Brevo transformer (multi-enrollment). Each enrollment targets a different Brevo endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Brevo-native message, and delivers it to the customer's own Brevo endpoint.",
+  "name": "msg-to-brevo-multi",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "brevo",
+    "email",
+    "notification",
+    "smtp",
+    "transactional",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://api.brevo.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"sender\":{\"email\":${ customer_secrets.{{ params.from_email_secret }} }},\"to\":[{\"email\":${ customer_secrets.{{ params.to_email_secret }} }}],\"subject\":{* _escape_json(_body.title) *},\"textContent\":{* _escape_json(_body.body) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json",
+                "api-key": "${ customer_secrets.{{ params.api_key_secret }} }"
+              }
+            },
+            "method": "POST",
+            "uri": "/v3/smtp/email"
+          }
+        }
+      }
+    }
+  }
+}

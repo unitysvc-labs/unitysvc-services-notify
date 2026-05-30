@@ -1,0 +1,47 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "SMTP-to-SendGrid transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a SendGrid-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "name": "msg-to-sendgrid",
+  "schema": "offering_v1",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "email",
+    "notification",
+    "sendgrid",
+    "smtp",
+    "transactional",
+    "transformer"
+  ],
+  "time_created": "2026-06-01T00:00:00Z",
+  "upstream_access_config": {
+    "webhook": {
+      "access_method": "http",
+      "base_url": "https://api.sendgrid.com",
+      "is_active": true,
+      "is_primary": true,
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"personalizations\":[{\"to\":[{\"email\":${ service_secrets.EMAIL_TO }}]}],\"from\":{\"email\":${ service_secrets.EMAIL_FROM }},\"subject\":{* _escape_json(_body.title) *},\"content\":[{\"type\":\"text/plain\",\"value\":{* _escape_json(_body.body) *}}]}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Authorization": "Bearer ${ service_secrets.API_KEY }",
+                "Content-Type": "application/json"
+              }
+            },
+            "method": "POST",
+            "uri": "/v3/mail/send"
+          }
+        }
+      }
+    }
+  }
+}
