@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.WXPUSHER_BASE_URL ?? http://localhost:8100/mock/wxpusher }",
+      "base_url": "${ secrets.WXPUSHER_BASE_URL ?? https://mock.unitysvc.dev/mock/wxpusher }",
       "is_active": true,
       "is_primary": true,
       "raw": {

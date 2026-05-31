@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.DISCORD_BASE_URL ?? http://localhost:8100/mock/discord }",
+      "base_url": "${ secrets.DISCORD_BASE_URL ?? https://mock.unitysvc.dev/mock/discord }",
       "is_active": true,
       "is_primary": true,
       "raw": {

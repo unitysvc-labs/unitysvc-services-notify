@@ -20,7 +20,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.PAGERTREE_BASE_URL ?? http://localhost:8100/mock/pagertree }",
+      "base_url": "${ secrets.PAGERTREE_BASE_URL ?? https://mock.unitysvc.dev/mock/pagertree }",
       "is_active": true,
       "is_primary": true,
       "raw": {

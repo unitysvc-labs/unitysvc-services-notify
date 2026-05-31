@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ customer_secrets.WECHAT_WEBHOOK_URL ?? http://localhost:8100/mock/wechat }",
+      "base_url": "${ customer_secrets.WECHAT_WEBHOOK_URL ?? https://mock.unitysvc.dev/mock/wechat }",
       "is_active": true,
       "is_primary": true
     }

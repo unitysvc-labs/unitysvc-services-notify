@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.ONESIGNAL_BASE_URL ?? http://localhost:8100/mock/onesignal }",
+      "base_url": "${ secrets.ONESIGNAL_BASE_URL ?? https://mock.unitysvc.dev/mock/onesignal }",
       "is_active": true,
       "is_primary": true,
       "raw": {
