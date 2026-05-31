@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_whatsapp_msg",
-        "webhook_path": "/v17.0/{phone_number_id}/messages"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_whatsapp_msg",
-        "webhook_path": "/v17.0/{phone_number_id}/messages"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_whatsapp_msg",
-        "webhook_path": "/v17.0/{phone_number_id}/messages"
+        "webhook_path": ""
       }
     }
   },

@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_ntfy",
-        "webhook_path": "/{topic}"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_ntfy",
-        "webhook_path": "/{topic}"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_ntfy",
-        "webhook_path": "/{topic}"
+        "webhook_path": ""
       }
     }
   },

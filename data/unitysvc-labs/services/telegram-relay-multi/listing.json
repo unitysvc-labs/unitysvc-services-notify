@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_telegram",
-        "webhook_path": "/bot{token}/sendMessage"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_telegram",
-        "webhook_path": "/bot{token}/sendMessage"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_telegram",
-        "webhook_path": "/bot{token}/sendMessage"
+        "webhook_path": ""
       }
     }
   },

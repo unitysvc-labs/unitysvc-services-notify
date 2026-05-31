@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_sparkpost_email",
-        "webhook_path": "/api/v1/transmissions"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_sparkpost_email",
-        "webhook_path": "/api/v1/transmissions"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_sparkpost_email",
-        "webhook_path": "/api/v1/transmissions"
+        "webhook_path": ""
       }
     }
   },

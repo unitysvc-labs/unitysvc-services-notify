@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_postmark_email",
-        "webhook_path": "/email"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_postmark_email",
-        "webhook_path": "/email"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_postmark_email",
-        "webhook_path": "/email"
+        "webhook_path": ""
       }
     }
   },

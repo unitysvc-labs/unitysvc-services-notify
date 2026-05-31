@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_msteams",
-        "webhook_path": "/webhookb2/{rest}"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_msteams",
-        "webhook_path": "/webhookb2/{rest}"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_msteams",
-        "webhook_path": "/webhookb2/{rest}"
+        "webhook_path": ""
       }
     }
   },

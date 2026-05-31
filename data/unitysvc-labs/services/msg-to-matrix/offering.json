@@ -20,7 +20,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.MATRIX_BASE_URL ?? https://mock.unitysvc.dev/mock/matrix }",
+      "base_url": "${ secrets.MATRIX_BASE_URL ?? https://mock.unitysvc.dev/matrix/_matrix/client/v3/rooms/!test:localhost/send/m.room.message/1 }",
       "is_active": true,
       "is_primary": true,
       "raw": {

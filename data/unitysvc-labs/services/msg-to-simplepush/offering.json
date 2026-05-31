@@ -18,7 +18,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.SIMPLEPUSH_BASE_URL ?? https://mock.unitysvc.dev/mock/simplepush }",
+      "base_url": "${ secrets.SIMPLEPUSH_BASE_URL ?? https://mock.unitysvc.dev/simplepush/send }",
       "is_active": true,
       "is_primary": true,
       "raw": {

@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.POSTMARK_BASE_URL ?? https://mock.unitysvc.dev/mock/postmark }",
+      "base_url": "${ secrets.POSTMARK_BASE_URL ?? https://mock.unitysvc.dev/postmark/email }",
       "is_active": true,
       "is_primary": true,
       "raw": {

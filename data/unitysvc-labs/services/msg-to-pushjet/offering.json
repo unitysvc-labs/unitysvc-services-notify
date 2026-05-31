@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.PUSHJET_BASE_URL ?? https://mock.unitysvc.dev/mock/pushjet }",
+      "base_url": "${ secrets.PUSHJET_BASE_URL ?? https://mock.unitysvc.dev/pushjet/message }",
       "is_active": true,
       "is_primary": true,
       "raw": {

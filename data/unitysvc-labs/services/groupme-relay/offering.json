@@ -18,7 +18,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ customer_secrets.GROUPME_WEBHOOK_URL ?? https://mock.unitysvc.dev/mock/groupme }",
+      "base_url": "${ customer_secrets.GROUPME_WEBHOOK_URL ?? https://mock.unitysvc.dev/groupme/v3/bots/post }",
       "is_active": true,
       "is_primary": true
     }

@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ customer_secrets.{{ params.webhook_base_url_secret }} ?? https://mock.unitysvc.dev/mock/whatsapp }",
+      "base_url": "${ customer_secrets.{{ params.webhook_base_url_secret }} ?? https://mock.unitysvc.dev/whatsapp/v17.0/testphoneid/messages }",
       "is_active": true,
       "is_primary": true,
       "raw": {

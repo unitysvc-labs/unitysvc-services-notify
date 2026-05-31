@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.GOTIFY_BASE_URL ?? https://mock.unitysvc.dev/mock/gotify }",
+      "base_url": "${ secrets.GOTIFY_BASE_URL ?? https://mock.unitysvc.dev/gotify/message }",
       "is_active": true,
       "is_primary": true,
       "raw": {

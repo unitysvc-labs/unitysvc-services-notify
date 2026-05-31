@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.SERVERCHAN_BASE_URL ?? https://mock.unitysvc.dev/mock/serverchan }",
+      "base_url": "${ secrets.SERVERCHAN_BASE_URL ?? https://mock.unitysvc.dev/serverchan/testtoken.send }",
       "is_active": true,
       "is_primary": true,
       "raw": {

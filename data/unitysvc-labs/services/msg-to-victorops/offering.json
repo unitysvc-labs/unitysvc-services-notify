@@ -20,7 +20,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.VICTOROPS_BASE_URL ?? https://mock.unitysvc.dev/mock/victorops }",
+      "base_url": "${ secrets.VICTOROPS_BASE_URL ?? https://mock.unitysvc.dev/victorops/integrations/generic/testapi/alert/testroutingkey }",
       "is_active": true,
       "is_primary": true,
       "raw": {

@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_ryver",
-        "webhook_path": "/application/webhook/{token}"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_ryver",
-        "webhook_path": "/application/webhook/{token}"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_ryver",
-        "webhook_path": "/application/webhook/{token}"
+        "webhook_path": ""
       }
     }
   },

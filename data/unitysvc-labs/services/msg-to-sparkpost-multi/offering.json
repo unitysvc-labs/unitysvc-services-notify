@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.SPARKPOST_BASE_URL ?? https://mock.unitysvc.dev/mock/sparkpost }",
+      "base_url": "${ secrets.SPARKPOST_BASE_URL ?? https://mock.unitysvc.dev/sparkpost/api/v1/transmissions }",
       "is_active": true,
       "is_primary": true,
       "raw": {

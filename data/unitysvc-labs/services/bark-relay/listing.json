@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_bark",
-        "webhook_path": "/{device_key}"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_bark",
-        "webhook_path": "/{device_key}"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_bark",
-        "webhook_path": "/{device_key}"
+        "webhook_path": ""
       }
     }
   },

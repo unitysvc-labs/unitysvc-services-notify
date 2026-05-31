@@ -20,7 +20,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.PAGERDUTY_BASE_URL ?? https://mock.unitysvc.dev/mock/pagerduty }",
+      "base_url": "${ secrets.PAGERDUTY_BASE_URL ?? https://mock.unitysvc.dev/pagerduty/v2/enqueue }",
       "is_active": true,
       "is_primary": true,
       "raw": {

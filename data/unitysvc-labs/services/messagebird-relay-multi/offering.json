@@ -18,7 +18,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ customer_secrets.{{ params.webhook_url_secret }} ?? https://mock.unitysvc.dev/mock/messagebird }",
+      "base_url": "${ customer_secrets.{{ params.webhook_url_secret }} ?? https://mock.unitysvc.dev/messagebird/messages }",
       "is_active": true,
       "is_primary": true
     }

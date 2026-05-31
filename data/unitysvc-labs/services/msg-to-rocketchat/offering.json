@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.ROCKETCHAT_BASE_URL ?? https://mock.unitysvc.dev/mock/rocketchat }",
+      "base_url": "${ secrets.ROCKETCHAT_BASE_URL ?? https://mock.unitysvc.dev/rocketchat/hooks/testtoken }",
       "is_active": true,
       "is_primary": true,
       "raw": {

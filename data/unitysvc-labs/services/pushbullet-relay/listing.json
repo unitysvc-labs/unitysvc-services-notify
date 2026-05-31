@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_pushbullet",
-        "webhook_path": "/v2/pushes"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_pushbullet",
-        "webhook_path": "/v2/pushes"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_pushbullet",
-        "webhook_path": "/v2/pushes"
+        "webhook_path": ""
       }
     }
   },

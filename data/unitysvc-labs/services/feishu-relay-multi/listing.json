@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_feishu_msg",
-        "webhook_path": "/open-apis/bot/v2/hook/{key}"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_feishu_msg",
-        "webhook_path": "/open-apis/bot/v2/hook/{key}"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_feishu_msg",
-        "webhook_path": "/open-apis/bot/v2/hook/{key}"
+        "webhook_path": ""
       }
     }
   },

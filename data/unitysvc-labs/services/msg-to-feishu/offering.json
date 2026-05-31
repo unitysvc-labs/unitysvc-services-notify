@@ -20,7 +20,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.FEISHU_BASE_URL ?? https://mock.unitysvc.dev/mock/feishu }",
+      "base_url": "${ secrets.FEISHU_BASE_URL ?? https://mock.unitysvc.dev/json }",
       "is_active": true,
       "is_primary": true,
       "raw": {

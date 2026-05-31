@@ -5,19 +5,19 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "notify_relay_connectivity_sendgrid_email",
-        "webhook_path": "/v3/mail/send"
+        "webhook_path": ""
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_py_sendgrid_email",
-        "webhook_path": "/v3/mail/send"
+        "webhook_path": ""
       }
     },
     "cURL code example": {
       "$doc_preset": {
         "name": "notify_relay_code_example_sh_sendgrid_email",
-        "webhook_path": "/v3/mail/send"
+        "webhook_path": ""
       }
     }
   },

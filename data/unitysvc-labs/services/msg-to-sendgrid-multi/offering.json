@@ -19,7 +19,7 @@
   "upstream_access_config": {
     "webhook": {
       "access_method": "http",
-      "base_url": "${ secrets.SENDGRID_BASE_URL ?? https://mock.unitysvc.dev/mock/sendgrid }",
+      "base_url": "${ secrets.SENDGRID_BASE_URL ?? https://mock.unitysvc.dev/sendgrid/v3/mail/send }",
       "is_active": true,
       "is_primary": true,
       "raw": {
