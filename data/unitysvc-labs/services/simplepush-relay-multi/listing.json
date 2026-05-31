@@ -37,7 +37,7 @@
   "user_access_interfaces": {
     "http_gateway": {
       "access_method": "http",
-      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/simplepush-relay-multi"
+      "base_url": "${API_GATEWAY_BASE_URL}/labs/simplepush-relay-multi"
     }
   },
   "user_parameters_schema": {
@@ -49,9 +49,7 @@
         "type": "string"
       }
     },
-    "required": [
-      "webhook_url_secret"
-    ],
+    "required": ["webhook_url_secret"],
     "title": "SimplePush Relay Configuration",
     "type": "object"
   },
