@@ -2,18 +2,18 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Notifico transformer (multi-enrollment). Each enrollment targets a different Notifico endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Notifico-native message, and delivers it to the customer's own Notifico endpoint.",
+  "description": "HTTP-to-Notifico transformer (multi-enrollment). Each enrollment targets a different Notifico endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Notifico-native message, and delivers it to the customer's own Notifico endpoint.",
   "name": "msg-to-notifico-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "chat",
+    "http",
     "irc",
     "notification",
     "notifico",
     "push",
-    "smtp",
     "transformer"
   ],
   "time_created": "2026-06-01T00:00:00Z",

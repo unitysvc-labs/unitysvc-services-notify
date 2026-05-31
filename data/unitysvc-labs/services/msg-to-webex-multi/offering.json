@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Webex transformer (multi-enrollment). Each enrollment targets a different Webex endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Webex-native message, and delivers it to the customer's own Webex endpoint.",
+  "description": "HTTP-to-Webex transformer (multi-enrollment). Each enrollment targets a different Webex endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Webex-native message, and delivers it to the customer's own Webex endpoint.",
   "name": "msg-to-webex-multi",
   "schema": "offering_v1",
   "service_type": "notification",
@@ -10,8 +10,8 @@
   "tags": [
     "chat",
     "cisco",
+    "http",
     "notification",
-    "smtp",
     "transformer",
     "webex",
     "workplace"

@@ -2,16 +2,16 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Slack transformer (multi-enrollment). Each enrollment targets a different Slack endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Slack-native message, and delivers it to the customer's own Slack endpoint.",
+  "description": "HTTP-to-Slack transformer (multi-enrollment). Each enrollment targets a different Slack endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Slack-native message, and delivers it to the customer's own Slack endpoint.",
   "name": "msg-to-slack-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "chat",
+    "http",
     "notification",
     "slack",
-    "smtp",
     "transformer",
     "workplace"
   ],

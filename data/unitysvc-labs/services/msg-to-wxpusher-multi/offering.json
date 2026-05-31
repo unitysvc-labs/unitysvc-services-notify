@@ -2,15 +2,15 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-WxPusher transformer (multi-enrollment). Each enrollment targets a different WxPusher endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a WxPusher-native message, and delivers it to the customer's own WxPusher endpoint.",
+  "description": "HTTP-to-WxPusher transformer (multi-enrollment). Each enrollment targets a different WxPusher endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a WxPusher-native message, and delivers it to the customer's own WxPusher endpoint.",
   "name": "msg-to-wxpusher-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
+    "http",
     "notification",
     "push",
-    "smtp",
     "transformer",
     "wechat",
     "wxpusher"

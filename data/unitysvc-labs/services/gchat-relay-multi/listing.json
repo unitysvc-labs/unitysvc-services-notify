@@ -49,7 +49,9 @@
         "type": "string"
       }
     },
-    "required": ["webhook_url_secret"],
+    "required": [
+      "webhook_url_secret"
+    ],
     "title": "Google Chat Relay Configuration",
     "type": "object"
   },

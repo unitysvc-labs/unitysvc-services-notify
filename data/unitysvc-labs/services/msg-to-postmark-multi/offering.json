@@ -2,16 +2,16 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Postmark transformer (multi-enrollment). Each enrollment targets a different Postmark endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Postmark-native message, and delivers it to the customer's own Postmark endpoint.",
+  "description": "HTTP-to-Postmark transformer (multi-enrollment). Each enrollment targets a different Postmark endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Postmark-native message, and delivers it to the customer's own Postmark endpoint.",
   "name": "msg-to-postmark-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "email",
+    "http",
     "notification",
     "postmark",
-    "smtp",
     "transactional",
     "transformer"
   ],

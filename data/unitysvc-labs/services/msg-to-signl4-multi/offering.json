@@ -2,19 +2,19 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-SIGNL4 transformer (multi-enrollment). Each enrollment targets a different SIGNL4 endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a SIGNL4-native message, and delivers it to the customer's own SIGNL4 endpoint.",
+  "description": "HTTP-to-SIGNL4 transformer (multi-enrollment). Each enrollment targets a different SIGNL4 endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a SIGNL4-native message, and delivers it to the customer's own SIGNL4 endpoint.",
   "name": "msg-to-signl4-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "alerting",
+    "http",
     "incident",
     "mobile",
     "notification",
     "ops",
     "signl4",
-    "smtp",
     "transformer"
   ],
   "time_created": "2026-06-01T00:00:00Z",

@@ -2,16 +2,16 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Resend transformer (multi-enrollment). Each enrollment targets a different Resend endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Resend-native message, and delivers it to the customer's own Resend endpoint.",
+  "description": "HTTP-to-Resend transformer (multi-enrollment). Each enrollment targets a different Resend endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Resend-native message, and delivers it to the customer's own Resend endpoint.",
   "name": "msg-to-resend-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "email",
+    "http",
     "notification",
     "resend",
-    "smtp",
     "transactional",
     "transformer"
   ],

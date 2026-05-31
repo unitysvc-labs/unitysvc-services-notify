@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Discord transformer (multi-enrollment). Each enrollment targets a different Discord endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Discord-native message, and delivers it to the customer's own Discord endpoint.",
+  "description": "HTTP-to-Discord transformer (multi-enrollment). Each enrollment targets a different Discord endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Discord-native message, and delivers it to the customer's own Discord endpoint.",
   "name": "msg-to-discord-multi",
   "schema": "offering_v1",
   "service_type": "notification",
@@ -11,8 +11,8 @@
     "chat",
     "discord",
     "gaming",
+    "http",
     "notification",
-    "smtp",
     "transformer"
   ],
   "time_created": "2026-06-01T00:00:00Z",

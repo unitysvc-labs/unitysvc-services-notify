@@ -2,16 +2,16 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-WhatsApp transformer (multi-enrollment). Each enrollment targets a different WhatsApp endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a WhatsApp-native message, and delivers it to the customer's own WhatsApp endpoint.",
+  "description": "HTTP-to-WhatsApp transformer (multi-enrollment). Each enrollment targets a different WhatsApp endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a WhatsApp-native message, and delivers it to the customer's own WhatsApp endpoint.",
   "name": "msg-to-whatsapp-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
+    "http",
     "messaging",
     "meta",
     "notification",
-    "smtp",
     "transformer",
     "whatsapp"
   ],

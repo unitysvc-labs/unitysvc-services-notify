@@ -2,16 +2,16 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-WeChat Work transformer (multi-enrollment). Each enrollment targets a different WeChat Work endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a WeChat Work-native message, and delivers it to the customer's own WeChat Work endpoint.",
+  "description": "SMTP-to-WeChat Work transformer (multi-enrollment). Each enrollment targets a different WeChat Work endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a WeChat Work-native message, and delivers it to the customer's own WeChat Work endpoint.",
   "name": "msg-to-wechat-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "china",
+    "http",
     "messaging",
     "notification",
-    "smtp",
     "transformer",
     "wechat",
     "workplace"

@@ -2,17 +2,17 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-MessageBird transformer (multi-enrollment). Each enrollment targets a different MessageBird endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a MessageBird-native message, and delivers it to the customer's own MessageBird endpoint.",
+  "description": "HTTP-to-MessageBird transformer (multi-enrollment). Each enrollment targets a different MessageBird endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a MessageBird-native message, and delivers it to the customer's own MessageBird endpoint.",
   "name": "msg-to-messagebird-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
+    "http",
     "messagebird",
     "messaging",
     "notification",
     "sms",
-    "smtp",
     "transformer"
   ],
   "time_created": "2026-06-01T00:00:00Z",

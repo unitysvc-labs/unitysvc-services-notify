@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Brevo transformer (multi-enrollment). Each enrollment targets a different Brevo endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Brevo-native message, and delivers it to the customer's own Brevo endpoint.",
+  "description": "HTTP-to-Brevo transformer (multi-enrollment). Each enrollment targets a different Brevo endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Brevo-native message, and delivers it to the customer's own Brevo endpoint.",
   "name": "msg-to-brevo-multi",
   "schema": "offering_v1",
   "service_type": "notification",
@@ -10,8 +10,8 @@
   "tags": [
     "brevo",
     "email",
+    "http",
     "notification",
-    "smtp",
     "transactional",
     "transformer"
   ],

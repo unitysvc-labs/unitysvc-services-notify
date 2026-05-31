@@ -2,15 +2,15 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-SparkPost transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a SparkPost-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "description": "HTTP-to-SparkPost transformer. Accepts canonical notification payloads (title/body/from) via HTTP POST and reshapes the payload into a SparkPost-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
   "name": "msg-to-sparkpost",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "email",
+    "http",
     "notification",
-    "smtp",
     "sparkpost",
     "transactional",
     "transformer"

@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Google Chat transformer (multi-enrollment). Each enrollment targets a different Google Chat endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Google Chat-native message, and delivers it to the customer's own Google Chat endpoint.",
+  "description": "SMTP-to-Google Chat transformer (multi-enrollment). Each enrollment targets a different Google Chat endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Google Chat-native message, and delivers it to the customer's own Google Chat endpoint.",
   "name": "msg-to-gchat-multi",
   "schema": "offering_v1",
   "service_type": "notification",
@@ -11,8 +11,8 @@
     "chat",
     "gchat",
     "google",
+    "http",
     "notification",
-    "smtp",
     "transformer",
     "workplace"
   ],

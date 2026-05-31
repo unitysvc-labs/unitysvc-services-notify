@@ -2,17 +2,17 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Bark transformer (multi-enrollment). Each enrollment targets a different Bark endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Bark-native message, and delivers it to the customer's own Bark endpoint.",
+  "description": "HTTP-to-Bark transformer (multi-enrollment). Each enrollment targets a different Bark endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Bark-native message, and delivers it to the customer's own Bark endpoint.",
   "name": "msg-to-bark-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "bark",
+    "http",
     "ios",
     "notification",
     "push",
-    "smtp",
     "transformer"
   ],
   "time_created": "2026-06-01T00:00:00Z",

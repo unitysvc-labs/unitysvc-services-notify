@@ -2,17 +2,17 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-LINE transformer (multi-enrollment). Each enrollment targets a different LINE endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a LINE-native message, and delivers it to the customer's own LINE endpoint.",
+  "description": "HTTP-to-LINE transformer (multi-enrollment). Each enrollment targets a different LINE endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a LINE-native message, and delivers it to the customer's own LINE endpoint.",
   "name": "msg-to-line-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "asia",
+    "http",
     "line",
     "messaging",
     "notification",
-    "smtp",
     "transformer"
   ],
   "time_created": "2026-06-01T00:00:00Z",

@@ -1,6 +1,6 @@
 {
   "currency": "USD",
-  "display_name": "SMTP \u2192 SMTP2GO",
+  "display_name": "Notify \u2192 SMTP2GO",
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
@@ -30,12 +30,9 @@
   "status": "ready",
   "time_created": "2026-06-01T00:00:00Z",
   "user_access_interfaces": {
-    "smtp_gateway": {
-      "access_method": "smtp",
-      "base_url": "${SMTP_GATEWAY_BASE_URL}",
-      "routing_key": {
-        "username": "msg-to-smtp2go"
-      }
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/labs/msg-to-smtp2go"
     }
   }
 }

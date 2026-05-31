@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Flock transformer (multi-enrollment). Each enrollment targets a different Flock endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Flock-native message, and delivers it to the customer's own Flock endpoint.",
+  "description": "HTTP-to-Flock transformer (multi-enrollment). Each enrollment targets a different Flock endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Flock-native message, and delivers it to the customer's own Flock endpoint.",
   "name": "msg-to-flock-multi",
   "schema": "offering_v1",
   "service_type": "notification",
@@ -10,8 +10,8 @@
   "tags": [
     "chat",
     "flock",
+    "http",
     "notification",
-    "smtp",
     "transformer",
     "workplace"
   ],

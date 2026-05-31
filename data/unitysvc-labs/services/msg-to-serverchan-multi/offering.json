@@ -2,16 +2,16 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-ServerChan transformer (multi-enrollment). Each enrollment targets a different ServerChan endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a ServerChan-native message, and delivers it to the customer's own ServerChan endpoint.",
+  "description": "HTTP-to-ServerChan transformer (multi-enrollment). Each enrollment targets a different ServerChan endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a ServerChan-native message, and delivers it to the customer's own ServerChan endpoint.",
   "name": "msg-to-serverchan-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
+    "http",
     "notification",
     "push",
     "serverchan",
-    "smtp",
     "transformer",
     "wechat"
   ],

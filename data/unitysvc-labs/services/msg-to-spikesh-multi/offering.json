@@ -2,17 +2,17 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Spike.sh transformer (multi-enrollment). Each enrollment targets a different Spike.sh endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Spike.sh-native message, and delivers it to the customer's own Spike.sh endpoint.",
+  "description": "HTTP-to-Spike.sh transformer (multi-enrollment). Each enrollment targets a different Spike.sh endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Spike.sh-native message, and delivers it to the customer's own Spike.sh endpoint.",
   "name": "msg-to-spikesh-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "alerting",
+    "http",
     "incident",
     "notification",
     "ops",
-    "smtp",
     "spikesh",
     "transformer"
   ],

@@ -2,19 +2,19 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-SIGNL4 transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a SIGNL4-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "description": "HTTP-to-SIGNL4 transformer. Accepts canonical notification payloads (title/body/from) via HTTP POST and reshapes the payload into a SIGNL4-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
   "name": "msg-to-signl4",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "alerting",
+    "http",
     "incident",
     "mobile",
     "notification",
     "ops",
     "signl4",
-    "smtp",
     "transformer"
   ],
   "time_created": "2026-06-01T00:00:00Z",

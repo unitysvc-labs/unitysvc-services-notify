@@ -2,17 +2,17 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-VictorOps transformer (multi-enrollment). Each enrollment targets a different VictorOps endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a VictorOps-native message, and delivers it to the customer's own VictorOps endpoint.",
+  "description": "HTTP-to-VictorOps transformer (multi-enrollment). Each enrollment targets a different VictorOps endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a VictorOps-native message, and delivers it to the customer's own VictorOps endpoint.",
   "name": "msg-to-victorops-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
     "alerting",
+    "http",
     "incident",
     "notification",
     "ops",
-    "smtp",
     "transformer",
     "victorops"
   ],

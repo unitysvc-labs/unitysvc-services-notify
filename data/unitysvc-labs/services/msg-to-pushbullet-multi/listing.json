@@ -1,6 +1,6 @@
 {
   "currency": "USD",
-  "display_name": "SMTP -> Pushbullet (Multi-Enrollment)",
+  "display_name": "Notify \u2192 Pushbullet (Multi)",
   "documents": {
     "Connectivity test": {
       "$doc_preset": {
@@ -35,12 +35,9 @@
   "status": "ready",
   "time_created": "2026-06-01T00:00:00Z",
   "user_access_interfaces": {
-    "smtp_gateway": {
-      "access_method": "smtp",
-      "base_url": "${SMTP_GATEWAY_BASE_URL}",
-      "routing_key": {
-        "username": "msg-to-pushbullet-multi"
-      }
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/labs/msg-to-pushbullet-multi"
     }
   },
   "user_parameters_schema": {

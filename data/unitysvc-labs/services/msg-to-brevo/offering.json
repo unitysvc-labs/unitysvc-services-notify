@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Brevo transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a Brevo-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "description": "HTTP-to-Brevo transformer. Accepts canonical notification payloads (title/body/from) via HTTP POST and reshapes the payload into a Brevo-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
   "name": "msg-to-brevo",
   "schema": "offering_v1",
   "service_type": "notification",
@@ -10,8 +10,8 @@
   "tags": [
     "brevo",
     "email",
+    "http",
     "notification",
-    "smtp",
     "transactional",
     "transformer"
   ],

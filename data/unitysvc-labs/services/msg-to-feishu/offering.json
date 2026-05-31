@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Feishu / Lark transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a Feishu / Lark-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "description": "SMTP-to-Feishu / Lark transformer. Accepts canonical notification payloads (title/body/from) via HTTP POST and reshapes the payload into a Feishu / Lark-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
   "name": "msg-to-feishu",
   "schema": "offering_v1",
   "service_type": "notification",
@@ -11,8 +11,8 @@
     "chat",
     "china",
     "feishu",
+    "http",
     "notification",
-    "smtp",
     "transformer",
     "workplace"
   ],

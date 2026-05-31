@@ -2,16 +2,16 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-WhatsApp transformer. Receives email through the UnitySVC SMTP gateway, extracts title/body/from, and reshapes the payload into a WhatsApp-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
+  "description": "HTTP-to-WhatsApp transformer. Accepts canonical notification payloads (title/body/from) via HTTP POST and reshapes the payload into a WhatsApp-native message before forwarding to the pre-configured webhook. No customer secrets required \u2014 the webhook URL is registered by the service operator.",
   "name": "msg-to-whatsapp",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
+    "http",
     "messaging",
     "meta",
     "notification",
-    "smtp",
     "transformer",
     "whatsapp"
   ],

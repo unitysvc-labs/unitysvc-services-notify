@@ -2,17 +2,17 @@
   "capabilities": [
     "notification"
   ],
-  "description": "SMTP-to-Pushover transformer (multi-enrollment). Each enrollment targets a different Pushover endpoint, provided by the customer via named secrets. Receives email through the UnitySVC SMTP gateway, transforms the canonical envelope into a Pushover-native message, and delivers it to the customer's own Pushover endpoint.",
+  "description": "HTTP-to-Pushover transformer (multi-enrollment). Each enrollment targets a different Pushover endpoint, provided by the customer via named secrets. Accepts canonical notification payloads (title/body/from) via HTTP POST and transforms them into a Pushover-native message, and delivers it to the customer's own Pushover endpoint.",
   "name": "msg-to-pushover-multi",
   "schema": "offering_v1",
   "service_type": "notification",
   "status": "ready",
   "tags": [
+    "http",
     "mobile",
     "notification",
     "push",
     "pushover",
-    "smtp",
     "transformer"
   ],
   "time_created": "2026-06-01T00:00:00Z",
