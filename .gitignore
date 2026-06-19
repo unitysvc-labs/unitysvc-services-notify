@@ -44,6 +44,7 @@ Thumbs.db
 
 # Secrets (never commit these)
 .secrets
+secrets.txt
 *.pem
 *.key
 failed*
