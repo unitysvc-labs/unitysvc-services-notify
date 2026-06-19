@@ -3,7 +3,16 @@
   "display_name": "{{ display_name }}",
   "documents": {
     "Connectivity test": {
-      "$doc_preset": "{{ connectivity_preset | default('api_connectivity') }}"
+      "$doc_preset": {
+        "name": "{{ connectivity_preset }}",
+        "webhook_path": "{{ test_webhook_path }}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "{{ code_example_preset }}",
+        "webhook_path": "{{ test_webhook_path }}"
+      }
     }
   },
   "list_price": {
