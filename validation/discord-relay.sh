@@ -2,12 +2,13 @@
 # Validate `discord-relay` (byok channel) against mock.unitysvc.dev — no real Discord needed.
 #
 # Mirrors the rendered byok upstream from specs/labs/discord-relay.json:
-#   ${ secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }
+#   ${ customer_secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }
 #     /${ customer_secrets.DISCORD_WEBHOOK_ID }/${ customer_secrets.DISCORD_WEBHOOK_TOKEN }
-# The seller sets DISCORD_WEBHOOK_BASE to the mock host for testing (env var locally, seller
-# secret on the platform); production leaves it unset so it defaults to real Discord. The
-# customer sends a NATIVE Discord webhook body; the gateway forwards it unchanged after
-# composing this URL.
+# For testing the seller sets a SELLER secret DISCORD_WEBHOOK_BASE=mock; the ops_customer's
+# customer-secret lookup misses and falls back to that seller secret (route_mapping.py), so
+# only test traffic hits the mock while production defaults to real Discord. Locally it comes
+# from the DISCORD_WEBHOOK_BASE env var. The customer sends a NATIVE Discord webhook body; the
+# gateway forwards it unchanged after composing this URL.
 set -euo pipefail
 
 DISCORD_WEBHOOK_BASE="${DISCORD_WEBHOOK_BASE:-https://mock.unitysvc.dev/discord/api/webhooks}"

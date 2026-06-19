@@ -69,19 +69,28 @@ curl -X POST "$API_GATEWAY_BASE_URL/labs/discord-relay" \
 Upstream config (rendered from `specs/labs/discord-relay.json`):
 
 ```
-byok.base_url = ${ secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }
+byok.base_url = ${ customer_secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }
                 /${ customer_secrets.DISCORD_WEBHOOK_ID }/${ customer_secrets.DISCORD_WEBHOOK_TOKEN }
 ```
 
-`DISCORD_WEBHOOK_BASE` is a **seller secret** that defaults to the real Discord host. The
-seller sets it to `https://mock.unitysvc.dev/discord/api/webhooks` to test against the mock —
-locally as an environment variable (for `usvc_seller specs run-tests`) and as a seller secret
-on the platform (for the gateway test). Production leaves it unset, so requests go to real
-Discord. Because a seller secret is global to its environment, set the mock value **only in
-your local/test environment** — don't set it where production traffic routes, or every
-request would hit the mock. (The grammar is `${ ns.key ?? <literal> }` — a single namespace
-plus a literal default — so a customer→seller→default chain isn't expressible; the seller
-scope is chosen here so the *seller* owns the mock/real switch.)
+`DISCORD_WEBHOOK_BASE` is a `customer_secrets` reference with a real-Discord default, and it
+resolves to the right host in every context:
+
+- **Production** — a normal customer hasn't set it, so the `?? https://discord.com/api/webhooks`
+  default is used. (A customer running their own Discord-compatible proxy may set
+  `DISCORD_WEBHOOK_BASE` to point at it.)
+- **Testing on the platform** — the ops/test customer hasn't set it either, but for the
+  **ops_customer** the gateway **falls back to the seller's secret store** (see
+  `backend/app/core/route_mapping.py` — "customer_secrets … not found for ops_customer, falling
+  back to seller secrets"). So the **seller** sets a seller secret
+  `DISCORD_WEBHOOK_BASE = https://mock.unitysvc.dev/discord/api/webhooks`, and only ops-customer
+  traffic routes to the mock — production customers are unaffected.
+- **Local testing** — `usvc_seller specs run-tests` reads the value from the
+  `DISCORD_WEBHOOK_BASE` environment variable.
+
+So the seller owns the mock/real switch via a *seller* secret, while keeping the reference in
+`customer_secrets` so the ops→seller fallback isolates the mock to test traffic on a single
+platform — no staging/production split needed.
 
 ---
 
