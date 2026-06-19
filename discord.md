@@ -124,8 +124,9 @@ each as a separate enrollment, by naming its secrets per enrollment:
 
 - At enrollment you provide two parameters: `webhook_id_secret` and `webhook_token_secret`
   — the **names** of the customer secrets holding that destination's id and token.
-- You get a unique enrollment code and call `$API_GATEWAY_BASE_URL/<code>` (the `/e/<code>`
-  path) for that destination.
+- You get a unique enrollment code and call the platform's per-enrollment path
+  `$API_GATEWAY_BASE_URL/e/<code>` for that destination — no extra access interface is
+  declared on the service; `/e/<code>` is provided by the platform.
 - Pricing: free channel **$0**, `plus` channel **$0.001 / message** (`list_price.type:"channel"`).
 
 Example: store `STAGING_WEBHOOK_ID` / `STAGING_WEBHOOK_TOKEN` and `PROD_WEBHOOK_ID` /
