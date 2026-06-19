@@ -69,16 +69,19 @@ curl -X POST "$API_GATEWAY_BASE_URL/labs/discord-relay" \
 Upstream config (rendered from `specs/labs/discord-relay.json`):
 
 ```
-byok.base_url = ${ customer_secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }
+byok.base_url = ${ secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }
                 /${ customer_secrets.DISCORD_WEBHOOK_ID }/${ customer_secrets.DISCORD_WEBHOOK_TOKEN }
 ```
 
-`DISCORD_WEBHOOK_BASE` is an **optional customer secret** that defaults to the real Discord
-host. Production customers leave it unset (or point it at their own Discord-compatible
-proxy); the ops/test customer sets it to `https://mock.unitysvc.dev/discord/api/webhooks`
-so only their requests hit the mock (see *Validation* below). It is a *customer* secret —
-not a seller one — precisely so testing and production can differ per customer rather than
-globally.
+`DISCORD_WEBHOOK_BASE` is a **seller secret** that defaults to the real Discord host. The
+seller sets it to `https://mock.unitysvc.dev/discord/api/webhooks` to test against the mock —
+locally as an environment variable (for `usvc_seller specs run-tests`) and as a seller secret
+on the platform (for the gateway test). Production leaves it unset, so requests go to real
+Discord. Because a seller secret is global to its environment, set the mock value **only in
+your local/test environment** — don't set it where production traffic routes, or every
+request would hit the mock. (The grammar is `${ ns.key ?? <literal> }` — a single namespace
+plus a literal default — so a customer→seller→default chain isn't expressible; the seller
+scope is chosen here so the *seller* owns the mock/real switch.)
 
 ---
 
