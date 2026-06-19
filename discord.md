@@ -69,13 +69,16 @@ curl -X POST "$API_GATEWAY_BASE_URL/labs/discord-relay" \
 Upstream config (rendered from `specs/labs/discord-relay.json`):
 
 ```
-byok.base_url = ${ secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }
+byok.base_url = ${ customer_secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }
                 /${ customer_secrets.DISCORD_WEBHOOK_ID }/${ customer_secrets.DISCORD_WEBHOOK_TOKEN }
 ```
 
-`DISCORD_WEBHOOK_BASE` is a seller secret that defaults to the real Discord host and is
-overridden to `https://mock.unitysvc.dev/discord/api/webhooks` during testing (see
-*Validation* below).
+`DISCORD_WEBHOOK_BASE` is an **optional customer secret** that defaults to the real Discord
+host. Production customers leave it unset (or point it at their own Discord-compatible
+proxy); the ops/test customer sets it to `https://mock.unitysvc.dev/discord/api/webhooks`
+so only their requests hit the mock (see *Validation* below). It is a *customer* secret —
+not a seller one — precisely so testing and production can differ per customer rather than
+globally.
 
 ---
 
