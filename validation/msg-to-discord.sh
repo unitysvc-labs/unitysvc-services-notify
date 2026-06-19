@@ -2,7 +2,7 @@
 # Validate `msg-to-discord` (apprise channel) against mock.unitysvc.dev via apprise.unitysvc.dev.
 #
 # The customer sends the unified envelope {title, body, type, format}. The gateway's
-# body-transformer (specs/unitysvc-labs/msg-to-discord.json) composes an apprise-api request:
+# body-transformer (specs/labs/msg-to-discord.json) composes an apprise-api request:
 #   {"urls":"discord://<id>/<token>","title":...,"body":...,"type":...,"format":...}
 # Here the discord:// URL is swapped for json://mock.unitysvc.dev/... so delivery lands on
 # the mock instead of a real Discord server — proving the envelope -> Apprise path end to end.

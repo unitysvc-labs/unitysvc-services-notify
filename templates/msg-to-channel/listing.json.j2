@@ -22,7 +22,7 @@
     "default": "apprise",
     "type": "channel"
   },
-  "name": "unitysvc-labs/{{ service_name }}",
+  "name": "labs/{{ service_name }}",
   "service_options": {
     "ops_testing_parameters": {{ ops_testing_parameters | tojson }}
   },
@@ -35,7 +35,7 @@
     },
     "http_gateway": {
       "access_method": "http",
-      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/{{ service_name }}"
+      "base_url": "${API_GATEWAY_BASE_URL}/labs/{{ service_name }}"
     }
   },
   "user_parameters_schema": {{ user_parameters_schema | tojson }}

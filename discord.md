@@ -4,7 +4,7 @@ This document describes the two Discord notification services so the design can 
 reviewed and validated. Both are **multi-channel** services (one free channel + one
 paid `plus` channel) authored via the `templates/` + per-channel param-file model.
 Discord is the first channel; every other channel is added by writing two more param
-files (see `specs/unitysvc-labs/`).
+files (see `specs/labs/`).
 
 | Service | Template | Input you send | Free channel | Paid channel | Delivers to |
 |---|---|---|---|---|---|
@@ -60,13 +60,13 @@ or a richer embed:
 **Call it** (free `byok` channel, canonical path):
 
 ```bash
-curl -X POST "$API_GATEWAY_BASE_URL/unitysvc-labs/discord-relay" \
+curl -X POST "$API_GATEWAY_BASE_URL/labs/discord-relay" \
   -H "Authorization: Bearer $UNITYSVC_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"content":"Deployment complete ✅"}'
 ```
 
-Upstream config (rendered from `specs/unitysvc-labs/discord-relay.json`):
+Upstream config (rendered from `specs/labs/discord-relay.json`):
 
 ```
 byok.base_url = ${ secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }
@@ -99,7 +99,7 @@ You send the channel-agnostic **message envelope**; the gateway composes an Appr
 **Call it** (free `apprise` channel, canonical path):
 
 ```bash
-curl -X POST "$API_GATEWAY_BASE_URL/unitysvc-labs/msg-to-discord" \
+curl -X POST "$API_GATEWAY_BASE_URL/labs/msg-to-discord" \
   -H "Authorization: Bearer $UNITYSVC_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"title":"Deploy complete","body":"v2 is live","type":"success","format":"text"}'

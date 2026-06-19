@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Validate `discord-relay` (byok channel) against mock.unitysvc.dev — no real Discord needed.
 #
-# Mirrors the rendered byok upstream from specs/unitysvc-labs/discord-relay.json:
+# Mirrors the rendered byok upstream from specs/labs/discord-relay.json:
 #   ${ secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }
 #     /${ customer_secrets.DISCORD_WEBHOOK_ID }/${ customer_secrets.DISCORD_WEBHOOK_TOKEN }
 # DISCORD_WEBHOOK_BASE is pointed at the mock; the customer sends a NATIVE Discord webhook
