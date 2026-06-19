@@ -1,0 +1,42 @@
+{
+  "currency": "USD",
+  "display_name": "{{ display_name }}",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": "{{ connectivity_preset | default('api_connectivity') }}"
+    }
+  },
+  "list_price": {
+    "channels": {
+      "byok": {
+        "description": {{ byok_price_description | default('Free — relay to your own webhook') | tojson }},
+        "price": "0",
+        "type": "constant"
+      },
+      "plus": {
+        "description": {{ plus_price_description | default('$0.001 per message — extra per-enrollment destinations') | tojson }},
+        "price": "{{ plus_price | default('0.001') }}",
+        "type": "constant"
+      }
+    },
+    "default": "byok",
+    "type": "channel"
+  },
+  "name": "unitysvc-labs/{{ service_name }}",
+  "service_options": {
+    "ops_testing_parameters": {{ ops_testing_parameters | tojson }}
+  },
+  "status": "{{ status | default('ready') }}",
+  "time_created": "{{ time_created | default('2026-06-19T00:00:00Z') }}",
+  "user_access_interfaces": {
+    "enrollment": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{% raw %}{{ enrollment.code }}{% endraw %}"
+    },
+    "http_gateway": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/unitysvc-labs/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {{ user_parameters_schema | tojson }}
+}
