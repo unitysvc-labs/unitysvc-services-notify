@@ -3,7 +3,7 @@
     "notification"
   ],
   "description": {{ description | tojson }},
-  "name": "{{ service_name }}",
+  "name": "{{ channel_name }}",
   "service_type": "notification",
   "status": "{{ status | default('ready') }}",
   "tags": {{ tags | tojson }},

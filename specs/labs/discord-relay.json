@@ -1,6 +1,7 @@
 {
   "parameters": {
     "byok_base_url": "${ secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }/${ customer_secrets.DISCORD_WEBHOOK_ID }/${ customer_secrets.DISCORD_WEBHOOK_TOKEN }",
+    "channel_name": "discord-relay",
     "description": "Relay messages to your own Discord channel through the UnitySVC gateway. POST a native Discord webhook payload (e.g. {\"content\": \"...\"} or {\"embeds\": [...]}); the gateway composes your webhook URL from your stored secrets and forwards it. The free byok channel uses your own stored webhook; the plus channel binds extra per-enrollment webhooks via parameters.",
     "display_name": "Discord Relay",
     "ops_testing_parameters": {
@@ -8,7 +9,6 @@
       "webhook_token_secret": "DISCORD_WEBHOOK_TOKEN"
     },
     "plus_base_url": "${ secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }/${ customer_secrets.{{ params.webhook_id_secret }} }/${ customer_secrets.{{ params.webhook_token_secret }} }",
-    "service_name": "discord-relay",
     "tags": [
       "notification",
       "discord",
