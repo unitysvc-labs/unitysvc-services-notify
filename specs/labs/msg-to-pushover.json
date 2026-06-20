@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "pover://${ customer_secrets.PUSHOVER_USER_KEY }@${ customer_secrets.PUSHOVER_TOKEN }",
+    "apprise_url_plus": "pover://${ customer_secrets.{{ params.user_key_secret }} }@${ customer_secrets.{{ params.token_secret }} }",
+    "channel_name": "msg-to-pushover",
+    "code_example_preset": "apprise_notify_code_example_py_pushover",
+    "connectivity_preset": "apprise_notify_connectivity_pushover",
+    "description": "Send notifications to your own Pushover destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise pover:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Pushover Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "token_secret": "PUSHOVER_TOKEN",
+      "user_key_secret": "PUSHOVER_USER_KEY"
+    },
+    "tags": [
+      "notification",
+      "pushover",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Pushover token",
+          "type": "string"
+        },
+        "user_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's Pushover user key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_key_secret",
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

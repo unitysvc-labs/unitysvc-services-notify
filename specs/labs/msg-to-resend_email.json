@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "resend://${ customer_secrets.RESEND_EMAIL_APIKEY }:${ customer_secrets.RESEND_EMAIL_FROM_ADDR }",
+    "apprise_url_plus": "resend://${ customer_secrets.{{ params.apikey_secret }} }:${ customer_secrets.{{ params.from_addr_secret }} }",
+    "channel_name": "msg-to-resend_email",
+    "code_example_preset": "apprise_notify_code_example_py_resend_email",
+    "connectivity_preset": "apprise_notify_connectivity_resend_email",
+    "description": "Send notifications to your own Resend Email destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise resend:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Resend Email Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "RESEND_EMAIL_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "from_addr_secret": "RESEND_EMAIL_FROM_ADDR"
+    },
+    "tags": [
+      "notification",
+      "resend_email",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's Resend Email apikey",
+          "type": "string"
+        },
+        "from_addr_secret": {
+          "description": "Name of the customer secret holding this enrollment's Resend Email from addr",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret",
+        "from_addr_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "apprise_url": "groupme://${ customer_secrets.GROUPME_MSG_BOT_ID }",
+    "apprise_url_plus": "groupme://${ customer_secrets.{{ params.bot_id_secret }} }",
+    "channel_name": "msg-to-groupme_msg",
+    "code_example_preset": "apprise_notify_code_example_py_groupme_msg",
+    "connectivity_preset": "apprise_notify_connectivity_groupme_msg",
+    "description": "Send notifications to your own GroupMe destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise groupme:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "GroupMe Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "bot_id_secret": "GROUPME_MSG_BOT_ID"
+    },
+    "tags": [
+      "notification",
+      "groupme_msg",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "bot_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's GroupMe bot id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "bot_id_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

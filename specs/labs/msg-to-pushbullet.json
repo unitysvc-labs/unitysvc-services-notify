@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "apprise_url": "pbul://${ customer_secrets.PUSHBULLET_ACCESSTOKEN }",
+    "apprise_url_plus": "pbul://${ customer_secrets.{{ params.accesstoken_secret }} }",
+    "channel_name": "msg-to-pushbullet",
+    "code_example_preset": "apprise_notify_code_example_py_pushbullet",
+    "connectivity_preset": "apprise_notify_connectivity_pushbullet",
+    "description": "Send notifications to your own Pushbullet destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise pbul:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Pushbullet Messages",
+    "ops_testing_parameters": {
+      "accesstoken_secret": "PUSHBULLET_ACCESSTOKEN",
+      "base_url": "https://mock.unitysvc.dev/notify"
+    },
+    "tags": [
+      "notification",
+      "pushbullet",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "accesstoken_secret": {
+          "description": "Name of the customer secret holding this enrollment's Pushbullet accesstoken",
+          "type": "string"
+        }
+      },
+      "required": [
+        "accesstoken_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

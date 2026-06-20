@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "onesignal://${ customer_secrets.ONESIGNAL_APP }@${ customer_secrets.ONESIGNAL_APIKEY }/${ customer_secrets.ONESIGNAL_TARGETS }",
+    "apprise_url_plus": "onesignal://${ customer_secrets.{{ params.app_secret }} }@${ customer_secrets.{{ params.apikey_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-onesignal",
+    "code_example_preset": "apprise_notify_code_example_py_onesignal",
+    "connectivity_preset": "apprise_notify_connectivity_onesignal",
+    "description": "Send notifications to your own OneSignal destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise onesignal:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "OneSignal Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "ONESIGNAL_APIKEY",
+      "app_secret": "ONESIGNAL_APP",
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "targets_secret": "ONESIGNAL_TARGETS"
+    },
+    "tags": [
+      "notification",
+      "onesignal",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's OneSignal apikey",
+          "type": "string"
+        },
+        "app_secret": {
+          "description": "Name of the customer secret holding this enrollment's OneSignal app",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's OneSignal targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "app_secret",
+        "apikey_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

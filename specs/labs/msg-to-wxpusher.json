@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "wxpusher://${ customer_secrets.WXPUSHER_TOKEN }/${ customer_secrets.WXPUSHER_TARGETS }",
+    "apprise_url_plus": "wxpusher://${ customer_secrets.{{ params.token_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-wxpusher",
+    "code_example_preset": "apprise_notify_code_example_py_wxpusher",
+    "connectivity_preset": "apprise_notify_connectivity_wxpusher",
+    "description": "Send notifications to your own WxPusher destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise wxpusher:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "WxPusher Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "targets_secret": "WXPUSHER_TARGETS",
+      "token_secret": "WXPUSHER_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "wxpusher",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's WxPusher targets",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's WxPusher token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

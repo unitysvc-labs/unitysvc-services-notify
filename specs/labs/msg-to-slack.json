@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "slack://${ customer_secrets.SLACK_TOKEN_A }/${ customer_secrets.SLACK_TOKEN_B }/${ customer_secrets.SLACK_TOKEN_C }",
+    "apprise_url_plus": "slack://${ customer_secrets.{{ params.token_a_secret }} }/${ customer_secrets.{{ params.token_b_secret }} }/${ customer_secrets.{{ params.token_c_secret }} }",
+    "channel_name": "msg-to-slack",
+    "code_example_preset": "apprise_notify_code_example_py_slack",
+    "connectivity_preset": "apprise_notify_connectivity_slack",
+    "description": "Send notifications to your own Slack destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise slack:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Slack Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "token_a_secret": "SLACK_TOKEN_A",
+      "token_b_secret": "SLACK_TOKEN_B",
+      "token_c_secret": "SLACK_TOKEN_C"
+    },
+    "tags": [
+      "notification",
+      "slack",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "token_a_secret": {
+          "description": "Name of the customer secret holding this enrollment's Slack token a",
+          "type": "string"
+        },
+        "token_b_secret": {
+          "description": "Name of the customer secret holding this enrollment's Slack token b",
+          "type": "string"
+        },
+        "token_c_secret": {
+          "description": "Name of the customer secret holding this enrollment's Slack token c",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_a_secret",
+        "token_b_secret",
+        "token_c_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

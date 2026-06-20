@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "ryver://${ customer_secrets.RYVER_ORGANIZATION }/${ customer_secrets.RYVER_TOKEN }",
+    "apprise_url_plus": "ryver://${ customer_secrets.{{ params.organization_secret }} }/${ customer_secrets.{{ params.token_secret }} }",
+    "channel_name": "msg-to-ryver",
+    "code_example_preset": "apprise_notify_code_example_py_ryver",
+    "connectivity_preset": "apprise_notify_connectivity_ryver",
+    "description": "Send notifications to your own Ryver destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise ryver:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Ryver Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "organization_secret": "RYVER_ORGANIZATION",
+      "token_secret": "RYVER_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "ryver",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "organization_secret": {
+          "description": "Name of the customer secret holding this enrollment's Ryver organization",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Ryver token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization_secret",
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

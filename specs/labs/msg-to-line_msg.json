@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "line://${ customer_secrets.LINE_MSG_TOKEN }/${ customer_secrets.LINE_MSG_TARGETS }",
+    "apprise_url_plus": "line://${ customer_secrets.{{ params.token_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-line_msg",
+    "code_example_preset": "apprise_notify_code_example_py_line_msg",
+    "connectivity_preset": "apprise_notify_connectivity_line_msg",
+    "description": "Send notifications to your own LINE destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise line:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "LINE Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "targets_secret": "LINE_MSG_TARGETS",
+      "token_secret": "LINE_MSG_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "line_msg",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's LINE targets",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's LINE token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

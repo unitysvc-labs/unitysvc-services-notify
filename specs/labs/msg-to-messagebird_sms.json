@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "msgbird://${ customer_secrets.MESSAGEBIRD_SMS_APIKEY }/${ customer_secrets.MESSAGEBIRD_SMS_SOURCE }",
+    "apprise_url_plus": "msgbird://${ customer_secrets.{{ params.apikey_secret }} }/${ customer_secrets.{{ params.source_secret }} }",
+    "channel_name": "msg-to-messagebird_sms",
+    "code_example_preset": "apprise_notify_code_example_py_messagebird_sms",
+    "connectivity_preset": "apprise_notify_connectivity_messagebird_sms",
+    "description": "Send notifications to your own MessageBird SMS destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise msgbird:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "MessageBird SMS Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "MESSAGEBIRD_SMS_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "source_secret": "MESSAGEBIRD_SMS_SOURCE"
+    },
+    "tags": [
+      "notification",
+      "messagebird_sms",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's MessageBird SMS apikey",
+          "type": "string"
+        },
+        "source_secret": {
+          "description": "Name of the customer secret holding this enrollment's MessageBird SMS source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret",
+        "source_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}
