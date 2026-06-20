@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "exotel://${ customer_secrets.EXOTEL_SMS_SID }:${ customer_secrets.EXOTEL_SMS_TOKEN }@${ customer_secrets.EXOTEL_SMS_FROM_PHONE }",
+    "apprise_url_plus": "exotel://${ customer_secrets.{{ params.sid_secret }} }:${ customer_secrets.{{ params.token_secret }} }@${ customer_secrets.{{ params.from_phone_secret }} }",
+    "channel_name": "msg-to-exotel_sms",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Exotel destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise exotel:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Exotel Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "from_phone_secret": "EXOTEL_SMS_FROM_PHONE",
+      "sid_secret": "EXOTEL_SMS_SID",
+      "token_secret": "EXOTEL_SMS_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "exotel_sms",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "exotel://exotel_smssidxyz123:exotel_smstokenxyz123@+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "from_phone_secret": {
+          "description": "Name of the customer secret holding this enrollment's Exotel from phone",
+          "type": "string"
+        },
+        "sid_secret": {
+          "description": "Name of the customer secret holding this enrollment's Exotel sid",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Exotel token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sid_secret",
+        "token_secret",
+        "from_phone_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

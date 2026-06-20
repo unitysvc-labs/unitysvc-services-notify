@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "parseps://${ customer_secrets.PARSEPLATFORM_APP_ID }:${ customer_secrets.PARSEPLATFORM_MASTER_KEY }@${ customer_secrets.PARSEPLATFORM_HOST }",
+    "apprise_url_plus": "parseps://${ customer_secrets.{{ params.app_id_secret }} }:${ customer_secrets.{{ params.master_key_secret }} }@${ customer_secrets.{{ params.host_secret }} }",
+    "channel_name": "msg-to-parseplatform",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Parse Platform destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise parseps:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Parse Platform Messages",
+    "ops_testing_parameters": {
+      "app_id_secret": "PARSEPLATFORM_APP_ID",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "PARSEPLATFORM_HOST",
+      "master_key_secret": "PARSEPLATFORM_MASTER_KEY"
+    },
+    "tags": [
+      "notification",
+      "parseplatform",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "parseps://parseplatformappidxyz123:parseplatformmasterkeyxyz123@notify.example.com",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "app_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's Parse Platform app id",
+          "type": "string"
+        },
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Parse Platform host",
+          "type": "string"
+        },
+        "master_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's Parse Platform master key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "app_id_secret",
+        "master_key_secret",
+        "host_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

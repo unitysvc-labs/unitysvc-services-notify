@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "46elks://${ customer_secrets.ELKS_SMS_USER }:${ customer_secrets.ELKS_SMS_PASSWORD }@/${ customer_secrets.ELKS_SMS_FROM_PHONE }",
+    "apprise_url_plus": "46elks://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@/${ customer_secrets.{{ params.from_phone_secret }} }",
+    "channel_name": "msg-to-elks_sms",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own 46elks destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise 46elks:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "46elks Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "from_phone_secret": "ELKS_SMS_FROM_PHONE",
+      "password_secret": "ELKS_SMS_PASSWORD",
+      "user_secret": "ELKS_SMS_USER"
+    },
+    "tags": [
+      "notification",
+      "elks_sms",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "46elks://elks_smsuser:elks_smspass@/+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "from_phone_secret": {
+          "description": "Name of the customer secret holding this enrollment's 46elks from phone",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's 46elks password",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's 46elks user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "from_phone_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

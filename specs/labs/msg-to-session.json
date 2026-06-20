@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "sessions://${ customer_secrets.SESSION_USER }:${ customer_secrets.SESSION_PASSWORD }@${ customer_secrets.SESSION_HOST }/${ customer_secrets.SESSION_TARGETS }",
+    "apprise_url_plus": "sessions://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-session",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Session destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise sessions:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Session Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "SESSION_HOST",
+      "password_secret": "SESSION_PASSWORD",
+      "targets_secret": "SESSION_TARGETS",
+      "user_secret": "SESSION_USER"
+    },
+    "tags": [
+      "notification",
+      "session",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "sessions://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:0000000000000000000000000000000000000000000000000000000000000000@notify.example.com/myroom",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Session host",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's Session password",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Session targets",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's Session user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "host_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

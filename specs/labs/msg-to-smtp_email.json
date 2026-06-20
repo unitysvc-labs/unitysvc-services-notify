@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "mailtos://${ customer_secrets.SMTP_EMAIL_USER }:${ customer_secrets.SMTP_EMAIL_PASSWORD }@${ customer_secrets.SMTP_EMAIL_HOST }/${ customer_secrets.SMTP_EMAIL_TARGETS }",
+    "apprise_url_plus": "mailtos://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-smtp_email",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own SMTP Email destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise mailtos:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "SMTP Email Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "SMTP_EMAIL_HOST",
+      "password_secret": "SMTP_EMAIL_PASSWORD",
+      "targets_secret": "SMTP_EMAIL_TARGETS",
+      "user_secret": "SMTP_EMAIL_USER"
+    },
+    "tags": [
+      "notification",
+      "smtp_email",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "mailtos://smtp_emailuser:smtp_emailpass@notify.example.com/smtp_email@example.com",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMTP Email host",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMTP Email password",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMTP Email targets",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMTP Email user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "host_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

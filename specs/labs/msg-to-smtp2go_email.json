@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "smtp2go://${ customer_secrets.SMTP2GO_EMAIL_USER }@${ customer_secrets.SMTP2GO_EMAIL_HOST }/${ customer_secrets.SMTP2GO_EMAIL_APIKEY }/",
+    "apprise_url_plus": "smtp2go://${ customer_secrets.{{ params.user_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.apikey_secret }} }/",
+    "channel_name": "msg-to-smtp2go_email",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own SMTP2Go destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise smtp2go:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "SMTP2Go Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "SMTP2GO_EMAIL_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "SMTP2GO_EMAIL_HOST",
+      "user_secret": "SMTP2GO_EMAIL_USER"
+    },
+    "tags": [
+      "notification",
+      "smtp2go_email",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "smtp2go://smtp2go_emailuser@notify.example.com/smtp2go_emailapikeyxyz123/",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMTP2Go apikey",
+          "type": "string"
+        },
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMTP2Go host",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMTP2Go user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "host_secret",
+        "apikey_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

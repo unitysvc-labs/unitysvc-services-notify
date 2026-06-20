@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "nctalks://${ customer_secrets.NEXTCLOUDTALK_USER }:${ customer_secrets.NEXTCLOUDTALK_PASSWORD }@${ customer_secrets.NEXTCLOUDTALK_HOST }/${ customer_secrets.NEXTCLOUDTALK_TARGETS }",
+    "apprise_url_plus": "nctalks://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-nextcloudtalk",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Nextcloud Talk destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise nctalks:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Nextcloud Talk Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "NEXTCLOUDTALK_HOST",
+      "password_secret": "NEXTCLOUDTALK_PASSWORD",
+      "targets_secret": "NEXTCLOUDTALK_TARGETS",
+      "user_secret": "NEXTCLOUDTALK_USER"
+    },
+    "tags": [
+      "notification",
+      "nextcloudtalk",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "nctalks://nextcloudtalkuser:nextcloudtalkpass@notify.example.com/nextcloudtalktargetroomidxyz123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Nextcloud Talk host",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's Nextcloud Talk password",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Nextcloud Talk targets",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's Nextcloud Talk user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "host_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

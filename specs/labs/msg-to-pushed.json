@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "pushed://${ customer_secrets.PUSHED_APP_KEY }/${ customer_secrets.PUSHED_APP_SECRET }",
+    "apprise_url_plus": "pushed://${ customer_secrets.{{ params.app_key_secret }} }/${ customer_secrets.{{ params.app_secret_secret }} }",
+    "channel_name": "msg-to-pushed",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Pushed destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise pushed:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Pushed Messages",
+    "ops_testing_parameters": {
+      "app_key_secret": "PUSHED_APP_KEY",
+      "app_secret_secret": "PUSHED_APP_SECRET",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify"
+    },
+    "tags": [
+      "notification",
+      "pushed",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "pushed://pushedappkeyxyz123/pushedappsecretxyz123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "app_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's Pushed app key",
+          "type": "string"
+        },
+        "app_secret_secret": {
+          "description": "Name of the customer secret holding this enrollment's Pushed app secret",
+          "type": "string"
+        }
+      },
+      "required": [
+        "app_key_secret",
+        "app_secret_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

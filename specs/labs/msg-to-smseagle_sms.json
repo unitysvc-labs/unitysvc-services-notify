@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "smseagles://${ customer_secrets.SMSEAGLE_SMS_TOKEN }@${ customer_secrets.SMSEAGLE_SMS_HOST }/${ customer_secrets.SMSEAGLE_SMS_TARGETS }",
+    "apprise_url_plus": "smseagles://${ customer_secrets.{{ params.token_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-smseagle_sms",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own SMS Eagle destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise smseagles:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "SMS Eagle Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "SMSEAGLE_SMS_HOST",
+      "targets_secret": "SMSEAGLE_SMS_TARGETS",
+      "token_secret": "SMSEAGLE_SMS_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "smseagle_sms",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "smseagles://smseagle_smstokenxyz123@notify.example.com/+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMS Eagle host",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMS Eagle targets",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMS Eagle token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret",
+        "host_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

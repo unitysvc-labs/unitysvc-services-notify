@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "evolutions://${ customer_secrets.EVOLUTION_APIKEY }@${ customer_secrets.EVOLUTION_HOST }/${ customer_secrets.EVOLUTION_INSTANCE }/${ customer_secrets.EVOLUTION_TARGETS }",
+    "apprise_url_plus": "evolutions://${ customer_secrets.{{ params.apikey_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.instance_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-evolution",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Evolution API destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise evolutions:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Evolution API Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "EVOLUTION_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "EVOLUTION_HOST",
+      "instance_secret": "EVOLUTION_INSTANCE",
+      "targets_secret": "EVOLUTION_TARGETS"
+    },
+    "tags": [
+      "notification",
+      "evolution",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "evolutions://evolutionapikeyxyz123@notify.example.com/instance1/+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's Evolution API apikey",
+          "type": "string"
+        },
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Evolution API host",
+          "type": "string"
+        },
+        "instance_secret": {
+          "description": "Name of the customer secret holding this enrollment's Evolution API instance",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Evolution API targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret",
+        "host_secret",
+        "instance_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

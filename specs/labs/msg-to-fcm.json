@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "fcm://${ customer_secrets.FCM_APIKEY }/${ customer_secrets.FCM_TARGETS }",
+    "apprise_url_plus": "fcm://${ customer_secrets.{{ params.apikey_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-fcm",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Firebase Cloud Messaging destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise fcm:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Firebase Cloud Messaging Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "FCM_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "targets_secret": "FCM_TARGETS"
+    },
+    "tags": [
+      "notification",
+      "fcm",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "fcm://fcmapikeyxyz123/fcmtargetdevicexyz123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's Firebase Cloud Messaging apikey",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Firebase Cloud Messaging targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

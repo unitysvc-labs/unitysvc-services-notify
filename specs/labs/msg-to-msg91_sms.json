@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "msg91://${ customer_secrets.MSG91_SMS_TEMPLATE }@${ customer_secrets.MSG91_SMS_AUTHKEY }/${ customer_secrets.MSG91_SMS_TARGETS }",
+    "apprise_url_plus": "msg91://${ customer_secrets.{{ params.template_secret }} }@${ customer_secrets.{{ params.authkey_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-msg91_sms",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own MSG91 destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise msg91:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "MSG91 Messages",
+    "ops_testing_parameters": {
+      "authkey_secret": "MSG91_SMS_AUTHKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "targets_secret": "MSG91_SMS_TARGETS",
+      "template_secret": "MSG91_SMS_TEMPLATE"
+    },
+    "tags": [
+      "notification",
+      "msg91_sms",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "msg91://dkry5cjqx4bi@dkry5cjqx4bi/+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "authkey_secret": {
+          "description": "Name of the customer secret holding this enrollment's MSG91 authkey",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's MSG91 targets",
+          "type": "string"
+        },
+        "template_secret": {
+          "description": "Name of the customer secret holding this enrollment's MSG91 template",
+          "type": "string"
+        }
+      },
+      "required": [
+        "template_secret",
+        "authkey_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

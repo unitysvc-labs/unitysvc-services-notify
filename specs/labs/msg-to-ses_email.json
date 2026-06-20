@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "ses://${ customer_secrets.SES_EMAIL_FROM_EMAIL }/${ customer_secrets.SES_EMAIL_ACCESS_KEY_ID }/${ customer_secrets.SES_EMAIL_SECRET_ACCESS_KEY }/${ customer_secrets.SES_EMAIL_REGION }",
+    "apprise_url_plus": "ses://${ customer_secrets.{{ params.from_email_secret }} }/${ customer_secrets.{{ params.access_key_id_secret }} }/${ customer_secrets.{{ params.secret_access_key_secret }} }/${ customer_secrets.{{ params.region_secret }} }",
+    "channel_name": "msg-to-ses_email",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Amazon SES destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise ses:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Amazon SES Messages",
+    "ops_testing_parameters": {
+      "access_key_id_secret": "SES_EMAIL_ACCESS_KEY_ID",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "from_email_secret": "SES_EMAIL_FROM_EMAIL",
+      "region_secret": "SES_EMAIL_REGION",
+      "secret_access_key_secret": "SES_EMAIL_SECRET_ACCESS_KEY"
+    },
+    "tags": [
+      "notification",
+      "ses_email",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "ses://ses_email@example.com/ses_emailaccesskeyidxyz123/ses_emailsecretaccesskeyxyz123/us-east-1",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "access_key_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's Amazon SES access key id",
+          "type": "string"
+        },
+        "from_email_secret": {
+          "description": "Name of the customer secret holding this enrollment's Amazon SES from email",
+          "type": "string"
+        },
+        "region_secret": {
+          "description": "Name of the customer secret holding this enrollment's Amazon SES region",
+          "type": "string"
+        },
+        "secret_access_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's Amazon SES secret access key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from_email_secret",
+        "access_key_id_secret",
+        "secret_access_key_secret",
+        "region_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}
