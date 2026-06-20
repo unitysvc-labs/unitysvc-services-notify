@@ -3,12 +3,12 @@
     "apprise_url": "bark://${ customer_secrets.BARK_HOST }/${ customer_secrets.BARK_DEVICE_KEY }",
     "apprise_url_plus": "bark://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.device_key_secret }} }",
     "channel_name": "msg-to-bark",
-    "code_example_preset": "apprise_notify_code_example_py_bark",
-    "connectivity_preset": "apprise_notify_connectivity_bark",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "Send notifications to your own Bark destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise bark:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
     "display_name": "Bark Messages",
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/notify",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "device_key_secret": "BARK_DEVICE_KEY",
       "host_secret": "BARK_HOST"
     },
@@ -18,7 +18,7 @@
       "apprise",
       "gateway"
     ],
-    "test_webhook_path": "/notify",
+    "test_apprise_url": "bark://hostname.example.com/DeviceKey1",
     "time_created": "2026-06-19T00:00:00Z",
     "user_parameters_schema": {
       "properties": {

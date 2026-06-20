@@ -3,12 +3,12 @@
     "apprise_url": "workflows://${ customer_secrets.MSTEAMS_HOST }/${ customer_secrets.MSTEAMS_WORKFLOW }/${ customer_secrets.MSTEAMS_SIGNATURE }",
     "apprise_url_plus": "workflows://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.workflow_secret }} }/${ customer_secrets.{{ params.signature_secret }} }",
     "channel_name": "msg-to-msteams",
-    "code_example_preset": "apprise_notify_code_example_py_msteams",
-    "connectivity_preset": "apprise_notify_connectivity_msteams",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "Send notifications to your own Microsoft Teams destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise workflows:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
     "display_name": "Microsoft Teams Messages",
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/notify",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "MSTEAMS_HOST",
       "signature_secret": "MSTEAMS_SIGNATURE",
       "workflow_secret": "MSTEAMS_WORKFLOW"
@@ -19,7 +19,7 @@
       "apprise",
       "gateway"
     ],
-    "test_webhook_path": "/notify",
+    "test_apprise_url": "workflows://hostname.example.com/workflowid/AbCdEfGhSignature",
     "time_created": "2026-06-19T00:00:00Z",
     "user_parameters_schema": {
       "properties": {

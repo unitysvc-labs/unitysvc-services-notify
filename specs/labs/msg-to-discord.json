@@ -3,12 +3,12 @@
     "apprise_url": "discord://${ customer_secrets.DISCORD_WEBHOOK_ID }/${ customer_secrets.DISCORD_WEBHOOK_TOKEN }",
     "apprise_url_plus": "discord://${ customer_secrets.{{ params.webhook_id_secret }} }/${ customer_secrets.{{ params.webhook_token_secret }} }",
     "channel_name": "msg-to-discord",
-    "code_example_preset": "apprise_notify_code_example_py_discord",
-    "connectivity_preset": "apprise_notify_connectivity_discord",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "Send notifications to your own Discord channel through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise discord:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored webhook; the apprise-plus channel binds extra per-enrollment webhooks via parameters.",
     "display_name": "Discord Messages",
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/notify",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "webhook_id_secret": "DISCORD_WEBHOOK_ID",
       "webhook_token_secret": "DISCORD_WEBHOOK_TOKEN"
     },
@@ -18,7 +18,7 @@
       "apprise",
       "gateway"
     ],
-    "test_webhook_path": "/notify",
+    "test_apprise_url": "discord://demo/demotoken",
     "time_created": "2026-06-19T00:00:00Z",
     "user_parameters_schema": {
       "properties": {

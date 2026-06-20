@@ -3,12 +3,12 @@
     "apprise_url": "matrix://${ customer_secrets.MATRIX_USER }:${ customer_secrets.MATRIX_PASSWORD }@${ customer_secrets.MATRIX_HOST }/#${ customer_secrets.MATRIX_TARGETS }",
     "apprise_url_plus": "matrix://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }/#${ customer_secrets.{{ params.targets_secret }} }",
     "channel_name": "msg-to-matrix",
-    "code_example_preset": "apprise_notify_code_example_py_matrix",
-    "connectivity_preset": "apprise_notify_connectivity_matrix",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "Send notifications to your own Matrix destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise matrix:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
     "display_name": "Matrix Messages",
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/notify",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "MATRIX_HOST",
       "password_secret": "MATRIX_PASSWORD",
       "targets_secret": "MATRIX_TARGETS",
@@ -20,7 +20,7 @@
       "apprise",
       "gateway"
     ],
-    "test_webhook_path": "/notify",
+    "test_apprise_url": "matrix://user:pass@hostname.example.com/#room",
     "time_created": "2026-06-19T00:00:00Z",
     "user_parameters_schema": {
       "properties": {

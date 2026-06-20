@@ -3,14 +3,14 @@
     "apprise_url": "onesignal://${ customer_secrets.ONESIGNAL_APP }@${ customer_secrets.ONESIGNAL_APIKEY }/${ customer_secrets.ONESIGNAL_TARGETS }",
     "apprise_url_plus": "onesignal://${ customer_secrets.{{ params.app_secret }} }@${ customer_secrets.{{ params.apikey_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
     "channel_name": "msg-to-onesignal",
-    "code_example_preset": "apprise_notify_code_example_py_onesignal",
-    "connectivity_preset": "apprise_notify_connectivity_onesignal",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "Send notifications to your own OneSignal destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise onesignal:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
     "display_name": "OneSignal Messages",
     "ops_testing_parameters": {
       "apikey_secret": "ONESIGNAL_APIKEY",
       "app_secret": "ONESIGNAL_APP",
-      "base_url": "https://mock.unitysvc.dev/notify",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "targets_secret": "ONESIGNAL_TARGETS"
     },
     "tags": [
@@ -19,7 +19,7 @@
       "apprise",
       "gateway"
     ],
-    "test_webhook_path": "/notify",
+    "test_apprise_url": "onesignal://appid123@apikey456/PlayerId789",
     "time_created": "2026-06-19T00:00:00Z",
     "user_parameters_schema": {
       "properties": {
