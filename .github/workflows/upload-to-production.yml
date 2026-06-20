@@ -1,0 +1,17 @@
+name: Upload Data to Production
+
+# Manual-only: production uploads are deliberate, never PR-triggered.
+# Assumes service IDs already exist in production (created by an earlier
+# staging run; the specs/**/service.json sidecars carry those IDs). This
+# workflow therefore does NOT write service.json back to the repo — those
+# are managed exclusively by the staging workflow.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload:
+    uses: unitysvc-labs/.github/.github/workflows/seller-upload-production.yml@main
+    secrets: inherit
+    permissions:
+      contents: write
