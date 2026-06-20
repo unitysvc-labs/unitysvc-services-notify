@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "tgram://${ customer_secrets.TELEGRAM_BOT_TOKEN }/${ customer_secrets.TELEGRAM_CHAT_ID }",
+    "apprise_url_plus": "tgram://${ customer_secrets.{{ params.bot_token_secret }} }/${ customer_secrets.{{ params.chat_id_secret }} }",
+    "channel_name": "msg-to-telegram",
+    "code_example_preset": "apprise_notify_code_example_py_telegram",
+    "connectivity_preset": "apprise_notify_connectivity_telegram",
+    "description": "Send notifications to your own Telegram destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise tgram:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Telegram Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "bot_token_secret": "TELEGRAM_BOT_TOKEN",
+      "chat_id_secret": "TELEGRAM_CHAT_ID"
+    },
+    "tags": [
+      "notification",
+      "telegram",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "bot_token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Telegram bot token",
+          "type": "string"
+        },
+        "chat_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's Telegram chat id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "bot_token_secret",
+        "chat_id_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

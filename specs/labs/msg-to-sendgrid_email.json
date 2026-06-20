@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "sendgrid://${ customer_secrets.SENDGRID_EMAIL_APIKEY }:${ customer_secrets.SENDGRID_EMAIL_FROM_EMAIL }",
+    "apprise_url_plus": "sendgrid://${ customer_secrets.{{ params.apikey_secret }} }:${ customer_secrets.{{ params.from_email_secret }} }",
+    "channel_name": "msg-to-sendgrid_email",
+    "code_example_preset": "apprise_notify_code_example_py_sendgrid_email",
+    "connectivity_preset": "apprise_notify_connectivity_sendgrid_email",
+    "description": "Send notifications to your own SendGrid Email destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise sendgrid:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "SendGrid Email Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "SENDGRID_EMAIL_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "from_email_secret": "SENDGRID_EMAIL_FROM_EMAIL"
+    },
+    "tags": [
+      "notification",
+      "sendgrid_email",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's SendGrid Email apikey",
+          "type": "string"
+        },
+        "from_email_secret": {
+          "description": "Name of the customer secret holding this enrollment's SendGrid Email from email",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret",
+        "from_email_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

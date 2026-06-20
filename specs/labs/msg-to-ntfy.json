@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "ntfy://${ customer_secrets.NTFY_HOST }/${ customer_secrets.NTFY_TOPIC }",
+    "apprise_url_plus": "ntfy://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.topic_secret }} }",
+    "channel_name": "msg-to-ntfy",
+    "code_example_preset": "apprise_notify_code_example_py_ntfy",
+    "connectivity_preset": "apprise_notify_connectivity_ntfy",
+    "description": "Send notifications to your own ntfy destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise ntfy:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "ntfy Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "host_secret": "NTFY_HOST",
+      "topic_secret": "NTFY_TOPIC"
+    },
+    "tags": [
+      "notification",
+      "ntfy",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's ntfy host",
+          "type": "string"
+        },
+        "topic_secret": {
+          "description": "Name of the customer secret holding this enrollment's ntfy topic",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host_secret",
+        "topic_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

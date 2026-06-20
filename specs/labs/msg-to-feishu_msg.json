@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "apprise_url": "feishu://${ customer_secrets.FEISHU_MSG_TOKEN }",
+    "apprise_url_plus": "feishu://${ customer_secrets.{{ params.token_secret }} }",
+    "channel_name": "msg-to-feishu_msg",
+    "code_example_preset": "apprise_notify_code_example_py_feishu_msg",
+    "connectivity_preset": "apprise_notify_connectivity_feishu_msg",
+    "description": "Send notifications to your own Feishu destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise feishu:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Feishu Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "token_secret": "FEISHU_MSG_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "feishu_msg",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Feishu token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

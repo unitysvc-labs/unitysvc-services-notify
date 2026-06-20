@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "pagerduty://${ customer_secrets.PAGERDUTY_INTEGRATIONKEY }@${ customer_secrets.PAGERDUTY_APIKEY }",
+    "apprise_url_plus": "pagerduty://${ customer_secrets.{{ params.integrationkey_secret }} }@${ customer_secrets.{{ params.apikey_secret }} }",
+    "channel_name": "msg-to-pagerduty",
+    "code_example_preset": "apprise_notify_code_example_py_pagerduty",
+    "connectivity_preset": "apprise_notify_connectivity_pagerduty",
+    "description": "Send notifications to your own PagerDuty destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise pagerduty:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "PagerDuty Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "PAGERDUTY_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "integrationkey_secret": "PAGERDUTY_INTEGRATIONKEY"
+    },
+    "tags": [
+      "notification",
+      "pagerduty",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's PagerDuty apikey",
+          "type": "string"
+        },
+        "integrationkey_secret": {
+          "description": "Name of the customer secret holding this enrollment's PagerDuty integrationkey",
+          "type": "string"
+        }
+      },
+      "required": [
+        "integrationkey_secret",
+        "apikey_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

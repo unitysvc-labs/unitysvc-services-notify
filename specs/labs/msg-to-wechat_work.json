@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "apprise_url": "wecombot://${ customer_secrets.WECHAT_WORK_KEY }",
+    "apprise_url_plus": "wecombot://${ customer_secrets.{{ params.key_secret }} }",
+    "channel_name": "msg-to-wechat_work",
+    "code_example_preset": "apprise_notify_code_example_py_wechat_work",
+    "connectivity_preset": "apprise_notify_connectivity_wechat_work",
+    "description": "Send notifications to your own WeCom destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise wecombot:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "WeCom Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "key_secret": "WECHAT_WORK_KEY"
+    },
+    "tags": [
+      "notification",
+      "wechat_work",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "key_secret": {
+          "description": "Name of the customer secret holding this enrollment's WeCom key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

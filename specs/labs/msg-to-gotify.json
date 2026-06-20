@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "gotify://${ customer_secrets.GOTIFY_HOST }/${ customer_secrets.GOTIFY_TOKEN }",
+    "apprise_url_plus": "gotify://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.token_secret }} }",
+    "channel_name": "msg-to-gotify",
+    "code_example_preset": "apprise_notify_code_example_py_gotify",
+    "connectivity_preset": "apprise_notify_connectivity_gotify",
+    "description": "Send notifications to your own Gotify destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise gotify:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Gotify Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "host_secret": "GOTIFY_HOST",
+      "token_secret": "GOTIFY_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "gotify",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Gotify host",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Gotify token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host_secret",
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

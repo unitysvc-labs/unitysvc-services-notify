@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "matrix://${ customer_secrets.MATRIX_USER }:${ customer_secrets.MATRIX_PASSWORD }@${ customer_secrets.MATRIX_HOST }/#${ customer_secrets.MATRIX_TARGETS }",
+    "apprise_url_plus": "matrix://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }/#${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-matrix",
+    "code_example_preset": "apprise_notify_code_example_py_matrix",
+    "connectivity_preset": "apprise_notify_connectivity_matrix",
+    "description": "Send notifications to your own Matrix destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise matrix:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Matrix Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notify",
+      "host_secret": "MATRIX_HOST",
+      "password_secret": "MATRIX_PASSWORD",
+      "targets_secret": "MATRIX_TARGETS",
+      "user_secret": "MATRIX_USER"
+    },
+    "tags": [
+      "notification",
+      "matrix",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Matrix host",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's Matrix password",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Matrix targets",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's Matrix user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "host_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

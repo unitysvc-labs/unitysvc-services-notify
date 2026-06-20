@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "apprise_url": "opsgenie://${ customer_secrets.OPSGENIE_APIKEY }",
+    "apprise_url_plus": "opsgenie://${ customer_secrets.{{ params.apikey_secret }} }",
+    "channel_name": "msg-to-opsgenie",
+    "code_example_preset": "apprise_notify_code_example_py_opsgenie",
+    "connectivity_preset": "apprise_notify_connectivity_opsgenie",
+    "description": "Send notifications to your own Opsgenie destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise opsgenie:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Opsgenie Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "OPSGENIE_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/notify"
+    },
+    "tags": [
+      "notification",
+      "opsgenie",
+      "apprise",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-19T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's Opsgenie apikey",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}
