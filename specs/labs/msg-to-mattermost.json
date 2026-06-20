@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "mmosts://${ customer_secrets.MATTERMOST_HOST }/${ customer_secrets.MATTERMOST_TOKEN }",
+    "apprise_url_plus": "mmosts://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.token_secret }} }",
+    "channel_name": "msg-to-mattermost",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Mattermost destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise mmosts:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Mattermost Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "MATTERMOST_HOST",
+      "token_secret": "MATTERMOST_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "mattermost",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "mmosts://notify.example.com/mattermosttokenxyz123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Mattermost host",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Mattermost token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host_secret",
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

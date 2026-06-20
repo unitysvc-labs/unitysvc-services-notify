@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "humhubs://${ customer_secrets.HUMHUB_USER }:${ customer_secrets.HUMHUB_PASSWORD }@${ customer_secrets.HUMHUB_HOST }/${ customer_secrets.HUMHUB_TARGETS }",
+    "apprise_url_plus": "humhubs://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-humhub",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own HumHub destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise humhubs:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "HumHub Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "HUMHUB_HOST",
+      "password_secret": "HUMHUB_PASSWORD",
+      "targets_secret": "HUMHUB_TARGETS",
+      "user_secret": "HUMHUB_USER"
+    },
+    "tags": [
+      "notification",
+      "humhub",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "humhubs://humhubuser:humhubpass@notify.example.com/123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's HumHub host",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's HumHub password",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's HumHub targets",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's HumHub user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "host_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

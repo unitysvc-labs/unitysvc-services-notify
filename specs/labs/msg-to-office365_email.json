@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "azure://${ customer_secrets.OFFICE365_EMAIL_SOURCE }/${ customer_secrets.OFFICE365_EMAIL_TENANT }/${ customer_secrets.OFFICE365_EMAIL_CLIENT_ID }/${ customer_secrets.OFFICE365_EMAIL_SECRET }",
+    "apprise_url_plus": "azure://${ customer_secrets.{{ params.source_secret }} }/${ customer_secrets.{{ params.tenant_secret }} }/${ customer_secrets.{{ params.client_id_secret }} }/${ customer_secrets.{{ params.secret_secret }} }",
+    "channel_name": "msg-to-office365_email",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Office 365 destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise azure:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Office 365 Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "client_id_secret": "OFFICE365_EMAIL_CLIENT_ID",
+      "secret_secret": "OFFICE365_EMAIL_SECRET",
+      "source_secret": "OFFICE365_EMAIL_SOURCE",
+      "tenant_secret": "OFFICE365_EMAIL_TENANT"
+    },
+    "tags": [
+      "notification",
+      "office365_email",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "azure://+15551234567/dkry5cjqx4bi/dkry5cjqx4bi/office365_emailsecretxyz123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "client_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's Office 365 client id",
+          "type": "string"
+        },
+        "secret_secret": {
+          "description": "Name of the customer secret holding this enrollment's Office 365 secret",
+          "type": "string"
+        },
+        "source_secret": {
+          "description": "Name of the customer secret holding this enrollment's Office 365 source",
+          "type": "string"
+        },
+        "tenant_secret": {
+          "description": "Name of the customer secret holding this enrollment's Office 365 tenant",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_secret",
+        "tenant_secret",
+        "client_id_secret",
+        "secret_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "apprise_url": "prowl://${ customer_secrets.PROWL_APIKEY }",
+    "apprise_url_plus": "prowl://${ customer_secrets.{{ params.apikey_secret }} }",
+    "channel_name": "msg-to-prowl",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Prowl destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise prowl:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Prowl Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "PROWL_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify"
+    },
+    "tags": [
+      "notification",
+      "prowl",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "prowl://dkryFMT07elszGNU18fmtAHOV29gnuBIPW3ahovC",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's Prowl apikey",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

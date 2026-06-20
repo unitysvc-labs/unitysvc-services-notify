@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "wxteams://${ customer_secrets.WEBEX_ACCESS_TOKEN }/${ customer_secrets.WEBEX_TARGETS }",
+    "apprise_url_plus": "wxteams://${ customer_secrets.{{ params.access_token_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-webex",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Cisco Webex Teams destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise wxteams:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Cisco Webex Teams Messages",
+    "ops_testing_parameters": {
+      "access_token_secret": "WEBEX_ACCESS_TOKEN",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "targets_secret": "WEBEX_TARGETS"
+    },
+    "tags": [
+      "notification",
+      "webex",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "wxteams://webexaccesstokenxyz123/webextarget",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "access_token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Cisco Webex Teams access token",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Cisco Webex Teams targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "access_token_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

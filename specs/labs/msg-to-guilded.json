@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "guilded://${ customer_secrets.GUILDED_WEBHOOK_ID }/${ customer_secrets.GUILDED_WEBHOOK_TOKEN }",
+    "apprise_url_plus": "guilded://${ customer_secrets.{{ params.webhook_id_secret }} }/${ customer_secrets.{{ params.webhook_token_secret }} }",
+    "channel_name": "msg-to-guilded",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Guilded destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise guilded:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Guilded Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "webhook_id_secret": "GUILDED_WEBHOOK_ID",
+      "webhook_token_secret": "GUILDED_WEBHOOK_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "guilded",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "guilded://guildedwebhookidxyz123/guildedwebhooktokenxyz123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "webhook_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's Guilded webhook id",
+          "type": "string"
+        },
+        "webhook_token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Guilded webhook token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "webhook_id_secret",
+        "webhook_token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

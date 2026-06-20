@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "lametrics://${ customer_secrets.LAMETRIC_APIKEY }@${ customer_secrets.LAMETRIC_HOST }",
+    "apprise_url_plus": "lametrics://${ customer_secrets.{{ params.apikey_secret }} }@${ customer_secrets.{{ params.host_secret }} }",
+    "channel_name": "msg-to-lametric",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own LaMetric destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise lametrics:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "LaMetric Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "LAMETRIC_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "LAMETRIC_HOST"
+    },
+    "tags": [
+      "notification",
+      "lametric",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "lametrics://lametricapikeyxyz123@notify.example.com",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's LaMetric apikey",
+          "type": "string"
+        },
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's LaMetric host",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret",
+        "host_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

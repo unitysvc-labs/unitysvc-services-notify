@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "mastodons://${ customer_secrets.MASTODON_TOKEN }@${ customer_secrets.MASTODON_HOST }",
+    "apprise_url_plus": "mastodons://${ customer_secrets.{{ params.token_secret }} }@${ customer_secrets.{{ params.host_secret }} }",
+    "channel_name": "msg-to-mastodon",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Mastodon destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise mastodons:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Mastodon Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "MASTODON_HOST",
+      "token_secret": "MASTODON_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "mastodon",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "mastodons://mastodontokenxyz123@notify.example.com",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Mastodon host",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Mastodon token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret",
+        "host_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

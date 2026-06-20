@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "threema://${ customer_secrets.THREEMA_GATEWAY_ID }@${ customer_secrets.THREEMA_SECRET }/${ customer_secrets.THREEMA_TARGETS }",
+    "apprise_url_plus": "threema://${ customer_secrets.{{ params.gateway_id_secret }} }@${ customer_secrets.{{ params.secret_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-threema",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Threema destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise threema:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Threema Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "gateway_id_secret": "THREEMA_GATEWAY_ID",
+      "secret_secret": "THREEMA_SECRET",
+      "targets_secret": "THREEMA_TARGETS"
+    },
+    "tags": [
+      "notification",
+      "threema",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "threema://*ABC1234@threemasecretxyz123/+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "gateway_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's Threema gateway id",
+          "type": "string"
+        },
+        "secret_secret": {
+          "description": "Name of the customer secret holding this enrollment's Threema secret",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Threema targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "gateway_id_secret",
+        "secret_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

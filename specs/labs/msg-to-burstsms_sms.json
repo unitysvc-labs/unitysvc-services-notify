@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "burstsms://${ customer_secrets.BURSTSMS_SMS_APIKEY }:${ customer_secrets.BURSTSMS_SMS_SECRET }@${ customer_secrets.BURSTSMS_SMS_SENDER_ID }/${ customer_secrets.BURSTSMS_SMS_TARGETS }",
+    "apprise_url_plus": "burstsms://${ customer_secrets.{{ params.apikey_secret }} }:${ customer_secrets.{{ params.secret_secret }} }@${ customer_secrets.{{ params.sender_id_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-burstsms_sms",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Burst SMS destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise burstsms:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Burst SMS Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "BURSTSMS_SMS_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "secret_secret": "BURSTSMS_SMS_SECRET",
+      "sender_id_secret": "BURSTSMS_SMS_SENDER_ID",
+      "targets_secret": "BURSTSMS_SMS_TARGETS"
+    },
+    "tags": [
+      "notification",
+      "burstsms_sms",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "burstsms://dkry5cjqx4bi:dkry5cjqx4bi@+15551234567/+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's Burst SMS apikey",
+          "type": "string"
+        },
+        "secret_secret": {
+          "description": "Name of the customer secret holding this enrollment's Burst SMS secret",
+          "type": "string"
+        },
+        "sender_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's Burst SMS sender id",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Burst SMS targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret",
+        "secret_secret",
+        "sender_id_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "smsmgr://${ customer_secrets.SMSMANAGER_SMS_APIKEY }@${ customer_secrets.SMSMANAGER_SMS_TARGETS }",
+    "apprise_url_plus": "smsmgr://${ customer_secrets.{{ params.apikey_secret }} }@${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-smsmanager_sms",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own SMS Manager destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise smsmgr:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "SMS Manager Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "SMSMANAGER_SMS_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "targets_secret": "SMSMANAGER_SMS_TARGETS"
+    },
+    "tags": [
+      "notification",
+      "smsmanager_sms",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "smsmgr://smsmanager_smsapikeyxyz123@+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMS Manager apikey",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMS Manager targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

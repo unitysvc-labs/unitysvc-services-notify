@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "bulkvs://${ customer_secrets.BULKVS_SMS_USER }:${ customer_secrets.BULKVS_SMS_PASSWORD }@${ customer_secrets.BULKVS_SMS_FROM_PHONE }/${ customer_secrets.BULKVS_SMS_TARGETS }",
+    "apprise_url_plus": "bulkvs://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.from_phone_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-bulkvs_sms",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own BulkVS destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise bulkvs:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "BulkVS Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "from_phone_secret": "BULKVS_SMS_FROM_PHONE",
+      "password_secret": "BULKVS_SMS_PASSWORD",
+      "targets_secret": "BULKVS_SMS_TARGETS",
+      "user_secret": "BULKVS_SMS_USER"
+    },
+    "tags": [
+      "notification",
+      "bulkvs_sms",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "bulkvs://bulkvs_smsuser:bulkvs_smspass@+15551234567/+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "from_phone_secret": {
+          "description": "Name of the customer secret holding this enrollment's BulkVS from phone",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's BulkVS password",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's BulkVS targets",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's BulkVS user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "from_phone_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

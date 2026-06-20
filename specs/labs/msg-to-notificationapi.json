@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "napi://${ customer_secrets.NOTIFICATIONAPI_CLIENT_ID }/${ customer_secrets.NOTIFICATIONAPI_CLIENT_SECRET }/${ customer_secrets.NOTIFICATIONAPI_TARGETS }",
+    "apprise_url_plus": "napi://${ customer_secrets.{{ params.client_id_secret }} }/${ customer_secrets.{{ params.client_secret_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-notificationapi",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own NotificationAPI destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise napi:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "NotificationAPI Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "client_id_secret": "NOTIFICATIONAPI_CLIENT_ID",
+      "client_secret_secret": "NOTIFICATIONAPI_CLIENT_SECRET",
+      "targets_secret": "NOTIFICATIONAPI_TARGETS"
+    },
+    "tags": [
+      "notification",
+      "notificationapi",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "napi://notificationapiclientidxyz123/notificationapiclientsecretxyz123/userid123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "client_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's NotificationAPI client id",
+          "type": "string"
+        },
+        "client_secret_secret": {
+          "description": "Name of the customer secret holding this enrollment's NotificationAPI client secret",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's NotificationAPI targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_id_secret",
+        "client_secret_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

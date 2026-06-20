@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "notificos://${ customer_secrets.NOTIFICO_PROJECT_ID }/${ customer_secrets.NOTIFICO_MSGHOOK }",
+    "apprise_url_plus": "notificos://${ customer_secrets.{{ params.project_id_secret }} }/${ customer_secrets.{{ params.msghook_secret }} }",
+    "channel_name": "msg-to-notifico",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Notifico destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise notificos:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Notifico Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "msghook_secret": "NOTIFICO_MSGHOOK",
+      "project_id_secret": "NOTIFICO_PROJECT_ID"
+    },
+    "tags": [
+      "notification",
+      "notifico",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "notificos://307418529630/dkry5cjqx4bi",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "msghook_secret": {
+          "description": "Name of the customer secret holding this enrollment's Notifico msghook",
+          "type": "string"
+        },
+        "project_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's Notifico project id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "project_id_secret",
+        "msghook_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

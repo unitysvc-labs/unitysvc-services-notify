@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "apprise_url": "push://${ customer_secrets.TECHULUS_APIKEY }",
+    "apprise_url_plus": "push://${ customer_secrets.{{ params.apikey_secret }} }",
+    "channel_name": "msg-to-techulus",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Techulus Push destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise push:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Techulus Push Messages",
+    "ops_testing_parameters": {
+      "apikey_secret": "TECHULUS_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify"
+    },
+    "tags": [
+      "notification",
+      "techulus",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "push://12345678-1234-4123-8123-123456789abc",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's Techulus Push apikey",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

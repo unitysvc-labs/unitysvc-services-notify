@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "bsky://${ customer_secrets.BLUESKY_USER }@${ customer_secrets.BLUESKY_PASSWORD }",
+    "apprise_url_plus": "bsky://${ customer_secrets.{{ params.user_secret }} }@${ customer_secrets.{{ params.password_secret }} }",
+    "channel_name": "msg-to-bluesky",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own BlueSky destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise bsky:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "BlueSky Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "password_secret": "BLUESKY_PASSWORD",
+      "user_secret": "BLUESKY_USER"
+    },
+    "tags": [
+      "notification",
+      "bluesky",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "bsky://blueskyuser@blueskypass",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's BlueSky password",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's BlueSky user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

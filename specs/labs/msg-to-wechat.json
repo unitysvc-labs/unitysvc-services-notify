@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "wechat://${ customer_secrets.WECHAT_USER }:${ customer_secrets.WECHAT_PASSWORD }@${ customer_secrets.WECHAT_HOST }",
+    "apprise_url_plus": "wechat://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }",
+    "channel_name": "msg-to-wechat",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own WeChat destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise wechat:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "WeChat Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "WECHAT_HOST",
+      "password_secret": "WECHAT_PASSWORD",
+      "user_secret": "WECHAT_USER"
+    },
+    "tags": [
+      "notification",
+      "wechat",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "wechat://wechatuser:wechatpass@307418529630",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's WeChat host",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's WeChat password",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's WeChat user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "host_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

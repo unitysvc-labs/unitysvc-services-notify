@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "twilio://${ customer_secrets.TWILIO_SMS_ACCOUNT_SID }:${ customer_secrets.TWILIO_SMS_AUTH_TOKEN }@${ customer_secrets.TWILIO_SMS_FROM_PHONE }",
+    "apprise_url_plus": "twilio://${ customer_secrets.{{ params.account_sid_secret }} }:${ customer_secrets.{{ params.auth_token_secret }} }@${ customer_secrets.{{ params.from_phone_secret }} }",
+    "channel_name": "msg-to-twilio_sms",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Twilio destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise twilio:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Twilio Messages",
+    "ops_testing_parameters": {
+      "account_sid_secret": "TWILIO_SMS_ACCOUNT_SID",
+      "auth_token_secret": "TWILIO_SMS_AUTH_TOKEN",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "from_phone_secret": "TWILIO_SMS_FROM_PHONE"
+    },
+    "tags": [
+      "notification",
+      "twilio_sms",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "twilio://ACdeadbeefdeadbeef:dkry5cjqx4bi@+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "account_sid_secret": {
+          "description": "Name of the customer secret holding this enrollment's Twilio account sid",
+          "type": "string"
+        },
+        "auth_token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Twilio auth token",
+          "type": "string"
+        },
+        "from_phone_secret": {
+          "description": "Name of the customer secret holding this enrollment's Twilio from phone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "account_sid_secret",
+        "auth_token_secret",
+        "from_phone_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

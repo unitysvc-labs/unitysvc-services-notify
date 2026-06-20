@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "zulip://${ customer_secrets.ZULIP_BOTNAME }@${ customer_secrets.ZULIP_ORGANIZATION }/${ customer_secrets.ZULIP_TOKEN }",
+    "apprise_url_plus": "zulip://${ customer_secrets.{{ params.botname_secret }} }@${ customer_secrets.{{ params.organization_secret }} }/${ customer_secrets.{{ params.token_secret }} }",
+    "channel_name": "msg-to-zulip",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Zulip destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise zulip:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Zulip Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "botname_secret": "ZULIP_BOTNAME",
+      "organization_secret": "ZULIP_ORGANIZATION",
+      "token_secret": "ZULIP_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "zulip",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "zulip://DKRY5CJQX4BI@DKRY5CJQX4BI/DKRY5CJQX4BIPW3AHOV29GNU18FMT07E",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "botname_secret": {
+          "description": "Name of the customer secret holding this enrollment's Zulip botname",
+          "type": "string"
+        },
+        "organization_secret": {
+          "description": "Name of the customer secret holding this enrollment's Zulip organization",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Zulip token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "botname_secret",
+        "organization_secret",
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

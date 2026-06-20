@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "voipms://${ customer_secrets.VOIPMS_SMS_PASSWORD }:${ customer_secrets.VOIPMS_SMS_EMAIL }/${ customer_secrets.VOIPMS_SMS_FROM_PHONE }/${ customer_secrets.VOIPMS_SMS_TARGETS }",
+    "apprise_url_plus": "voipms://${ customer_secrets.{{ params.password_secret }} }:${ customer_secrets.{{ params.email_secret }} }/${ customer_secrets.{{ params.from_phone_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-voipms_sms",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own VoIPms destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise voipms:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "VoIPms Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "email_secret": "VOIPMS_SMS_EMAIL",
+      "from_phone_secret": "VOIPMS_SMS_FROM_PHONE",
+      "password_secret": "VOIPMS_SMS_PASSWORD",
+      "targets_secret": "VOIPMS_SMS_TARGETS"
+    },
+    "tags": [
+      "notification",
+      "voipms_sms",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "voipms://voipms_smspass:voipms_sms@example.com/+15551234567/+15551234567",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "email_secret": {
+          "description": "Name of the customer secret holding this enrollment's VoIPms email",
+          "type": "string"
+        },
+        "from_phone_secret": {
+          "description": "Name of the customer secret holding this enrollment's VoIPms from phone",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's VoIPms password",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's VoIPms targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "password_secret",
+        "email_secret",
+        "from_phone_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

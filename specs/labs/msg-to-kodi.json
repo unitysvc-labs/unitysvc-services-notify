@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "apprise_url": "kodis://${ customer_secrets.KODI_HOST }",
+    "apprise_url_plus": "kodis://${ customer_secrets.{{ params.host_secret }} }",
+    "channel_name": "msg-to-kodi",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Kodi/XBMC destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise kodis:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Kodi/XBMC Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "KODI_HOST"
+    },
+    "tags": [
+      "notification",
+      "kodi",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "kodis://notify.example.com",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Kodi/XBMC host",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

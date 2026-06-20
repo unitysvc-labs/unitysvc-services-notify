@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "nclouds://${ customer_secrets.NEXTCLOUD_HOST }/${ customer_secrets.NEXTCLOUD_TARGETS }",
+    "apprise_url_plus": "nclouds://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-nextcloud",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Nextcloud destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise nclouds:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Nextcloud Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "NEXTCLOUD_HOST",
+      "targets_secret": "NEXTCLOUD_TARGETS"
+    },
+    "tags": [
+      "notification",
+      "nextcloud",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "nclouds://notify.example.com/nextcloudtargetuserxyz123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Nextcloud host",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Nextcloud targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "apprise_url": "reddit://${ customer_secrets.REDDIT_USER }:${ customer_secrets.REDDIT_PASSWORD }@${ customer_secrets.REDDIT_APP_ID }/${ customer_secrets.REDDIT_APP_SECRET }/${ customer_secrets.REDDIT_TARGETS }",
+    "apprise_url_plus": "reddit://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.app_id_secret }} }/${ customer_secrets.{{ params.app_secret_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-reddit",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Reddit destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise reddit:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Reddit Messages",
+    "ops_testing_parameters": {
+      "app_id_secret": "REDDIT_APP_ID",
+      "app_secret_secret": "REDDIT_APP_SECRET",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "password_secret": "REDDIT_PASSWORD",
+      "targets_secret": "REDDIT_TARGETS",
+      "user_secret": "REDDIT_USER"
+    },
+    "tags": [
+      "notification",
+      "reddit",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "reddit://reddituser:redditpass@dkry5cjqx4bi/dkry5cjqx4bi/reddittargetsubredditxyz123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "app_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's Reddit app id",
+          "type": "string"
+        },
+        "app_secret_secret": {
+          "description": "Name of the customer secret holding this enrollment's Reddit app secret",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's Reddit password",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Reddit targets",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's Reddit user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "app_id_secret",
+        "app_secret_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

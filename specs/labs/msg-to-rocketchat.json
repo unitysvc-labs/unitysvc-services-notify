@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "apprise_url": "rockets://${ customer_secrets.ROCKETCHAT_USER }:${ customer_secrets.ROCKETCHAT_PASSWORD }@${ customer_secrets.ROCKETCHAT_HOST }/${ customer_secrets.ROCKETCHAT_TARGETS }",
+    "apprise_url_plus": "rockets://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-rocketchat",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Rocket.Chat destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise rockets:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Rocket.Chat Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "ROCKETCHAT_HOST",
+      "password_secret": "ROCKETCHAT_PASSWORD",
+      "targets_secret": "ROCKETCHAT_TARGETS",
+      "user_secret": "ROCKETCHAT_USER"
+    },
+    "tags": [
+      "notification",
+      "rocketchat",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "rockets://rocketchatuser:rocketchatpass@notify.example.com/rocketchattargetchannelxyz123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Rocket.Chat host",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's Rocket.Chat password",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's Rocket.Chat targets",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's Rocket.Chat user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "host_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

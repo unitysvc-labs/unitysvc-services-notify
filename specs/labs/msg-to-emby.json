@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "apprise_url": "embys://${ customer_secrets.EMBY_USER }:${ customer_secrets.EMBY_PASSWORD }@${ customer_secrets.EMBY_HOST }",
+    "apprise_url_plus": "embys://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }",
+    "channel_name": "msg-to-emby",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Emby destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise embys:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Emby Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "EMBY_HOST",
+      "password_secret": "EMBY_PASSWORD",
+      "user_secret": "EMBY_USER"
+    },
+    "tags": [
+      "notification",
+      "emby",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "embys://embyuser:embypass@notify.example.com",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Emby host",
+          "type": "string"
+        },
+        "password_secret": {
+          "description": "Name of the customer secret holding this enrollment's Emby password",
+          "type": "string"
+        },
+        "user_secret": {
+          "description": "Name of the customer secret holding this enrollment's Emby user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_secret",
+        "password_secret",
+        "host_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}

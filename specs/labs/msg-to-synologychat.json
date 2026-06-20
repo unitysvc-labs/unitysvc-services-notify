@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "apprise_url": "synologys://${ customer_secrets.SYNOLOGYCHAT_HOST }/${ customer_secrets.SYNOLOGYCHAT_TOKEN }",
+    "apprise_url_plus": "synologys://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.token_secret }} }",
+    "channel_name": "msg-to-synologychat",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send notifications to your own Synology Chat destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise synologys:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Synology Chat Messages",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "SYNOLOGYCHAT_HOST",
+      "token_secret": "SYNOLOGYCHAT_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "synologychat",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "synologys://notify.example.com/synologychattokenxyz123",
+    "time_created": "2026-06-20T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "host_secret": {
+          "description": "Name of the customer secret holding this enrollment's Synology Chat host",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's Synology Chat token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host_secret",
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}
