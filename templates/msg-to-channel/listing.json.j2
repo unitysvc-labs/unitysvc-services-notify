@@ -1,0 +1,47 @@
+{
+  "currency": "USD",
+  "display_name": "{{ display_name }}",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "name": "{{ connectivity_preset }}",
+        "webhook_path": "{{ test_webhook_path }}"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "name": "{{ code_example_preset }}",
+        "webhook_path": "{{ test_webhook_path }}"
+      }
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": {{ apprise_price_description | default('Free — send notifications to your own channel') | tojson }},
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": {{ apprise_plus_price_description | default('$0.001 per message — extra per-enrollment destinations') | tojson }},
+        "price": "{{ plus_price | default('0.001') }}",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/{{ channel_name }}",
+  "service_options": {
+    "ops_testing_parameters": {{ ops_testing_parameters | tojson }}
+  },
+  "status": "{{ status | default('ready') }}",
+  "time_created": "{{ time_created | default('2026-06-19T00:00:00Z') }}",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{% raw %}{{ service_name }}{% endraw %}"
+    }
+  },
+  "user_parameters_schema": {{ user_parameters_schema | tojson }}
+}

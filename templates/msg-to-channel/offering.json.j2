@@ -1,0 +1,42 @@
+{%- set apprise_tail = '","title":{* _escape_json(_body.title or "") *},"body":{* _escape_json(_body.body or "") *},"type":{* _escape_json(_body.type or "info") *},"format":{* _escape_json(_body.format or "text") *}}' -%}
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": {{ description | tojson }},
+  "name": "{{ channel_name }}",
+  "service_type": "notification",
+  "status": "{{ status | default('ready') }}",
+  "tags": {{ tags | tojson }},
+  "time_created": "{{ time_created | default('2026-06-19T00:00:00Z') }}",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": {{ ('{"urls":"' ~ apprise_url ~ apprise_tail) | tojson }}
+            }
+          }
+        }
+      }
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": {{ ('{"urls":"' ~ apprise_url_plus ~ apprise_tail) | tojson }}
+            }
+          }
+        }
+      }
+    }
+  }
+}
