@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.QQPUSH_BASE ?? https://qmsg.zendee.cn }/send/${ customer_secrets.QQPUSH_TOKEN }",
+    "channel_name": "qqpush-relay",
+    "code_example_preset": "notify_relay_code_example_py_qqpush",
+    "connectivity_preset": "notify_relay_connectivity_qqpush",
+    "description": "Relay messages to your own Qmsg through the UnitySVC gateway. POST a native qqpush payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Qmsg Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/qqpush",
+      "token_secret": "QQPUSH_TOKEN"
+    },
+    "plus_base_url": "${ customer_secrets.QQPUSH_BASE ?? https://qmsg.zendee.cn }/send/${ customer_secrets.{{ params.token_secret }} }",
+    "tags": [
+      "notification",
+      "qqpush",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/send/demotoken",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's qqpush token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

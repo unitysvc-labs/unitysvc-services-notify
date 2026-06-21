@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.PUSHDEER_BASE ?? https://api2.pushdeer.com }/message/push?pushkey=${ customer_secrets.PUSHDEER_PUSHKEY }",
+    "channel_name": "pushdeer-relay",
+    "code_example_preset": "notify_relay_code_example_py_pushdeer",
+    "connectivity_preset": "notify_relay_connectivity_pushdeer",
+    "description": "Relay messages to your own PushDeer through the UnitySVC gateway. POST a native pushdeer payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "PushDeer Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/pushdeer",
+      "pushkey_secret": "PUSHDEER_PUSHKEY"
+    },
+    "plus_base_url": "${ customer_secrets.PUSHDEER_BASE ?? https://api2.pushdeer.com }/message/push?pushkey=${ customer_secrets.{{ params.pushkey_secret }} }",
+    "tags": [
+      "notification",
+      "pushdeer",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/message/push?pushkey=demotoken",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "pushkey_secret": {
+          "description": "Name of the customer secret holding this enrollment's pushdeer pushkey",
+          "type": "string"
+        }
+      },
+      "required": [
+        "pushkey_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

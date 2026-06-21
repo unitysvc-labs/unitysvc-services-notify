@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.CHANIFY_TOKEN }/",
+    "channel_name": "chanify-relay",
+    "code_example_preset": "notify_relay_code_example_py_chanify",
+    "connectivity_preset": "notify_relay_connectivity_chanify",
+    "description": "Relay messages to your own Chanify through the UnitySVC gateway. POST a native chanify payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Chanify Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/chanify",
+      "token_secret": "CHANIFY_TOKEN"
+    },
+    "plus_base_url": "${ customer_secrets.CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.{{ params.token_secret }} }/",
+    "tags": [
+      "notification",
+      "chanify",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/v1/sender/demotoken/",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's chanify token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

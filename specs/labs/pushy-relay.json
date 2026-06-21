@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.PUSHY_BASE ?? https://api.pushy.me }/push?api_key=${ customer_secrets.PUSHY_APIKEY }",
+    "channel_name": "pushy-relay",
+    "code_example_preset": "notify_relay_code_example_py_pushy",
+    "connectivity_preset": "notify_relay_connectivity_pushy",
+    "description": "Relay messages to your own Pushy through the UnitySVC gateway. POST a native pushy payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Pushy Relay",
+    "ops_testing_parameters": {
+      "apikey_secret": "PUSHY_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/pushy"
+    },
+    "plus_base_url": "${ customer_secrets.PUSHY_BASE ?? https://api.pushy.me }/push?api_key=${ customer_secrets.{{ params.apikey_secret }} }",
+    "tags": [
+      "notification",
+      "pushy",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/push?api_key=demotoken",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's pushy apikey",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}
