@@ -10,12 +10,32 @@
   "time_created": "{{ time_created | default('2026-06-19T00:00:00Z') }}",
   "upstream_access_config": {
     "byok": {
-      "access_method": "http",
-      "base_url": {{ byok_base_url | tojson }}
+      "access_method": "http",{% if byok_api_key %}
+      "api_key": {{ byok_api_key | tojson }},{% endif %}
+      "base_url": {{ byok_base_url | tojson }}{% if byok_headers %},
+      "raw": {
+        "request_transformer": {
+          "proxy_rewrite": {
+            "headers": {
+              "set": {{ byok_headers | tojson }}
+            }
+          }
+        }
+      }{% endif %}
     },
     "plus": {
-      "access_method": "http",
-      "base_url": {{ plus_base_url | tojson }}
+      "access_method": "http",{% if plus_api_key %}
+      "api_key": {{ plus_api_key | tojson }},{% endif %}
+      "base_url": {{ plus_base_url | tojson }}{% if plus_headers %},
+      "raw": {
+        "request_transformer": {
+          "proxy_rewrite": {
+            "headers": {
+              "set": {{ plus_headers | tojson }}
+            }
+          }
+        }
+      }{% endif %}
     }
   }
 }
