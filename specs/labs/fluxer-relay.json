@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.FLUXER_BASE ?? https://api.fluxer.app }/webhooks/${ customer_secrets.FLUXER_WEBHOOK_ID }/${ customer_secrets.FLUXER_WEBHOOK_TOKEN }",
+    "channel_name": "fluxer-relay",
+    "code_example_preset": "notify_relay_code_example_py_fluxer",
+    "connectivity_preset": "notify_relay_connectivity_fluxer",
+    "description": "Relay messages to your own Fluxer through the UnitySVC gateway. POST a native fluxer payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Fluxer Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/fluxer",
+      "webhook_id_secret": "FLUXER_WEBHOOK_ID",
+      "webhook_token_secret": "FLUXER_WEBHOOK_TOKEN"
+    },
+    "plus_base_url": "${ customer_secrets.FLUXER_BASE ?? https://api.fluxer.app }/webhooks/${ customer_secrets.{{ params.webhook_id_secret }} }/${ customer_secrets.{{ params.webhook_token_secret }} }",
+    "tags": [
+      "notification",
+      "fluxer",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/webhooks/demoid/demotoken",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "webhook_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's fluxer webhook id",
+          "type": "string"
+        },
+        "webhook_token_secret": {
+          "description": "Name of the customer secret holding this enrollment's fluxer webhook token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "webhook_id_secret",
+        "webhook_token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

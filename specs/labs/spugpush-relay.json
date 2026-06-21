@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.SPUGPUSH_BASE ?? https://push.spug.cc }/send/${ customer_secrets.SPUGPUSH_TOKEN }",
+    "channel_name": "spugpush-relay",
+    "code_example_preset": "notify_relay_code_example_py_spugpush",
+    "connectivity_preset": "notify_relay_connectivity_spugpush",
+    "description": "Relay messages to your own Spug Push through the UnitySVC gateway. POST a native spugpush payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Spug Push Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/spugpush",
+      "token_secret": "SPUGPUSH_TOKEN"
+    },
+    "plus_base_url": "${ customer_secrets.SPUGPUSH_BASE ?? https://push.spug.cc }/send/${ customer_secrets.{{ params.token_secret }} }",
+    "tags": [
+      "notification",
+      "spugpush",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/send/demotoken",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's spugpush token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

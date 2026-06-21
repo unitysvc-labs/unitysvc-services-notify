@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.SYNOLOGYCHAT_BASE }/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=${ customer_secrets.SYNOLOGYCHAT_TOKEN }",
+    "channel_name": "synologychat-relay",
+    "code_example_preset": "notify_relay_code_example_py_synologychat",
+    "connectivity_preset": "notify_relay_connectivity_synologychat",
+    "description": "Relay messages to your own Synology Chat through the UnitySVC gateway. POST a native synologychat payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Synology Chat Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/synologychat",
+      "token_secret": "SYNOLOGYCHAT_TOKEN"
+    },
+    "plus_base_url": "${ customer_secrets.SYNOLOGYCHAT_BASE }/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=${ customer_secrets.{{ params.token_secret }} }",
+    "tags": [
+      "notification",
+      "synologychat",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=demotoken",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's synologychat token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

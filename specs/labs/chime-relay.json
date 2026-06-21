@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.CHIME_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.CHIME_WEBHOOK_ID }?token=${ customer_secrets.CHIME_TOKEN }",
+    "channel_name": "chime-relay",
+    "code_example_preset": "notify_relay_code_example_py_chime",
+    "connectivity_preset": "notify_relay_connectivity_chime",
+    "description": "Relay messages to your own Amazon Chime through the UnitySVC gateway. POST a native chime payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Amazon Chime Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/chime",
+      "token_secret": "CHIME_TOKEN",
+      "webhook_id_secret": "CHIME_WEBHOOK_ID"
+    },
+    "plus_base_url": "${ customer_secrets.CHIME_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.{{ params.webhook_id_secret }} }?token=${ customer_secrets.{{ params.token_secret }} }",
+    "tags": [
+      "notification",
+      "chime",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/incomingwebhooks/demowebhookid?token=demotoken",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's chime token",
+          "type": "string"
+        },
+        "webhook_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's chime webhook id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "webhook_id_secret",
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}
