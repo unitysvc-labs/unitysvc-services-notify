@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.FORM_WEBHOOK_BASE ?? https://webhook.example.com }",
+    "channel_name": "form_webhook-relay",
+    "code_example_preset": "notify_relay_code_example_py_form_webhook",
+    "connectivity_preset": "notify_relay_connectivity_form_webhook",
+    "description": "Relay messages to your own Form Webhook through the UnitySVC gateway. POST a native form_webhook payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Form Webhook Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/form"
+    },
+    "plus_base_url": "${ customer_secrets.FORM_WEBHOOK_BASE ?? https://webhook.example.com }",
+    "tags": [
+      "notification",
+      "form_webhook",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

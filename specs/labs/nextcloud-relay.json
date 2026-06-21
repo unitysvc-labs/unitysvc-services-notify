@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.NEXTCLOUD_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.NEXTCLOUD_TARGETS }",
+    "channel_name": "nextcloud-relay",
+    "code_example_preset": "notify_relay_code_example_py_nextcloud",
+    "connectivity_preset": "notify_relay_connectivity_nextcloud",
+    "description": "Relay messages to your own Nextcloud through the UnitySVC gateway. POST a native nextcloud payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Nextcloud Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/nextcloud",
+      "target_secret": "NEXTCLOUD_TARGETS"
+    },
+    "plus_base_url": "${ customer_secrets.NEXTCLOUD_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.{{ params.target_secret }} }",
+    "tags": [
+      "notification",
+      "nextcloud",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/ocs/v2.php/apps/notifications/api/v2/admin_notifications/demoid",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "target_secret": {
+          "description": "Name of the customer secret holding this enrollment's nextcloud targets",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

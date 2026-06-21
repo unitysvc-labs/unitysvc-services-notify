@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.NOTICA_BASE ?? https://notica.us }/${ customer_secrets.NOTICA_TOKEN }",
+    "channel_name": "notica-relay",
+    "code_example_preset": "notify_relay_code_example_py_notica",
+    "connectivity_preset": "notify_relay_connectivity_notica",
+    "description": "Relay messages to your own Notica through the UnitySVC gateway. POST a native notica payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Notica Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/notica",
+      "token_secret": "NOTICA_TOKEN"
+    },
+    "plus_base_url": "${ customer_secrets.NOTICA_BASE ?? https://notica.us }/${ customer_secrets.{{ params.token_secret }} }",
+    "tags": [
+      "notification",
+      "notica",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/demotoken",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's notica token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

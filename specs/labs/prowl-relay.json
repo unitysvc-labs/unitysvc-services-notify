@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.PROWL_BASE ?? https://api.prowlapp.com }/publicapi/add",
+    "channel_name": "prowl-relay",
+    "code_example_preset": "notify_relay_code_example_py_prowl",
+    "connectivity_preset": "notify_relay_connectivity_prowl",
+    "description": "Relay messages to your own Prowl through the UnitySVC gateway. POST a native prowl payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Prowl Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/prowl"
+    },
+    "plus_base_url": "${ customer_secrets.PROWL_BASE ?? https://api.prowlapp.com }/publicapi/add",
+    "tags": [
+      "notification",
+      "prowl",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/publicapi/add",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}
