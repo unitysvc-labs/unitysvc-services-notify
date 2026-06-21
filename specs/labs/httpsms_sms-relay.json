@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.HTTPSMS_SMS_BASE ?? https://api.httpsms.com }/v1/messages/send",
+    "byok_headers": {
+      "x-api-key": "${ customer_secrets.HTTPSMS_SMS_APIKEY }"
+    },
+    "channel_name": "httpsms_sms-relay",
+    "code_example_preset": "notify_relay_code_example_py_httpsms_sms",
+    "connectivity_preset": "notify_relay_connectivity_httpsms_sms",
+    "description": "Relay messages to your own httpSMS through the UnitySVC gateway. POST a native httpsms_sms payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "httpSMS Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "HTTPSMS_SMS_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/httpsms_sms"
+    },
+    "plus_base_url": "${ customer_secrets.HTTPSMS_SMS_BASE ?? https://api.httpsms.com }/v1/messages/send",
+    "plus_headers": {
+      "x-api-key": "${ customer_secrets.{{ params.api_key_secret }} }"
+    },
+    "tags": [
+      "notification",
+      "httpsms",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/v1/messages/send",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's API credential",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

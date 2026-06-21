@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.NEXTCLOUDTALK_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/spreed/api/v1/chat/${ customer_secrets.NEXTCLOUDTALK_TARGETS }",
+    "byok_headers": {
+      "Authorization": "Basic ${ customer_secrets.NEXTCLOUDTALK_BASIC }"
+    },
+    "channel_name": "nextcloudtalk-relay",
+    "code_example_preset": "notify_relay_code_example_py_nextcloudtalk",
+    "connectivity_preset": "notify_relay_connectivity_nextcloudtalk",
+    "description": "Relay messages to your own Nextcloud Talk through the UnitySVC gateway. POST a native nextcloudtalk payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "Nextcloud Talk Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "NEXTCLOUDTALK_BASIC",
+      "base_url": "https://mock.unitysvc.dev/nextcloudtalk"
+    },
+    "plus_base_url": "${ customer_secrets.NEXTCLOUDTALK_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/spreed/api/v1/chat/${ customer_secrets.NEXTCLOUDTALK_TARGETS }",
+    "plus_headers": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
+    },
+    "tags": [
+      "notification",
+      "nextcloudtalk",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/ocs/v2.php/apps/spreed/api/v1/chat/demoroom",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's base64 of user:password for HTTP basic auth",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "byok_api_key": "${ customer_secrets.DOT_APIKEY ?? }",
+    "byok_base_url": "${ customer_secrets.DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/${ customer_secrets.DOT_DEVICE_ID }/text",
+    "channel_name": "dot-relay",
+    "code_example_preset": "notify_relay_code_example_py_dot",
+    "connectivity_preset": "notify_relay_connectivity_dot",
+    "description": "Relay messages to your own Dot through the UnitySVC gateway. POST a native dot payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "Dot Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "DOT_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/dot"
+    },
+    "plus_api_key": "${ customer_secrets.{{ params.api_key_secret }} ?? }",
+    "plus_base_url": "${ customer_secrets.DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/${ customer_secrets.DOT_DEVICE_ID }/text",
+    "tags": [
+      "notification",
+      "dot",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/api/authV2/open/device/demodevice/text",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's Bearer access token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

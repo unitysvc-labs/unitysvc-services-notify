@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "byok_api_key": "${ customer_secrets.MASTODON_TOKEN ?? }",
+    "byok_base_url": "${ customer_secrets.MASTODON_BASE ?? https://mastodon.social }/api/v1/statuses",
+    "channel_name": "mastodon-relay",
+    "code_example_preset": "notify_relay_code_example_py_mastodon",
+    "connectivity_preset": "notify_relay_connectivity_mastodon",
+    "description": "Relay messages to your own Mastodon through the UnitySVC gateway. POST a native mastodon payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "Mastodon Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "MASTODON_TOKEN",
+      "base_url": "https://mock.unitysvc.dev/mastodon"
+    },
+    "plus_api_key": "${ customer_secrets.{{ params.api_key_secret }} ?? }",
+    "plus_base_url": "${ customer_secrets.MASTODON_BASE ?? https://mastodon.social }/api/v1/statuses",
+    "tags": [
+      "notification",
+      "mastodon",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/api/v1/statuses",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's Bearer access token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

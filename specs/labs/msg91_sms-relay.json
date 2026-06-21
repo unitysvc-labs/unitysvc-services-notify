@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.MSG91_SMS_BASE ?? https://control.msg91.com }/api/v5/flow/",
+    "byok_headers": {
+      "authkey": "${ customer_secrets.MSG91_SMS_AUTHKEY }"
+    },
+    "channel_name": "msg91_sms-relay",
+    "code_example_preset": "notify_relay_code_example_py_msg91_sms",
+    "connectivity_preset": "notify_relay_connectivity_msg91_sms",
+    "description": "Relay messages to your own MSG91 SMS through the UnitySVC gateway. POST a native msg91_sms payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "MSG91 SMS Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "MSG91_SMS_AUTHKEY",
+      "base_url": "https://mock.unitysvc.dev/msg91_sms"
+    },
+    "plus_base_url": "${ customer_secrets.MSG91_SMS_BASE ?? https://control.msg91.com }/api/v5/flow/",
+    "plus_headers": {
+      "authkey": "${ customer_secrets.{{ params.api_key_secret }} }"
+    },
+    "tags": [
+      "notification",
+      "msg91",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/api/v5/flow/",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's API credential",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

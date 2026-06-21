@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "byok_api_key": "${ customer_secrets.D7NETWORKS_SMS_TOKEN ?? }",
+    "byok_base_url": "${ customer_secrets.D7NETWORKS_SMS_BASE ?? https://api.d7networks.com }/messages/v1/send",
+    "channel_name": "d7networks_sms-relay",
+    "code_example_preset": "notify_relay_code_example_py_d7networks_sms",
+    "connectivity_preset": "notify_relay_connectivity_d7networks_sms",
+    "description": "Relay messages to your own D7 Networks SMS through the UnitySVC gateway. POST a native d7networks_sms payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "D7 Networks SMS Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "D7NETWORKS_SMS_TOKEN",
+      "base_url": "https://mock.unitysvc.dev/d7networks_sms"
+    },
+    "plus_api_key": "${ customer_secrets.{{ params.api_key_secret }} ?? }",
+    "plus_base_url": "${ customer_secrets.D7NETWORKS_SMS_BASE ?? https://api.d7networks.com }/messages/v1/send",
+    "tags": [
+      "notification",
+      "d7networks",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/messages/v1/send",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's Bearer access token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.EVOLUTION_BASE ?? https://evolution.example.com }/message/sendText/${ customer_secrets.EVOLUTION_INSTANCE }",
+    "byok_headers": {
+      "apikey": "${ customer_secrets.EVOLUTION_APIKEY }"
+    },
+    "channel_name": "evolution-relay",
+    "code_example_preset": "notify_relay_code_example_py_evolution",
+    "connectivity_preset": "notify_relay_connectivity_evolution",
+    "description": "Relay messages to your own Evolution API through the UnitySVC gateway. POST a native evolution payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "Evolution API Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "EVOLUTION_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/evolution"
+    },
+    "plus_base_url": "${ customer_secrets.EVOLUTION_BASE ?? https://evolution.example.com }/message/sendText/${ customer_secrets.EVOLUTION_INSTANCE }",
+    "plus_headers": {
+      "apikey": "${ customer_secrets.{{ params.api_key_secret }} }"
+    },
+    "tags": [
+      "notification",
+      "evolution",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/message/sendText/demoinstance",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's API credential",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}
