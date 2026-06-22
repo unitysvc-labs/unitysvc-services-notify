@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.PLIVO_SMS_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.PLIVO_SMS_AUTH_ID }/Message/",
+    "byok_headers": {
+      "Authorization": "Basic ${ customer_secrets.PLIVO_SMS_BASIC }"
+    },
+    "channel_name": "plivo_sms-relay",
+    "code_example_preset": "notify_relay_code_example_py_plivo_sms",
+    "connectivity_preset": "notify_relay_connectivity_plivo_sms",
+    "description": "Relay messages to your own Plivo SMS through the UnitySVC gateway. POST a native plivo_sms payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "Plivo SMS Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "PLIVO_SMS_BASIC",
+      "base_url": "https://mock.unitysvc.dev/plivo_sms"
+    },
+    "plus_base_url": "${ customer_secrets.PLIVO_SMS_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.PLIVO_SMS_AUTH_ID }/Message/",
+    "plus_headers": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
+    },
+    "tags": [
+      "notification",
+      "plivo",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/v1/Account/demoauthid/Message/",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's base64 of user:password for HTTP basic auth",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

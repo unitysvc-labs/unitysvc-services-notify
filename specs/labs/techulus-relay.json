@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.TECHULUS_BASE ?? https://push.techulus.com }/api/v1/notify",
+    "byok_headers": {
+      "x-api-key": "${ customer_secrets.TECHULUS_APIKEY }"
+    },
+    "channel_name": "techulus-relay",
+    "code_example_preset": "notify_relay_code_example_py_techulus",
+    "connectivity_preset": "notify_relay_connectivity_techulus",
+    "description": "Relay messages to your own Push by Techulus through the UnitySVC gateway. POST a native Techulus payload; the gateway composes the upstream URL from your stored secrets, injects your credential, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Push by Techulus Relay",
+    "ops_testing_parameters": {
+      "apikey_secret": "TECHULUS_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/techulus"
+    },
+    "plus_base_url": "${ customer_secrets.TECHULUS_BASE ?? https://push.techulus.com }/api/v1/notify",
+    "plus_headers": {
+      "x-api-key": "${ customer_secrets.{{ params.apikey_secret }} }"
+    },
+    "tags": [
+      "notification",
+      "techulus",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/api/v1/notify",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "apikey_secret": {
+          "description": "Name of the customer secret holding this enrollment's Techulus API key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apikey_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

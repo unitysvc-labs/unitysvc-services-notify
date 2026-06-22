@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.PUSHED_BASE ?? https://api.pushed.co }/1/push",
+    "channel_name": "pushed-relay",
+    "code_example_preset": "notify_relay_code_example_py_pushed",
+    "connectivity_preset": "notify_relay_connectivity_pushed",
+    "description": "Relay messages to your own Pushed through the UnitySVC gateway. POST a native pushed payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Pushed Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/pushed"
+    },
+    "plus_base_url": "${ customer_secrets.PUSHED_BASE ?? https://api.pushed.co }/1/push",
+    "tags": [
+      "notification",
+      "pushed",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/1/push",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

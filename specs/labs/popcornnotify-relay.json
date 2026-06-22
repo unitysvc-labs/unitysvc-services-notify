@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.POPCORNNOTIFY_BASE ?? https://popcornnotify.com }/notify",
+    "channel_name": "popcornnotify-relay",
+    "code_example_preset": "notify_relay_code_example_py_popcornnotify",
+    "connectivity_preset": "notify_relay_connectivity_popcornnotify",
+    "description": "Relay messages to your own PopcornNotify through the UnitySVC gateway. POST a native popcornnotify payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "PopcornNotify Relay",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/popcornnotify"
+    },
+    "plus_base_url": "${ customer_secrets.POPCORNNOTIFY_BASE ?? https://popcornnotify.com }/notify",
+    "tags": [
+      "notification",
+      "popcornnotify",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/notify",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

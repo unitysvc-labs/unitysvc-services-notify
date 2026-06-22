@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "byok_api_key": "${ customer_secrets.SINCH_SMS_API_TOKEN ?? }",
+    "byok_base_url": "${ customer_secrets.SINCH_SMS_BASE ?? https://us.sms.api.sinch.com }/xms/v1/${ customer_secrets.SINCH_SMS_SERVICE_PLAN_ID }/batches",
+    "channel_name": "sinch_sms-relay",
+    "code_example_preset": "notify_relay_code_example_py_sinch_sms",
+    "connectivity_preset": "notify_relay_connectivity_sinch_sms",
+    "description": "Relay messages to your own Sinch SMS through the UnitySVC gateway. POST a native sinch_sms payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "Sinch SMS Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "SINCH_SMS_API_TOKEN",
+      "base_url": "https://mock.unitysvc.dev/sinch_sms"
+    },
+    "plus_api_key": "${ customer_secrets.{{ params.api_key_secret }} ?? }",
+    "plus_base_url": "${ customer_secrets.SINCH_SMS_BASE ?? https://us.sms.api.sinch.com }/xms/v1/${ customer_secrets.SINCH_SMS_SERVICE_PLAN_ID }/batches",
+    "tags": [
+      "notification",
+      "sinch",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/xms/v1/demoplan/batches",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's Bearer access token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

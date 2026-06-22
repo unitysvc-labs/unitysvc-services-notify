@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
+    "byok_headers": {
+      "api-key": "${ customer_secrets.OCTOPUSH_SMS_API_KEY }",
+      "api-login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }"
+    },
+    "channel_name": "octopush_sms-relay",
+    "code_example_preset": "notify_relay_code_example_py_octopush_sms",
+    "connectivity_preset": "notify_relay_connectivity_octopush_sms",
+    "description": "Relay messages to your own Octopush SMS through the UnitySVC gateway. POST a native octopush_sms payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "Octopush SMS Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "OCTOPUSH_SMS_API_KEY",
+      "base_url": "https://mock.unitysvc.dev/octopush_sms"
+    },
+    "plus_base_url": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
+    "plus_headers": {
+      "api-key": "${ customer_secrets.{{ params.api_key_secret }} }",
+      "api-login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }"
+    },
+    "tags": [
+      "notification",
+      "octopush",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/v1/public/sms-campaign/send",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's API key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "byok_api_key": "${ customer_secrets.HOMEASSISTANT_ACCESSTOKEN ?? }",
+    "byok_base_url": "${ customer_secrets.HOMEASSISTANT_BASE ?? https://homeassistant.local:8123 }/api/services/persistent_notification/create",
+    "channel_name": "homeassistant-relay",
+    "code_example_preset": "notify_relay_code_example_py_homeassistant",
+    "connectivity_preset": "notify_relay_connectivity_homeassistant",
+    "description": "Relay messages to your own Home Assistant through the UnitySVC gateway. POST a native Home Assistant payload; the gateway composes the upstream URL from your stored secrets, injects your credential, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "display_name": "Home Assistant Relay",
+    "ops_testing_parameters": {
+      "accesstoken_secret": "HOMEASSISTANT_ACCESSTOKEN",
+      "base_url": "https://mock.unitysvc.dev/homeassistant"
+    },
+    "plus_api_key": "${ customer_secrets.{{ params.accesstoken_secret }} ?? }",
+    "plus_base_url": "${ customer_secrets.HOMEASSISTANT_BASE ?? https://homeassistant.local:8123 }/api/services/persistent_notification/create",
+    "tags": [
+      "notification",
+      "homeassistant",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "/api/services/persistent_notification/create",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "accesstoken_secret": {
+          "description": "Name of the customer secret holding this enrollment's Home Assistant long-lived access token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "accesstoken_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}

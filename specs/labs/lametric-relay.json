@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "byok_base_url": "${ customer_secrets.LAMETRIC_BASE ?? https://lametric.example.com:8080 }/api/v2/device/notifications",
+    "byok_headers": {
+      "Authorization": "Basic ${ customer_secrets.LAMETRIC_BASIC }"
+    },
+    "channel_name": "lametric-relay",
+    "code_example_preset": "notify_relay_code_example_py_lametric",
+    "connectivity_preset": "notify_relay_connectivity_lametric",
+    "description": "Relay messages to your own LaMetric through the UnitySVC gateway. POST a native lametric payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "display_name": "LaMetric Relay",
+    "ops_testing_parameters": {
+      "api_key_secret": "LAMETRIC_BASIC",
+      "base_url": "https://mock.unitysvc.dev/lametric/api/v2/device/notifications"
+    },
+    "plus_base_url": "${ customer_secrets.LAMETRIC_BASE ?? https://lametric.example.com:8080 }/api/v2/device/notifications",
+    "plus_headers": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
+    },
+    "tags": [
+      "notification",
+      "lametric",
+      "webhook",
+      "gateway"
+    ],
+    "test_webhook_path": "",
+    "time_created": "2026-06-21T00:00:00Z",
+    "user_parameters_schema": {
+      "properties": {
+        "api_key_secret": {
+          "description": "Name of the customer secret holding this enrollment's base64 of user:password for HTTP basic auth",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "notify-relay"
+}
