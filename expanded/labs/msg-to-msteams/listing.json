@@ -1,0 +1,138 @@
+{
+  "currency": "USD",
+  "display_name": "Microsoft Teams Messages",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_connectivity-51490e5e32d6fd3c.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Connectivity test (gateway)": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for gateway-transformer notification services",
+      "file_path": "msg_to_channel_connectivity_msteams-4569731106911338.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "gateway"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_code_example_py-f51ac87f6e584fd1.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "python"
+    },
+    "Python code example (gateway)": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for gateway-transformer notification services",
+      "file_path": "msg_to_channel_code_example_py_msteams-49a4456ef1af5e52.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "gateway"
+        ]
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free — send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message — extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      },
+      "gateway": {
+        "description": "Free — direct to your Microsoft Teams incoming webhook (no Apprise)",
+        "price": "0",
+        "type": "constant"
+      },
+      "gateway-plus": {
+        "description": "$0.001 per message — extra per-enrollment Microsoft Teams destinations, direct",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-msteams",
+  "service_options": {
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "MSTEAMS_HOST",
+      "signature_secret": "MSTEAMS_SIGNATURE",
+      "webhook_path_secret": "MSTEAMS_WEBHOOK_PATH",
+      "workflow_secret": "MSTEAMS_WORKFLOW"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-19T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "host_secret": {
+        "description": "Name of the customer secret holding this enrollment's Microsoft Teams host",
+        "type": "string"
+      },
+      "signature_secret": {
+        "description": "Name of the customer secret holding this enrollment's Microsoft Teams signature",
+        "type": "string"
+      },
+      "webhook_path_secret": {
+        "description": "Name of the customer secret holding this enrollment's Microsoft Teams incoming-webhook path (the opaque segment after /webhookb2/); used by the gateway-plus transformer channel",
+        "type": "string"
+      },
+      "workflow_secret": {
+        "description": "Name of the customer secret holding this enrollment's Microsoft Teams workflow",
+        "type": "string"
+      }
+    },
+    "required": [
+      "host_secret",
+      "workflow_secret",
+      "signature_secret"
+    ],
+    "type": "object"
+  }
+}
