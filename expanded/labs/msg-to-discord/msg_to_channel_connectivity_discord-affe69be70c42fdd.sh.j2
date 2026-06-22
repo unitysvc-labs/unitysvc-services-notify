@@ -1,12 +1,13 @@
 #!/bin/bash
-# Connectivity test for a UnitySVC Notify gateway-transformer channel.
-#   local_testing : POST the channel-NATIVE body straight to a mock upstream
-#                   (local_url).  No gateway to transform it, no platform auth.
+# Connectivity test for a UnitySVC Notify gateway-transformer channel (discord).
+#   local_testing : POST the channel-NATIVE discord body (baked in) straight to
+#                   a mock upstream (local_url).  No gateway to transform it, no
+#                   platform auth.
 #   gateway       : POST the canonical envelope to service_base_url@<channel>;
-#                   the gateway transforms it into the upstream-native payload
-#                   and forwards it (Bearer auth).
-# The native_body / local_url parameters hold the local-mode upstream test
-# payload and URL; the channel parameter selects the transformer channel.
+#                   the gateway transforms it into the discord-native payload and
+#                   forwards it (Bearer auth).
+# The discord-native body is baked into this variant — only the local_url (mock
+# upstream) and channel (transformer selector) parameters are supplied.
 set -o pipefail
 
 {% if local_testing %}

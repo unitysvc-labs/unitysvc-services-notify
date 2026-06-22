@@ -19,7 +19,7 @@
     "Connectivity test (gateway)": {
       "category": "connectivity_test",
       "description": "Connectivity test for gateway-transformer notification services",
-      "file_path": "msg_to_channel_connectivity-b0041702752433ef.sh.j2",
+      "file_path": "msg_to_channel_connectivity_discord-affe69be70c42fdd.sh.j2",
       "is_active": true,
       "is_public": true,
       "meta": {
@@ -50,7 +50,7 @@
     "Python code example (gateway)": {
       "category": "code_example",
       "description": "Python (httpx) code example for gateway-transformer notification services",
-      "file_path": "msg_to_channel_code_example_py-abf1cd9628a422c6.py.j2",
+      "file_path": "msg_to_channel_code_example_py_discord-936806e31ea8ab4c.py.j2",
       "is_active": true,
       "is_public": true,
       "meta": {
