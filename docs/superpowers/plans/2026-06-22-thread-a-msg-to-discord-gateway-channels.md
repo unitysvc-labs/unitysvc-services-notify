@@ -4,7 +4,7 @@
 
 **Goal:** Add two new channels to `msg-to-discord` — `gateway` (byok) and `gateway-plus` (enrollable) — that transform the canonical `{title,body,type,format}` envelope into a Discord webhook embed in the gateway and POST it to `discord.com` directly, bypassing Apprise; selectable via `@gateway` / `@gateway-plus`, default stays Apprise.
 
-**Architecture:** The `msg-to-channel` template is shared across ~95 channels, so the Discord transform is emitted **conditionally** (only when a spec supplies `gateway_url`/`gateway_template`). Selection/billing already work today; ordering is expressed with per-channel `sort_order` (1=apprise, 2=apprise-plus, 3=gateway, 4=gateway-plus). Channel-specific connectivity/code-example **presets** are added in `unitysvc-data`. No backend change (that is Thread B).
+**Architecture:** The `msg-to-channel` template is shared across ~95 channels, so the transformer channels are emitted **conditionally**, guarded by an explicit spec flag `{% if transformer_channel_exists %}` (only `msg-to-discord` sets it). Selection/billing already work today; ordering is expressed with per-channel `sort_order` (1=apprise, 2=apprise-plus, 3=gateway, 4=gateway-plus). Channel-specific connectivity/code-example **presets** are added in `unitysvc-data`. No backend change (that is Thread B).
 
 **Tech Stack:** Jinja2 templates (`unitysvc-services-notify`), resty.template gateway `body_transformer`, `unitysvc-data` doc presets, `usvc_seller` CLI verification pipeline.
 
@@ -22,7 +22,7 @@
 - Create in `unitysvc-data`: `examples/msg-to-gateway/connectivity/connectivity-v1.sh.j2`, `examples/msg-to-gateway/code-example-py/code-example-v1.py.j2`, and manifest entries `msg_to_gateway_connectivity` / `msg_to_gateway_code_example_py`.
 - Verify with the `usvc_seller` pipeline.
 
-Other `msg-to-*` specs omit the `gateway_*` params, so the conditional emits nothing for them — they are unaffected.
+Other `msg-to-*` specs do not set `transformer_channel_exists`, so the `{% if transformer_channel_exists %}` guard emits nothing for them — they are unaffected.
 
 ---
 
@@ -118,10 +118,10 @@ Create `code-example-v1.py.j2` identical to the apprise one except the request U
 
 **Files:** Modify `templates/msg-to-channel/offering.json.j2`
 
-- [ ] **Step 1: Add the conditional channels** after `apprise-plus`, guarded so only specs that define `gateway_url` emit them:
+- [ ] **Step 1: Add the conditional channels** after `apprise-plus`, guarded by the explicit `transformer_channel_exists` flag so only `msg-to-discord` emits them:
 
 ```jinja
-{%- if gateway_url is defined %}
+{%- if transformer_channel_exists | default(false) %}
     ,"gateway": {
       "access_method": "http",
       "sort_order": 3,
@@ -162,7 +162,7 @@ Expected: `['apprise', 'apprise-plus']` — gateway channels absent.
 - [ ] **Step 1: Conditionally add `gateway`/`gateway-plus` to `list_price.channels`**, guarded by `{% if gateway_url is defined %}`, prices defaulting to the apprise pair:
 
 ```jinja
-{%- if gateway_url is defined %}
+{%- if transformer_channel_exists | default(false) %}
 ,"gateway": { "description": {{ gateway_price_description | default('Free — direct to your Discord webhook (no Apprise)') | tojson }}, "price": "0", "type": "constant" }
 ,"gateway-plus": { "description": {{ gateway_plus_price_description | default('$0.001 per message — extra per-enrollment destinations, direct') | tojson }}, "price": "{{ plus_price | default('0.001') }}", "type": "constant" }
 {%- endif %}
@@ -171,7 +171,7 @@ Expected: `['apprise', 'apprise-plus']` — gateway channels absent.
 - [ ] **Step 2: Add gateway connectivity + code-example docs (conditional), tagged with `meta.channels`:**
 
 ```jinja
-{%- if gateway_url is defined %}
+{%- if transformer_channel_exists | default(false) %}
 ,"Connectivity test (gateway)": { "$doc_preset": { "name": "msg_to_gateway_connectivity", "native_body": "{{ gateway_test_body }}", "local_url": "{{ gateway_test_local_url }}", "channel": "gateway" }, "meta": { "channels": ["gateway"] } }
 ,"Python code example (gateway)": { "$doc_preset": { "name": "msg_to_gateway_code_example_py", "channel": "gateway" }, "meta": { "channels": ["gateway"] } }
 {%- endif %}
@@ -184,9 +184,10 @@ Also add `"meta": { "channels": ["apprise"] }` to the existing two apprise docs 
 
 **Files:** Modify `specs/labs/msg-to-discord.json`
 
-- [ ] **Step 1: Add the gateway params** to the spec's `parameters` block:
+- [ ] **Step 1: Add the gateway params** to the spec's `parameters` block (note `transformer_channel_exists` is the flag the template guards on):
 
 ```json
+"transformer_channel_exists": true,
 "gateway_url": "${ customer_secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }/${ customer_secrets.DISCORD_WEBHOOK_ID }/${ customer_secrets.DISCORD_WEBHOOK_TOKEN }",
 "gateway_url_plus": "${ customer_secrets.DISCORD_WEBHOOK_BASE ?? https://discord.com/api/webhooks }/${ customer_secrets.{{ params.webhook_id_secret }} }/${ customer_secrets.{{ params.webhook_token_secret }} }",
 "gateway_body_template": "{\"embeds\":[{\"title\":{* _escape_json(_body.title or \"\") *},\"description\":{* _escape_json(_body.body or \"\") *},\"color\":{* ({info=3447003,success=3066993,warning=16776960,failure=15158332})[_body.type or \"info\"] or 3447003 *}}]}",
