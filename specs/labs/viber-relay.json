@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.VIBER_BASE ?? https://chatapi.viber.com }/pa/send-message",
+    "byok_base_url": "${ customer_secrets.VIBER_BASE ?? https://chatapi.viber.com }/pa/send_message",
     "byok_headers": {
       "X-Viber-Auth-Token": "${ customer_secrets.VIBER_TOKEN }"
     },
@@ -13,7 +13,7 @@
       "api_key_secret": "VIBER_TOKEN",
       "base_url": "https://mock.unitysvc.dev/viber"
     },
-    "plus_base_url": "${ customer_secrets.VIBER_BASE ?? https://chatapi.viber.com }/pa/send-message",
+    "plus_base_url": "${ customer_secrets.VIBER_BASE ?? https://chatapi.viber.com }/pa/send_message",
     "plus_headers": {
       "X-Viber-Auth-Token": "${ customer_secrets.{{ params.api_key_secret }} }"
     },
@@ -23,7 +23,7 @@
       "webhook",
       "gateway"
     ],
-    "test_webhook_path": "/pa/send-message",
+    "test_webhook_path": "/pa/send_message",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {
       "properties": {

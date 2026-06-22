@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.SMSEAGLE_SMS_BASE ?? https://smseagle.example.com }/index.php/http_api/send_sms",
+    "byok_base_url": "${ customer_secrets.SMSEAGLE_SMS_BASE ?? https://smseagle.example.com }/index.php/jsonrpc",
     "channel_name": "smseagle_sms-relay",
     "code_example_preset": "notify_relay_code_example_py_smseagle_sms",
     "connectivity_preset": "notify_relay_connectivity_smseagle_sms",
@@ -9,14 +9,14 @@
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/smseagle_sms"
     },
-    "plus_base_url": "${ customer_secrets.SMSEAGLE_SMS_BASE ?? https://smseagle.example.com }/index.php/http_api/send_sms",
+    "plus_base_url": "${ customer_secrets.SMSEAGLE_SMS_BASE ?? https://smseagle.example.com }/index.php/jsonrpc",
     "tags": [
       "notification",
       "smseagle",
       "webhook",
       "gateway"
     ],
-    "test_webhook_path": "/index.php/http_api/send_sms",
+    "test_webhook_path": "/index.php/jsonrpc",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {
       "properties": {},
