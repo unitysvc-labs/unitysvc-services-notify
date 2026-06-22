@@ -18,7 +18,7 @@
     }
 {%- if transformer_channel_exists | default(false) %}
     ,"Connectivity test (gateway)": { "$doc_preset": { "name": "msg_to_gateway_connectivity", "native_body": {{ gateway_test_body | tojson }}, "local_url": {{ gateway_test_local_url | tojson }}, "channel": "gateway", "meta": { "channels": ["gateway"] } } }
-    ,"Python code example (gateway)": { "$doc_preset": { "name": "msg_to_gateway_code_example_py", "channel": "gateway", "meta": { "channels": ["gateway"] } } }
+    ,"Python code example (gateway)": { "$doc_preset": { "name": "msg_to_gateway_code_example_py", "native_body": {{ gateway_test_body | tojson }}, "local_url": {{ gateway_test_local_url | tojson }}, "channel": "gateway", "meta": { "channels": ["gateway"] } } }
 {%- endif %}
   },
   "list_price": {
