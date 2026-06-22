@@ -38,9 +38,6 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Generated (informal expand tree from `usvc_seller specs expand`)
-expanded/
-
 # Test outputs
 *.env
 *.log
