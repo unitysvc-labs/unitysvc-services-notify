@@ -1,0 +1,92 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notifications to your own GroupMe destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise groupme:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway / gateway-plus transformer channels instead compose your GroupMe bot post URL from your stored secrets and POST a native GroupMe {bot_id, text} payload directly, bypassing Apprise.",
+  "name": "msg-to-groupme_msg",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "groupme_msg",
+    "apprise",
+    "gateway"
+  ],
+  "time_created": "2026-06-19T00:00:00Z",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"groupme://${ customer_secrets.GROUPME_MSG_BOT_ID }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"groupme://${ customer_secrets.{{ params.bot_id_secret }} }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    },
+    "gateway": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.GROUPME_MSG_BASE ?? https://api.groupme.com }/v3/bots/post",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"bot_id\":\"${ customer_secrets.GROUPME_MSG_BOT_ID }\",\"text\":{* _escape_json((_body.title or \"\")..(( (_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 3
+    },
+    "gateway-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.GROUPME_MSG_BASE ?? https://api.groupme.com }/v3/bots/post",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"bot_id\":\"${ customer_secrets.GROUPME_MSG_BOT_ID }\",\"text\":{* _escape_json((_body.title or \"\")..(( (_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 4
+    }
+  }
+}

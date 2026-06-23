@@ -1,0 +1,121 @@
+{
+  "currency": "USD",
+  "display_name": "Opsgenie Messages",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_connectivity-0b21ea1fce568a20.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Connectivity test (gateway)": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for gateway-transformer notification services",
+      "file_path": "msg_to_channel_connectivity_opsgenie-118da774392da1d0.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "gateway"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_code_example_py-237997e86e249422.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "python"
+    },
+    "Python code example (gateway)": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for gateway-transformer notification services",
+      "file_path": "msg_to_channel_code_example_py_opsgenie-c507a4c5e5a1eff3.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "gateway"
+        ]
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free — send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message — extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      },
+      "gateway": {
+        "description": "Free — direct to Opsgenie Alerts API (no Apprise)",
+        "price": "0",
+        "type": "constant"
+      },
+      "gateway-plus": {
+        "description": "$0.001 per message — extra per-enrollment Opsgenie destinations, direct",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-opsgenie",
+  "service_options": {
+    "ops_testing_parameters": {
+      "apikey_secret": "OPSGENIE_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-19T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "apikey_secret": {
+        "description": "Name of the customer secret holding this enrollment's Opsgenie apikey",
+        "type": "string"
+      }
+    },
+    "required": [
+      "apikey_secret"
+    ],
+    "type": "object"
+  }
+}

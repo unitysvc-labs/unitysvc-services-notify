@@ -5,8 +5,17 @@
     "channel_name": "msg-to-chime",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Amazon Chime destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise chime:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Amazon Chime destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise chime:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway / gateway-plus transformer channels instead compose your Amazon Chime incoming webhook URL from your stored secrets and POST a native Chime {Content} payload directly, bypassing Apprise.",
     "display_name": "Amazon Chime Messages",
+    "gateway_body_template": "{\"Content\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_chime",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_chime",
+    "gateway_content_type": "application/json",
+    "gateway_price_description": "Free — direct to your Amazon Chime incoming webhook (no Apprise)",
+    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Amazon Chime destinations, direct",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/chime/incomingwebhooks/demo123?token=demo123",
+    "gateway_url": "${ customer_secrets.CHIME_WEBHOOK_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.CHIME_WEBHOOK_ID }?token=${ customer_secrets.CHIME_TOKEN }",
+    "gateway_url_plus": "${ customer_secrets.CHIME_WEBHOOK_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.{{ params.webhook_id_secret }} }?token=${ customer_secrets.{{ params.token_secret }} }",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_secret": "CHIME_TOKEN",
@@ -20,6 +29,7 @@
     ],
     "test_apprise_url": "chime://chimewebhookidxyz123/chimetokenxyz123",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "token_secret": {

@@ -5,8 +5,18 @@
     "channel_name": "msg-to-homeassistant",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own HomeAssistant destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise hassios:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own HomeAssistant destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise hassios:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway channels skip Apprise and transform the envelope into a native HomeAssistant persistent_notification payload delivered straight to your HA instance.",
     "display_name": "HomeAssistant Messages",
+    "gateway_api_key": "${ customer_secrets.HOMEASSISTANT_ACCESSTOKEN }",
+    "gateway_body_template": "{\"message\":{* _escape_json((_body.body or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\" or \"\")) *},\"title\":{* _escape_json(_body.title or \"\") *}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_homeassistant",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_homeassistant",
+    "gateway_content_type": "application/json",
+    "gateway_price_description": "Free — direct to your HomeAssistant persistent_notification API (no Apprise)",
+    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment HomeAssistant destinations, direct",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/homeassistant/api/services/persistent_notification/create",
+    "gateway_url": "${ customer_secrets.HOMEASSISTANT_BASE ?? https://homeassistant.local:8123 }/api/services/persistent_notification/create",
+    "gateway_url_plus": "${ customer_secrets.HOMEASSISTANT_BASE ?? https://homeassistant.local:8123 }/api/services/persistent_notification/create",
     "ops_testing_parameters": {
       "accesstoken_secret": "HOMEASSISTANT_ACCESSTOKEN",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
@@ -20,6 +30,7 @@
     ],
     "test_apprise_url": "hassios://notify.example.com/homeassistantaccesstokenxyz123",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "accesstoken_secret": {

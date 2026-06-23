@@ -1,0 +1,94 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notifications to your own LaMetric destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise lametrics:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a LaMetric device notification JSON body and post it to your LaMetric device API (no Apprise).",
+  "name": "msg-to-lametric",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "lametric",
+    "apprise",
+    "gateway"
+  ],
+  "time_created": "2026-06-20T00:00:00Z",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"lametrics://${ customer_secrets.LAMETRIC_APIKEY }@${ customer_secrets.LAMETRIC_HOST }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"lametrics://${ customer_secrets.{{ params.apikey_secret }} }@${ customer_secrets.{{ params.host_secret }} }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    },
+    "gateway": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.LAMETRIC_API_BASE ?? https://developer.lametric.com/api/v2 }/device/notifications",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"model\":{\"cycles\":1,\"frames\":[{\"icon\":0,\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}]}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Authorization": "Basic ZGV2OmRlbW8xMjM=",
+                "Content-Type": "application/json"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 3
+    },
+    "gateway-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.LAMETRIC_API_BASE ?? https://developer.lametric.com/api/v2 }/device/notifications",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"model\":{\"cycles\":1,\"frames\":[{\"icon\":0,\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}]}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Authorization": "Basic ZGV2OmRlbW8xMjM=",
+                "Content-Type": "application/json"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 4
+    }
+  }
+}

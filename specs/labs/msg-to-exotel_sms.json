@@ -5,8 +5,20 @@
     "channel_name": "msg-to-exotel_sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Exotel destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise exotel:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Exotel destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise exotel:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into an Exotel SMS API form body and post it to api.exotel.com (no Apprise).",
     "display_name": "Exotel Messages",
+    "gateway_body_template": "From=${ customer_secrets.EXOTEL_SMS_FROM }&To=${ customer_secrets.EXOTEL_SMS_TO }&Body={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
+    "gateway_content_type": "application/x-www-form-urlencoded",
+    "gateway_extra_headers": {
+      "Authorization": "Basic ZGVtbzEyM3NpZDpkZW1vMTIzdG9rZW4="
+    },
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_exotel_sms",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_exotel_sms",
+    "gateway_price_description": "Free — direct to your Exotel number (no Apprise)",
+    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Exotel destinations, direct",
+    "gateway_test_local_url": "https://demo123sid:demo123token@mock.unitysvc.dev/exotel_sms/v1/Accounts/demo123sid/Sms/send",
+    "gateway_url": "${ customer_secrets.EXOTEL_SMS_API_BASE ?? https://api.exotel.com }/v1/Accounts/${ customer_secrets.EXOTEL_SMS_SID }/Sms/send",
+    "gateway_url_plus": "${ customer_secrets.EXOTEL_SMS_API_BASE ?? https://api.exotel.com }/v1/Accounts/${ customer_secrets.{{ params.sid_secret }} }/Sms/send",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_phone_secret": "EXOTEL_SMS_FROM_PHONE",
@@ -21,6 +33,7 @@
     ],
     "test_apprise_url": "exotel://exotel_smssidxyz123:exotel_smstokenxyz123@+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "from_phone_secret": {

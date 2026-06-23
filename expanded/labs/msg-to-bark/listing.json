@@ -1,0 +1,127 @@
+{
+  "currency": "USD",
+  "display_name": "Bark Messages",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_connectivity-c151e18cb7fc37eb.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Connectivity test (gateway)": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for gateway-transformer notification services",
+      "file_path": "msg_to_channel_connectivity_bark-c248e6ff736bb5d0.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "gateway"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_code_example_py-7f7aa9f0b07353c1.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "python"
+    },
+    "Python code example (gateway)": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for gateway-transformer notification services",
+      "file_path": "msg_to_channel_code_example_py_bark-d708534be92fda7c.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "gateway"
+        ]
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free — send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message — extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      },
+      "gateway": {
+        "description": "Free — direct to your own Bark server (no Apprise)",
+        "price": "0",
+        "type": "constant"
+      },
+      "gateway-plus": {
+        "description": "$0.001 per message — extra per-enrollment Bark destinations, direct",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-bark",
+  "service_options": {
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "device_key_secret": "BARK_DEVICE_KEY",
+      "host_secret": "BARK_HOST"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-19T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "device_key_secret": {
+        "description": "Name of the customer secret holding this enrollment's Bark device key",
+        "type": "string"
+      },
+      "host_secret": {
+        "description": "Name of the customer secret holding this enrollment's Bark host",
+        "type": "string"
+      }
+    },
+    "required": [
+      "host_secret",
+      "device_key_secret"
+    ],
+    "type": "object"
+  }
+}

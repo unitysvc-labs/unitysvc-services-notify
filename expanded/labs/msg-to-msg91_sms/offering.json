@@ -1,0 +1,94 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notifications to your own MSG91 destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise msg91:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a MSG91 Flow API JSON body and post it to api.msg91.com (no Apprise).",
+  "name": "msg-to-msg91_sms",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "msg91_sms",
+    "apprise",
+    "gateway"
+  ],
+  "time_created": "2026-06-20T00:00:00Z",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"msg91://${ customer_secrets.MSG91_SMS_TEMPLATE }@${ customer_secrets.MSG91_SMS_AUTHKEY }/${ customer_secrets.MSG91_SMS_TARGETS }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"msg91://${ customer_secrets.{{ params.template_secret }} }@${ customer_secrets.{{ params.authkey_secret }} }/${ customer_secrets.{{ params.targets_secret }} }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    },
+    "gateway": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.MSG91_SMS_API_BASE ?? https://api.msg91.com }/api/v5/flow/",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"template_id\":\"${ customer_secrets.MSG91_SMS_TEMPLATE }\",\"short_url\":0,\"recipients\":[{\"mobiles\":\"${ customer_secrets.MSG91_SMS_TARGETS }\",\"body\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}}]}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json",
+                "authkey": "${ customer_secrets.MSG91_SMS_AUTHKEY }"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 3
+    },
+    "gateway-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.MSG91_SMS_API_BASE ?? https://api.msg91.com }/api/v5/flow/",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"template_id\":\"${ customer_secrets.MSG91_SMS_TEMPLATE }\",\"short_url\":0,\"recipients\":[{\"mobiles\":\"${ customer_secrets.MSG91_SMS_TARGETS }\",\"body\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}}]}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json",
+                "authkey": "${ customer_secrets.MSG91_SMS_AUTHKEY }"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 4
+    }
+  }
+}

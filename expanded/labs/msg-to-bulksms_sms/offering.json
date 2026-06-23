@@ -1,0 +1,94 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notifications to your own BulkSMS destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise bulksms:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a BulkSMS v1/messages JSON body and post it to api.bulksms.com (no Apprise).",
+  "name": "msg-to-bulksms_sms",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "bulksms_sms",
+    "apprise",
+    "gateway"
+  ],
+  "time_created": "2026-06-20T00:00:00Z",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"bulksms://${ customer_secrets.BULKSMS_SMS_USER }:${ customer_secrets.BULKSMS_SMS_PASSWORD }@${ customer_secrets.BULKSMS_SMS_TARGETS }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"bulksms://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.targets_secret }} }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    },
+    "gateway": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.BULKSMS_SMS_API_BASE ?? https://api.bulksms.com }/v1/messages",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"to\":\"${ customer_secrets.BULKSMS_SMS_TO }\",\"body\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *},\"routingGroup\":\"STANDARD\",\"encoding\":\"TEXT\"}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Authorization": "Basic ZGVtbzEyM3VzZXI6ZGVtbzEyMw==",
+                "Content-Type": "application/json"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 3
+    },
+    "gateway-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.BULKSMS_SMS_API_BASE ?? https://api.bulksms.com }/v1/messages",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"to\":\"${ customer_secrets.BULKSMS_SMS_TO }\",\"body\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *},\"routingGroup\":\"STANDARD\",\"encoding\":\"TEXT\"}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Authorization": "Basic ZGVtbzEyM3VzZXI6ZGVtbzEyMw==",
+                "Content-Type": "application/json"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 4
+    }
+  }
+}

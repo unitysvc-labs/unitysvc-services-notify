@@ -1,0 +1,133 @@
+{
+  "currency": "USD",
+  "display_name": "BulkSMS Messages",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_connectivity-d955db6f63c443de.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Connectivity test (gateway)": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for gateway-transformer notification services",
+      "file_path": "msg_to_channel_connectivity_bulksms_sms-db8590a1f9f9038e.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "gateway"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_code_example_py-7f46788fd1f5d6ca.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "python"
+    },
+    "Python code example (gateway)": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for gateway-transformer notification services",
+      "file_path": "msg_to_channel_code_example_py_bulksms_sms-652077aab49838f6.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "gateway"
+        ]
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free — send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message — extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      },
+      "gateway": {
+        "description": "Free — direct to BulkSMS v1/messages (no Apprise)",
+        "price": "0",
+        "type": "constant"
+      },
+      "gateway-plus": {
+        "description": "$0.001 per message — extra per-enrollment BulkSMS destinations, direct",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-bulksms_sms",
+  "service_options": {
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "password_secret": "BULKSMS_SMS_PASSWORD",
+      "targets_secret": "BULKSMS_SMS_TARGETS",
+      "user_secret": "BULKSMS_SMS_USER"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-20T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "password_secret": {
+        "description": "Name of the customer secret holding this enrollment's BulkSMS password",
+        "type": "string"
+      },
+      "targets_secret": {
+        "description": "Name of the customer secret holding this enrollment's BulkSMS targets",
+        "type": "string"
+      },
+      "user_secret": {
+        "description": "Name of the customer secret holding this enrollment's BulkSMS user",
+        "type": "string"
+      }
+    },
+    "required": [
+      "user_secret",
+      "password_secret",
+      "targets_secret"
+    ],
+    "type": "object"
+  }
+}

@@ -5,8 +5,20 @@
     "channel_name": "msg-to-notifiarr",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Notifiarr destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise notifiarr:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Notifiarr destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise notifiarr:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway channels skip Apprise and transform the envelope into a native Notifiarr apprise notification payload delivered straight to notifiarr.com.",
     "display_name": "Notifiarr Messages",
+    "gateway_body_template": "{\"source\":\"apprise\",\"type\":\"info\",\"notification\":{},\"discord\":{\"text\":{\"title\":{* _escape_json(_body.title or \"\") *},\"description\":{* _escape_json(_body.body or \"\") *}},\"ids\":{\"channel\":0}}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_notifiarr",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_notifiarr",
+    "gateway_content_type": "application/json",
+    "gateway_extra_headers": {
+      "X-api-Key": "${ customer_secrets.NOTIFIARR_APIKEY }"
+    },
+    "gateway_price_description": "Free — direct to Notifiarr apprise API (no Apprise relay)",
+    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Notifiarr destinations, direct",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/notifiarr/api/v1/notification/apprise",
+    "gateway_url": "${ customer_secrets.NOTIFIARR_API_BASE ?? https://notifiarr.com }/api/v1/notification/apprise",
+    "gateway_url_plus": "${ customer_secrets.NOTIFIARR_API_BASE ?? https://notifiarr.com }/api/v1/notification/apprise",
     "ops_testing_parameters": {
       "apikey_secret": "NOTIFIARR_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
@@ -20,6 +32,7 @@
     ],
     "test_apprise_url": "notifiarr://notifiarrapikeyxyz123/notifiarrtargetchannelxyz123",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "apikey_secret": {
