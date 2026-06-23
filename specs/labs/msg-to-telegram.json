@@ -10,6 +10,7 @@
     "gateway_body_template": "{\"chat_id\":\"${ customer_secrets.TELEGRAM_CHAT_ID }\",\"text\":{* _escape_json(((_body.title and _body.title ~= \"\") and (_body.title .. \"\\n\\n\") or \"\") .. (_body.body or \"\")) *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_telegram",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_telegram",
+    "gateway_content_type": "application/json",
     "gateway_price_description": "Free — direct to the Telegram Bot API (no Apprise)",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Telegram destinations, direct",
     "gateway_test_local_url": "https://mock.unitysvc.dev/telegram/botdemotoken/sendMessage",

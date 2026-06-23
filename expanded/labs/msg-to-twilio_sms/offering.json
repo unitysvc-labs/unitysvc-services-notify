@@ -52,13 +52,14 @@
           "body_transformer": {
             "request": {
               "input_format": "json",
-              "template": "To=${ customer_secrets.TWILIO_SMS_TO }&From=${ customer_secrets.TWILIO_SMS_FROM }&Body={* _escape_uri(((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\"))) *}"
+              "template": "To=${ customer_secrets.TWILIO_SMS_TO }&From=${ customer_secrets.TWILIO_SMS_FROM }&Body={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}"
             }
           },
           "proxy_rewrite": {
             "headers": {
               "set": {
-                "Content-Type": "application/json"
+                "Authorization": "Basic QUNkZW1vMTIzOmRlbW8xMjN0b2tlbg==",
+                "Content-Type": "application/x-www-form-urlencoded"
               }
             }
           }
@@ -74,13 +75,14 @@
           "body_transformer": {
             "request": {
               "input_format": "json",
-              "template": "To=${ customer_secrets.TWILIO_SMS_TO }&From=${ customer_secrets.TWILIO_SMS_FROM }&Body={* _escape_uri(((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\"))) *}"
+              "template": "To=${ customer_secrets.TWILIO_SMS_TO }&From=${ customer_secrets.TWILIO_SMS_FROM }&Body={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}"
             }
           },
           "proxy_rewrite": {
             "headers": {
               "set": {
-                "Content-Type": "application/json"
+                "Authorization": "Basic QUNkZW1vMTIzOmRlbW8xMjN0b2tlbg==",
+                "Content-Type": "application/x-www-form-urlencoded"
               }
             }
           }

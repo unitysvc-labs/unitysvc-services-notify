@@ -50,7 +50,7 @@
       "base_url": {{ gateway_url | tojson }},
       "raw": { "request_transformer": {
         "body_transformer": { "request": { "input_format": "json", "template": {{ gateway_body_template | tojson }} } },
-        "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }} } } }
+        "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }}{% if gateway_extra_headers is defined %}{% for hk, hv in gateway_extra_headers.items() %}, {{ hk | tojson }}: {{ hv | tojson }}{% endfor %}{% endif %} } } }
       } }
     },
     "gateway-plus": {
@@ -62,7 +62,7 @@
       "base_url": {{ gateway_url_plus | tojson }},
       "raw": { "request_transformer": {
         "body_transformer": { "request": { "input_format": "json", "template": {{ gateway_body_template | tojson }} } },
-        "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }} } } }
+        "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }}{% if gateway_extra_headers is defined %}{% for hk, hv in gateway_extra_headers.items() %}, {{ hk | tojson }}: {{ hv | tojson }}{% endfor %}{% endif %} } } }
       } }
     }
 {%- endif %}
