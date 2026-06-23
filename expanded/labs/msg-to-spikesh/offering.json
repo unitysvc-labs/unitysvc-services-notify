@@ -1,0 +1,48 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notifications to your own Spike.sh destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise spike:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+  "name": "msg-to-spikesh",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "spikesh",
+    "apprise",
+    "gateway"
+  ],
+  "time_created": "2026-06-19T00:00:00Z",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"spike://${ customer_secrets.SPIKESH_TOKEN }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"spike://${ customer_secrets.{{ params.token_secret }} }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    }
+  }
+}

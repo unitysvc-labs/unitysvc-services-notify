@@ -5,11 +5,21 @@
     "channel_name": "msg-to-nextcloud",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Nextcloud destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise nclouds:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Nextcloud destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise nclouds:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus transformer channels instead POST a native Nextcloud admin notification directly to your Nextcloud server's notification API, bypassing Apprise.",
     "display_name": "Nextcloud Messages",
+    "gateway_body_template": "shortMessage={* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}&longMessage={* _escape_json(_body.body or \"\") *}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_nextcloud",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_nextcloud",
+    "gateway_content_type": "application/x-www-form-urlencoded",
+    "gateway_price_description": "Free — direct to your Nextcloud server notification API (no Apprise)",
+    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Nextcloud destinations, direct",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/nextcloud/ocs/v2.php/apps/notifications/api/v2/admin_notifications/demouser",
+    "gateway_url": "${ customer_secrets.NEXTCLOUD_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.NEXTCLOUD_TARGET }",
+    "gateway_url_plus": "${ customer_secrets.NEXTCLOUD_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.{{ params.target_secret }} }",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "NEXTCLOUD_HOST",
+      "target_secret": "NEXTCLOUD_TARGET",
       "targets_secret": "NEXTCLOUD_TARGETS"
     },
     "tags": [
@@ -20,10 +30,15 @@
     ],
     "test_apprise_url": "nclouds://notify.example.com/nextcloudtargetuserxyz123",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "host_secret": {
           "description": "Name of the customer secret holding this enrollment's Nextcloud host",
+          "type": "string"
+        },
+        "target_secret": {
+          "description": "Name of the customer secret holding this enrollment's Nextcloud target username; used by the gateway-plus transformer channel",
           "type": "string"
         },
         "targets_secret": {

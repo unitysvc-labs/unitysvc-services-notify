@@ -5,8 +5,21 @@
     "channel_name": "msg-to-octopush_sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Octopush destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise octopush:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Octopush destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise octopush:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into an Octopush SMS Campaign API JSON body and post it to api.octopush.com (no Apprise).",
     "display_name": "Octopush Messages",
+    "gateway_body_template": "{\"recipients\":[{\"phone_number\":\"${ customer_secrets.OCTOPUSH_SMS_TO }\"}],\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *},\"purpose\":\"alert\",\"sender\":\"${ customer_secrets.OCTOPUSH_SMS_FROM }\"}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_octopush_sms",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_octopush_sms",
+    "gateway_content_type": "application/json",
+    "gateway_extra_headers": {
+      "api-login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }",
+      "api-key": "${ customer_secrets.OCTOPUSH_SMS_API_KEY }"
+    },
+    "gateway_price_description": "Free — direct to Octopush SMS Campaign API (no Apprise)",
+    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Octopush destinations, direct",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/octopush_sms/v1/public/sms-campaign/send",
+    "gateway_url": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
+    "gateway_url_plus": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
     "ops_testing_parameters": {
       "api_key_secret": "OCTOPUSH_SMS_API_KEY",
       "api_login_secret": "OCTOPUSH_SMS_API_LOGIN",
@@ -21,6 +34,7 @@
     ],
     "test_apprise_url": "octopush://octopush_sms@example.com/octopush_smsapikeyxyz123/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "api_key_secret": {

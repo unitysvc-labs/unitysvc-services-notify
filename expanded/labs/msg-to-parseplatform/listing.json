@@ -1,0 +1,133 @@
+{
+  "currency": "USD",
+  "display_name": "Parse Platform Messages",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_connectivity-8600cb935c3409f3.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Connectivity test (gateway)": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for gateway-transformer notification services",
+      "file_path": "msg_to_channel_connectivity_parseplatform-dc83b20e41e10468.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "gateway"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_code_example_py-ac186e2b0a78e68d.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "python"
+    },
+    "Python code example (gateway)": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for gateway-transformer notification services",
+      "file_path": "msg_to_channel_code_example_py_parseplatform-6605a1366f46c340.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "gateway"
+        ]
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free — send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message — extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      },
+      "gateway": {
+        "description": "Free — direct to your Parse Platform push API (no Apprise)",
+        "price": "0",
+        "type": "constant"
+      },
+      "gateway-plus": {
+        "description": "$0.001 per message — extra per-enrollment Parse Platform destinations, direct",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-parseplatform",
+  "service_options": {
+    "ops_testing_parameters": {
+      "app_id_secret": "PARSEPLATFORM_APP_ID",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "PARSEPLATFORM_HOST",
+      "master_key_secret": "PARSEPLATFORM_MASTER_KEY"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-20T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "app_id_secret": {
+        "description": "Name of the customer secret holding this enrollment's Parse Platform app id",
+        "type": "string"
+      },
+      "host_secret": {
+        "description": "Name of the customer secret holding this enrollment's Parse Platform host",
+        "type": "string"
+      },
+      "master_key_secret": {
+        "description": "Name of the customer secret holding this enrollment's Parse Platform master key",
+        "type": "string"
+      }
+    },
+    "required": [
+      "app_id_secret",
+      "master_key_secret",
+      "host_secret"
+    ],
+    "type": "object"
+  }
+}

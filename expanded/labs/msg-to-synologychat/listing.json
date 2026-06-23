@@ -1,0 +1,77 @@
+{
+  "currency": "USD",
+  "display_name": "Synology Chat Messages",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "apprise_url": "synologys://notify.example.com/synologychattokenxyz123",
+        "meta": {
+          "channels": [
+            "apprise"
+          ]
+        },
+        "name": "msg_to_apprise_connectivity"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "apprise_url": "synologys://notify.example.com/synologychattokenxyz123",
+        "meta": {
+          "channels": [
+            "apprise"
+          ]
+        },
+        "name": "msg_to_apprise_code_example_py"
+      }
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free \u2014 send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message \u2014 extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-synologychat",
+  "service_options": {
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "host_secret": "SYNOLOGYCHAT_HOST",
+      "token_secret": "SYNOLOGYCHAT_TOKEN"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-20T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "host_secret": {
+        "description": "Name of the customer secret holding this enrollment's Synology Chat host",
+        "type": "string"
+      },
+      "token_secret": {
+        "description": "Name of the customer secret holding this enrollment's Synology Chat token",
+        "type": "string"
+      }
+    },
+    "required": [
+      "host_secret",
+      "token_secret"
+    ],
+    "type": "object"
+  }
+}

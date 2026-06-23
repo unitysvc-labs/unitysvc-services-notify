@@ -1,0 +1,92 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notifications to your own PushDeer destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise pushdeers:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway / gateway-plus transformer channels instead POST a native PushDeer form-encoded payload directly to the PushDeer API, bypassing Apprise.",
+  "name": "msg-to-pushdeer",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "pushdeer",
+    "apprise",
+    "gateway"
+  ],
+  "time_created": "2026-06-20T00:00:00Z",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"pushdeers://${ customer_secrets.PUSHDEER_PUSHKEY }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"pushdeers://${ customer_secrets.{{ params.pushkey_secret }} }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    },
+    "gateway": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.PUSHDEER_BASE ?? https://api2.pushdeer.com }/message/push?pushkey=${ customer_secrets.PUSHDEER_PUSHKEY }",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "text={* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}&type=text&desp=UnitySVC"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/x-www-form-urlencoded"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 3
+    },
+    "gateway-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.PUSHDEER_BASE ?? https://api2.pushdeer.com }/message/push?pushkey=${ customer_secrets.{{ params.pushkey_secret }} }",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "text={* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}&type=text&desp=UnitySVC"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/x-www-form-urlencoded"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 4
+    }
+  }
+}

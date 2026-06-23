@@ -1,0 +1,86 @@
+{
+  "currency": "USD",
+  "display_name": "BlueSky Messages",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "Connectivity test for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_connectivity-64973daa45085024.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok",
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "bash"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Python (httpx) code example for SMTP→notification transformer services",
+      "file_path": "msg_to_apprise_code_example_py-06cf44dd025416a6.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ],
+        "channels": [
+          "apprise"
+        ]
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free — send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message — extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-bluesky",
+  "service_options": {
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "password_secret": "BLUESKY_PASSWORD",
+      "user_secret": "BLUESKY_USER"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-20T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "password_secret": {
+        "description": "Name of the customer secret holding this enrollment's BlueSky password",
+        "type": "string"
+      },
+      "user_secret": {
+        "description": "Name of the customer secret holding this enrollment's BlueSky user",
+        "type": "string"
+      }
+    },
+    "required": [
+      "user_secret",
+      "password_secret"
+    ],
+    "type": "object"
+  }
+}

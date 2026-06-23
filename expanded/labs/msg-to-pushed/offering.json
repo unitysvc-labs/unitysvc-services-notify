@@ -1,0 +1,92 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notifications to your own Pushed destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise pushed:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway channel skips Apprise and POSTs a native Pushed JSON payload (app_key, app_secret, content) directly to api.pushed.co.",
+  "name": "msg-to-pushed",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "pushed",
+    "apprise",
+    "gateway"
+  ],
+  "time_created": "2026-06-20T00:00:00Z",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"pushed://${ customer_secrets.PUSHED_APP_KEY }/${ customer_secrets.PUSHED_APP_SECRET }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"pushed://${ customer_secrets.{{ params.app_key_secret }} }/${ customer_secrets.{{ params.app_secret_secret }} }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    },
+    "gateway": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.PUSHED_BASE ?? https://api.pushed.co }/1/push",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"app_key\":\"${ customer_secrets.PUSHED_APP_KEY }\",\"app_secret\":\"${ customer_secrets.PUSHED_APP_SECRET }\",\"target_type\":\"app\",\"content\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 3
+    },
+    "gateway-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.PUSHED_BASE ?? https://api.pushed.co }/1/push",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"app_key\":\"${ customer_secrets.PUSHED_APP_KEY }\",\"app_secret\":\"${ customer_secrets.PUSHED_APP_SECRET }\",\"target_type\":\"app\",\"content\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *}}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 4
+    }
+  }
+}

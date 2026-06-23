@@ -1,0 +1,89 @@
+{
+  "currency": "USD",
+  "display_name": "RingCentral Messages",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "apprise_url": "ringc://ringcentral_smstokenxyz123@dkry5cjqx4bi/dkry5cjqx4bi/+15551234567",
+        "meta": {
+          "channels": [
+            "apprise"
+          ]
+        },
+        "name": "msg_to_apprise_connectivity"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "apprise_url": "ringc://ringcentral_smstokenxyz123@dkry5cjqx4bi/dkry5cjqx4bi/+15551234567",
+        "meta": {
+          "channels": [
+            "apprise"
+          ]
+        },
+        "name": "msg_to_apprise_code_example_py"
+      }
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free \u2014 send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message \u2014 extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-ringcentral_sms",
+  "service_options": {
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "client_id_secret": "RINGCENTRAL_SMS_CLIENT_ID",
+      "from_phone_secret": "RINGCENTRAL_SMS_FROM_PHONE",
+      "secret_secret": "RINGCENTRAL_SMS_SECRET",
+      "token_secret": "RINGCENTRAL_SMS_TOKEN"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-20T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "client_id_secret": {
+        "description": "Name of the customer secret holding this enrollment's RingCentral client id",
+        "type": "string"
+      },
+      "from_phone_secret": {
+        "description": "Name of the customer secret holding this enrollment's RingCentral from phone",
+        "type": "string"
+      },
+      "secret_secret": {
+        "description": "Name of the customer secret holding this enrollment's RingCentral secret",
+        "type": "string"
+      },
+      "token_secret": {
+        "description": "Name of the customer secret holding this enrollment's RingCentral token",
+        "type": "string"
+      }
+    },
+    "required": [
+      "token_secret",
+      "client_id_secret",
+      "secret_secret",
+      "from_phone_secret"
+    ],
+    "type": "object"
+  }
+}
