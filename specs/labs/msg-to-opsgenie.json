@@ -7,15 +7,15 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "Send notifications to your own Opsgenie destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise opsgenie:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway channels skip Apprise and transform the envelope into a native Opsgenie Alerts API {message} payload delivered straight to api.opsgenie.com.",
     "display_name": "Opsgenie Messages",
-    "gateway_body_template": "{\"message\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \" — \" or \"\")..(_body.body or \"\")) *},\"description\":{* _escape_json(_body.body or \"\") *}}",
+    "gateway_body_template": "{\"message\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \" \u2014 \" or \"\")..(_body.body or \"\")) *},\"description\":{* _escape_json(_body.body or \"\") *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_opsgenie",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_opsgenie",
     "gateway_content_type": "application/json",
     "gateway_extra_headers": {
       "Authorization": "GenieKey ${ customer_secrets.OPSGENIE_APIKEY }"
     },
-    "gateway_price_description": "Free — direct to Opsgenie Alerts API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Opsgenie destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Opsgenie destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to Opsgenie Alerts API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/opsgenie/v2/alerts",
     "gateway_url": "${ customer_secrets.OPSGENIE_API_BASE ?? https://api.opsgenie.com }/v2/alerts",
     "gateway_url_plus": "${ customer_secrets.OPSGENIE_API_BASE ?? https://api.opsgenie.com }/v2/alerts",

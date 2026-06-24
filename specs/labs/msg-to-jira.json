@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "Basic ZGVtb0BleGFtcGxlLmNvbTpkZW1vMTIzdG9rZW4="
     },
-    "gateway_price_description": "Free — direct to your Jira REST API v2 (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Jira destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Jira destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your Jira REST API v2 (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/jira/rest/api/2/issue",
     "gateway_url": "${ customer_secrets.JIRA_BASE ?? https://yourcompany.atlassian.net }/rest/api/2/issue",
     "gateway_url_plus": "${ customer_secrets.JIRA_BASE ?? https://yourcompany.atlassian.net }/rest/api/2/issue",

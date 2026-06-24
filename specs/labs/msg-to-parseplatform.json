@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "X-Parse-Master-Key": "${ customer_secrets.PARSEPLATFORM_MASTER_KEY }"
     },
-    "gateway_price_description": "Free — direct to your Parse Platform push API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Parse Platform destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Parse Platform destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your Parse Platform push API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/parseplatform/parse/push/",
     "gateway_url": "${ customer_secrets.PARSEPLATFORM_BASE ?? https://parseplatform.example.com }/parse/push/",
     "gateway_url_plus": "${ customer_secrets.PARSEPLATFORM_BASE ?? https://parseplatform.example.com }/parse/push/",

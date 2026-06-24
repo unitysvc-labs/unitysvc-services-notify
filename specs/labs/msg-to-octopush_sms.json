@@ -12,11 +12,11 @@
     "gateway_connectivity_preset": "msg_to_channel_connectivity_octopush_sms",
     "gateway_content_type": "application/json",
     "gateway_extra_headers": {
-      "api-login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }",
-      "api-key": "${ customer_secrets.OCTOPUSH_SMS_API_KEY }"
+      "api-key": "${ customer_secrets.OCTOPUSH_SMS_API_KEY }",
+      "api-login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }"
     },
-    "gateway_price_description": "Free — direct to Octopush SMS Campaign API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Octopush destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Octopush destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to Octopush SMS Campaign API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/octopush_sms/v1/public/sms-campaign/send",
     "gateway_url": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
     "gateway_url_plus": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",

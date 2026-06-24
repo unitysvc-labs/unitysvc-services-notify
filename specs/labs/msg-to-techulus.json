@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "X-API-Key": "${ customer_secrets.TECHULUS_APIKEY }"
     },
-    "gateway_price_description": "Free — direct to Techulus Push API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Techulus destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Techulus destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to Techulus Push API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/techulus/api/v1/notify",
     "gateway_url": "${ customer_secrets.TECHULUS_BASE ?? https://push.techulus.com }/api/v1/notify",
     "gateway_url_plus": "${ customer_secrets.TECHULUS_BASE ?? https://push.techulus.com }/api/v1/notify",

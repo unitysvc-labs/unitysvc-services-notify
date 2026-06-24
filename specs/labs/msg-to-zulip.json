@@ -14,14 +14,14 @@
     "gateway_extra_headers": {
       "Authorization": "Basic REtSWTVDSlFYNEJJQERLUlk1Q0pRWDRCSTpES1JZNUNKUVg0QklQVzNBSE9WMjlHTlUxOEZNVDA3RQ=="
     },
-    "gateway_price_description": "Free — direct to your Zulip organization (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Zulip destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Zulip destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your Zulip organization (no Apprise)",
     "gateway_test_local_url": "https://DKRY5CJQX4BI%40DKRY5CJQX4BI:DKRY5CJQX4BIPW3AHOV29GNU18FMT07E@mock.unitysvc.dev/zulip/api/v1/messages",
     "gateway_url": "${ customer_secrets.ZULIP_BASE ?? https://dkry5cjqx4bi.zulipchat.com }/api/v1/messages",
     "gateway_url_plus": "${ customer_secrets.{{ params.base_secret }} ?? https://dkry5cjqx4bi.zulipchat.com }/api/v1/messages",
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "base_secret": "ZULIP_BASE",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "botname_secret": "ZULIP_BOTNAME",
       "organization_secret": "ZULIP_ORGANIZATION",
       "token_secret": "ZULIP_TOKEN"

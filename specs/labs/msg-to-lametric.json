@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "Basic ZGV2OmRlbW8xMjM="
     },
-    "gateway_price_description": "Free — direct to your LaMetric device API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment LaMetric destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment LaMetric destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your LaMetric device API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/lametric/api/v2/device/notifications",
     "gateway_url": "${ customer_secrets.LAMETRIC_API_BASE ?? https://developer.lametric.com/api/v2 }/device/notifications",
     "gateway_url_plus": "${ customer_secrets.LAMETRIC_API_BASE ?? https://developer.lametric.com/api/v2 }/device/notifications",

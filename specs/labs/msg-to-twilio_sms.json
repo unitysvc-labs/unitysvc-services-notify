@@ -8,14 +8,14 @@
     "description": "Send notifications to your own Twilio destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise twilio:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a Twilio Messages API form body and post it to api.twilio.com (no Apprise).",
     "display_name": "Twilio Messages",
     "gateway_body_template": "To=${ customer_secrets.TWILIO_SMS_TO }&From=${ customer_secrets.TWILIO_SMS_FROM }&Body={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_twilio_sms",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_twilio_sms",
     "gateway_content_type": "application/x-www-form-urlencoded",
     "gateway_extra_headers": {
       "Authorization": "Basic QUNkZW1vMTIzOmRlbW8xMjN0b2tlbg=="
     },
-    "gateway_code_example_preset": "msg_to_channel_code_example_py_twilio_sms",
-    "gateway_connectivity_preset": "msg_to_channel_connectivity_twilio_sms",
-    "gateway_price_description": "Free — direct to your Twilio number (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Twilio destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Twilio destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your Twilio number (no Apprise)",
     "gateway_test_local_url": "https://ACdeadbeefdeadbeef:dkry5cjqx4bi@mock.unitysvc.dev/twilio/2010-04-01/Accounts/ACdeadbeefdeadbeef/Messages.json",
     "gateway_url": "${ customer_secrets.TWILIO_SMS_API_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/${ customer_secrets.TWILIO_SMS_ACCOUNT_SID }/Messages.json",
     "gateway_url_plus": "${ customer_secrets.TWILIO_SMS_API_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/${ customer_secrets.{{ params.account_sid_secret }} }/Messages.json",

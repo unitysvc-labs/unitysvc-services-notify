@@ -8,14 +8,14 @@
     "description": "Send notifications to your own BulkSMS destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise bulksms:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a BulkSMS v1/messages JSON body and post it to api.bulksms.com (no Apprise).",
     "display_name": "BulkSMS Messages",
     "gateway_body_template": "{\"to\":\"${ customer_secrets.BULKSMS_SMS_TO }\",\"body\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *},\"routingGroup\":\"STANDARD\",\"encoding\":\"TEXT\"}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_bulksms_sms",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_bulksms_sms",
     "gateway_content_type": "application/json",
     "gateway_extra_headers": {
       "Authorization": "Basic ZGVtbzEyM3VzZXI6ZGVtbzEyMw=="
     },
-    "gateway_code_example_preset": "msg_to_channel_code_example_py_bulksms_sms",
-    "gateway_connectivity_preset": "msg_to_channel_connectivity_bulksms_sms",
-    "gateway_price_description": "Free — direct to BulkSMS v1/messages (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment BulkSMS destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment BulkSMS destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to BulkSMS v1/messages (no Apprise)",
     "gateway_test_local_url": "https://demo123user:demo123@mock.unitysvc.dev/bulksms/v1/messages",
     "gateway_url": "${ customer_secrets.BULKSMS_SMS_API_BASE ?? https://api.bulksms.com }/v1/messages",
     "gateway_url_plus": "${ customer_secrets.BULKSMS_SMS_API_BASE ?? https://api.bulksms.com }/v1/messages",

@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "key=${ customer_secrets.FCM_APIKEY }"
     },
-    "gateway_price_description": "Free — direct to Firebase Cloud Messaging (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment FCM destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment FCM destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to Firebase Cloud Messaging (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/fcm/fcm/send",
     "gateway_url": "${ customer_secrets.FCM_BASE ?? https://fcm.googleapis.com/fcm }/fcm/send",
     "gateway_url_plus": "${ customer_secrets.FCM_BASE ?? https://fcm.googleapis.com/fcm }/fcm/send",

@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Access-Token": "${ customer_secrets.PUSHBULLET_ACCESSTOKEN }"
     },
-    "gateway_price_description": "Free — direct to Pushbullet v2/pushes (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Pushbullet destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Pushbullet destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to Pushbullet v2/pushes (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushbullet/v2/pushes",
     "gateway_url": "${ customer_secrets.PUSHBULLET_BASE ?? https://api.pushbullet.com }/v2/pushes",
     "gateway_url_plus": "${ customer_secrets.PUSHBULLET_BASE ?? https://api.pushbullet.com }/v2/pushes",

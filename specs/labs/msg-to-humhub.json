@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "Basic aHVtaHVidXNlcjpkZW1vMTIzcHc="
     },
-    "gateway_price_description": "Free — direct to your HumHub post API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment HumHub destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment HumHub destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your HumHub post API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/humhub/api/v1/post/container/123",
     "gateway_url": "${ customer_secrets.HUMHUB_API_BASE ?? https://humhub.example.com }/api/v1/post/container/${ customer_secrets.HUMHUB_CONTAINER_ID }",
     "gateway_url_plus": "${ customer_secrets.HUMHUB_API_BASE ?? https://humhub.example.com }/api/v1/post/container/${ customer_secrets.{{ params.container_id_secret }} }",

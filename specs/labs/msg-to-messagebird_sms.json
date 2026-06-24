@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "AccessKey ${ customer_secrets.MESSAGEBIRD_SMS_APIKEY }"
     },
-    "gateway_price_description": "Free — direct to MessageBird Messages API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment MessageBird SMS destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment MessageBird SMS destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to MessageBird Messages API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/messagebird/messages",
     "gateway_url": "${ customer_secrets.MESSAGEBIRD_SMS_API_BASE ?? https://rest.messagebird.com }/messages",
     "gateway_url_plus": "${ customer_secrets.MESSAGEBIRD_SMS_API_BASE ?? https://rest.messagebird.com }/messages",

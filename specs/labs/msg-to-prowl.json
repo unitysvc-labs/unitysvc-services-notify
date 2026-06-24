@@ -11,12 +11,11 @@
     "gateway_code_example_preset": "msg_to_channel_code_example_py_prowl",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_prowl",
     "gateway_content_type": "application/x-www-form-urlencoded",
-    "gateway_price_description": "Free — direct to Prowl API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Prowl destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Prowl destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to Prowl API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/prowl/publicapi/add",
     "gateway_url": "${ customer_secrets.PROWL_API_BASE ?? https://api.prowlapp.com }/publicapi/add",
     "gateway_url_plus": "${ customer_secrets.PROWL_API_BASE ?? https://api.prowlapp.com }/publicapi/add",
-    "transformer_channel_exists": true,
     "ops_testing_parameters": {
       "apikey_secret": "PROWL_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
@@ -29,6 +28,7 @@
     ],
     "test_apprise_url": "prowl://dkryFMT07elszGNU18fmtAHOV29gnuBIPW3ahovC",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "apikey_secret": {

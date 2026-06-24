@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "Basic YXBpOm1haWxndW5fZW1haWxhcGlrZXl4eXoxMjM="
     },
-    "gateway_price_description": "Free — direct to your Mailgun sending domain (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Mailgun destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Mailgun destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your Mailgun sending domain (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/mailgun_email/v3/notify.example.com/messages",
     "gateway_url": "${ customer_secrets.MAILGUN_EMAIL_BASE ?? https://api.mailgun.net }/v3/${ customer_secrets.MAILGUN_EMAIL_HOST }/messages",
     "gateway_url_plus": "${ customer_secrets.MAILGUN_EMAIL_BASE ?? https://api.mailgun.net }/v3/${ customer_secrets.{{ params.host_secret }} }/messages",

@@ -8,14 +8,14 @@
     "description": "Send notifications to your own MSG91 destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise msg91:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a MSG91 Flow API JSON body and post it to api.msg91.com (no Apprise).",
     "display_name": "MSG91 Messages",
     "gateway_body_template": "{\"template_id\":\"${ customer_secrets.MSG91_SMS_TEMPLATE }\",\"short_url\":0,\"recipients\":[{\"mobiles\":\"${ customer_secrets.MSG91_SMS_TARGETS }\",\"body\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}}]}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_msg91_sms",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_msg91_sms",
     "gateway_content_type": "application/json",
     "gateway_extra_headers": {
       "authkey": "${ customer_secrets.MSG91_SMS_AUTHKEY }"
     },
-    "gateway_code_example_preset": "msg_to_channel_code_example_py_msg91_sms",
-    "gateway_connectivity_preset": "msg_to_channel_connectivity_msg91_sms",
-    "gateway_price_description": "Free — direct to MSG91 Flow API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment MSG91 destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment MSG91 destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to MSG91 Flow API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/msg91_sms/api/v5/flow/",
     "gateway_url": "${ customer_secrets.MSG91_SMS_API_BASE ?? https://api.msg91.com }/api/v5/flow/",
     "gateway_url_plus": "${ customer_secrets.MSG91_SMS_API_BASE ?? https://api.msg91.com }/api/v5/flow/",

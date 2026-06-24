@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "X-api-Key": "${ customer_secrets.NOTIFIARR_APIKEY }"
     },
-    "gateway_price_description": "Free — direct to Notifiarr apprise API (no Apprise relay)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Notifiarr destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Notifiarr destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to Notifiarr apprise API (no Apprise relay)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/notifiarr/api/v1/notification/apprise",
     "gateway_url": "${ customer_secrets.NOTIFIARR_API_BASE ?? https://notifiarr.com }/api/v1/notification/apprise",
     "gateway_url_plus": "${ customer_secrets.NOTIFIARR_API_BASE ?? https://notifiarr.com }/api/v1/notification/apprise",

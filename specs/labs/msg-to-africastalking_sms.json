@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "apiKey": "${ customer_secrets.AFRICASTALKING_SMS_APIKEY }"
     },
-    "gateway_price_description": "Free — direct to Africa's Talking Messaging API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Africa's Talking destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Africa's Talking destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to Africa's Talking Messaging API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/africastalking_sms/version1/messaging",
     "gateway_url": "${ customer_secrets.AFRICASTALKING_SMS_API_BASE ?? https://api.africastalking.com }/version1/messaging",
     "gateway_url_plus": "${ customer_secrets.AFRICASTALKING_SMS_API_BASE ?? https://api.africastalking.com }/version1/messaging",

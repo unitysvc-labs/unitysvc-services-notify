@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "Basic ZGVtbzEyMzpkZW1vMTIz"
     },
-    "gateway_price_description": "Free — direct to your 46elks number (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment 46elks destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment 46elks destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your 46elks number (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/elks_sms/a1/sms",
     "gateway_url": "${ customer_secrets.ELKS_SMS_API_BASE ?? https://api.46elks.com }/a1/sms",
     "gateway_url_plus": "${ customer_secrets.ELKS_SMS_API_BASE ?? https://api.46elks.com }/a1/sms",

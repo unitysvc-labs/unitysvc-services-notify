@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "${ customer_secrets.SPARKPOST_APIKEY }"
     },
-    "gateway_price_description": "Free — direct to SparkPost transmissions API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment SparkPost destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment SparkPost destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to SparkPost transmissions API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/sparkpost/api/v1/transmissions",
     "gateway_url": "${ customer_secrets.SPARKPOST_API_BASE ?? https://api.sparkpost.com }/api/v1/transmissions",
     "gateway_url_plus": "${ customer_secrets.SPARKPOST_API_BASE ?? https://api.sparkpost.com }/api/v1/transmissions",

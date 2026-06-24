@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "X-API-Key": "${ customer_secrets.HTTPSMS_SMS_APIKEY }"
     },
-    "gateway_price_description": "Free — direct to httpSMS Messages API (no Apprise)",
-    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment httpSMS destinations, direct",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment httpSMS destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to httpSMS Messages API (no Apprise)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/httpsms_sms/v1/messages/send",
     "gateway_url": "${ customer_secrets.HTTPSMS_SMS_API_BASE ?? https://api.httpsms.com }/v1/messages/send",
     "gateway_url_plus": "${ customer_secrets.HTTPSMS_SMS_API_BASE ?? https://api.httpsms.com }/v1/messages/send",
