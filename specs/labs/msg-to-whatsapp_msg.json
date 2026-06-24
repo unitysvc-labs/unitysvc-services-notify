@@ -5,8 +5,18 @@
     "channel_name": "msg-to-whatsapp_msg",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own WhatsApp destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise whatsapp:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own WhatsApp destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise whatsapp:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway channels skip Apprise and transform the envelope into a native WhatsApp Cloud API {messaging_product, to, type, text} payload delivered straight to graph.facebook.com.",
     "display_name": "WhatsApp Messages",
+    "gateway_api_key": "${ customer_secrets.WHATSAPP_MSG_TOKEN }",
+    "gateway_body_template": "{\"messaging_product\":\"whatsapp\",\"to\":\"${ customer_secrets.WHATSAPP_MSG_TO }\",\"type\":\"text\",\"text\":{\"body\":{* _escape_json(((_body.title and _body.title ~= \"\") and (_body.title .. \"\\n\\n\") or \"\") .. (_body.body or \"\")) *}}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_whatsapp_msg",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_whatsapp_msg",
+    "gateway_content_type": "application/json",
+    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment WhatsApp destinations, direct",
+    "gateway_price_description": "Free — direct to the WhatsApp Cloud API (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/whatsapp/v17.0/1234567890/messages",
+    "gateway_url": "${ customer_secrets.WHATSAPP_API_BASE ?? https://graph.facebook.com }/v17.0/${ customer_secrets.WHATSAPP_MSG_FROM_PHONE_ID }/messages",
+    "gateway_url_plus": "${ customer_secrets.WHATSAPP_API_BASE ?? https://graph.facebook.com }/v17.0/${ customer_secrets.{{ params.from_phone_id_secret }} }/messages",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_phone_id_secret": "WHATSAPP_MSG_FROM_PHONE_ID",
@@ -21,6 +31,7 @@
     ],
     "test_apprise_url": "whatsapp://token123abc@1234567890/15551234567",
     "time_created": "2026-06-19T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "from_phone_id_secret": {
