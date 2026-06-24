@@ -1,0 +1,92 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notifications to your own Vonage destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise vonage:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a Vonage SMS API form body and post it to rest.nexmo.com (no Apprise).",
+  "name": "msg-to-vonage_sms",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "vonage_sms",
+    "apprise",
+    "gateway"
+  ],
+  "time_created": "2026-06-20T00:00:00Z",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"vonage://${ customer_secrets.VONAGE_SMS_APIKEY }:${ customer_secrets.VONAGE_SMS_SECRET }@${ customer_secrets.VONAGE_SMS_FROM_PHONE }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"vonage://${ customer_secrets.{{ params.apikey_secret }} }:${ customer_secrets.{{ params.secret_secret }} }@${ customer_secrets.{{ params.from_phone_secret }} }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    },
+    "gateway": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.VONAGE_SMS_BASE ?? https://rest.nexmo.com }/sms/json",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "api_key=${ customer_secrets.VONAGE_SMS_APIKEY }&api_secret=${ customer_secrets.VONAGE_SMS_SECRET }&from=${ customer_secrets.VONAGE_SMS_FROM_PHONE }&to=${ customer_secrets.VONAGE_SMS_TO }&text={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/x-www-form-urlencoded"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 3
+    },
+    "gateway-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.VONAGE_SMS_BASE ?? https://rest.nexmo.com }/sms/json",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "api_key=${ customer_secrets.VONAGE_SMS_APIKEY }&api_secret=${ customer_secrets.VONAGE_SMS_SECRET }&from=${ customer_secrets.VONAGE_SMS_FROM_PHONE }&to=${ customer_secrets.VONAGE_SMS_TO }&text={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/x-www-form-urlencoded"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 4
+    }
+  }
+}

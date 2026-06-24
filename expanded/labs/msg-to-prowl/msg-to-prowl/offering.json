@@ -1,0 +1,92 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notifications to your own Prowl destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise prowl:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+  "name": "msg-to-prowl",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "prowl",
+    "apprise",
+    "gateway"
+  ],
+  "time_created": "2026-06-20T00:00:00Z",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"prowl://${ customer_secrets.PROWL_APIKEY }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"prowl://${ customer_secrets.{{ params.apikey_secret }} }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    },
+    "gateway": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.PROWL_API_BASE ?? https://api.prowlapp.com }/publicapi/add",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "apikey=${ customer_secrets.PROWL_APIKEY }&application={* _escape_json(_body.title or \"UnitySVC\") *}&description={* _escape_json(_body.body or _body.title or \"\") *}&event={* _escape_json(_body.title or \"\") *}&priority=0"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/x-www-form-urlencoded"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 3
+    },
+    "gateway-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.PROWL_API_BASE ?? https://api.prowlapp.com }/publicapi/add",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "apikey=${ customer_secrets.PROWL_APIKEY }&application={* _escape_json(_body.title or \"UnitySVC\") *}&description={* _escape_json(_body.body or _body.title or \"\") *}&event={* _escape_json(_body.title or \"\") *}&priority=0"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/x-www-form-urlencoded"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 4
+    }
+  }
+}

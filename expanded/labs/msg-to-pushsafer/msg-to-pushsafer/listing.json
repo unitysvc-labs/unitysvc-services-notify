@@ -1,0 +1,105 @@
+{
+  "currency": "USD",
+  "display_name": "Pushsafer Messages",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "apprise_url": "psafers://pushsaferprivatekeyxyz123",
+        "meta": {
+          "channels": [
+            "apprise"
+          ]
+        },
+        "name": "msg_to_apprise_connectivity"
+      }
+    },
+    "Connectivity test (gateway)": {
+      "$doc_preset": {
+        "channel": "gateway",
+        "local_url": "https://mock.unitysvc.dev/pushsafer/api",
+        "meta": {
+          "channels": [
+            "gateway"
+          ]
+        },
+        "name": "msg_to_channel_connectivity_pushsafer"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "apprise_url": "psafers://pushsaferprivatekeyxyz123",
+        "meta": {
+          "channels": [
+            "apprise"
+          ]
+        },
+        "name": "msg_to_apprise_code_example_py"
+      }
+    },
+    "Python code example (gateway)": {
+      "$doc_preset": {
+        "channel": "gateway",
+        "local_url": "https://mock.unitysvc.dev/pushsafer/api",
+        "meta": {
+          "channels": [
+            "gateway"
+          ]
+        },
+        "name": "msg_to_channel_code_example_py_pushsafer"
+      }
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free \u2014 send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message \u2014 extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      },
+      "gateway": {
+        "description": "Free \u2014 direct to Pushsafer API (no Apprise)",
+        "price": "0",
+        "type": "constant"
+      },
+      "gateway-plus": {
+        "description": "$0.001 per message \u2014 extra per-enrollment Pushsafer destinations, direct",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-pushsafer",
+  "service_options": {
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "privatekey_secret": "PUSHSAFER_PRIVATEKEY"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-20T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "privatekey_secret": {
+        "description": "Name of the customer secret holding this enrollment's Pushsafer privatekey",
+        "type": "string"
+      }
+    },
+    "required": [
+      "privatekey_secret"
+    ],
+    "type": "object"
+  }
+}

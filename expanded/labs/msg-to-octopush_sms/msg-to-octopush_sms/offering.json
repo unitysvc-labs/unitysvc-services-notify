@@ -1,0 +1,96 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notifications to your own Octopush destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise octopush:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into an Octopush SMS Campaign API JSON body and post it to api.octopush.com (no Apprise).",
+  "name": "msg-to-octopush_sms",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "octopush_sms",
+    "apprise",
+    "gateway"
+  ],
+  "time_created": "2026-06-20T00:00:00Z",
+  "upstream_access_config": {
+    "apprise": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"octopush://${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }/${ customer_secrets.OCTOPUSH_SMS_API_KEY }/${ customer_secrets.OCTOPUSH_SMS_TARGETS }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"urls\":\"octopush://${ customer_secrets.{{ params.api_login_secret }} }/${ customer_secrets.{{ params.api_key_secret }} }/${ customer_secrets.{{ params.targets_secret }} }\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    },
+    "gateway": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"recipients\":[{\"phone_number\":\"${ customer_secrets.OCTOPUSH_SMS_TO }\"}],\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *},\"purpose\":\"alert\",\"sender\":\"${ customer_secrets.OCTOPUSH_SMS_FROM }\"}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json",
+                "api-key": "${ customer_secrets.OCTOPUSH_SMS_API_KEY }",
+                "api-login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 3
+    },
+    "gateway-plus": {
+      "access_method": "http",
+      "base_url": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"recipients\":[{\"phone_number\":\"${ customer_secrets.OCTOPUSH_SMS_TO }\"}],\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *},\"purpose\":\"alert\",\"sender\":\"${ customer_secrets.OCTOPUSH_SMS_FROM }\"}"
+            }
+          },
+          "proxy_rewrite": {
+            "headers": {
+              "set": {
+                "Content-Type": "application/json",
+                "api-key": "${ customer_secrets.OCTOPUSH_SMS_API_KEY }",
+                "api-login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }"
+              }
+            }
+          }
+        }
+      },
+      "sort_order": 4
+    }
+  }
+}

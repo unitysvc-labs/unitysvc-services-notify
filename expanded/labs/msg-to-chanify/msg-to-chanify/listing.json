@@ -1,0 +1,105 @@
+{
+  "currency": "USD",
+  "display_name": "Chanify Messages",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "apprise_url": "chanify://DKRY5CJQX4BI",
+        "meta": {
+          "channels": [
+            "apprise"
+          ]
+        },
+        "name": "msg_to_apprise_connectivity"
+      }
+    },
+    "Connectivity test (gateway)": {
+      "$doc_preset": {
+        "channel": "gateway",
+        "local_url": "https://mock.unitysvc.dev/chanify/v1/sender/demo123/",
+        "meta": {
+          "channels": [
+            "gateway"
+          ]
+        },
+        "name": "msg_to_channel_connectivity_chanify"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "apprise_url": "chanify://DKRY5CJQX4BI",
+        "meta": {
+          "channels": [
+            "apprise"
+          ]
+        },
+        "name": "msg_to_apprise_code_example_py"
+      }
+    },
+    "Python code example (gateway)": {
+      "$doc_preset": {
+        "channel": "gateway",
+        "local_url": "https://mock.unitysvc.dev/chanify/v1/sender/demo123/",
+        "meta": {
+          "channels": [
+            "gateway"
+          ]
+        },
+        "name": "msg_to_channel_code_example_py_chanify"
+      }
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free \u2014 send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message \u2014 extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      },
+      "gateway": {
+        "description": "Free \u2014 direct to your Chanify sender token (no Apprise)",
+        "price": "0",
+        "type": "constant"
+      },
+      "gateway-plus": {
+        "description": "$0.001 per message \u2014 extra per-enrollment Chanify destinations, direct",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-chanify",
+  "service_options": {
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "token_secret": "CHANIFY_TOKEN"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-20T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "token_secret": {
+        "description": "Name of the customer secret holding this enrollment's Chanify token",
+        "type": "string"
+      }
+    },
+    "required": [
+      "token_secret"
+    ],
+    "type": "object"
+  }
+}

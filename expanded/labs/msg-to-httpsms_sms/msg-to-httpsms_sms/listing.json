@@ -1,0 +1,117 @@
+{
+  "currency": "USD",
+  "display_name": "httpSMS Messages",
+  "documents": {
+    "Connectivity test": {
+      "$doc_preset": {
+        "apprise_url": "httpsms://httpsms_smsapikeyxyz123@+15551234567/+15551234567",
+        "meta": {
+          "channels": [
+            "apprise"
+          ]
+        },
+        "name": "msg_to_apprise_connectivity"
+      }
+    },
+    "Connectivity test (gateway)": {
+      "$doc_preset": {
+        "channel": "gateway",
+        "local_url": "https://mock.unitysvc.dev/httpsms_sms/v1/messages/send",
+        "meta": {
+          "channels": [
+            "gateway"
+          ]
+        },
+        "name": "msg_to_channel_connectivity_httpsms_sms"
+      }
+    },
+    "Python code example": {
+      "$doc_preset": {
+        "apprise_url": "httpsms://httpsms_smsapikeyxyz123@+15551234567/+15551234567",
+        "meta": {
+          "channels": [
+            "apprise"
+          ]
+        },
+        "name": "msg_to_apprise_code_example_py"
+      }
+    },
+    "Python code example (gateway)": {
+      "$doc_preset": {
+        "channel": "gateway",
+        "local_url": "https://mock.unitysvc.dev/httpsms_sms/v1/messages/send",
+        "meta": {
+          "channels": [
+            "gateway"
+          ]
+        },
+        "name": "msg_to_channel_code_example_py_httpsms_sms"
+      }
+    }
+  },
+  "list_price": {
+    "channels": {
+      "apprise": {
+        "description": "Free \u2014 send notifications to your own channel",
+        "price": "0",
+        "type": "constant"
+      },
+      "apprise-plus": {
+        "description": "$0.001 per message \u2014 extra per-enrollment destinations",
+        "price": "0.001",
+        "type": "constant"
+      },
+      "gateway": {
+        "description": "Free \u2014 direct to httpSMS Messages API (no Apprise)",
+        "price": "0",
+        "type": "constant"
+      },
+      "gateway-plus": {
+        "description": "$0.001 per message \u2014 extra per-enrollment httpSMS destinations, direct",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "apprise",
+    "type": "channel"
+  },
+  "name": "labs/msg-to-httpsms_sms",
+  "service_options": {
+    "ops_testing_parameters": {
+      "apikey_secret": "HTTPSMS_SMS_APIKEY",
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "from_phone_secret": "HTTPSMS_SMS_FROM_PHONE",
+      "targets_secret": "HTTPSMS_SMS_TARGETS"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-06-20T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "apikey_secret": {
+        "description": "Name of the customer secret holding this enrollment's httpSMS apikey",
+        "type": "string"
+      },
+      "from_phone_secret": {
+        "description": "Name of the customer secret holding this enrollment's httpSMS from phone",
+        "type": "string"
+      },
+      "targets_secret": {
+        "description": "Name of the customer secret holding this enrollment's httpSMS targets",
+        "type": "string"
+      }
+    },
+    "required": [
+      "apikey_secret",
+      "from_phone_secret",
+      "targets_secret"
+    ],
+    "type": "object"
+  }
+}
