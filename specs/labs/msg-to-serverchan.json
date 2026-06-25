@@ -5,8 +5,17 @@
     "channel_name": "msg-to-serverchan",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own ServerChan destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise schan:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own ServerChan destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise schan:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway / gateway-plus transformer channels instead POST a native ServerChan payload directly to sctapi.ftqq.com, bypassing Apprise.",
     "display_name": "ServerChan Messages",
+    "gateway_body_template": "{\"title\":{* _escape_json(_body.title or \"\") *},\"desp\":{* _escape_json(_body.body or \"\") *}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_serverchan",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_serverchan",
+    "gateway_content_type": "application/json",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment ServerChan destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your ServerChan endpoint (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/serverchan/demotoken.send",
+    "gateway_url": "${ customer_secrets.SERVERCHAN_BASE ?? https://sctapi.ftqq.com }/${ customer_secrets.SERVERCHAN_TOKEN }.send",
+    "gateway_url_plus": "${ customer_secrets.SERVERCHAN_BASE ?? https://sctapi.ftqq.com }/${ customer_secrets.{{ params.token_secret }} }.send",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_secret": "SERVERCHAN_TOKEN"
@@ -19,6 +28,7 @@
     ],
     "test_apprise_url": "schan://SCT123456abcdef",
     "time_created": "2026-06-19T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "token_secret": {

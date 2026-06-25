@@ -5,13 +5,25 @@
     "channel_name": "msg-to-matrix",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Matrix destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise matrix:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Matrix destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise matrix:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway / gateway-plus transformer channels instead compose the Matrix client API URL from your stored secrets and POST a native m.room.message payload directly, bypassing Apprise.",
     "display_name": "Matrix Messages",
+    "gateway_api_key": "${ customer_secrets.MATRIX_TOKEN }",
+    "gateway_body_template": "{\"msgtype\":\"m.text\",\"body\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_matrix",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_matrix",
+    "gateway_content_type": "application/json",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Matrix destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your Matrix homeserver (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/matrix/_matrix/client/v3/rooms/demo/send/m.room.message/1",
+    "gateway_url": "${ customer_secrets.MATRIX_BASE ?? https://matrix.org }/_matrix/client/v3/rooms/${ customer_secrets.MATRIX_ROOM }/send/m.room.message/${ customer_secrets.MATRIX_TXN }",
+    "gateway_url_plus": "${ customer_secrets.MATRIX_BASE ?? https://matrix.org }/_matrix/client/v3/rooms/${ customer_secrets.{{ params.room_secret }} }/send/m.room.message/${ customer_secrets.{{ params.txn_secret }} }",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "MATRIX_HOST",
       "password_secret": "MATRIX_PASSWORD",
+      "room_secret": "MATRIX_ROOM",
       "targets_secret": "MATRIX_TARGETS",
+      "txn_secret": "MATRIX_TXN",
       "user_secret": "MATRIX_USER"
     },
     "tags": [
@@ -22,6 +34,7 @@
     ],
     "test_apprise_url": "matrix://user:pass@hostname.example.com/#room",
     "time_created": "2026-06-19T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "host_secret": {
@@ -32,8 +45,16 @@
           "description": "Name of the customer secret holding this enrollment's Matrix password",
           "type": "string"
         },
+        "room_secret": {
+          "description": "Name of the customer secret holding this enrollment's Matrix room ID (URL-encoded); used by the gateway-plus transformer channel",
+          "type": "string"
+        },
         "targets_secret": {
           "description": "Name of the customer secret holding this enrollment's Matrix targets",
+          "type": "string"
+        },
+        "txn_secret": {
+          "description": "Name of the customer secret holding this enrollment's Matrix transaction ID; used by the gateway-plus transformer channel",
           "type": "string"
         },
         "user_secret": {

@@ -5,8 +5,20 @@
     "channel_name": "msg-to-burstsms_sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Burst SMS destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise burstsms:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Burst SMS destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise burstsms:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a Burst SMS send-sms.json form body and post it to api.transmitsms.com (no Apprise).",
     "display_name": "Burst SMS Messages",
+    "gateway_body_template": "to=${ customer_secrets.BURSTSMS_SMS_TO }&from=${ customer_secrets.BURSTSMS_SMS_FROM }&message={* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_burstsms_sms",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_burstsms_sms",
+    "gateway_content_type": "application/x-www-form-urlencoded",
+    "gateway_extra_headers": {
+      "Authorization": "Basic ZGVtbzEyMzpkZW1vMTIz"
+    },
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Burst SMS destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your Burst SMS account (no Apprise)",
+    "gateway_test_local_url": "https://demo123:demo123@mock.unitysvc.dev/burstsms_sms/send-sms.json",
+    "gateway_url": "${ customer_secrets.BURSTSMS_SMS_API_BASE ?? https://api.transmitsms.com }/send-sms.json",
+    "gateway_url_plus": "${ customer_secrets.BURSTSMS_SMS_API_BASE ?? https://api.transmitsms.com }/send-sms.json",
     "ops_testing_parameters": {
       "apikey_secret": "BURSTSMS_SMS_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
@@ -22,6 +34,7 @@
     ],
     "test_apprise_url": "burstsms://dkry5cjqx4bi:dkry5cjqx4bi@+15551234567/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "apikey_secret": {

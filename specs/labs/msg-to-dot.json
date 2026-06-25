@@ -5,8 +5,18 @@
     "channel_name": "msg-to-dot",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own DOT destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise dot:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own DOT destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise dot:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway channels skip Apprise and transform the envelope into a native DOT API {message} payload delivered straight to the DOT device API.",
     "display_name": "DOT Messages",
+    "gateway_api_key": "${ customer_secrets.DOT_APIKEY }",
+    "gateway_body_template": "{\"message\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_dot",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_dot",
+    "gateway_content_type": "application/json",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment DOT destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to DOT device API (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/dot/api/authV2/open/device/demo123/text",
+    "gateway_url": "${ customer_secrets.DOT_BASE ?? https://api.dot-api.com }/api/authV2/open/device/${ customer_secrets.DOT_DEVICE_ID }/text",
+    "gateway_url_plus": "${ customer_secrets.DOT_BASE ?? https://api.dot-api.com }/api/authV2/open/device/${ customer_secrets.{{ params.device_id_secret }} }/text",
     "ops_testing_parameters": {
       "apikey_secret": "DOT_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
@@ -20,6 +30,7 @@
     ],
     "test_apprise_url": "dot://dotapikeyxyz123@dotdevice/",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "apikey_secret": {

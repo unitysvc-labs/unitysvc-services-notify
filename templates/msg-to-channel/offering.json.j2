@@ -12,6 +12,7 @@
   "upstream_access_config": {
     "apprise": {
       "access_method": "http",
+      "sort_order": 2,
       "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
       "raw": {
         "request_transformer": {
@@ -26,6 +27,7 @@
     },
     "apprise-plus": {
       "access_method": "http",
+      "sort_order": 4,
       "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
       "raw": {
         "request_transformer": {
@@ -38,5 +40,31 @@
         }
       }
     }
+{%- if transformer_channel_exists | default(false) %}
+    ,"gateway": {
+      "access_method": "http",
+      {%- if gateway_api_key is defined %}
+      "api_key": {{ gateway_api_key | tojson }},
+      {%- endif %}
+      "sort_order": 1,
+      "base_url": {{ gateway_url | tojson }},
+      "raw": { "request_transformer": {
+        "body_transformer": { "request": { "input_format": "json", "template": {{ gateway_body_template | tojson }} } },
+        "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }}{% if gateway_extra_headers is defined %}{% for hk, hv in gateway_extra_headers.items() %}, {{ hk | tojson }}: {{ hv | tojson }}{% endfor %}{% endif %} } } }
+      } }
+    },
+    "gateway-plus": {
+      "access_method": "http",
+      {%- if gateway_api_key is defined %}
+      "api_key": {{ gateway_api_key | tojson }},
+      {%- endif %}
+      "sort_order": 3,
+      "base_url": {{ gateway_url_plus | tojson }},
+      "raw": { "request_transformer": {
+        "body_transformer": { "request": { "input_format": "json", "template": {{ gateway_body_template | tojson }} } },
+        "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }}{% if gateway_extra_headers is defined %}{% for hk, hv in gateway_extra_headers.items() %}, {{ hk | tojson }}: {{ hv | tojson }}{% endfor %}{% endif %} } } }
+      } }
+    }
+{%- endif %}
   }
 }

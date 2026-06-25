@@ -5,8 +5,20 @@
     "channel_name": "msg-to-kumulos",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Kumulos destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise kumulos:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Kumulos destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise kumulos:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a Kumulos notifications API JSON body and post it to messages.kumulos.com (no Apprise).",
     "display_name": "Kumulos Messages",
+    "gateway_body_template": "{\"target\":{\"broadcast\":true},\"content\":{\"title\":{* _escape_json(_body.title or \"\") *},\"message\":{* _escape_json(_body.body or \"\") *}}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_kumulos",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_kumulos",
+    "gateway_content_type": "application/json",
+    "gateway_extra_headers": {
+      "Authorization": "Basic ZGVtbzEyMzpkZW1vMTIz"
+    },
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Kumulos destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to Kumulos notifications API (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/kumulos/v2/notifications",
+    "gateway_url": "${ customer_secrets.KUMULOS_API_BASE ?? https://messages.kumulos.com }/v2/notifications",
+    "gateway_url_plus": "${ customer_secrets.KUMULOS_API_BASE ?? https://messages.kumulos.com }/v2/notifications",
     "ops_testing_parameters": {
       "apikey_secret": "KUMULOS_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
@@ -20,6 +32,7 @@
     ],
     "test_apprise_url": "kumulos://12345678-1234-4123-8123-123456789abc/DKRY5CJQX4BIPW3AHOV29GNU18FMT07ELSZ6",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "apikey_secret": {

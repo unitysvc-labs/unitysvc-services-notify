@@ -5,8 +5,17 @@
     "channel_name": "msg-to-smtp2go_email",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own SMTP2Go destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise smtp2go:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own SMTP2Go destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise smtp2go:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway channels skip Apprise and transform the envelope into a native SMTP2GO v3 email/send payload delivered straight to api.smtp2go.com.",
     "display_name": "SMTP2Go Messages",
+    "gateway_body_template": "{\"api_key\":\"${ customer_secrets.SMTP2GO_EMAIL_APIKEY }\",\"sender\":\"${ customer_secrets.SMTP2GO_FROM }\",\"to\":[\"${ customer_secrets.SMTP2GO_TO }\"],\"subject\":{* _escape_json(_body.title or \"\") *},\"textbody\":{* _escape_json(_body.body or \"\") *}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_smtp2go_email",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_smtp2go_email",
+    "gateway_content_type": "application/json",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment SMTP2GO destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to SMTP2GO v3 email/send (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/smtp2go/v3/email/send",
+    "gateway_url": "${ customer_secrets.SMTP2GO_API_BASE ?? https://api.smtp2go.com }/v3/email/send",
+    "gateway_url_plus": "${ customer_secrets.SMTP2GO_API_BASE ?? https://api.smtp2go.com }/v3/email/send",
     "ops_testing_parameters": {
       "apikey_secret": "SMTP2GO_EMAIL_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
@@ -21,6 +30,7 @@
     ],
     "test_apprise_url": "smtp2go://smtp2go_emailuser@notify.example.com/smtp2go_emailapikeyxyz123/",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "apikey_secret": {

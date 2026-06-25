@@ -5,8 +5,17 @@
     "channel_name": "msg-to-chanify",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Chanify destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise chanify:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Chanify destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise chanify:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a Chanify form-encoded payload and post it to the Chanify sender API (no Apprise).",
     "display_name": "Chanify Messages",
+    "gateway_body_template": "text={* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_chanify",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_chanify",
+    "gateway_content_type": "application/x-www-form-urlencoded",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Chanify destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your Chanify sender token (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/chanify/v1/sender/demo123/",
+    "gateway_url": "${ customer_secrets.CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.CHANIFY_TOKEN }/",
+    "gateway_url_plus": "${ customer_secrets.CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.{{ params.token_secret }} }/",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_secret": "CHANIFY_TOKEN"
@@ -19,6 +28,7 @@
     ],
     "test_apprise_url": "chanify://DKRY5CJQX4BI",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "token_secret": {

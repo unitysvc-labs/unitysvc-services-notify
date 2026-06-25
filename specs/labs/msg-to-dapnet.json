@@ -5,8 +5,20 @@
     "channel_name": "msg-to-dapnet",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own DAPNET destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise dapnet:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own DAPNET destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise dapnet:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a DAPNET calls API JSON body and post it to hampager.de (no Apprise).",
     "display_name": "DAPNET Messages",
+    "gateway_body_template": "{\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *},\"callSignNames\":[\"${ customer_secrets.DAPNET_CALLSIGN }\"],\"transmitterGroupNames\":[\"${ customer_secrets.DAPNET_TRANSMITTER_GROUP }\"],\"emergency\":false}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_dapnet",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_dapnet",
+    "gateway_content_type": "application/json",
+    "gateway_extra_headers": {
+      "Authorization": "Basic ZGFwbmV0dXNlcjpkZW1vMTIz"
+    },
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment DAPNET destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to DAPNET calls API (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/dapnet/api/calls",
+    "gateway_url": "${ customer_secrets.DAPNET_API_BASE ?? https://hampager.de }/api/calls",
+    "gateway_url_plus": "${ customer_secrets.DAPNET_API_BASE ?? https://hampager.de }/api/calls",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "password_secret": "DAPNET_PASSWORD",
@@ -21,6 +33,7 @@
     ],
     "test_apprise_url": "dapnet://dapnetuser:dapnetpass@ab1cd",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "password_secret": {

@@ -5,8 +5,20 @@
     "channel_name": "msg-to-lametric",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own LaMetric destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise lametrics:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own LaMetric destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise lametrics:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway/gateway-plus channels transform the envelope directly into a LaMetric device notification JSON body and post it to your LaMetric device API (no Apprise).",
     "display_name": "LaMetric Messages",
+    "gateway_body_template": "{\"model\":{\"cycles\":1,\"frames\":[{\"icon\":0,\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}]}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_lametric",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_lametric",
+    "gateway_content_type": "application/json",
+    "gateway_extra_headers": {
+      "Authorization": "Basic ZGV2OmRlbW8xMjM="
+    },
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment LaMetric destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your LaMetric device API (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/lametric/api/v2/device/notifications",
+    "gateway_url": "${ customer_secrets.LAMETRIC_API_BASE ?? https://developer.lametric.com/api/v2 }/device/notifications",
+    "gateway_url_plus": "${ customer_secrets.LAMETRIC_API_BASE ?? https://developer.lametric.com/api/v2 }/device/notifications",
     "ops_testing_parameters": {
       "apikey_secret": "LAMETRIC_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
@@ -20,6 +32,7 @@
     ],
     "test_apprise_url": "lametrics://lametricapikeyxyz123@notify.example.com",
     "time_created": "2026-06-20T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "apikey_secret": {

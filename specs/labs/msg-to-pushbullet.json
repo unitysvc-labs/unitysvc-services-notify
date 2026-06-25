@@ -5,8 +5,20 @@
     "channel_name": "msg-to-pushbullet",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Pushbullet destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise pbul:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Pushbullet destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise pbul:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway channels skip Apprise and transform the envelope into a native Pushbullet v2/pushes JSON payload delivered straight to api.pushbullet.com.",
     "display_name": "Pushbullet Messages",
+    "gateway_body_template": "{\"type\":\"note\",\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_pushbullet",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_pushbullet",
+    "gateway_content_type": "application/json",
+    "gateway_extra_headers": {
+      "Access-Token": "${ customer_secrets.PUSHBULLET_ACCESSTOKEN }"
+    },
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Pushbullet destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to Pushbullet v2/pushes (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/pushbullet/v2/pushes",
+    "gateway_url": "${ customer_secrets.PUSHBULLET_BASE ?? https://api.pushbullet.com }/v2/pushes",
+    "gateway_url_plus": "${ customer_secrets.PUSHBULLET_BASE ?? https://api.pushbullet.com }/v2/pushes",
     "ops_testing_parameters": {
       "accesstoken_secret": "PUSHBULLET_ACCESSTOKEN",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
@@ -19,6 +31,7 @@
     ],
     "test_apprise_url": "pbul://o.abcdefghijklmnop",
     "time_created": "2026-06-19T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "accesstoken_secret": {

@@ -5,12 +5,22 @@
     "channel_name": "msg-to-msteams",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Microsoft Teams destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise workflows:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send notifications to your own Microsoft Teams destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise workflows:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters. The gateway / gateway-plus transformer channels instead compose your Microsoft Teams incoming webhook URL (webhook.office.com /webhookb2/ connector) from your stored secrets and POST a native MessageCard payload directly, bypassing Apprise.",
     "display_name": "Microsoft Teams Messages",
+    "gateway_body_template": "{\"@type\":\"MessageCard\",\"@context\":\"https://schema.org/extensions\",\"title\":{* _escape_json(_body.title or \"\") *},\"text\":{* _escape_json(_body.body or \"\") *}}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_msteams",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_msteams",
+    "gateway_content_type": "application/json",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Microsoft Teams destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to your Microsoft Teams incoming webhook (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/msteams/webhookb2/demo",
+    "gateway_url": "${ customer_secrets.MSTEAMS_WEBHOOK_HOST ?? https://outlook.office.com }/webhookb2/${ customer_secrets.MSTEAMS_WEBHOOK_PATH }",
+    "gateway_url_plus": "${ customer_secrets.MSTEAMS_WEBHOOK_HOST ?? https://outlook.office.com }/webhookb2/${ customer_secrets.{{ params.webhook_path_secret }} }",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "MSTEAMS_HOST",
       "signature_secret": "MSTEAMS_SIGNATURE",
+      "webhook_path_secret": "MSTEAMS_WEBHOOK_PATH",
       "workflow_secret": "MSTEAMS_WORKFLOW"
     },
     "tags": [
@@ -21,6 +31,7 @@
     ],
     "test_apprise_url": "workflows://hostname.example.com/workflowid/AbCdEfGhSignature",
     "time_created": "2026-06-19T00:00:00Z",
+    "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
         "host_secret": {
@@ -29,6 +40,10 @@
         },
         "signature_secret": {
           "description": "Name of the customer secret holding this enrollment's Microsoft Teams signature",
+          "type": "string"
+        },
+        "webhook_path_secret": {
+          "description": "Name of the customer secret holding this enrollment's Microsoft Teams incoming-webhook path (the opaque segment after /webhookb2/); used by the gateway-plus transformer channel",
           "type": "string"
         },
         "workflow_secret": {

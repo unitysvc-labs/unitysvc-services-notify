@@ -5,15 +5,21 @@
     "Connectivity test": {
       "$doc_preset": {
         "name": "{{ connectivity_preset }}",
-        "apprise_url": "{{ test_apprise_url | default('') }}"
+        "apprise_url": "{{ test_apprise_url | default('') }}",
+        "meta": { "channels": ["apprise"] }
       }
     },
     "Python code example": {
       "$doc_preset": {
         "name": "{{ code_example_preset }}",
-        "apprise_url": "{{ test_apprise_url | default('') }}"
+        "apprise_url": "{{ test_apprise_url | default('') }}",
+        "meta": { "channels": ["apprise"] }
       }
     }
+{%- if transformer_channel_exists | default(false) %}
+    ,"Connectivity test (gateway)": { "$doc_preset": { "name": "{{ gateway_connectivity_preset }}", "local_url": {{ gateway_test_local_url | tojson }}, "channel": "gateway", "meta": { "channels": ["gateway"] } } }
+    ,"Python code example (gateway)": { "$doc_preset": { "name": "{{ gateway_code_example_preset }}", "local_url": {{ gateway_test_local_url | tojson }}, "channel": "gateway", "meta": { "channels": ["gateway"] } } }
+{%- endif %}
   },
   "list_price": {
     "channels": {
@@ -27,6 +33,10 @@
         "price": "{{ plus_price | default('0.001') }}",
         "type": "constant"
       }
+{%- if transformer_channel_exists | default(false) %}
+,"gateway": { "description": {{ gateway_price_description | default('Free — direct to your Discord webhook (no Apprise)') | tojson }}, "price": "0", "type": "constant" }
+,"gateway-plus": { "description": {{ gateway_plus_price_description | default('$0.001 per message — extra per-enrollment destinations, direct') | tojson }}, "price": "{{ plus_price | default('0.001') }}", "type": "constant" }
+{%- endif %}
     },
     "default": "apprise",
     "type": "channel"
