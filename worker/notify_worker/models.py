@@ -4,6 +4,7 @@ from typing import Literal
 
 class SendRequest(BaseModel):
     message: str
+    title: str = ""          # subject line for channels that have one (email)
     target: str = ""
     format: Literal["text", "html", "markdown"] = "text"
     # gateway injects routing_key into body

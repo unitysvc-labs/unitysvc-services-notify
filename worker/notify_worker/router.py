@@ -1,5 +1,6 @@
 from notify_worker.channels.base import ChannelHandler
 from notify_worker.channels.discord import DiscordHandler
+from notify_worker.channels.email import EmailHandler
 from notify_worker.channels.apprise_handler import (
     SlackHandler, TelegramHandler, GotifyHandler, GchatHandler, TeamsHandler,
     PushoverHandler, MattermostHandler, RocketchatHandler, LineHandler,
@@ -11,6 +12,7 @@ from notify_worker.channels.apprise_handler import (
 
 _REGISTRY: dict[str, ChannelHandler] = {
     "discord":    DiscordHandler(),
+    "email":      EmailHandler(),
     "slack":      SlackHandler(),
     "telegram":   TelegramHandler(),
     "gotify":     GotifyHandler(),
