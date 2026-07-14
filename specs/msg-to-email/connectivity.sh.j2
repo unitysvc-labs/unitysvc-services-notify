@@ -1,0 +1,31 @@
+#!/bin/bash
+# Connectivity test for msg-to-email — the gateway-native notify://email
+# primitive (unitysvc#1526). There is NO seller upstream: the gateway
+# short-circuits the request and the platform backend queues the email.
+#
+#   local_testing : there is no server to reach — the response is produced by
+#                   the gateway itself (cf. the resp:// services). This branch
+#                   always passes; it exists only to confirm wiring. Gateway
+#                   test deliveries land in the platform's mailpit sink
+#                   (notify-test@svcmarket.com).
+#   gateway       : POST the canonical msg envelope through the gateway and
+#                   expect 2xx (202 Accepted — the notification is queued).
+set -o pipefail
+
+{% if local_testing %}
+echo "connectivity ok (gateway-native notify://email, no upstream)"
+{% else %}
+status=$(curl -sS --max-time 10 \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer ${UNITYSVC_API_KEY}" \
+    -d '{"title":"msg-to-email connectivity","body":"connectivity probe","type":"info","format":"text"}' \
+    -o /dev/null -w "%{http_code}" \
+    "{{ service_base_url }}" 2>/dev/null)
+
+case "$status" in
+  2??) echo "connectivity ok (HTTP $status)"; exit 0 ;;
+  000) echo "connectivity failed: could not connect to {{ service_base_url }}" >&2; exit 1 ;;
+  *)   echo "connectivity failed: HTTP $status from {{ service_base_url }}" >&2; exit 1 ;;
+esac
+{% endif %}
