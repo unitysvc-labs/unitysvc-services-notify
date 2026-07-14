@@ -1,0 +1,89 @@
+{
+  "currency": "USD",
+  "display_name": "Email Messages (Platform)",
+  "documents": {
+    "Connectivity test (default)": {
+      "category": "connectivity_test",
+      "description": "POST the msg envelope through the gateway (default channel \u2014 delivers to your UNITYSVC_NOTIFY_EMAIL address)",
+      "file_path": "connectivity.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "channels": [
+          "default"
+        ],
+        "output_contains": "connectivity ok"
+      },
+      "mime_type": "bash"
+    },
+    "Connectivity test (plus)": {
+      "category": "connectivity_test",
+      "description": "POST the msg envelope through the gateway (plus channel \u2014 delivers to the enrollment's 'to' recipient)",
+      "file_path": "connectivity.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "channels": [
+          "plus"
+        ],
+        "output_contains": "connectivity ok"
+      },
+      "mime_type": "bash"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Python (httpx) example \u2014 send an email notification via the msg envelope",
+      "file_path": "code-example.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ]
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "channels": {
+      "default": {
+        "description": "Free \u2014 email to your configured UNITYSVC_NOTIFY_EMAIL address",
+        "price": "0",
+        "type": "constant"
+      },
+      "plus": {
+        "description": "$0.001 per message \u2014 per-enrollment recipient via the 'to' parameter",
+        "price": "0.001",
+        "type": "constant"
+      }
+    },
+    "default": "default",
+    "type": "channel"
+  },
+  "name": "msg-to-email",
+  "service_options": {
+    "ops_testing_parameters": {
+      "to": "notify-test@svcmarket.com"
+    }
+  },
+  "status": "ready",
+  "time_created": "2026-07-13T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  },
+  "user_parameters_schema": {
+    "properties": {
+      "to": {
+        "default": "notify-test@svcmarket.com",
+        "description": "Recipient email address for this enrollment (plus channel only; the default channel delivers to your UNITYSVC_NOTIFY_EMAIL secret). Defaults to the platform's mailpit test sink.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "capabilities": [
+    "notification"
+  ],
+  "description": "Send notification emails with no email infrastructure of your own. POST the unified message envelope {title, body, type, format} and the UnitySVC gateway delivers it as email from the platform's domain (svcpass.com) \u2014 no SMTP server, no email-provider API key. The default channel is free and delivers to the address stored in your UNITYSVC_NOTIFY_EMAIL secret; the plus channel delivers to a recipient you choose per enrollment via the 'to' parameter, at $0.001 per message.",
+  "name": "msg-to-email",
+  "service_type": "notification",
+  "status": "ready",
+  "tags": [
+    "notification",
+    "email",
+    "platform",
+    "gateway"
+  ],
+  "time_created": "2026-07-13T00:00:00Z",
+  "upstream_access_config": {
+    "default": {
+      "access_method": "http",
+      "base_url": "notify://email",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"to\":[\"${ customer_secrets.UNITYSVC_NOTIFY_EMAIL }\"],\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or _body.message or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 1
+    },
+    "plus": {
+      "access_method": "http",
+      "base_url": "notify://email",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": "{\"to\":[\"{{ params.to }}\"],\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or _body.message or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+            }
+          }
+        }
+      },
+      "sort_order": 2
+    }
+  }
+}
