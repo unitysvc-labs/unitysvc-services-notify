@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "apprise_url": "line://${ customer_secrets.LINE_MSG_TOKEN }/${ customer_secrets.LINE_MSG_TARGETS }",
+    "apprise_url_plus": "line://${ customer_secrets.{{ params.token_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
+    "channel_name": "msg-to-line-msg",
+    "code_example_preset": "msg_to_apprise_code_example_py",
+    "connectivity_preset": "msg_to_apprise_connectivity",
+    "description": "Send a notification to your own LINE destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-line-msg` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`). On the Apprise channels the gateway composes an Apprise `line://` URL from your stored secrets and delivers via apprise.unitysvc.dev; on the gateway channels it transforms the envelope directly into a LINE Messaging API push-message body and posts it to api.line.me with no Apprise involved.\n\nFour channels are available: the free `apprise` channel uses your own stored credentials; the `apprise-plus` channel binds extra per-enrollment destinations via enrollment parameters (`token_secret`, `targets_secret`); the free `gateway` channel delivers direct to the LINE Messaging API push message (no Apprise); and the `gateway-plus` channel adds extra per-enrollment LINE destinations, direct, at $0.001 per message.",
+    "display_name": "LINE Messages",
+    "gateway_api_key": "${ customer_secrets.LINE_MSG_TOKEN }",
+    "gateway_body_template": "{\"to\":\"${ customer_secrets.LINE_MSG_TARGETS }\",\"messages\":[{\"type\":\"text\",\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}]}",
+    "gateway_code_example_preset": "msg_to_channel_code_example_py_line_msg",
+    "gateway_connectivity_preset": "msg_to_channel_connectivity_line_msg",
+    "gateway_content_type": "application/json",
+    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment LINE destinations, direct",
+    "gateway_price_description": "Free \u2014 direct to LINE Messaging API push message (no Apprise)",
+    "gateway_test_local_url": "https://mock.unitysvc.dev/line/v2/bot/message/push",
+    "gateway_url": "${ customer_secrets.LINE_MSG_BASE ?? https://api.line.me }/v2/bot/message/push",
+    "gateway_url_plus": "${ customer_secrets.LINE_MSG_BASE ?? https://api.line.me }/v2/bot/message/push",
+    "ops_testing_parameters": {
+      "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "targets_secret": "LINE_MSG_TARGETS",
+      "token_secret": "LINE_MSG_TOKEN"
+    },
+    "tags": [
+      "notification",
+      "line_msg",
+      "apprise",
+      "gateway"
+    ],
+    "test_apprise_url": "line://demotoken123456/UserOrGroupId1",
+    "time_created": "2026-06-19T00:00:00Z",
+    "transformer_channel_exists": true,
+    "user_parameters_schema": {
+      "properties": {
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's LINE targets",
+          "type": "string"
+        },
+        "token_secret": {
+          "description": "Name of the customer secret holding this enrollment's LINE token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_secret",
+        "targets_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "template": "msg-to-channel"
+}
