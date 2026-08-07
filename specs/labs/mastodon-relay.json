@@ -5,7 +5,7 @@
     "channel_name": "mastodon-relay",
     "code_example_preset": "notify_relay_code_example_py_mastodon",
     "connectivity_preset": "notify_relay_connectivity_mastodon",
-    "description": "Relay messages to your own Mastodon through the UnitySVC gateway. POST a native mastodon payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "description": "Relay a status to your own Mastodon account by posting a native Mastodon payload to the UnitySVC gateway.\n\n`mastodon-relay` accepts an HTTP POST with a native `mastodon` payload. The gateway composes the upstream Mastodon URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "Mastodon Relay",
     "ops_testing_parameters": {
       "api_key_secret": "MASTODON_TOKEN",

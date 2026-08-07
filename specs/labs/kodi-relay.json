@@ -4,7 +4,7 @@
     "channel_name": "kodi-relay",
     "code_example_preset": "notify_relay_code_example_py_kodi",
     "connectivity_preset": "notify_relay_connectivity_kodi",
-    "description": "Relay messages to your own Kodi through the UnitySVC gateway. POST a native kodi payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Relay a message to your own Kodi by posting a native `kodi` payload to the UnitySVC gateway.\n\n`kodi-relay` accepts an HTTP POST with a native `kodi` payload. The gateway composes the upstream Kodi URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
     "display_name": "Kodi Relay",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/kodi"

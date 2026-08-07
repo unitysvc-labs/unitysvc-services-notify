@@ -5,7 +5,7 @@
     "channel_name": "dot-relay",
     "code_example_preset": "notify_relay_code_example_py_dot",
     "connectivity_preset": "notify_relay_connectivity_dot",
-    "description": "Relay messages to your own Dot through the UnitySVC gateway. POST a native dot payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "description": "Relay a message through your own Dot device by posting a native Dot payload to the UnitySVC gateway.\n\n`dot-relay` accepts an HTTP POST with a native `dot` payload. The gateway composes the upstream Dot URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "Dot Relay",
     "ops_testing_parameters": {
       "api_key_secret": "DOT_APIKEY",
