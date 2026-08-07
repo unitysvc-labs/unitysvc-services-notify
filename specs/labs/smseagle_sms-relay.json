@@ -4,7 +4,7 @@
     "channel_name": "smseagle_sms-relay",
     "code_example_preset": "notify_relay_code_example_py_smseagle_sms",
     "connectivity_preset": "notify_relay_connectivity_smseagle_sms",
-    "description": "Relay messages to your own SMSEagle through the UnitySVC gateway. POST a native smseagle_sms payload (including your credential field); the gateway forwards it to the upstream. The free byok channel relays your own authenticated payload; the plus channel is the metered tier.",
+    "description": "Relay an SMS through your own SMSEagle by posting a native SMSEagle payload to the UnitySVC gateway.\n\n`smseagle_sms-relay` accepts an HTTP POST with a native `smseagle_sms` payload that includes your credential field; the gateway forwards it to the upstream, so you run no messaging infrastructure of your own.\n\nTwo channels are available: the free `byok` channel relays your own authenticated payload; the `plus` channel is the metered tier.",
     "display_name": "SMSEagle Relay",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/smseagle_sms"

@@ -7,7 +7,7 @@
     "channel_name": "burstsms_sms-relay",
     "code_example_preset": "notify_relay_code_example_py_burstsms_sms",
     "connectivity_preset": "notify_relay_connectivity_burstsms_sms",
-    "description": "Relay messages to your own BurstSMS through the UnitySVC gateway. POST a native burstsms_sms payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "description": "Relay an SMS through your own BurstSMS account by posting a native BurstSMS payload to the UnitySVC gateway.\n\n`burstsms_sms-relay` accepts an HTTP POST with a native `burstsms_sms` payload. The gateway composes the upstream BurstSMS URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "BurstSMS Relay",
     "ops_testing_parameters": {
       "api_key_secret": "BURSTSMS_SMS_BASIC",

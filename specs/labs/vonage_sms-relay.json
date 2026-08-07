@@ -4,7 +4,7 @@
     "channel_name": "vonage_sms-relay",
     "code_example_preset": "notify_relay_code_example_py_vonage_sms",
     "connectivity_preset": "notify_relay_connectivity_vonage_sms",
-    "description": "Relay messages to your own Vonage SMS through the UnitySVC gateway. POST a native vonage_sms payload (including your credential field); the gateway forwards it to the upstream. The free byok channel relays your own authenticated payload; the plus channel is the metered tier.",
+    "description": "Relay an SMS through your own Vonage account by posting a native Vonage payload to the UnitySVC gateway.\n\n`vonage_sms-relay` accepts an HTTP POST with a native `vonage_sms` payload that includes your credential field. The gateway forwards it to the upstream Vonage endpoint, so you run no messaging infrastructure of your own.\n\nTwo channels are available: the free `byok` channel relays your own authenticated payload; the `plus` channel is the metered tier.",
     "display_name": "Vonage SMS Relay",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/vonage_sms"

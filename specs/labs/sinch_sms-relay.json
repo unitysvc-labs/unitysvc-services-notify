@@ -5,7 +5,7 @@
     "channel_name": "sinch_sms-relay",
     "code_example_preset": "notify_relay_code_example_py_sinch_sms",
     "connectivity_preset": "notify_relay_connectivity_sinch_sms",
-    "description": "Relay messages to your own Sinch SMS through the UnitySVC gateway. POST a native sinch_sms payload; the gateway composes the upstream URL from your stored secrets, injects your credential header, and forwards it. The free byok channel uses your own stored credentials; the plus channel binds an extra per-enrollment credential via parameters.",
+    "description": "Relay an SMS through your own Sinch account by posting a native Sinch SMS payload to the UnitySVC gateway.\n\n`sinch_sms-relay` accepts an HTTP POST with a native `sinch_sms` payload. The gateway composes the upstream Sinch URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters (the `api_key_secret` parameter names the customer secret holding this enrollment's Bearer access token).",
     "display_name": "Sinch SMS Relay",
     "ops_testing_parameters": {
       "api_key_secret": "SINCH_SMS_API_TOKEN",

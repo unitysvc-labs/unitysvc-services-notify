@@ -4,7 +4,7 @@
     "channel_name": "form_webhook-relay",
     "code_example_preset": "notify_relay_code_example_py_form_webhook",
     "connectivity_preset": "notify_relay_connectivity_form_webhook",
-    "description": "Relay messages to your own Form Webhook through the UnitySVC gateway. POST a native form_webhook payload; the gateway composes the upstream URL from your stored secrets and forwards it. The free byok channel uses your own stored credentials; the plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Relay a message to your own form webhook by posting a native `form_webhook` payload to the UnitySVC gateway.\n\n`form_webhook-relay` accepts an HTTP POST with a native `form_webhook` payload. The gateway composes the upstream webhook URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
     "display_name": "Form Webhook Relay",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/form"

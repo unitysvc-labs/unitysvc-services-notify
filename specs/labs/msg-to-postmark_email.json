@@ -5,7 +5,7 @@
     "channel_name": "msg-to-postmark_email",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send notifications to your own Postmark Email destination through the UnitySVC gateway. POST the unified message envelope {title, body, type, format}; the gateway composes an Apprise postmark:// URL from your stored secrets and delivers via apprise.unitysvc.dev. The free apprise channel uses your own stored credentials; the apprise-plus channel binds extra per-enrollment destinations via parameters.",
+    "description": "Send a notification to your own Postmark Email destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-postmark_email` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`). The gateway composes an Apprise `postmark://` URL from the credentials in your stored secrets and delivers the notification via apprise.unitysvc.dev, so you run no messaging infrastructure of your own.\n\nTwo channels are available: the free `apprise` channel uses your own stored credentials; the `apprise-plus` channel binds extra per-enrollment destinations via enrollment parameters (`apikey_secret`, `from_email_secret`).",
     "display_name": "Postmark Email Messages",
     "gateway_body_template": "{\"From\":\"${ customer_secrets.POSTMARK_FROM_EMAIL }\",\"To\":\"${ customer_secrets.POSTMARK_TO_EMAIL }\",\"Subject\":{* _escape_json(_body.title or \"\") *},\"TextBody\":{* _escape_json(_body.body or \"\") *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_postmark_email",
