@@ -29,6 +29,9 @@
       }
     },
     "default": "byok",
+{%- set _plus = plus_price | default('0.001') %}
+    "price": "{{ _plus }}",
+    "description": {{ list_price_description | default('Free' if _plus == '0' else 'Free - $' ~ _plus ~ ' per message') | tojson }},
     "type": "channel"
   },
   "name": "labs/{{ channel_name }}",
