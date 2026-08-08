@@ -5,7 +5,7 @@
     "channel_name": "msg-to-octopush-sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send an SMS to your own Octopush destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-octopush-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`). The gateway composes an Apprise `octopush://` URL from the credentials in your stored secrets and delivers the notification via apprise.unitysvc.dev, so you run no messaging infrastructure of your own.\n\nFour channels are available. The free `apprise` channel uses your own stored credentials; the `apprise-plus` channel binds extra per-enrollment destinations via enrollment parameters. The `gateway` and `gateway-plus` channels transform the envelope directly into an Octopush SMS Campaign API JSON body and post it to api.octopush.com, bypassing Apprise: `gateway` is free (direct to the Octopush SMS Campaign API), and `gateway-plus` is $0.001 per message for extra per-enrollment Octopush destinations.",
+    "description": "Send an SMS to your own Octopush destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-octopush-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Octopush destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Octopush destinations bound per enrollment.",
     "display_name": "Octopush Messages",
     "gateway_body_template": "{\"recipients\":[{\"phone_number\":\"${ customer_secrets.OCTOPUSH_SMS_TO }\"}],\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *},\"purpose\":\"alert\",\"sender\":\"${ customer_secrets.OCTOPUSH_SMS_FROM }\"}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_octopush_sms",
@@ -16,7 +16,7 @@
       "api-login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }"
     },
     "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Octopush destinations, direct",
-    "gateway_price_description": "Free \u2014 direct to Octopush SMS Campaign API (no Apprise)",
+    "gateway_price_description": "Free \u2014 direct to Octopush SMS Campaign API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/octopush_sms/v1/public/sms-campaign/send",
     "gateway_url": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
     "gateway_url_plus": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
