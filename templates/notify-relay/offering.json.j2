@@ -3,6 +3,9 @@
     "notification"
   ],
   "description": {{ description | tojson }},
+  "details": {
+    "input_formats": ["x-{{ channel_name | replace('-relay', '') }}"]
+  },
   "name": "{{ channel_name }}",
   "service_type": "notification",
   "status": "{{ status | default('ready') }}",
