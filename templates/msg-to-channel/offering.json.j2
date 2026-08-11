@@ -4,6 +4,9 @@
     "notification"
   ],
   "description": {{ description | tojson }},
+  "details": {
+    "input_formats": ["msg"]
+  },
   "name": "{{ channel_name }}",
   "service_type": "notification",
   "status": "{{ status | default('ready') }}",
