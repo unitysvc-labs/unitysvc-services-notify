@@ -6,6 +6,7 @@
     "connectivity_preset": "notify_relay_connectivity_dingtalk",
     "description": "Relay a message to your own DingTalk robot by posting a native DingTalk payload to the UnitySVC gateway.\n\n`dingtalk-relay` accepts an HTTP POST with a native `dingtalk` payload. The gateway composes the upstream DingTalk URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
     "display_name": "DingTalk Relay",
+    "logo": "https://img.alicdn.com/imgextra/i3/O1CN017PqYP51OX3bSJGxQY_!!6000000001714-2-tps-200-200.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/dingtalk",
       "token_secret": "DINGTALK_TOKEN"

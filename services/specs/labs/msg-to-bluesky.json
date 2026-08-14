@@ -7,6 +7,7 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "Send a notification to your own BlueSky account by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-bluesky` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your BlueSky account \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional BlueSky accounts bound per enrollment.",
     "display_name": "BlueSky Messages",
+    "logo": "https://cdn.simpleicons.org/bluesky/1185FE",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "password_secret": "BLUESKY_PASSWORD",

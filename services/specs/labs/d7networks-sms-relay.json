@@ -7,6 +7,7 @@
     "connectivity_preset": "notify_relay_connectivity_d7networks_sms",
     "description": "Relay an SMS through your own D7 Networks account by posting a native D7 Networks payload to the UnitySVC gateway.\n\n`d7networks-sms-relay` accepts an HTTP POST with a native `d7networks_sms` payload. The gateway composes the upstream D7 Networks URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "D7 Networks SMS Relay",
+    "logo": "https://d7networks.com/static/assets/images/logo-icon.caf18bccbb75.svg",
     "ops_testing_parameters": {
       "api_key_secret": "D7NETWORKS_SMS_TOKEN",
       "base_url": "https://mock.unitysvc.dev/d7networks_sms"

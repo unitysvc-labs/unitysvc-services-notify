@@ -9,6 +9,7 @@
     "connectivity_preset": "notify_relay_connectivity_elks_sms",
     "description": "Relay an SMS through your own 46elks account by posting a native 46elks payload to the UnitySVC gateway.\n\n`elks-sms-relay` accepts an HTTP POST with a native `elks_sms` payload. The gateway composes the upstream 46elks URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "46elks SMS Relay",
+    "logo": "https://46elks.com/static/images/logo/46elks-mark-blue.svg",
     "ops_testing_parameters": {
       "api_key_secret": "ELKS_SMS_BASIC",
       "base_url": "https://mock.unitysvc.dev/elks_sms"

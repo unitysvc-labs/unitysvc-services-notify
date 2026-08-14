@@ -9,6 +9,7 @@
     "connectivity_preset": "notify_relay_connectivity_exotel_sms",
     "description": "Relay an SMS through your own Exotel account by posting a native Exotel payload to the UnitySVC gateway.\n\n`exotel-sms-relay` accepts an HTTP POST with a native `exotel_sms` payload. The gateway composes the upstream Exotel URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "Exotel SMS Relay",
+    "logo": "https://exotel.com/favicon-black.ico",
     "ops_testing_parameters": {
       "api_key_secret": "EXOTEL_SMS_BASIC",
       "base_url": "https://mock.unitysvc.dev/exotel_sms"

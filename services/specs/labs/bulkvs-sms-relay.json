@@ -9,6 +9,7 @@
     "connectivity_preset": "notify_relay_connectivity_bulkvs_sms",
     "description": "Relay an SMS through your own BulkVS account by posting a native BulkVS payload to the UnitySVC gateway.\n\n`bulkvs-sms-relay` accepts an HTTP POST with a native `bulkvs_sms` payload. The gateway composes the upstream BulkVS URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "BulkVS SMS Relay",
+    "logo": "https://portal.bulkvs.com/assets/images/logo@2x.png",
     "ops_testing_parameters": {
       "api_key_secret": "BULKVS_SMS_BASIC",
       "base_url": "https://mock.unitysvc.dev/bulkvs_sms"

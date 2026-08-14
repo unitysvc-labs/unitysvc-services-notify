@@ -6,6 +6,7 @@
     "connectivity_preset": "notify_relay_connectivity_pushplus",
     "description": "Relay a push notification through your own PushPlus account by posting a native PushPlus payload to the UnitySVC gateway.\n\n`pushplus-relay` accepts an HTTP POST with a native `pushplus` payload that includes your credential field; the gateway forwards it to the upstream, so you run no messaging infrastructure of your own.\n\nTwo channels are available: the free `byok` channel relays your own authenticated payload; the `plus` channel is the metered tier.",
     "display_name": "PushPlus Relay",
+    "logo": "https://www.pushplus.plus/favicon.ico",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/pushplus"
     },

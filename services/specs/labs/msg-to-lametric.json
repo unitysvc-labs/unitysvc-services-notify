@@ -19,6 +19,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/lametric/api/v2/device/notifications",
     "gateway_url": "${ customer_secrets.LAMETRIC_API_BASE ?? https://developer.lametric.com/api/v2 }/device/notifications",
     "gateway_url_plus": "${ customer_secrets.LAMETRIC_API_BASE ?? https://developer.lametric.com/api/v2 }/device/notifications",
+    "logo": "https://lametric.com/themes/custom/lametric/favicon/apple-touch-icon.png",
     "ops_testing_parameters": {
       "apikey_secret": "LAMETRIC_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

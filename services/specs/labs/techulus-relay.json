@@ -9,6 +9,7 @@
     "connectivity_preset": "notify_relay_connectivity_techulus",
     "description": "Relay a push notification through your own Push by Techulus account by posting a native Techulus payload to the UnitySVC gateway.\n\n`techulus-relay` accepts an HTTP POST with a native `techulus` payload. The gateway composes the upstream Push by Techulus URL from your stored secrets, injects your credential, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters (the `apikey_secret` parameter names the customer secret holding this enrollment's Techulus API key).",
     "display_name": "Push by Techulus Relay",
+    "logo": "https://push.techulus.com/images/logo.svg",
     "ops_testing_parameters": {
       "apikey_secret": "TECHULUS_APIKEY",
       "base_url": "https://mock.unitysvc.dev/techulus"

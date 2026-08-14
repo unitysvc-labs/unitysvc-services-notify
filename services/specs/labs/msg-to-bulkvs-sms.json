@@ -19,6 +19,7 @@
     "gateway_test_local_url": "https://demo123:demo123@mock.unitysvc.dev/bulkvs_sms/api/v1.0/messageSend",
     "gateway_url": "${ customer_secrets.BULKVS_SMS_API_BASE ?? https://portal.bulkvs.com }/api/v1.0/messageSend",
     "gateway_url_plus": "${ customer_secrets.BULKVS_SMS_API_BASE ?? https://portal.bulkvs.com }/api/v1.0/messageSend",
+    "logo": "https://portal.bulkvs.com/assets/images/logo@2x.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_phone_secret": "BULKVS_SMS_FROM_PHONE",

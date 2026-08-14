@@ -9,6 +9,7 @@
     "connectivity_preset": "notify_relay_connectivity_nextcloudtalk",
     "description": "Relay a message through your own Nextcloud Talk by posting a native Nextcloud Talk payload to the UnitySVC gateway.\n\n`nextcloudtalk-relay` accepts an HTTP POST with a native `nextcloudtalk` payload. The gateway composes the upstream Nextcloud Talk URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "Nextcloud Talk Relay",
+    "logo": "https://cdn.simpleicons.org/nextcloud/0082C9",
     "ops_testing_parameters": {
       "api_key_secret": "NEXTCLOUDTALK_BASIC",
       "base_url": "https://mock.unitysvc.dev/nextcloudtalk"

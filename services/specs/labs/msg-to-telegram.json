@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/telegram/botdemotoken/sendMessage",
     "gateway_url": "${ customer_secrets.TELEGRAM_API_BASE ?? https://api.telegram.org }/bot${ customer_secrets.TELEGRAM_BOT_TOKEN }/sendMessage",
     "gateway_url_plus": "${ customer_secrets.TELEGRAM_API_BASE ?? https://api.telegram.org }/bot${ customer_secrets.{{ params.bot_token_secret }} }/sendMessage",
+    "logo": "https://cdn.simpleicons.org/telegram/26A5E4",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "bot_token_secret": "TELEGRAM_BOT_TOKEN",

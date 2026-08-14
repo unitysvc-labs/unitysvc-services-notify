@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/freemobile/sendmsg",
     "gateway_url": "${ customer_secrets.FREEMOBILE_BASE ?? https://smsapi.free-mobile.fr }/sendmsg",
     "gateway_url_plus": "${ customer_secrets.FREEMOBILE_BASE ?? https://smsapi.free-mobile.fr }/sendmsg",
+    "logo": "https://mobile.free.fr/static/favicons/favicon-196x196.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "password_secret": "FREEMOBILE_PASSWORD",

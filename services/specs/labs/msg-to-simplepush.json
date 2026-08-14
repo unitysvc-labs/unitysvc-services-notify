@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/simplepush/send",
     "gateway_url": "${ customer_secrets.SIMPLEPUSH_API_BASE ?? https://api.simplepush.io }/send",
     "gateway_url_plus": "${ customer_secrets.SIMPLEPUSH_API_BASE ?? https://api.simplepush.io }/send",
+    "logo": "https://simplepush.io/apple-touch-icon.png",
     "ops_testing_parameters": {
       "apikey_secret": "SIMPLEPUSH_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"

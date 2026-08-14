@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushsafer/api",
     "gateway_url": "${ customer_secrets.PUSHSAFER_BASE ?? https://www.pushsafer.com }/api",
     "gateway_url_plus": "${ customer_secrets.PUSHSAFER_BASE ?? https://www.pushsafer.com }/api",
+    "logo": "https://www.pushsafer.com/icon512.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "privatekey_secret": "PUSHSAFER_PRIVATEKEY"

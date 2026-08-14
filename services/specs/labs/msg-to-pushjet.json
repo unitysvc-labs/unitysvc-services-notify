@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushjet/message?secret=demo123",
     "gateway_url": "${ customer_secrets.PUSHJET_BASE ?? https://push.example.com }/message?secret=${ customer_secrets.PUSHJET_SECRET_KEY }",
     "gateway_url_plus": "${ customer_secrets.PUSHJET_BASE ?? https://push.example.com }/message?secret=${ customer_secrets.{{ params.secret_key_secret }} }",
+    "logo": "https://raw.githubusercontent.com/Pushjet/Pushjet-Android/master/app/src/main/res/drawable-xxhdpi/ic_launcher.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "PUSHJET_HOST",

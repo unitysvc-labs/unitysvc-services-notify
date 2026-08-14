@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/pagerduty/v2/enqueue",
     "gateway_url": "${ customer_secrets.PAGERDUTY_API_BASE ?? https://events.pagerduty.com }/v2/enqueue",
     "gateway_url_plus": "${ customer_secrets.PAGERDUTY_API_BASE ?? https://events.pagerduty.com }/v2/enqueue",
+    "logo": "https://cdn.simpleicons.org/pagerduty/06AC38",
     "ops_testing_parameters": {
       "apikey_secret": "PAGERDUTY_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

@@ -9,6 +9,7 @@
     "connectivity_preset": "notify_relay_connectivity_httpsms_sms",
     "description": "Relay an SMS through your own httpSMS account by posting a native `httpsms_sms` payload to the UnitySVC gateway.\n\n`httpsms-sms-relay` accepts an HTTP POST with a native `httpsms_sms` payload. The gateway composes the upstream httpSMS URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters (the `api_key_secret` parameter names the customer secret holding this enrollment's API credential).",
     "display_name": "httpSMS Relay",
+    "logo": "https://httpsms.com/img/icon.svg",
     "ops_testing_parameters": {
       "api_key_secret": "HTTPSMS_SMS_APIKEY",
       "base_url": "https://mock.unitysvc.dev/httpsms_sms"

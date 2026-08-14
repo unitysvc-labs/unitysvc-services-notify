@@ -9,6 +9,7 @@
     "connectivity_preset": "notify_relay_connectivity_plivo_sms",
     "description": "Relay an SMS through your own Plivo account by posting a native Plivo payload to the UnitySVC gateway.\n\n`plivo-sms-relay` accepts an HTTP POST with a native `plivo_sms` payload. The gateway composes the upstream Plivo URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "Plivo SMS Relay",
+    "logo": "https://www.plivo.com/favicon/favicon.svg",
     "ops_testing_parameters": {
       "api_key_secret": "PLIVO_SMS_BASIC",
       "base_url": "https://mock.unitysvc.dev/plivo_sms"

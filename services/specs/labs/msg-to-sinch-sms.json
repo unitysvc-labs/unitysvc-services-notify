@@ -17,6 +17,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/sinch_sms/xms/v1/d4b2907e5c3a/batches",
     "gateway_url": "${ customer_secrets.SINCH_SMS_BASE ?? https://sms.sinch.com }/xms/v1/${ customer_secrets.SINCH_SMS_SERVICE_PLAN_ID }/batches",
     "gateway_url_plus": "${ customer_secrets.SINCH_SMS_BASE ?? https://sms.sinch.com }/xms/v1/${ customer_secrets.{{ params.service_plan_id_secret }} }/batches",
+    "logo": "https://sinch.com/wp-content/themes/simpletexting-theme-blank/assets/favicon/android-chrome-512x512.png",
     "ops_testing_parameters": {
       "api_token_secret": "SINCH_SMS_API_TOKEN",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

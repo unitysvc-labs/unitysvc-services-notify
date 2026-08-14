@@ -13,6 +13,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushover/1/messages.json",
     "gateway_url": "${ customer_secrets.PUSHOVER_API_BASE ?? https://api.pushover.net }/1/messages.json",
     "gateway_url_plus": "${ customer_secrets.PUSHOVER_API_BASE ?? https://api.pushover.net }/1/messages.json",
+    "logo": "https://pushover.net/favicon.ico",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_secret": "PUSHOVER_TOKEN",

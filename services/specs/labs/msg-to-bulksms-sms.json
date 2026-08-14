@@ -19,6 +19,7 @@
     "gateway_test_local_url": "https://demo123user:demo123@mock.unitysvc.dev/bulksms/v1/messages",
     "gateway_url": "${ customer_secrets.BULKSMS_SMS_API_BASE ?? https://api.bulksms.com }/v1/messages",
     "gateway_url_plus": "${ customer_secrets.BULKSMS_SMS_API_BASE ?? https://api.bulksms.com }/v1/messages",
+    "logo": "https://www.bulksms.com/images/icons/android-icon-192x192.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "password_secret": "BULKSMS_SMS_PASSWORD",

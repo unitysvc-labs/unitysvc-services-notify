@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/flock/hooks/sendMessage/demotoken",
     "gateway_url": "${ customer_secrets.FLOCK_WEBHOOK_BASE ?? https://api.flock.com }/hooks/sendMessage/${ customer_secrets.FLOCK_TOKEN }",
     "gateway_url_plus": "${ customer_secrets.FLOCK_WEBHOOK_BASE ?? https://api.flock.com }/hooks/sendMessage/${ customer_secrets.{{ params.token_secret }} }",
+    "logo": "https://www.flock.com/hubfs/Flock%20Icon.svg",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_secret": "FLOCK_TOKEN"

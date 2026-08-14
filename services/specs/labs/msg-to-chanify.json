@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/chanify/v1/sender/demo123/",
     "gateway_url": "${ customer_secrets.CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.CHANIFY_TOKEN }/",
     "gateway_url_plus": "${ customer_secrets.CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.{{ params.token_secret }} }/",
+    "logo": "https://raw.githubusercontent.com/chanify/chanify-ios/main/iOS/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-iTunes.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_secret": "CHANIFY_TOKEN"

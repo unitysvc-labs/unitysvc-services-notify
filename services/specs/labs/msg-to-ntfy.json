@@ -15,6 +15,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/ntfy/demo",
     "gateway_url": "${ customer_secrets.NTFY_BASE ?? https://ntfy.sh }/${ customer_secrets.NTFY_TOPIC }",
     "gateway_url_plus": "${ customer_secrets.NTFY_BASE ?? https://ntfy.sh }/${ customer_secrets.{{ params.topic_secret }} }",
+    "logo": "https://cdn.simpleicons.org/ntfy/317F6F",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "NTFY_HOST",
