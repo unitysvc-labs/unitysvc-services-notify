@@ -9,6 +9,7 @@
     "connectivity_preset": "notify_relay_connectivity_evolution",
     "description": "Relay a message through your own Evolution API instance by posting a native Evolution payload to the UnitySVC gateway.\n\n`evolution-relay` accepts an HTTP POST with a native `evolution` payload. The gateway composes the upstream Evolution API URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "Evolution API Relay",
+    "logo": "https://raw.githubusercontent.com/EvolutionAPI/evolution-api/main/public/images/evolution-logo.png",
     "ops_testing_parameters": {
       "api_key_secret": "EVOLUTION_APIKEY",
       "base_url": "https://mock.unitysvc.dev/evolution"

@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/signl4/webhook/demosecrettoken",
     "gateway_url": "${ customer_secrets.SIGNL4_WEBHOOK_BASE ?? https://connect.signl4.com }/webhook/${ customer_secrets.SIGNL4_TOKEN }",
     "gateway_url_plus": "${ customer_secrets.SIGNL4_WEBHOOK_BASE ?? https://connect.signl4.com }/webhook/${ customer_secrets.{{ params.secret_secret }} }",
+    "logo": "https://www.signl4.com/wp-content/uploads/2020/05/cropped-signl4-192x192.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "secret_secret": "SIGNL4_SECRET"

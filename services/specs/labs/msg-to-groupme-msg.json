@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/groupme/v3/bots/post",
     "gateway_url": "${ customer_secrets.GROUPME_MSG_BASE ?? https://api.groupme.com }/v3/bots/post",
     "gateway_url_plus": "${ customer_secrets.GROUPME_MSG_BASE ?? https://api.groupme.com }/v3/bots/post",
+    "logo": "https://cdn.simpleicons.org/groupme/00AFF0",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "bot_id_secret": "GROUPME_MSG_BOT_ID"

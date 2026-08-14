@@ -6,6 +6,7 @@
     "connectivity_preset": "notify_relay_connectivity_streamlabs",
     "description": "Relay an alert through your own Streamlabs account by posting a native Streamlabs payload to the UnitySVC gateway.\n\n`streamlabs-relay` accepts an HTTP POST with a native `streamlabs` payload that includes your credential field; the gateway forwards it to the upstream, so you run no messaging infrastructure of your own.\n\nTwo channels are available: the free `byok` channel relays your own authenticated payload; the `plus` channel is the metered tier.",
     "display_name": "Streamlabs Relay",
+    "logo": "https://cdn.simpleicons.org/streamlabs/80F5D2",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/streamlabs"
     },

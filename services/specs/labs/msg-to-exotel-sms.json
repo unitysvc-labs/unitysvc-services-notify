@@ -19,6 +19,7 @@
     "gateway_test_local_url": "https://demo123sid:demo123token@mock.unitysvc.dev/exotel_sms/v1/Accounts/demo123sid/Sms/send",
     "gateway_url": "${ customer_secrets.EXOTEL_SMS_API_BASE ?? https://api.exotel.com }/v1/Accounts/${ customer_secrets.EXOTEL_SMS_SID }/Sms/send",
     "gateway_url_plus": "${ customer_secrets.EXOTEL_SMS_API_BASE ?? https://api.exotel.com }/v1/Accounts/${ customer_secrets.{{ params.sid_secret }} }/Sms/send",
+    "logo": "https://exotel.com/favicon-black.ico",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_phone_secret": "EXOTEL_SMS_FROM_PHONE",

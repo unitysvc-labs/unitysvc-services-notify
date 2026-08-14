@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushdeer/message/push?pushkey=demo123",
     "gateway_url": "${ customer_secrets.PUSHDEER_BASE ?? https://api2.pushdeer.com }/message/push?pushkey=${ customer_secrets.PUSHDEER_PUSHKEY }",
     "gateway_url_plus": "${ customer_secrets.PUSHDEER_BASE ?? https://api2.pushdeer.com }/message/push?pushkey=${ customer_secrets.{{ params.pushkey_secret }} }",
+    "logo": "https://www.pushdeer.com/favicon.svg",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "pushkey_secret": "PUSHDEER_PUSHKEY"

@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/bark/push",
     "gateway_url": "${ customer_secrets.BARK_API_BASE ?? https://api.day.app }/push",
     "gateway_url_plus": "${ customer_secrets.BARK_API_BASE ?? https://api.day.app }/push",
+    "logo": "https://raw.githubusercontent.com/Finb/Bark/master/Bark/Assets.xcassets/AppIcon.appiconset/bark.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "device_key_secret": "BARK_DEVICE_KEY",

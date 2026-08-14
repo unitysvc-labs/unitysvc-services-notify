@@ -19,6 +19,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/humhub/api/v1/post/container/123",
     "gateway_url": "${ customer_secrets.HUMHUB_API_BASE ?? https://humhub.example.com }/api/v1/post/container/${ customer_secrets.HUMHUB_CONTAINER_ID }",
     "gateway_url_plus": "${ customer_secrets.HUMHUB_API_BASE ?? https://humhub.example.com }/api/v1/post/container/${ customer_secrets.{{ params.container_id_secret }} }",
+    "logo": "https://cdn.simpleicons.org/humhub/1B8291",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "container_id_secret": "HUMHUB_CONTAINER_ID",

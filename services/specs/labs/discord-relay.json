@@ -6,6 +6,7 @@
     "connectivity_preset": "notify_relay_connectivity_discord",
     "description": "Relay a message to your own Discord channel by posting a native Discord webhook payload to the UnitySVC gateway.\n\n`discord-relay` accepts an HTTP POST with a native Discord webhook payload (e.g. {\"content\": \"...\"} or {\"embeds\": [...]}). The gateway composes your webhook URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored webhook; the `plus` channel binds extra per-enrollment webhooks via enrollment parameters.",
     "display_name": "Discord Relay",
+    "logo": "https://cdn.simpleicons.org/discord/5865F2",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/discord/api/webhooks",
       "webhook_id_secret": "DISCORD_WEBHOOK_ID",

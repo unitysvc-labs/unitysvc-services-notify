@@ -9,6 +9,7 @@
     "connectivity_preset": "notify_relay_connectivity_viber",
     "description": "Relay a message to your own Viber through the UnitySVC gateway by posting a native Viber payload.\n\n`viber-relay` accepts an HTTP POST with a native `viber` payload. The gateway composes the upstream Viber URL from your stored secrets, injects your `X-Viber-Auth-Token` credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters (the `api_key_secret` parameter names the customer secret holding it).",
     "display_name": "Viber Relay",
+    "logo": "https://cdn.simpleicons.org/viber/7360F2",
     "ops_testing_parameters": {
       "api_key_secret": "VIBER_TOKEN",
       "base_url": "https://mock.unitysvc.dev/viber"

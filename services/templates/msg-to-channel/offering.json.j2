@@ -6,7 +6,8 @@
   "description": {{ description | tojson }},
   "details": {
     "input_formats": ["msg"]
-  },
+  },{% if logo %}
+  "logo": {{ logo | tojson }},{% endif %}
   "name": "{{ channel_name }}",
   "service_type": "notification",
   "status": "{{ status | default('ready') }}",

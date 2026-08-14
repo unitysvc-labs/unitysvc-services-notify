@@ -19,6 +19,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/parseplatform/parse/push/",
     "gateway_url": "${ customer_secrets.PARSEPLATFORM_BASE ?? https://parseplatform.example.com }/parse/push/",
     "gateway_url_plus": "${ customer_secrets.PARSEPLATFORM_BASE ?? https://parseplatform.example.com }/parse/push/",
+    "logo": "https://raw.githubusercontent.com/parse-community/parse-community.github.io/main/img/favicon.svg",
     "ops_testing_parameters": {
       "app_id_secret": "PARSEPLATFORM_APP_ID",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

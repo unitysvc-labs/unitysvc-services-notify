@@ -9,6 +9,7 @@
     "connectivity_preset": "notify_relay_connectivity_jira",
     "description": "Relay a message to your own Jira by posting a native `jira` payload to the UnitySVC gateway.\n\n`jira-relay` accepts an HTTP POST with a native `jira` payload. The gateway composes the upstream Jira URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters (the `api_key_secret` parameter names the customer secret holding this enrollment's base64 user:password for HTTP basic auth).",
     "display_name": "Jira Relay",
+    "logo": "https://cdn.simpleicons.org/jira/0052CC",
     "ops_testing_parameters": {
       "api_key_secret": "JIRA_BASIC",
       "base_url": "https://mock.unitysvc.dev/jira"

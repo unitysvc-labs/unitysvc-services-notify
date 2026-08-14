@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/kodi/jsonrpc",
     "gateway_url": "${ customer_secrets.KODI_BASE ?? http://kodi.local:8080 }/jsonrpc",
     "gateway_url_plus": "${ customer_secrets.KODI_BASE ?? http://kodi.local:8080 }/jsonrpc",
+    "logo": "https://cdn.simpleicons.org/kodi/17B2E7",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "KODI_HOST"

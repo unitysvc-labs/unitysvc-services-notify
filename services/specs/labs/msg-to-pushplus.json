@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushplus/send",
     "gateway_url": "${ customer_secrets.PUSHPLUS_BASE ?? https://www.pushplus.plus }/send",
     "gateway_url_plus": "${ customer_secrets.PUSHPLUS_BASE ?? https://www.pushplus.plus }/send",
+    "logo": "https://www.pushplus.plus/favicon.ico",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_secret": "PUSHPLUS_TOKEN"

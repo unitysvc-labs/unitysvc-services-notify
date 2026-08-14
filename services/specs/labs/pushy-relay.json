@@ -6,6 +6,7 @@
     "connectivity_preset": "notify_relay_connectivity_pushy",
     "description": "Relay a push notification through your own Pushy account by posting a native Pushy payload to the UnitySVC gateway.\n\n`pushy-relay` accepts an HTTP POST with a native `pushy` payload. The gateway composes the upstream Pushy URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters (the `apikey_secret` parameter names the customer secret holding this enrollment's pushy apikey).",
     "display_name": "Pushy Relay",
+    "logo": "https://pushy.me/img/favicon.png",
     "ops_testing_parameters": {
       "apikey_secret": "PUSHY_APIKEY",
       "base_url": "https://mock.unitysvc.dev/pushy"
