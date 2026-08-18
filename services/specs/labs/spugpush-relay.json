@@ -4,7 +4,7 @@
     "channel_name": "spugpush-relay",
     "code_example_preset": "notify_relay_code_example_py_spugpush",
     "connectivity_preset": "notify_relay_connectivity_spugpush",
-    "description": "Relay a push notification through your own Spug Push account by posting a native Spug Push payload to the UnitySVC gateway.\n\n`spugpush-relay` accepts an HTTP POST with a native `spugpush` payload. The gateway composes the upstream Spug Push URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters (the `token_secret` parameter names the customer secret holding this enrollment's spugpush token).",
+    "description": "`spugpush-relay` accepts an HTTP POST with a native `spugpush` payload. The gateway composes the upstream Spug Push URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters (the `token_secret` parameter names the customer secret holding this enrollment's spugpush token).",
     "display_name": "Spug Push Relay",
     "logo": "https://push.spug.cc/favicon.ico",
     "ops_testing_parameters": {
@@ -12,6 +12,7 @@
       "token_secret": "SPUGPUSH_TOKEN"
     },
     "plus_base_url": "${ customer_secrets.SPUGPUSH_BASE ?? https://push.spug.cc }/send/${ customer_secrets.{{ params.token_secret }} }",
+    "summary": "Relay a push notification through your own Spug Push account by posting a native Spug Push payload to the UnitySVC gateway.",
     "tags": [
       "notification",
       "spugpush",

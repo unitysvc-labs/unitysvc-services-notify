@@ -4,7 +4,7 @@
     "channel_name": "ifttt-relay",
     "code_example_preset": "notify_relay_code_example_py_ifttt",
     "connectivity_preset": "notify_relay_connectivity_ifttt",
-    "description": "Relay a message to your own IFTTT by posting a native `ifttt` payload to the UnitySVC gateway.\n\n`ifttt-relay` accepts an HTTP POST with a native `ifttt` payload. The gateway composes the upstream IFTTT URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters (the `events_secret` and `webhook_id_secret` parameters name the customer secrets holding this enrollment's IFTTT events and webhook id).",
+    "description": "`ifttt-relay` accepts an HTTP POST with a native `ifttt` payload. The gateway composes the upstream IFTTT URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters (the `events_secret` and `webhook_id_secret` parameters name the customer secrets holding this enrollment's IFTTT events and webhook id).",
     "display_name": "IFTTT Relay",
     "logo": "https://cdn.simpleicons.org/ifttt/000000",
     "ops_testing_parameters": {
@@ -13,6 +13,7 @@
       "webhook_id_secret": "IFTTT_WEBHOOK_ID"
     },
     "plus_base_url": "${ customer_secrets.IFTTT_BASE ?? https://maker.ifttt.com }/trigger/${ customer_secrets.{{ params.events_secret }} }/with/key/${ customer_secrets.{{ params.webhook_id_secret }} }",
+    "summary": "Relay a message to your own IFTTT by posting a native `ifttt` payload to the UnitySVC gateway.",
     "tags": [
       "notification",
       "ifttt",

@@ -5,7 +5,7 @@
     "channel_name": "msg-to-exotel-sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send a notification to your own Exotel destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-exotel-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Exotel destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Exotel destinations bound per enrollment.",
+    "description": "`msg-to-exotel-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Exotel destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Exotel destinations bound per enrollment.",
     "display_name": "Exotel Messages",
     "gateway_body_template": "From=${ customer_secrets.EXOTEL_SMS_FROM }&To=${ customer_secrets.EXOTEL_SMS_TO }&Body={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_exotel_sms",
@@ -26,6 +26,7 @@
       "sid_secret": "EXOTEL_SMS_SID",
       "token_secret": "EXOTEL_SMS_TOKEN"
     },
+    "summary": "Send a notification to your own Exotel destination by posting a simple `msg` request to the UnitySVC gateway.",
     "tags": [
       "notification",
       "exotel_sms",

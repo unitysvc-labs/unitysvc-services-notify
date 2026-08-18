@@ -5,7 +5,7 @@
     "channel_name": "msg-to-postmark-email",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send a notification to your own Postmark Email destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-postmark-email` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Postmark Email destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Postmark Email destinations bound per enrollment.",
+    "description": "`msg-to-postmark-email` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Postmark Email destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Postmark Email destinations bound per enrollment.",
     "display_name": "Postmark Email Messages",
     "gateway_body_template": "{\"From\":\"${ customer_secrets.POSTMARK_FROM_EMAIL }\",\"To\":\"${ customer_secrets.POSTMARK_TO_EMAIL }\",\"Subject\":{* _escape_json(_body.title or \"\") *},\"TextBody\":{* _escape_json(_body.body or \"\") *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_postmark_email",
@@ -25,6 +25,7 @@
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_email_secret": "POSTMARK_EMAIL_FROM_EMAIL"
     },
+    "summary": "Send a notification to your own Postmark Email destination by posting a simple `msg` request to the UnitySVC gateway.",
     "tags": [
       "notification",
       "postmark_email",

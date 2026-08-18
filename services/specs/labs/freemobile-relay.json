@@ -4,13 +4,14 @@
     "channel_name": "freemobile-relay",
     "code_example_preset": "notify_relay_code_example_py_freemobile",
     "connectivity_preset": "notify_relay_connectivity_freemobile",
-    "description": "Relay an SMS to your own Free Mobile by posting a native `freemobile` payload to the UnitySVC gateway.\n\n`freemobile-relay` accepts an HTTP POST with a native `freemobile` payload that includes your credential field. The gateway forwards it to the upstream Free Mobile endpoint.\n\nTwo channels are available: the free `byok` channel relays your own authenticated payload; the `plus` channel is the metered tier.",
+    "description": "`freemobile-relay` accepts an HTTP POST with a native `freemobile` payload that includes your credential field. The gateway forwards it to the upstream Free Mobile endpoint.\n\nTwo channels are available: the free `byok` channel relays your own authenticated payload; the `plus` channel is the metered tier.",
     "display_name": "Free Mobile Relay",
     "logo": "https://mobile.free.fr/static/favicons/favicon-196x196.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/freemobile"
     },
     "plus_base_url": "${ customer_secrets.FREEMOBILE_BASE ?? https://smsapi.free-mobile.fr }/sendmsg",
+    "summary": "Relay an SMS to your own Free Mobile by posting a native `freemobile` payload to the UnitySVC gateway.",
     "tags": [
       "notification",
       "freemobile",

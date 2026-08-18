@@ -5,7 +5,7 @@
     "channel_name": "msg-to-resend-email",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send a notification to your own Resend email destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-resend-email` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Resend email destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Resend email destinations bound per enrollment.",
+    "description": "`msg-to-resend-email` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Resend email destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Resend email destinations bound per enrollment.",
     "display_name": "Resend Email Messages",
     "gateway_api_key": "${ customer_secrets.RESEND_EMAIL_APIKEY }",
     "gateway_body_template": "{\"from\":\"${ customer_secrets.RESEND_FROM_EMAIL }\",\"to\":[\"${ customer_secrets.RESEND_TO_EMAIL }\"],\"subject\":{* _escape_json(_body.title or \"\") *},\"text\":{* _escape_json(_body.body or \"\") *}}",
@@ -23,6 +23,7 @@
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_addr_secret": "RESEND_EMAIL_FROM_ADDR"
     },
+    "summary": "Send a notification to your own Resend email destination by posting a simple `msg` request to the UnitySVC gateway.",
     "tags": [
       "notification",
       "resend_email",

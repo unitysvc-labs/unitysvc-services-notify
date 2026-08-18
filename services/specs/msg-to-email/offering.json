@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "Accepts an HTTP request in the unified `msg` format and delivers it to you as email, using a pre-configured destination \u2014 no SMTP server or email-provider API key of your own required.\n\n`msg-to-email` accepts an HTTP POST carrying the standard `msg` envelope (`title`, `body`, `type`, `format`), composes an email from those fields, and sends it from the platform's domain (svcpass.com). Two delivery channels are available: the free `default` channel delivers to the address stored in your `UNITYSVC_NOTIFY_EMAIL` secret; the `plus` channel delivers to a recipient you choose per enrollment via the `to` parameter, at $0.001 per message.",
+  "description": "`msg-to-email` accepts an HTTP POST carrying the standard `msg` envelope (`title`, `body`, `type`, `format`), composes an email from those fields, and sends it from the platform's domain (svcpass.com). Two delivery channels are available: the free `default` channel delivers to the address stored in your `UNITYSVC_NOTIFY_EMAIL` secret; the `plus` channel delivers to a recipient you choose per enrollment via the `to` parameter, at $0.001 per message.",
   "details": {
     "input_formats": [
       "msg"
@@ -11,6 +11,7 @@
   "name": "msg-to-email",
   "service_type": "notification",
   "status": "ready",
+  "summary": "Accepts an HTTP request in the unified `msg` format and delivers it to you as email, using a pre-configured destination \u2014 no SMTP server or email-provider API key of your own required.",
   "tags": [
     "notification",
     "email",

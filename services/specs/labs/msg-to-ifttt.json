@@ -5,7 +5,7 @@
     "channel_name": "msg-to-ifttt",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send a notification to your own IFTTT destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-ifttt` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your IFTTT destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional IFTTT destinations bound per enrollment.",
+    "description": "`msg-to-ifttt` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your IFTTT destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional IFTTT destinations bound per enrollment.",
     "display_name": "IFTTT Messages",
     "gateway_body_template": "{\"value1\":{* _escape_json(_body.title or \"\") *},\"value2\":{* _escape_json(_body.body or \"\") *},\"value3\":{* _escape_json(_body.type or \"\") *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_ifttt",
@@ -23,6 +23,7 @@
       "events_secret": "IFTTT_EVENTS",
       "webhook_id_secret": "IFTTT_WEBHOOK_ID"
     },
+    "summary": "Send a notification to your own IFTTT destination by posting a simple `msg` request to the UnitySVC gateway.",
     "tags": [
       "notification",
       "ifttt",

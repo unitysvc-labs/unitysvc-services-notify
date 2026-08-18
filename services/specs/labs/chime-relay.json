@@ -4,7 +4,7 @@
     "channel_name": "chime-relay",
     "code_example_preset": "notify_relay_code_example_py_chime",
     "connectivity_preset": "notify_relay_connectivity_chime",
-    "description": "Relay a message to your own Amazon Chime room by posting a native Chime payload to the UnitySVC gateway.\n\n`chime-relay` accepts an HTTP POST with a native `chime` payload. The gateway composes the upstream Amazon Chime URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
+    "description": "`chime-relay` accepts an HTTP POST with a native `chime` payload. The gateway composes the upstream Amazon Chime URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
     "display_name": "Amazon Chime Relay",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/chime",
@@ -12,6 +12,7 @@
       "webhook_id_secret": "CHIME_WEBHOOK_ID"
     },
     "plus_base_url": "${ customer_secrets.CHIME_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.{{ params.webhook_id_secret }} }?token=${ customer_secrets.{{ params.token_secret }} }",
+    "summary": "Relay a message to your own Amazon Chime room by posting a native Chime payload to the UnitySVC gateway.",
     "tags": [
       "notification",
       "chime",
