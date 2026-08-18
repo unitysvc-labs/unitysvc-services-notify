@@ -32,6 +32,16 @@
     },
     "apprise-plus": {
       "access_method": "http",
+{%- if transformer_channel_exists | default(false) %}
+      {#- With the transformer gateway-plus channel present, this would be a
+          SECOND enrollable channel — against the at-most-one-enrollable rule
+          (enrollments associate with exactly one channel). Keep the
+          definition as documentation/fallback but disabled; the backend
+          honors is_active everywhere channels are read
+          (unitysvc/unitysvc#1844). Apprise-only services (no transformer)
+          keep this channel active — it is their sole enrollable. -#}
+      "is_active": false,
+{%- endif %}
       "sort_order": 4,
       "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
       "raw": {
