@@ -5,7 +5,7 @@
     "channel_name": "msg-to-pushy",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send a notification to your own Pushy destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-pushy` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Pushy destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Pushy destinations bound per enrollment.",
+    "description": "`msg-to-pushy` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Pushy destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Pushy destinations bound per enrollment.",
     "display_name": "Pushy Messages",
     "gateway_body_template": "{\"to\":{* _escape_json(customer_secrets.PUSHY_TARGETS or \"\") *},\"notification\":{\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or \"\") *}}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_pushy",
@@ -22,6 +22,7 @@
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "targets_secret": "PUSHY_TARGETS"
     },
+    "summary": "Send a notification to your own Pushy destination by posting a simple `msg` request to the UnitySVC gateway.",
     "tags": [
       "notification",
       "pushy",

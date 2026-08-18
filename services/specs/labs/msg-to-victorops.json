@@ -5,7 +5,7 @@
     "channel_name": "msg-to-victorops",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send a notification to your own Splunk On-Call destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-victorops` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Splunk On-Call destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Splunk On-Call destinations bound per enrollment.",
+    "description": "`msg-to-victorops` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Splunk On-Call destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Splunk On-Call destinations bound per enrollment.",
     "display_name": "Splunk On-Call Messages",
     "gateway_body_template": "{\"message_type\":\"CRITICAL\",\"entity_display_name\":{* _escape_json(_body.title or \"\") *},\"state_message\":{* _escape_json(_body.body or \"\") *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_victorops",
@@ -22,6 +22,7 @@
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "routing_key_secret": "VICTOROPS_ROUTING_KEY"
     },
+    "summary": "Send a notification to your own Splunk On-Call destination by posting a simple `msg` request to the UnitySVC gateway.",
     "tags": [
       "notification",
       "victorops",

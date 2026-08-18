@@ -5,7 +5,7 @@
     "channel_name": "msg-to-nextcloud",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send a notification to your own Nextcloud server by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-nextcloud` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Nextcloud server \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Nextcloud servers bound per enrollment.",
+    "description": "`msg-to-nextcloud` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Nextcloud server \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Nextcloud servers bound per enrollment.",
     "display_name": "Nextcloud Messages",
     "gateway_body_template": "shortMessage={* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}&longMessage={* _escape_json(_body.body or \"\") *}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_nextcloud",
@@ -23,6 +23,7 @@
       "target_secret": "NEXTCLOUD_TARGET",
       "targets_secret": "NEXTCLOUD_TARGETS"
     },
+    "summary": "Send a notification to your own Nextcloud server by posting a simple `msg` request to the UnitySVC gateway.",
     "tags": [
       "notification",
       "nextcloud",

@@ -5,7 +5,7 @@
     "channel_name": "msg-to-kumulos",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send a notification to your own Kumulos destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-kumulos` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Kumulos destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Kumulos destinations bound per enrollment.",
+    "description": "`msg-to-kumulos` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Kumulos destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Kumulos destinations bound per enrollment.",
     "display_name": "Kumulos Messages",
     "gateway_body_template": "{\"target\":{\"broadcast\":true},\"content\":{\"title\":{* _escape_json(_body.title or \"\") *},\"message\":{* _escape_json(_body.body or \"\") *}}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_kumulos",
@@ -25,6 +25,7 @@
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "serverkey_secret": "KUMULOS_SERVERKEY"
     },
+    "summary": "Send a notification to your own Kumulos destination by posting a simple `msg` request to the UnitySVC gateway.",
     "tags": [
       "notification",
       "kumulos",

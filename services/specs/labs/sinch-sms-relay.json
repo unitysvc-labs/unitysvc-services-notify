@@ -5,7 +5,7 @@
     "channel_name": "sinch-sms-relay",
     "code_example_preset": "notify_relay_code_example_py_sinch_sms",
     "connectivity_preset": "notify_relay_connectivity_sinch_sms",
-    "description": "Relay an SMS through your own Sinch account by posting a native Sinch SMS payload to the UnitySVC gateway.\n\n`sinch-sms-relay` accepts an HTTP POST with a native `sinch_sms` payload. The gateway composes the upstream Sinch URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters (the `api_key_secret` parameter names the customer secret holding this enrollment's Bearer access token).",
+    "description": "`sinch-sms-relay` accepts an HTTP POST with a native `sinch_sms` payload. The gateway composes the upstream Sinch URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters (the `api_key_secret` parameter names the customer secret holding this enrollment's Bearer access token).",
     "display_name": "Sinch SMS Relay",
     "logo": "https://sinch.com/wp-content/themes/simpletexting-theme-blank/assets/favicon/android-chrome-512x512.png",
     "ops_testing_parameters": {
@@ -14,6 +14,7 @@
     },
     "plus_api_key": "${ customer_secrets.{{ params.api_key_secret }} ?? }",
     "plus_base_url": "${ customer_secrets.SINCH_SMS_BASE ?? https://us.sms.api.sinch.com }/xms/v1/${ customer_secrets.SINCH_SMS_SERVICE_PLAN_ID }/batches",
+    "summary": "Relay an SMS through your own Sinch account by posting a native Sinch SMS payload to the UnitySVC gateway.",
     "tags": [
       "notification",
       "sinch",

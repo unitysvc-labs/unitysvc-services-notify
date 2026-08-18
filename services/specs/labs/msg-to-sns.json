@@ -5,7 +5,7 @@
     "channel_name": "msg-to-sns",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "Send a notification to your own Amazon SNS destination by posting a simple `msg` request to the UnitySVC gateway.\n\n`msg-to-sns` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Amazon SNS destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional Amazon SNS destinations bound per enrollment.",
+    "description": "`msg-to-sns` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Amazon SNS destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional Amazon SNS destinations bound per enrollment.",
     "display_name": "Amazon SNS Messages",
     "ops_testing_parameters": {
       "access_key_id_secret": "SNS_ACCESS_KEY_ID",
@@ -14,6 +14,7 @@
       "secret_access_key_secret": "SNS_SECRET_ACCESS_KEY",
       "targets_secret": "SNS_TARGETS"
     },
+    "summary": "Send a notification to your own Amazon SNS destination by posting a simple `msg` request to the UnitySVC gateway.",
     "tags": [
       "notification",
       "sns",

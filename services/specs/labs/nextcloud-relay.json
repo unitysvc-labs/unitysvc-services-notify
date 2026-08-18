@@ -4,7 +4,7 @@
     "channel_name": "nextcloud-relay",
     "code_example_preset": "notify_relay_code_example_py_nextcloud",
     "connectivity_preset": "notify_relay_connectivity_nextcloud",
-    "description": "Relay a message through your own Nextcloud by posting a native Nextcloud payload to the UnitySVC gateway.\n\n`nextcloud-relay` accepts an HTTP POST with a native `nextcloud` payload. The gateway composes the upstream Nextcloud URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
+    "description": "`nextcloud-relay` accepts an HTTP POST with a native `nextcloud` payload. The gateway composes the upstream Nextcloud URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
     "display_name": "Nextcloud Relay",
     "logo": "https://cdn.simpleicons.org/nextcloud/0082C9",
     "ops_testing_parameters": {
@@ -12,6 +12,7 @@
       "target_secret": "NEXTCLOUD_TARGETS"
     },
     "plus_base_url": "${ customer_secrets.NEXTCLOUD_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.{{ params.target_secret }} }",
+    "summary": "Relay a message through your own Nextcloud by posting a native Nextcloud payload to the UnitySVC gateway.",
     "tags": [
       "notification",
       "nextcloud",

@@ -8,7 +8,7 @@
     "channel_name": "parseplatform-relay",
     "code_example_preset": "notify_relay_code_example_py_parseplatform",
     "connectivity_preset": "notify_relay_connectivity_parseplatform",
-    "description": "Relay a message through your own Parse Platform by posting a native Parse Platform payload to the UnitySVC gateway.\n\n`parseplatform-relay` accepts an HTTP POST with a native `parseplatform` payload. The gateway composes the upstream Parse Platform URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
+    "description": "`parseplatform-relay` accepts an HTTP POST with a native `parseplatform` payload. The gateway composes the upstream Parse Platform URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "Parse Platform Relay",
     "logo": "https://raw.githubusercontent.com/parse-community/parse-community.github.io/main/img/favicon.svg",
     "ops_testing_parameters": {
@@ -20,6 +20,7 @@
       "X-Parse-Application-Id": "${ customer_secrets.{{ params.api_key_secret }} }",
       "X-Parse-Master-Key": "${ customer_secrets.PARSEPLATFORM_MASTER_KEY }"
     },
+    "summary": "Relay a message through your own Parse Platform by posting a native Parse Platform payload to the UnitySVC gateway.",
     "tags": [
       "notification",
       "parseplatform",

@@ -4,13 +4,14 @@
     "channel_name": "prowl-relay",
     "code_example_preset": "notify_relay_code_example_py_prowl",
     "connectivity_preset": "notify_relay_connectivity_prowl",
-    "description": "Relay a message through your own Prowl by posting a native Prowl payload to the UnitySVC gateway.\n\n`prowl-relay` accepts an HTTP POST with a native `prowl` payload. The gateway composes the upstream Prowl URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
+    "description": "`prowl-relay` accepts an HTTP POST with a native `prowl` payload. The gateway composes the upstream Prowl URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
     "display_name": "Prowl Relay",
     "logo": "https://is1-ssl.mzstatic.com/image/thumb/Purple49/v4/1c/3d/a6/1c3da6cb-0182-e061-68f4-68573731c4d6/mzl.xbttojza.png/512x512bb.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/prowl"
     },
     "plus_base_url": "${ customer_secrets.PROWL_BASE ?? https://api.prowlapp.com }/publicapi/add",
+    "summary": "Relay a message through your own Prowl by posting a native Prowl payload to the UnitySVC gateway.",
     "tags": [
       "notification",
       "prowl",
