@@ -6,6 +6,7 @@
     "connectivity_preset": "notify_relay_connectivity_xml_webhook",
     "description": "`xml-webhook-relay` accepts an HTTP POST with a native `xml_webhook` payload. The gateway composes the upstream webhook URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
     "display_name": "XML Webhook Relay",
+    "logo": "https://api.iconify.design/mdi:xml.svg?color=%23FF9A3E",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/xml"
     },

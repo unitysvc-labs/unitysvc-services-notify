@@ -10,7 +10,7 @@
     "connectivity_preset": "notify_relay_connectivity_octopush_sms",
     "description": "`octopush-sms-relay` accepts an HTTP POST with a native `octopush_sms` payload. The gateway composes the upstream Octopush URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "Octopush SMS Relay",
-    "logo": "https://octopush.com/wp-content/uploads/2026/04/cropped-new_logo-1-scaled-e1776690270826-270x270.png",
+    "logo": "https://api.iconify.design/boxicons:octopus-filled.svg?color=%23FFFFFF",
     "ops_testing_parameters": {
       "api_key_secret": "OCTOPUSH_SMS_API_KEY",
       "base_url": "https://mock.unitysvc.dev/octopush_sms"

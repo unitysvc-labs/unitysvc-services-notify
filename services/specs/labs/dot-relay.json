@@ -7,6 +7,7 @@
     "connectivity_preset": "notify_relay_connectivity_dot",
     "description": "`dot-relay` accepts an HTTP POST with a native `dot` payload. The gateway composes the upstream Dot URL from your stored secrets, injects your credential header, and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds an extra per-enrollment credential via enrollment parameters.",
     "display_name": "Dot Relay",
+    "logo": "https://api.iconify.design/mdi:message-text-fast-outline.svg?color=%2300BCEB",
     "ops_testing_parameters": {
       "api_key_secret": "DOT_APIKEY",
       "base_url": "https://mock.unitysvc.dev/dot"

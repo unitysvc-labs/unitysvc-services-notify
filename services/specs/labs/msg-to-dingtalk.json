@@ -16,7 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/dingtalk/robot/send?access_token=demo123",
     "gateway_url": "${ customer_secrets.DINGTALK_BASE ?? https://oapi.dingtalk.com }/robot/send?access_token=${ customer_secrets.DINGTALK_ACCESS_TOKEN }",
     "gateway_url_plus": "${ customer_secrets.DINGTALK_BASE ?? https://oapi.dingtalk.com }/robot/send?access_token=${ customer_secrets.{{ params.token_secret }} }",
-    "logo": "https://img.alicdn.com/imgextra/i3/O1CN017PqYP51OX3bSJGxQY_!!6000000001714-2-tps-200-200.png",
+    "logo": "https://api.iconify.design/ant-design:dingtalk-circle-filled.svg?color=%231677FF",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_secret": "DINGTALK_TOKEN"

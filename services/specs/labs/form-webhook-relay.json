@@ -6,6 +6,7 @@
     "connectivity_preset": "notify_relay_connectivity_form_webhook",
     "description": "`form-webhook-relay` accepts an HTTP POST with a native `form_webhook` payload. The gateway composes the upstream webhook URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
     "display_name": "Form Webhook Relay",
+    "logo": "https://api.iconify.design/mdi:form-select.svg?color=%2300BCEB",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/form"
     },

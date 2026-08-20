@@ -16,7 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/smseagle_sms/index.php/jsonrpc",
     "gateway_url": "${ customer_secrets.SMSEAGLE_SMS_BASE ?? https://notify.example.com }/index.php/jsonrpc",
     "gateway_url_plus": "${ customer_secrets.SMSEAGLE_SMS_BASE ?? https://notify.example.com }/index.php/jsonrpc",
-    "logo": "https://www.smseagle.eu/wpsite/wp-content/uploads/2023/11/Artboard-1192.png",
+    "logo": "https://mma.prnewswire.com/media/814246/SMSEagle_Logo.jpg?p=facebook",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "SMSEAGLE_SMS_HOST",
