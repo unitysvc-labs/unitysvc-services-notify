@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/form",
     "gateway_url": "${ customer_secrets.FORM_WEBHOOK_URL ?? https://mock.unitysvc.dev/form }",
     "gateway_url_plus": "${ customer_secrets.{{ params.host_secret }} ?? https://mock.unitysvc.dev/form }",
+    "logo": "https://api.iconify.design/mdi:form-select.svg?color=%2300BCEB",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "FORM_WEBHOOK_HOST"

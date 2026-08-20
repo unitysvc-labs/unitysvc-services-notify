@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushed/1/push",
     "gateway_url": "${ customer_secrets.PUSHED_BASE ?? https://api.pushed.co }/1/push",
     "gateway_url_plus": "${ customer_secrets.PUSHED_BASE ?? https://api.pushed.co }/1/push",
+    "logo": "https://api.iconify.design/fa6-brands:pushed.svg?color=%23FFFFFF",
     "ops_testing_parameters": {
       "app_key_secret": "PUSHED_APP_KEY",
       "app_secret_secret": "PUSHED_APP_SECRET",

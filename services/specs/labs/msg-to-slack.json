@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/slack/services/demo/demob/demotoken",
     "gateway_url": "${ customer_secrets.SLACK_WEBHOOK_BASE ?? https://hooks.slack.com/services }/${ customer_secrets.SLACK_TOKEN_A }/${ customer_secrets.SLACK_TOKEN_B }/${ customer_secrets.SLACK_TOKEN_C }",
     "gateway_url_plus": "${ customer_secrets.SLACK_WEBHOOK_BASE ?? https://hooks.slack.com/services }/${ customer_secrets.{{ params.token_a_secret }} }/${ customer_secrets.{{ params.token_b_secret }} }/${ customer_secrets.{{ params.token_c_secret }} }",
+    "logo": "https://api.iconify.design/logos:slack-icon.svg",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_a_secret": "SLACK_TOKEN_A",

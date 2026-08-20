@@ -17,7 +17,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/matrix/_matrix/client/v3/rooms/demo/send/m.room.message/1",
     "gateway_url": "${ customer_secrets.MATRIX_BASE ?? https://matrix.org }/_matrix/client/v3/rooms/${ customer_secrets.MATRIX_ROOM }/send/m.room.message/${ customer_secrets.MATRIX_TXN }",
     "gateway_url_plus": "${ customer_secrets.MATRIX_BASE ?? https://matrix.org }/_matrix/client/v3/rooms/${ customer_secrets.{{ params.room_secret }} }/send/m.room.message/${ customer_secrets.{{ params.txn_secret }} }",
-    "logo": "https://cdn.simpleicons.org/matrix/000000",
+    "logo": "https://cdn.simpleicons.org/matrix/FFFFFF",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "MATRIX_HOST",

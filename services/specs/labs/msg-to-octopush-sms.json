@@ -20,7 +20,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/octopush_sms/v1/public/sms-campaign/send",
     "gateway_url": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
     "gateway_url_plus": "${ customer_secrets.OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
-    "logo": "https://octopush.com/wp-content/uploads/2026/04/cropped-new_logo-1-scaled-e1776690270826-270x270.png",
+    "logo": "https://api.iconify.design/boxicons:octopus-filled.svg?color=%23FFFFFF",
     "ops_testing_parameters": {
       "api_key_secret": "OCTOPUSH_SMS_API_KEY",
       "api_login_secret": "OCTOPUSH_SMS_API_LOGIN",

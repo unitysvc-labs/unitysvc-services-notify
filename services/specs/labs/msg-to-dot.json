@@ -17,6 +17,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/dot/api/authV2/open/device/demo123/text",
     "gateway_url": "${ customer_secrets.DOT_BASE ?? https://api.dot-api.com }/api/authV2/open/device/${ customer_secrets.DOT_DEVICE_ID }/text",
     "gateway_url_plus": "${ customer_secrets.DOT_BASE ?? https://api.dot-api.com }/api/authV2/open/device/${ customer_secrets.{{ params.device_id_secret }} }/text",
+    "logo": "https://api.iconify.design/mdi:message-text-fast-outline.svg?color=%2300BCEB",
     "ops_testing_parameters": {
       "apikey_secret": "DOT_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/chime/incomingwebhooks/demo123?token=demo123",
     "gateway_url": "${ customer_secrets.CHIME_WEBHOOK_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.CHIME_WEBHOOK_ID }?token=${ customer_secrets.CHIME_TOKEN }",
     "gateway_url_plus": "${ customer_secrets.CHIME_WEBHOOK_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.{{ params.webhook_id_secret }} }?token=${ customer_secrets.{{ params.token_secret }} }",
+    "logo": "https://api.iconify.design/logos:amazon-chime.svg",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_secret": "CHIME_TOKEN",

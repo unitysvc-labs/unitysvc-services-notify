@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/msteams/webhookb2/demo",
     "gateway_url": "${ customer_secrets.MSTEAMS_WEBHOOK_HOST ?? https://outlook.office.com }/webhookb2/${ customer_secrets.MSTEAMS_WEBHOOK_PATH }",
     "gateway_url_plus": "${ customer_secrets.MSTEAMS_WEBHOOK_HOST ?? https://outlook.office.com }/webhookb2/${ customer_secrets.{{ params.webhook_path_secret }} }",
+    "logo": "https://api.iconify.design/logos:microsoft-teams.svg",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "host_secret": "MSTEAMS_HOST",

@@ -16,7 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/ifttt/trigger/demoevent/with/key/demo123",
     "gateway_url": "${ customer_secrets.IFTTT_WEBHOOK_BASE ?? https://maker.ifttt.com }/trigger/${ customer_secrets.IFTTT_EVENT }/with/key/${ customer_secrets.IFTTT_WEBHOOK_ID }",
     "gateway_url_plus": "${ customer_secrets.IFTTT_WEBHOOK_BASE ?? https://maker.ifttt.com }/trigger/${ customer_secrets.{{ params.event_secret }} }/with/key/${ customer_secrets.{{ params.webhook_id_secret }} }",
-    "logo": "https://cdn.simpleicons.org/ifttt/000000",
+    "logo": "https://cdn.simpleicons.org/ifttt/FFFFFF",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "event_secret": "IFTTT_EVENT",

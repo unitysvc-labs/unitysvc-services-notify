@@ -16,6 +16,7 @@
     "gateway_test_local_url": "https://mock.unitysvc.dev/notica/demo123",
     "gateway_url": "${ customer_secrets.NOTICA_BASE ?? https://notica.us }/${ customer_secrets.NOTICA_TOKEN }",
     "gateway_url_plus": "${ customer_secrets.NOTICA_BASE ?? https://notica.us }/${ customer_secrets.{{ params.token_secret }} }",
+    "logo": "https://notica.us/apple-touch-icon.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "token_secret": "NOTICA_TOKEN"

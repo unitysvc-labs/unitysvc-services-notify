@@ -6,6 +6,7 @@
     "connectivity_preset": "notify_relay_connectivity_pushed",
     "description": "`pushed-relay` accepts an HTTP POST with a native `pushed` payload. The gateway composes the upstream Pushed URL from your stored secrets and forwards the request, so your credentials never leave the platform.\n\nTwo channels are available: the free `byok` channel uses your own stored credentials; the `plus` channel binds extra per-enrollment destinations via enrollment parameters.",
     "display_name": "Pushed Relay",
+    "logo": "https://api.iconify.design/fa6-brands:pushed.svg?color=%23FFFFFF",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/pushed"
     },
