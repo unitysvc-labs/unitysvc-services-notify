@@ -5,7 +5,7 @@
     "channel_name": "msg-to-lametric",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "`msg-to-lametric` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your LaMetric device \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional LaMetric devices bound per enrollment.",
+    "description": "`msg-to-lametric` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your LaMetric device — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) — the open-source notification library — or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional LaMetric devices bound per enrollment.",
     "display_name": "LaMetric Messages",
     "gateway_body_template": "{\"model\":{\"cycles\":1,\"frames\":[{\"icon\":0,\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}]}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_lametric",
@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "Basic ZGV2OmRlbW8xMjM="
     },
-    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment LaMetric destinations, direct",
-    "gateway_price_description": "Free \u2014 direct to your LaMetric device API",
+    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment LaMetric destinations, direct",
+    "gateway_price_description": "Free — direct to your LaMetric device API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/lametric/api/v2/device/notifications",
     "gateway_url": "${ customer_secrets.LAMETRIC_API_BASE ?? https://developer.lametric.com/api/v2 }/device/notifications",
     "gateway_url_plus": "${ customer_secrets.LAMETRIC_API_BASE ?? https://developer.lametric.com/api/v2 }/device/notifications",

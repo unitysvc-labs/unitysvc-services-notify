@@ -5,7 +5,7 @@
     "channel_name": "msg-to-messagebird-sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "`msg-to-messagebird-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your MessageBird destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional MessageBird destinations bound per enrollment.",
+    "description": "`msg-to-messagebird-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your MessageBird destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) — the open-source notification library — or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional MessageBird destinations bound per enrollment.",
     "display_name": "MessageBird SMS Messages",
     "gateway_body_template": "{\"recipients\":[\"${ customer_secrets.MESSAGEBIRD_SMS_TO }\"],\"originator\":\"${ customer_secrets.MESSAGEBIRD_SMS_FROM }\",\"body\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_messagebird_sms",
@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "AccessKey ${ customer_secrets.MESSAGEBIRD_SMS_APIKEY }"
     },
-    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment MessageBird SMS destinations, direct",
-    "gateway_price_description": "Free \u2014 direct to MessageBird Messages API",
+    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment MessageBird SMS destinations, direct",
+    "gateway_price_description": "Free — direct to MessageBird Messages API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/messagebird/messages",
     "gateway_url": "${ customer_secrets.MESSAGEBIRD_SMS_API_BASE ?? https://rest.messagebird.com }/messages",
     "gateway_url_plus": "${ customer_secrets.MESSAGEBIRD_SMS_API_BASE ?? https://rest.messagebird.com }/messages",
