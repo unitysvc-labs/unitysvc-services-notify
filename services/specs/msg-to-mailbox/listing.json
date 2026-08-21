@@ -2,16 +2,13 @@
   "currency": "USD",
   "display_name": "Email Messages (Platform)",
   "documents": {
-    "Connectivity test (default)": {
+    "Connectivity test": {
       "category": "connectivity_test",
-      "description": "POST the msg envelope through the gateway (default channel — delivers to your verified primary email address)",
+      "description": "POST the msg envelope through the gateway and expect 2xx",
       "file_path": "connectivity.sh.j2",
       "is_active": true,
       "is_public": true,
       "meta": {
-        "channels": [
-          "default"
-        ],
         "output_contains": "connectivity ok"
       },
       "mime_type": "bash"
@@ -32,15 +29,9 @@
     }
   },
   "list_price": {
-    "channels": {
-      "default": {
-        "description": "Free — email to your verified primary email address",
-        "price": "0",
-        "type": "constant"
-      }
-    },
-    "default": "default",
-    "type": "channel"
+    "description": "Free",
+    "price": "0",
+    "type": "constant"
   },
   "name": "msg-to-mailbox",
   "status": "ready",
