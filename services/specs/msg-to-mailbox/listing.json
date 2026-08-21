@@ -29,7 +29,7 @@
     }
   },
   "list_price": {
-    "description": "Free — delivered to your verified primary email address",
+    "description": "Free",
     "price": "0",
     "type": "constant"
   },
