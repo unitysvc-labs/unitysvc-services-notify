@@ -11,7 +11,7 @@
   "name": "msg-to-mailbox",
   "service_type": "notification",
   "status": "ready",
-  "summary": "Accepts an HTTP request in the unified `msg` format and delivers it to you as email, using a pre-configured destination — no SMTP server or email-provider API key of your own required.",
+  "summary": "POST a `msg` envelope and UnitySVC emails it to your verified primary address — no recipient to choose, no SMTP server or provider API key of your own.",
   "tags": [
     "notification",
     "email",
