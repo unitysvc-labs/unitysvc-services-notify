@@ -6,8 +6,7 @@ import httpx
 # Send an email notification through the UnitySVC gateway (msg-to-mailbox).
 # POST the unified message envelope; the platform delivers it as email from
 # its own domain — no SMTP server or email-provider API key required.
-#   default channel : recipient = your UNITYSVC_NOTIFY_EMAIL secret (free)
-#   plus channel    : recipient = the 'to' parameter of your enrollment
+#   default channel : recipient = your verified __PRIMARY_EMAIL secret (free)
 {% if local_testing %}
 # msg-to-mailbox is gateway-native (notify://email): there is no seller
 # upstream to call in local mode, so this branch only confirms wiring.
