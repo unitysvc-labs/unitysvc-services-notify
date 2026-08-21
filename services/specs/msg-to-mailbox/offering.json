@@ -2,7 +2,7 @@
   "capabilities": [
     "notification"
   ],
-  "description": "`msg-to-mailbox` accepts an HTTP POST carrying the standard `msg` envelope (`title`, `body`, `type`, `format`), composes an email from those fields, and sends it from the platform's domain (svcpass.com). Two delivery channels are available: the free `default` channel delivers to the address stored in your `UNITYSVC_NOTIFY_EMAIL` secret; the `plus` channel delivers to a recipient you choose per enrollment via the `to` parameter, at $0.001 per message.",
+  "description": "`msg-to-mailbox` delivers HTTP `msg` notifications to the caller's verified UnitySVC mailbox.\n\nThe gateway composes an email from the `title`, `body`, `type`, and `format` fields and sends it from the platform's svcpass.com domain using the gateway-native `notify://email` primitive. The destination is the required platform-managed `${ customer_secrets.__PRIMARY_EMAIL }` secret, so customers cannot self-assert a recipient.\n\nUse the `default` channel at the canonical gateway URL. No enrollment parameter, SMTP server, or email-provider API key is required; users without `__PRIMARY_EMAIL` fail closed.",
   "details": {
     "input_formats": [
       "msg"
@@ -11,7 +11,7 @@
   "name": "msg-to-mailbox",
   "service_type": "notification",
   "status": "ready",
-  "summary": "Accepts an HTTP request in the unified `msg` format and delivers it to you as email, using a pre-configured destination — no SMTP server or email-provider API key of your own required.",
+  "summary": "Accepts an HTTP request in the unified `msg` format and delivers it to you as email, using a pre-configured destination \u2014 no SMTP server or email-provider API key of your own required.",
   "tags": [
     "notification",
     "email",
@@ -28,27 +28,12 @@
           "body_transformer": {
             "request": {
               "input_format": "json",
-              "template": "{\"to\":[\"${ customer_secrets.UNITYSVC_NOTIFY_EMAIL }\"],\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or _body.message or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
+              "template": "{\"to\":[\"${ customer_secrets.__PRIMARY_EMAIL }\"],\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or _body.message or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
             }
           }
         }
       },
       "sort_order": 1
-    },
-    "plus": {
-      "access_method": "http",
-      "base_url": "notify://email",
-      "raw": {
-        "request_transformer": {
-          "body_transformer": {
-            "request": {
-              "input_format": "json",
-              "template": "{\"to\":[\"{{ params.to }}\"],\"title\":{* _escape_json(_body.title or \"\") *},\"body\":{* _escape_json(_body.body or _body.message or \"\") *},\"type\":{* _escape_json(_body.type or \"info\") *},\"format\":{* _escape_json(_body.format or \"text\") *}}"
-            }
-          }
-        }
-      },
-      "sort_order": 2
     }
   }
 }

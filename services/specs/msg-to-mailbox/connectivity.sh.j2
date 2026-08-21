@@ -5,9 +5,7 @@
 #
 #   local_testing : there is no server to reach — the response is produced by
 #                   the gateway itself (cf. the resp:// services). This branch
-#                   always passes; it exists only to confirm wiring. Gateway
-#                   test deliveries land in the platform's mailpit sink
-#                   (notify-test@svcmarket.com).
+#                   always passes; it exists only to confirm wiring.
 #   gateway       : POST the canonical msg envelope through the gateway and
 #                   expect 2xx (202 Accepted — the notification is queued).
 set -o pipefail
