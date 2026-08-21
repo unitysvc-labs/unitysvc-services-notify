@@ -4,7 +4,7 @@
   "documents": {
     "Connectivity test (default)": {
       "category": "connectivity_test",
-      "description": "POST the msg envelope through the gateway (default channel \u2014 delivers to your verified primary email address)",
+      "description": "POST the msg envelope through the gateway (default channel — delivers to your verified primary email address)",
       "file_path": "connectivity.sh.j2",
       "is_active": true,
       "is_public": true,
@@ -18,7 +18,7 @@
     },
     "Python code example": {
       "category": "code_example",
-      "description": "Python (httpx) example \u2014 send an email notification via the msg envelope",
+      "description": "Python (httpx) example — send an email notification via the msg envelope",
       "file_path": "code-example.py.j2",
       "is_active": true,
       "is_public": true,
@@ -34,7 +34,7 @@
   "list_price": {
     "channels": {
       "default": {
-        "description": "Free \u2014 email to your verified primary email address",
+        "description": "Free — email to your verified primary email address",
         "price": "0",
         "type": "constant"
       }

@@ -11,7 +11,7 @@
   "name": "msg-to-mailbox",
   "service_type": "notification",
   "status": "ready",
-  "summary": "Accepts an HTTP request in the unified `msg` format and delivers it to you as email, using a pre-configured destination \u2014 no SMTP server or email-provider API key of your own required.",
+  "summary": "Accepts an HTTP request in the unified `msg` format and delivers it to you as email, using a pre-configured destination — no SMTP server or email-provider API key of your own required.",
   "tags": [
     "notification",
     "email",
