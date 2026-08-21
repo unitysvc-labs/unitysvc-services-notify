@@ -5,7 +5,7 @@
     "channel_name": "msg-to-reddit",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "`msg-to-reddit` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Reddit destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional Reddit destinations bound per enrollment.",
+    "description": "`msg-to-reddit` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Reddit destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional Reddit destinations bound per enrollment.",
     "display_name": "Reddit Messages",
     "logo": "https://cdn.simpleicons.org/reddit/FF4500",
     "ops_testing_parameters": {

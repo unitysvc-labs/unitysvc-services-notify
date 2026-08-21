@@ -5,7 +5,7 @@
     "channel_name": "msg-to-zulip",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "`msg-to-zulip` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Zulip destination \u2014 so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) \u2014 the open-source notification library \u2014 or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Zulip destinations bound per enrollment.",
+    "description": "`msg-to-zulip` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Zulip destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) — the open-source notification library — or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Zulip destinations bound per enrollment.",
     "display_name": "Zulip Messages",
     "gateway_body_template": "content={* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}&type=stream",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_zulip",
@@ -14,8 +14,8 @@
     "gateway_extra_headers": {
       "Authorization": "Basic REtSWTVDSlFYNEJJQERLUlk1Q0pRWDRCSTpES1JZNUNKUVg0QklQVzNBSE9WMjlHTlUxOEZNVDA3RQ=="
     },
-    "gateway_plus_price_description": "$0.001 per message \u2014 extra per-enrollment Zulip destinations, direct",
-    "gateway_price_description": "Free \u2014 direct to your Zulip organization",
+    "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Zulip destinations, direct",
+    "gateway_price_description": "Free — direct to your Zulip organization",
     "gateway_test_local_url": "https://DKRY5CJQX4BI%40DKRY5CJQX4BI:DKRY5CJQX4BIPW3AHOV29GNU18FMT07E@mock.unitysvc.dev/zulip/api/v1/messages",
     "gateway_url": "${ customer_secrets.ZULIP_BASE ?? https://dkry5cjqx4bi.zulipchat.com }/api/v1/messages",
     "gateway_url_plus": "${ customer_secrets.{{ params.base_secret }} ?? https://dkry5cjqx4bi.zulipchat.com }/api/v1/messages",

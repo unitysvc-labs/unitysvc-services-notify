@@ -1,5 +1,5 @@
 #!/bin/bash
-# Connectivity test for msg-to-email — the gateway-native notify://email
+# Connectivity test for msg-to-mailbox — the gateway-native notify://email
 # primitive (unitysvc#1526). There is NO seller upstream: the gateway
 # short-circuits the request and the platform backend queues the email.
 #
@@ -19,7 +19,7 @@ status=$(curl -sS --max-time 10 \
     -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer ${UNITYSVC_API_KEY}" \
-    -d '{"title":"msg-to-email connectivity","body":"connectivity probe","type":"info","format":"text"}' \
+    -d '{"title":"msg-to-mailbox connectivity","body":"connectivity probe","type":"info","format":"text"}' \
     -o /dev/null -w "%{http_code}" \
     "{{ service_base_url }}" 2>/dev/null)
 
