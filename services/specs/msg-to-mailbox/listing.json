@@ -4,7 +4,7 @@
   "documents": {
     "Connectivity test (default)": {
       "category": "connectivity_test",
-      "description": "POST the msg envelope through the gateway (default channel \u2014 delivers to your UNITYSVC_NOTIFY_EMAIL address)",
+      "description": "POST the msg envelope through the gateway (default channel — delivers to your UNITYSVC_NOTIFY_EMAIL address)",
       "file_path": "connectivity.sh.j2",
       "is_active": true,
       "is_public": true,
@@ -18,7 +18,7 @@
     },
     "Connectivity test (plus)": {
       "category": "connectivity_test",
-      "description": "POST the msg envelope through the gateway (plus channel \u2014 delivers to the enrollment's 'to' recipient)",
+      "description": "POST the msg envelope through the gateway (plus channel — delivers to the enrollment's 'to' recipient)",
       "file_path": "connectivity.sh.j2",
       "is_active": true,
       "is_public": true,
@@ -32,7 +32,7 @@
     },
     "Python code example": {
       "category": "code_example",
-      "description": "Python (httpx) example \u2014 send an email notification via the msg envelope",
+      "description": "Python (httpx) example — send an email notification via the msg envelope",
       "file_path": "code-example.py.j2",
       "is_active": true,
       "is_public": true,
@@ -48,12 +48,12 @@
   "list_price": {
     "channels": {
       "default": {
-        "description": "Free \u2014 email to your configured UNITYSVC_NOTIFY_EMAIL address",
+        "description": "Free — email to your configured UNITYSVC_NOTIFY_EMAIL address",
         "price": "0",
         "type": "constant"
       },
       "plus": {
-        "description": "$0.001 per message \u2014 per-enrollment recipient via the 'to' parameter",
+        "description": "$0.001 per message — per-enrollment recipient via the 'to' parameter",
         "price": "0.001",
         "type": "constant"
       }
@@ -61,7 +61,7 @@
     "default": "default",
     "type": "channel"
   },
-  "name": "msg-to-email",
+  "name": "msg-to-mailbox",
   "service_options": {
     "ops_testing_parameters": {
       "to": "notify-test@svcmarket.com"
