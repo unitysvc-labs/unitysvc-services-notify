@@ -1,7 +1,7 @@
 {%- set apprise_tail = '","title":{* _escape_json(_body.title or "") *},"body":{* _escape_json(_body.body or "") *},"type":{* _escape_json(_body.type or "info") *},"format":{* _escape_json(_body.format or "text") *}}' -%}
 {
   "capabilities": [
-    "notification"
+    "deliver-message"
   ],
   "description": {{ description | tojson }},
   "details": {
