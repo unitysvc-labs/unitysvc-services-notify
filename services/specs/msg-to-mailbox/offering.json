@@ -8,6 +8,7 @@
       "msg"
     ]
   },
+  "logo": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Mail%20Alert/SVG/ic_fluent_mail_alert_32_color.svg",
   "name": "msg-to-mailbox",
   "service_type": "notification",
   "status": "ready",
