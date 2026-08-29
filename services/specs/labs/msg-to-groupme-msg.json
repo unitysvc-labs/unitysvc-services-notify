@@ -22,12 +22,6 @@
       "bot_id_secret": "GROUPME_MSG_BOT_ID"
     },
     "summary": "Send a notification to your own GroupMe destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "groupme_msg",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "groupme://1234567890abcdef",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

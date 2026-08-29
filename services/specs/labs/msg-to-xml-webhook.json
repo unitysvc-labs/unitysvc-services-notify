@@ -21,12 +21,6 @@
       "host_secret": "XML_WEBHOOK_HOST"
     },
     "summary": "Send a notification to your own XML Webhook destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "xml_webhook",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "xmls://notify.example.com",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

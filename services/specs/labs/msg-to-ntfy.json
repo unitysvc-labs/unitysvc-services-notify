@@ -22,12 +22,6 @@
       "topic_secret": "NTFY_TOPIC"
     },
     "summary": "Send a notification to your own ntfy destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "ntfy",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "ntfy://hostname.example.com/mytopic",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

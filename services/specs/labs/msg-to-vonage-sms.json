@@ -15,12 +15,6 @@
       "secret_secret": "VONAGE_SMS_SECRET"
     },
     "summary": "Send a notification to your own Vonage destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "vonage_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "vonage://dkry5cjqx4bi:dkry5cjqx4bi@+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

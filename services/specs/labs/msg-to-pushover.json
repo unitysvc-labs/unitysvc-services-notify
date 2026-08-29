@@ -20,12 +20,6 @@
       "user_key_secret": "PUSHOVER_USER_KEY"
     },
     "summary": "Send a notification to your own Pushover destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "pushover",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "pover://userkey123@apptoken456",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

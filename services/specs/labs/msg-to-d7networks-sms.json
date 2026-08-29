@@ -24,12 +24,6 @@
       "token_secret": "D7NETWORKS_SMS_TOKEN"
     },
     "summary": "Send an SMS to your own D7 Networks account by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "d7networks_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "d7sms://d7networks_smstokenxyz123@+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

@@ -16,12 +16,6 @@
       "tenant_secret": "OFFICE365_EMAIL_TENANT"
     },
     "summary": "Send an email notification to your own Office 365 destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "office365_email",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "azure://+15551234567/dkry5cjqx4bi/dkry5cjqx4bi/office365_emailsecretxyz123",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

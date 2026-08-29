@@ -25,12 +25,6 @@
       "token_secret": "WHATSAPP_MSG_TOKEN"
     },
     "summary": "Send a notification to your own WhatsApp destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "whatsapp_msg",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "whatsapp://token123abc@1234567890/15551234567",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

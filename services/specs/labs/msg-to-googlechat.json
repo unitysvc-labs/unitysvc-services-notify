@@ -15,12 +15,6 @@
       "workspace_secret": "GOOGLECHAT_WORKSPACE"
     },
     "summary": "Send a notification to your own Google Chat destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "googlechat",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "gchat://googlechatorg/googlechatwebhookkeyxyz123/googlechatwebhooktokenxyz123",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

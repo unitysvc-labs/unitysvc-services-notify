@@ -13,12 +13,6 @@
       "token_secret": "SPIKESH_TOKEN"
     },
     "summary": "Send a notification to your own Spike.sh destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "spikesh",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "spike://abcdef0123456789abcdef0123456789",
     "time_created": "2026-06-19T00:00:00Z",
     "user_parameters_schema": {

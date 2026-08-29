@@ -26,12 +26,6 @@
       "host_secret": "LAMETRIC_HOST"
     },
     "summary": "Send a notification to your own LaMetric device by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "lametric",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "lametrics://lametricapikeyxyz123@notify.example.com",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

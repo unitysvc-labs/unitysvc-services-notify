@@ -15,12 +15,6 @@
       "user_secret": "EMBY_USER"
     },
     "summary": "Send a notification to your own Emby destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "emby",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "embys://embyuser:embypass@notify.example.com",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

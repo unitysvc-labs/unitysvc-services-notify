@@ -24,12 +24,6 @@
       "from_email_secret": "SENDGRID_EMAIL_FROM_EMAIL"
     },
     "summary": "Send a notification to your own SendGrid email destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "sendgrid_email",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "sendgrid://abcdef0123456789:noreply@example.com",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

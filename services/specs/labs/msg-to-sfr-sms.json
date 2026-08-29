@@ -16,12 +16,6 @@
       "user_secret": "SFR_SMS_USER"
     },
     "summary": "Send a notification to your own SFR destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "sfr_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "sfr://sfr_smsuser:sfr_smspass@sfr_smsorg/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

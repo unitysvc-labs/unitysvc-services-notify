@@ -27,12 +27,6 @@
       "targets_secret": "HTTPSMS_SMS_TARGETS"
     },
     "summary": "Send a notification to your own httpSMS destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "httpsms_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "httpsms://httpsms_smsapikeyxyz123@+15551234567/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

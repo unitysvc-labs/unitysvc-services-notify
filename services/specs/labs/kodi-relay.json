@@ -12,12 +12,6 @@
     },
     "plus_base_url": "${ customer_secrets.KODI_BASE ?? http://kodi.local:8080 }/jsonrpc",
     "summary": "Relay a message to your own Kodi by posting a native `kodi` payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "kodi",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/jsonrpc",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

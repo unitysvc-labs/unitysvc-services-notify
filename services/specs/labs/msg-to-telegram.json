@@ -23,12 +23,6 @@
       "chat_id_secret": "TELEGRAM_CHAT_ID"
     },
     "summary": "Send a notification to your own Telegram destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "telegram",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "tgram://123456:aaaaaaaaaaaaaaa/4567",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

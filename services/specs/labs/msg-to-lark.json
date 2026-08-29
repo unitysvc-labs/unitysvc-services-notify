@@ -13,12 +13,6 @@
       "token_secret": "LARK_TOKEN"
     },
     "summary": "Send a notification to your own Lark (Feishu) destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "lark",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "lark://dkry5cjqx4bi",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

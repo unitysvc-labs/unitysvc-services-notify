@@ -23,12 +23,6 @@
       "secret_key_secret": "PUSHJET_SECRET_KEY"
     },
     "summary": "Send a notification to your own Pushjet destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "pushjet",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "pjet://hostname.example.com/secretkey123",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

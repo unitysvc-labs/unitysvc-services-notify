@@ -14,12 +14,6 @@
       "targets_secret": "JOIN_TARGETS"
     },
     "summary": "Send a notification to your own Join destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "join",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "join://dkry5cjqx4bipw3ahov29gnu18fmt07e/dkry5cjqx4bipw3ahov29gnu18fmt07e",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

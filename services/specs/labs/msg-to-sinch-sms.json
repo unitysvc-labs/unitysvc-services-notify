@@ -25,12 +25,6 @@
       "service_plan_id_secret": "SINCH_SMS_SERVICE_PLAN_ID"
     },
     "summary": "Send a notification to your own Sinch SMS destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "sinch_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "sinch://d4b2907e5c3a:d4b2907e5c3a@+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

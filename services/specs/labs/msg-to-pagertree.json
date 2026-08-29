@@ -22,12 +22,6 @@
       "integration_secret": "PAGERTREE_INTEGRATION"
     },
     "summary": "Send a notification to your own PagerTree destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "pagertree",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "pagertree://int_abc1234567",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

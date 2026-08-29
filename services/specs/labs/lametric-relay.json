@@ -19,12 +19,6 @@
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay a notification to your own LaMetric by posting a native `lametric` payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "lametric",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

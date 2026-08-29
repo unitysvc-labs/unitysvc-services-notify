@@ -19,12 +19,6 @@
       "apikey": "${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay a message through your own Evolution API instance by posting a native Evolution payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "evolution",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/message/sendText/demoinstance",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

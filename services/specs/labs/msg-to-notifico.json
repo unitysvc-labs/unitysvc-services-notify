@@ -14,12 +14,6 @@
       "project_id_secret": "NOTIFICO_PROJECT_ID"
     },
     "summary": "Send a notification to your own Notifico destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "notifico",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "notificos://307418529630/dkry5cjqx4bi",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

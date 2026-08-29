@@ -22,12 +22,6 @@
       "secret_secret": "SIGNL4_SECRET"
     },
     "summary": "Send a notification to your own SIGNL4 destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "signl4",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "signl4://signl4secretxyz123",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

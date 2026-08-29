@@ -25,12 +25,6 @@
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Techulus Push destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "techulus",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "push://12345678-1234-4123-8123-123456789abc",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

@@ -14,12 +14,6 @@
       "targets_secret": "SEVEN_SMS_TARGETS"
     },
     "summary": "Send a notification to your own seven destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "seven_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "seven://seven_smsapikeyxyz123/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

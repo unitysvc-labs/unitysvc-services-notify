@@ -24,12 +24,6 @@
       "token_c_secret": "SLACK_TOKEN_C"
     },
     "summary": "Send a notification to your own Slack destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "slack",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "slack://TokenA/TokenB/TokenC",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

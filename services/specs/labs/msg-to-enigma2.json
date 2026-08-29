@@ -13,12 +13,6 @@
       "host_secret": "ENIGMA2_HOST"
     },
     "summary": "Send a notification to your own Enigma2 destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "enigma2",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "enigma2s://notify.example.com",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

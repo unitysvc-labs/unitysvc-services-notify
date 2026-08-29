@@ -27,12 +27,6 @@
       "template_secret": "MSG91_SMS_TEMPLATE"
     },
     "summary": "Send an SMS notification to your own MSG91 destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "msg91_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "msg91://dkry5cjqx4bi@dkry5cjqx4bi/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

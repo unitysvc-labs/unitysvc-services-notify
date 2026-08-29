@@ -19,12 +19,6 @@
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay a notification to your own Kumulos by posting a native `kumulos` payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "kumulos",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/v2/notifications",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

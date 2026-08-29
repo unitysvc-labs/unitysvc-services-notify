@@ -22,12 +22,6 @@
       "privatekey_secret": "PUSHSAFER_PRIVATEKEY"
     },
     "summary": "Send a notification to your own Pushsafer destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "pushsafer",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "psafers://pushsaferprivatekeyxyz123",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

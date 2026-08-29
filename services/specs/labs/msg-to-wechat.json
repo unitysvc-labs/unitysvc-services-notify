@@ -15,12 +15,6 @@
       "user_secret": "WECHAT_USER"
     },
     "summary": "Send a notification to your own WeChat destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "wechat",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "wechat://wechatuser:wechatpass@307418529630",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

@@ -23,12 +23,6 @@
       "token_secret": "RYVER_TOKEN"
     },
     "summary": "Send a notification to your own Ryver destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "ryver",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "ryver://myorg/ABC123DEF456GHI",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

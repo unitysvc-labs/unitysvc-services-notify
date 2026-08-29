@@ -23,12 +23,6 @@
       "targets_secret": "POPCORNNOTIFY_TARGETS"
     },
     "summary": "Send a notification to your own PopcornNotify destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "popcornnotify",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "popcorn://dkry5cjqx4bi/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

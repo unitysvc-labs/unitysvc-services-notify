@@ -24,12 +24,6 @@
       "device_id_secret": "DOT_DEVICE_ID"
     },
     "summary": "Send a notification to your own DOT destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "dot",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "dot://dotapikeyxyz123@dotdevice/",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

@@ -13,12 +13,6 @@
       "token_secret": "PUSHME_TOKEN"
     },
     "summary": "Send a notification to your own PushMe destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "pushme",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "pushme://pushmetokenxyz123",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

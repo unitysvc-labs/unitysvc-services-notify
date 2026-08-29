@@ -28,12 +28,6 @@
       "token_secret": "ZULIP_TOKEN"
     },
     "summary": "Send a notification to your own Zulip destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "zulip",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "zulip://DKRY5CJQX4BI@DKRY5CJQX4BI/DKRY5CJQX4BIPW3AHOV29GNU18FMT07E",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

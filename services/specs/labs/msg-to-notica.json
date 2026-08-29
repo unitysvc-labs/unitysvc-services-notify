@@ -22,12 +22,6 @@
       "token_secret": "NOTICA_TOKEN"
     },
     "summary": "Send a notification to your own Notica destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "notica",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "noticas://noticatoken123",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

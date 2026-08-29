@@ -28,12 +28,6 @@
       "user_secret": "MATRIX_USER"
     },
     "summary": "Send a notification to your own Matrix room by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "matrix",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "matrix://user:pass@hostname.example.com/#room",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

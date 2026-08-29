@@ -23,12 +23,6 @@
       "host_secret": "BARK_HOST"
     },
     "summary": "Send a push notification to your own Bark device by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "bark",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "bark://hostname.example.com/DeviceKey1",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

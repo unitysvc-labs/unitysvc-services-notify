@@ -13,12 +13,6 @@
   "service_type": "notification",
   "status": "ready",
   "summary": "POST a `msg` envelope and UnitySVC emails it to your verified primary address — no recipient to choose, no SMTP server or provider API key of your own.",
-  "tags": [
-    "notification",
-    "email",
-    "platform",
-    "gateway"
-  ],
   "time_created": "2026-07-13T00:00:00Z",
   "upstream_access_config": {
     "default": {

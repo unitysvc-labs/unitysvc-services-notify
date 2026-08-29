@@ -23,12 +23,6 @@
       "token_secret": "MISSKEY_TOKEN"
     },
     "summary": "Send a notification to your own Misskey instance by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "misskey",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "misskeys://misskeytokenxyz123@notify.example.com",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

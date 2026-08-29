@@ -14,12 +14,6 @@
       "webhook_token_secret": "GUILDED_WEBHOOK_TOKEN"
     },
     "summary": "Send a notification to your own Guilded destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "guilded",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "guilded://guildedwebhookidxyz123/guildedwebhooktokenxyz123",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

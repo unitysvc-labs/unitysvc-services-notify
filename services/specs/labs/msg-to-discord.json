@@ -20,12 +20,6 @@
       "webhook_token_secret": "DISCORD_WEBHOOK_TOKEN"
     },
     "summary": "Send a notification to your own Discord channel by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "discord",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "discord://demo/demotoken",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,
