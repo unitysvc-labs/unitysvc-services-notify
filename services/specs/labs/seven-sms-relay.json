@@ -19,12 +19,6 @@
       "X-Api-Key": "${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay an SMS through your own seven account by posting a native seven SMS payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "seven",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/api/sms",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

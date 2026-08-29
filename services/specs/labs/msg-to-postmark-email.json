@@ -26,12 +26,6 @@
       "from_email_secret": "POSTMARK_EMAIL_FROM_EMAIL"
     },
     "summary": "Send a notification to your own Postmark Email destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "postmark_email",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "postmark://abcdef0123456789:noreply@example.com",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

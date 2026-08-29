@@ -19,12 +19,6 @@
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay an SMS through your own Exotel account by posting a native Exotel payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "exotel",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/v1/Accounts/demosid/Sms/send",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

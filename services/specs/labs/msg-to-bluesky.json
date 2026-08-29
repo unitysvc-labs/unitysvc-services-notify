@@ -14,12 +14,6 @@
       "user_secret": "BLUESKY_USER"
     },
     "summary": "Send a notification to your own BlueSky account by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "bluesky",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "bsky://blueskyuser@blueskypass",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

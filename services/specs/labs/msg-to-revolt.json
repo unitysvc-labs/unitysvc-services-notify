@@ -14,12 +14,6 @@
       "targets_secret": "REVOLT_TARGETS"
     },
     "summary": "Send a notification to your own Revolt destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "revolt",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "revolt://revoltbottokenxyz123/dkry5cjqx4bi",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

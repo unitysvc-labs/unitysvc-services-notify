@@ -23,12 +23,6 @@
       "user_secret": "FREEMOBILE_USER"
     },
     "summary": "Send a notification to your own Free-Mobile destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "freemobile",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "freemobile://freemobileuser@freemobilepass",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

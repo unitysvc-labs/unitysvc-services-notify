@@ -14,12 +14,6 @@
       "targets_secret": "WEBEX_TARGETS"
     },
     "summary": "Send a notification to your own Cisco Webex Teams destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "webex",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "wxteams://webexaccesstokenxyz123/webextarget",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

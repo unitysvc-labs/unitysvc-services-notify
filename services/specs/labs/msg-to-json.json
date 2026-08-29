@@ -22,12 +22,6 @@
       "host_secret": "JSON_HOST"
     },
     "summary": "Send a notification to your own JSON webhook by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "json",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "json://hostname.example.com",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

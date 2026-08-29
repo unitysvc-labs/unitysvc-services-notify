@@ -27,12 +27,6 @@
       "user_secret": "SPARKPOST_EMAIL_USER"
     },
     "summary": "Send an email to your own SparkPost destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "sparkpost_email",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "sparkpost://noreply@example.com/abcdef0123456789",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

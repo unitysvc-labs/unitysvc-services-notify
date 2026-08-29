@@ -27,12 +27,6 @@
       "from_phone_secret": "TWILIO_SMS_FROM_PHONE"
     },
     "summary": "Send a notification to your own Twilio destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "twilio_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "twilio://ACdeadbeefdeadbeef:dkry5cjqx4bi@+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

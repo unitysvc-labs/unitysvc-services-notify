@@ -24,12 +24,6 @@
       "host_secret": "HOMEASSISTANT_HOST"
     },
     "summary": "Send a notification to your own HomeAssistant instance by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "homeassistant",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "hassios://notify.example.com/homeassistantaccesstokenxyz123",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

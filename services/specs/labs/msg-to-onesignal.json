@@ -25,12 +25,6 @@
       "targets_secret": "ONESIGNAL_TARGETS"
     },
     "summary": "Send a notification to your own OneSignal destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "onesignal",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "onesignal://appid123@apikey456/PlayerId789",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

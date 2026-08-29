@@ -23,12 +23,6 @@
       "routing_key_secret": "VICTOROPS_ROUTING_KEY"
     },
     "summary": "Send a notification to your own Splunk On-Call destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "victorops",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "victorops://routingkey@apikey123abc",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

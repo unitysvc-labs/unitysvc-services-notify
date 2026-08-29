@@ -19,12 +19,6 @@
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay a message through your own NotificationAPI by posting a native NotificationAPI payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "notificationapi",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/democlientid/sender",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

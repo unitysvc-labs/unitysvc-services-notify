@@ -19,12 +19,6 @@
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay a message to your own Zulip through the UnitySVC gateway by posting a native Zulip payload.",
-    "tags": [
-      "notification",
-      "zulip",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/api/v1/messages",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

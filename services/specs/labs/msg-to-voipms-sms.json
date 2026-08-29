@@ -16,12 +16,6 @@
       "targets_secret": "VOIPMS_SMS_TARGETS"
     },
     "summary": "Send a notification to your own VoIPms destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "voipms_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "voipms://voipms_smspass:voipms_sms@example.com/+15551234567/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

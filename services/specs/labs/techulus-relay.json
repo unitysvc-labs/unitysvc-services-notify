@@ -19,12 +19,6 @@
       "x-api-key": "${ customer_secrets.{{ params.apikey_secret }} }"
     },
     "summary": "Relay a push notification through your own Push by Techulus account by posting a native Techulus payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "techulus",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/api/v1/notify",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

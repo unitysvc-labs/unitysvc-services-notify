@@ -23,12 +23,6 @@
       "integrationkey_secret": "PAGERDUTY_INTEGRATIONKEY"
     },
     "summary": "Send a notification to your own PagerDuty destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "pagerduty",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "pagerduty://integ123key@apikey456",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

@@ -22,12 +22,6 @@
       "token_secret": "SERVERCHAN_TOKEN"
     },
     "summary": "Send a notification to your own ServerChan destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "serverchan",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "schan://SCT123456abcdef",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

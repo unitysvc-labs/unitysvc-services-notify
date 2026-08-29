@@ -16,12 +16,6 @@
       "user_secret": "ROCKETCHAT_USER"
     },
     "summary": "Send a notification to your own Rocket.Chat destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "rocketchat",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "rockets://rocketchatuser:rocketchatpass@notify.example.com/rocketchattargetchannelxyz123",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

@@ -14,12 +14,6 @@
       "webhook_token_secret": "FLUXER_WEBHOOK_TOKEN"
     },
     "summary": "Send a notification to your own Fluxer destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "fluxer",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "fluxers://307418529630/dkryFMT07elszGNU",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

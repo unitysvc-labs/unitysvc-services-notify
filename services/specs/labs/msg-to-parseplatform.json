@@ -27,12 +27,6 @@
       "master_key_secret": "PARSEPLATFORM_MASTER_KEY"
     },
     "summary": "Send a notification to your own Parse Platform destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "parseplatform",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "parseps://parseplatformappidxyz123:parseplatformmasterkeyxyz123@notify.example.com",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

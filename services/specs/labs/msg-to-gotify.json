@@ -23,12 +23,6 @@
       "token_secret": "GOTIFY_TOKEN"
     },
     "summary": "Send a notification to your own Gotify server by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "gotify",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "gotify://hostname.example.com/AbCdEfGhIjKlMnO",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

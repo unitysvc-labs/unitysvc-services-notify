@@ -13,12 +13,6 @@
       "subscriber_secret": "VAPID_SUBSCRIBER"
     },
     "summary": "Send a notification to your own Web Push (VAPID) destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "vapid",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "vapid://mailto:vapid@example.com",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

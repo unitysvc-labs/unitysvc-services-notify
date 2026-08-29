@@ -19,12 +19,6 @@
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay an SMS through your own BurstSMS account by posting a native BurstSMS payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "burstsms",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/send-sms.json",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

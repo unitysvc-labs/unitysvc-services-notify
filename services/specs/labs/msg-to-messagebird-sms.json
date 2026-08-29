@@ -26,12 +26,6 @@
       "source_secret": "MESSAGEBIRD_SMS_SOURCE"
     },
     "summary": "Send an SMS notification to your own MessageBird destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "messagebird_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "msgbird://abcdefghij0123456789abcde/15551234567",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

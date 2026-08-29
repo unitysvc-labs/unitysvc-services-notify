@@ -24,12 +24,6 @@
       "webhook_id_secret": "IFTTT_WEBHOOK_ID"
     },
     "summary": "Send a notification to your own IFTTT destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "ifttt",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "ifttt://iftttwebhookidxyz123/iftttevent",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

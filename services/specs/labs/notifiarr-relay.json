@@ -19,12 +19,6 @@
       "X-api-Key": "${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay a message through your own Notifiarr by posting a native Notifiarr payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "notifiarr",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/api/v1/notification/apprise",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

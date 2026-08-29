@@ -19,12 +19,6 @@
       "Authorization": "${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay a message to your own Zoom Team Chat through the UnitySVC gateway by posting a native Zoom payload.",
-    "tags": [
-      "notification",
-      "zoom",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/incoming/hook/demowebhookid",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

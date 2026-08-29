@@ -21,12 +21,6 @@
       "X-Parse-Master-Key": "${ customer_secrets.PARSEPLATFORM_MASTER_KEY }"
     },
     "summary": "Relay a message through your own Parse Platform by posting a native Parse Platform payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "parseplatform",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/parse/push/",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

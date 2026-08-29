@@ -27,12 +27,6 @@
       "token_secret": "EXOTEL_SMS_TOKEN"
     },
     "summary": "Send a notification to your own Exotel destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "exotel_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "exotel://exotel_smssidxyz123:exotel_smstokenxyz123@+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

@@ -23,12 +23,6 @@
       "token_secret": "WXPUSHER_TOKEN"
     },
     "summary": "Send a notification to your own WxPusher destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "wxpusher",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "wxpusher://AT_abcdef0123456789/UID_xxxxxxxx",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

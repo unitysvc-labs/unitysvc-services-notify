@@ -26,12 +26,6 @@
       "from_email_secret": "BREVO_EMAIL_FROM_EMAIL"
     },
     "summary": "Send an email through your own Brevo account by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "brevo_email",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "brevo://abcdef0123456789:noreply@example.com",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,

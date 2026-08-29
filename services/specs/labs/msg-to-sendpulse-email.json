@@ -17,12 +17,6 @@
       "user_secret": "SENDPULSE_EMAIL_USER"
     },
     "summary": "Send a notification to your own SendPulse destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "sendpulse_email",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "sendpulse://sendpulse_emailuser@notify.example.com/DKRY5CJQX4BI/DKRY5CJQX4BI/sendpulse_email@example.com",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

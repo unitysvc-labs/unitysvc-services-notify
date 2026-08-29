@@ -24,12 +24,6 @@
       "token_secret": "SMSEAGLE_SMS_TOKEN"
     },
     "summary": "Send a notification to your own SMS Eagle device by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "smseagle_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "smseagles://smseagle_smstokenxyz123@notify.example.com/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

@@ -22,12 +22,6 @@
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Prowl destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "prowl",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "prowl://dkryFMT07elszGNU18fmtAHOV29gnuBIPW3ahovC",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

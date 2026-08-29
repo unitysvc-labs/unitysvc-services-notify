@@ -14,12 +14,6 @@
       "password_secret": "TWIST_PASSWORD"
     },
     "summary": "Send a notification to your own Twist destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "twist",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "twist://twistpass:twist@example.com",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

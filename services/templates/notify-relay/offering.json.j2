@@ -11,7 +11,6 @@
   "service_type": "notification",
   "status": "{{ status | default('ready') }}",
   "summary": {{ summary | tojson }},
-  "tags": {{ tags | tojson }},
   "time_created": "{{ time_created | default('2026-06-19T00:00:00Z') }}",
   "upstream_access_config": {
     "byok": {

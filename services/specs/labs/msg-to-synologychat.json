@@ -23,12 +23,6 @@
       "token_secret": "SYNOLOGYCHAT_TOKEN"
     },
     "summary": "Send a notification to your own Synology Chat destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "synologychat",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "synologys://notify.example.com/synologychattokenxyz123",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

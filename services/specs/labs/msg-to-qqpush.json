@@ -22,12 +22,6 @@
       "token_secret": "QQPUSH_TOKEN"
     },
     "summary": "Send a notification to your own QQ Push destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "qqpush",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "qq://dkry5cjqx4bipw3ahov29gnu",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

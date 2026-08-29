@@ -14,12 +14,6 @@
       "targets_secret": "CLICKATELL_SMS_TARGETS"
     },
     "summary": "Send an SMS to your own Clickatell account by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "clickatell_sms",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "clickatell://clickatell_smsapikeyxyz123/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {

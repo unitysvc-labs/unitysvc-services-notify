@@ -22,12 +22,6 @@
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Streamlabs destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "streamlabs",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "strmlabs://dkry5cjqx4bipw3ahov29gnu18fmt07elsz6dkry/",
     "time_created": "2026-06-20T00:00:00Z",
     "transformer_channel_exists": true,

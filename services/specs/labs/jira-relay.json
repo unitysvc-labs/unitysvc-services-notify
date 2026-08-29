@@ -19,12 +19,6 @@
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },
     "summary": "Relay a message to your own Jira by posting a native `jira` payload to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "jira",
-      "webhook",
-      "gateway"
-    ],
     "test_webhook_path": "/rest/api/2/issue",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {

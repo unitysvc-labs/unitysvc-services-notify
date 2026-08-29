@@ -13,12 +13,6 @@
       "key_secret": "WECHAT_WORK_KEY"
     },
     "summary": "Send a notification to your own WeCom destination by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "wechat_work",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "wecombot://693a91f6-7xxx-4bc4-97a0-0ec2sifa5aaa",
     "time_created": "2026-06-19T00:00:00Z",
     "user_parameters_schema": {

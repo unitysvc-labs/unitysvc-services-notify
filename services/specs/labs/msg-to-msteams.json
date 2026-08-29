@@ -25,12 +25,6 @@
       "workflow_secret": "MSTEAMS_WORKFLOW"
     },
     "summary": "Send a notification to your own Microsoft Teams channel by posting a simple `msg` request to the UnitySVC gateway.",
-    "tags": [
-      "notification",
-      "msteams",
-      "apprise",
-      "gateway"
-    ],
     "test_apprise_url": "workflows://hostname.example.com/workflowid/AbCdEfGhSignature",
     "time_created": "2026-06-19T00:00:00Z",
     "transformer_channel_exists": true,
