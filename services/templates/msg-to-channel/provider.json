@@ -1,8 +1,18 @@
 {
   "contact_email": "hello@unitysvc.com",
   "display_name": "UnitySVC Labs",
+  "documents": {
+    "Company Logo": {
+      "category": "logo",
+      "external_url": "https://avatars.githubusercontent.com/u/280703328",
+      "is_public": true,
+      "meta": {
+        "source_url": "https://avatars.githubusercontent.com/u/280703328"
+      },
+      "mime_type": "url"
+    }
+  },
   "homepage": "https://unitysvc.com",
-  "logo": "https://avatars.githubusercontent.com/u/280703328",
   "name": "labs",
   "status": "ready",
   "terms_of_service": "https://unitysvc.com/terms/",

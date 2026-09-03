@@ -5,8 +5,31 @@
   "description": {{ description | tojson }},
   "details": {
     "input_formats": ["x-{{ channel_name | replace('-relay', '') }}"]
-  },{% if logo %}
-  "logo": {{ logo | tojson }},{% endif %}
+  },
+{%- if logo %}
+{#- The `logo` convenience field is a bare URL, so there is nowhere to record
+    where that URL came from. Mirroring rewrites `external_url` to the
+    platform's own `${UNITYSVC_S3_BASE_URL}/<content-key>` form, and once it
+    does, the original is lost — which is why every upload re-fetches every
+    logo from its origin CDN. Authoring the document explicitly keeps the
+    source in `meta.source_url`, so a later upload can recognise an already
+    mirrored logo instead of downloading it again.
+    See unitysvc/unitysvc-sellers#193. -#}
+{%- set _logo_lower = logo | lower %}
+{%- if _logo_lower.endswith('.png') %}{% set _logo_mime = 'png' %}
+{%- elif _logo_lower.endswith('.jpg') or _logo_lower.endswith('.jpeg') %}{% set _logo_mime = 'jpeg' %}
+{%- elif _logo_lower.endswith('.svg') %}{% set _logo_mime = 'svg' %}
+{%- else %}{% set _logo_mime = 'url' %}{% endif %}
+  "documents": {
+    "Company Logo": {
+      "category": "logo",
+      "external_url": {{ logo | tojson }},
+      "is_public": true,
+      "meta": { "source_url": {{ logo | tojson }} },
+      "mime_type": {{ _logo_mime | tojson }}
+    }
+  },
+{%- endif %}
   "name": "{{ channel_name }}",
   "service_type": "notification",
   "status": "{{ status | default('ready') }}",

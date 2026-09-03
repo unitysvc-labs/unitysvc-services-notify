@@ -8,7 +8,17 @@
       "msg"
     ]
   },
-  "logo": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Mail%20Alert/SVG/ic_fluent_mail_alert_32_color.svg",
+  "documents": {
+    "Company Logo": {
+      "category": "logo",
+      "external_url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Mail%20Alert/SVG/ic_fluent_mail_alert_32_color.svg",
+      "is_public": true,
+      "meta": {
+        "source_url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Mail%20Alert/SVG/ic_fluent_mail_alert_32_color.svg"
+      },
+      "mime_type": "svg"
+    }
+  },
   "name": "msg-to-mailbox",
   "service_type": "notification",
   "status": "ready",
