@@ -16,6 +16,16 @@
   "upstream_access_config": {
     "apprise": {
       "access_method": "http",
+{%- if transformer_channel_exists | default(false) %}
+      {#- A native `gateway` channel delivers straight to the provider's own
+          API, so the Apprise relay is redundant here — and it is a path we
+          cannot exercise end-to-end against the real destination. Keep the
+          definition as documentation/fallback but disabled; the backend
+          honors is_active everywhere channels are read
+          (unitysvc/unitysvc#1844). Apprise-only services (no transformer)
+          keep this channel active — it is their sole delivery path. -#}
+      "is_active": false,
+{%- endif %}
       "sort_order": 2,
       "base_url": "${ customer_secrets.APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
       "raw": {

@@ -5,7 +5,7 @@
     "channel_name": "msg-to-sinch-sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "`msg-to-sinch-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Sinch SMS destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise) — the open-source notification library — or a native gateway transformation, both free and driven entirely by your own stored credentials. Paid variants ($0.001 per message) deliver to additional Sinch SMS destinations bound per enrollment.",
+    "description": "`msg-to-sinch-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Sinch SMS destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Sinch SMS destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Sinch SMS destinations bound per enrollment.",
     "display_name": "Sinch Messages",
     "gateway_api_key": "${ customer_secrets.SINCH_SMS_API_TOKEN }",
     "gateway_body_template": "{\"from\":\"${ customer_secrets.SINCH_SMS_FROM_PHONE }\",\"to\":[\"${ customer_secrets.SINCH_SMS_TO_PHONE }\"],\"body\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *}}",
