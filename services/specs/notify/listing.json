@@ -29,7 +29,7 @@
     }
   },
   "list_price": {
-    "description": "Free — delivery to any external destination you've configured is billed by that destination's own listing, if it has a cost",
+    "description": "Free | delivery to any external destination you've configured is billed by that destination's own listing, if it has a cost",
     "price": "0",
     "type": "constant"
   },
