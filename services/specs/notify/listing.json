@@ -1,0 +1,45 @@
+{
+  "currency": "USD",
+  "display_name": "Notify Me",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "POST the msg envelope through the gateway and expect 2xx",
+      "file_path": "connectivity.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok"
+      },
+      "mime_type": "bash"
+    },
+    "Python code example": {
+      "category": "code_example",
+      "description": "Python (httpx) example — send yourself a notification via the msg envelope",
+      "file_path": "code-example.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent",
+        "requirements": [
+          "httpx"
+        ]
+      },
+      "mime_type": "python"
+    }
+  },
+  "list_price": {
+    "description": "Free",
+    "price": "0",
+    "type": "constant"
+  },
+  "name": "notify",
+  "status": "ready",
+  "time_created": "2026-09-06T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  }
+}

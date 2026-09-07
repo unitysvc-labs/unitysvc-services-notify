@@ -1,0 +1,34 @@
+{
+  "capabilities": [
+    "deliver-to-preference"
+  ],
+  "description": "`notify` sends a message to you, the caller — delivered however you've configured notification delivery, no recipient or channel to specify.\n\nThe gateway-native `notify://user` primitive (unitysvc#1526) resolves the caller from the gateway's own auth context, then: raises an in-app UnitySVC notification, sends the category-default platform email, and — if you've set an external destination via `PUT /v1/users/me/notification-destination` — fans the message out through that destination too (any service that accepts the `msg` envelope, or an SMTP-only destination, via unitysvc#1874). Without a saved destination, delivery is just the in-app notification and platform email.\n\nThis is the HTTP-only half of the `notify`/`smtp-notify` pair (unitysvc#2063): send by POSTing the msg envelope here. `smtp-notify` covers the same delivery for callers that can only send email.",
+  "details": {
+    "input_formats": [
+      "msg"
+    ]
+  },
+  "logo": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Alert/SVG/ic_fluent_alert_32_color.svg",
+  "name": "notify",
+  "payout_price": {
+    "description": "No platform commission — delivers to the caller's own configured destination",
+    "percentage": "100.00",
+    "type": "revenue_share"
+  },
+  "service_type": "notification",
+  "status": "ready",
+  "summary": "POST a `msg` envelope and UnitySVC delivers it to you — in-app, by email, and through whatever external destination you've configured. No recipient or channel to specify.",
+  "tags": [
+    "gateway",
+    "notification"
+  ],
+  "time_created": "2026-09-06T00:00:00Z",
+  "upstream_access_config": {
+    "default": {
+      "access_method": "http",
+      "base_url": "notify://user",
+      "is_active": true,
+      "is_primary": true
+    }
+  }
+}
