@@ -18,10 +18,6 @@
   "service_type": "notification",
   "status": "ready",
   "summary": "POST a `msg` envelope and UnitySVC delivers it to you — in-app, by email, and through whatever external destination you've configured. No recipient or channel to specify.",
-  "tags": [
-    "gateway",
-    "notification"
-  ],
   "time_created": "2026-09-06T00:00:00Z",
   "upstream_access_config": {
     "default": {
