@@ -2,10 +2,10 @@
   "currency": "USD",
   "display_name": "Notify Me",
   "documents": {
-    "Connectivity test": {
+    "Connectivity test (HTTP)": {
       "category": "connectivity_test",
-      "description": "Runs once per access interface: POST the msg envelope over HTTP, or submit a message over SMTP -- both expect success",
-      "file_path": "connectivity.sh.j2",
+      "description": "POST the msg envelope through the canonical interface and expect 2xx",
+      "file_path": "connectivity-http.sh.j2",
       "is_active": true,
       "is_public": true,
       "meta": {
@@ -13,10 +13,21 @@
       },
       "mime_type": "bash"
     },
-    "Python code example": {
+    "Connectivity test (SMTP)": {
+      "category": "connectivity_test",
+      "description": "Submit a message over SMTP through the smtp_gateway interface and expect the transaction to complete",
+      "file_path": "connectivity-smtp.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "connectivity ok"
+      },
+      "mime_type": "bash"
+    },
+    "Python code example (HTTP)": {
       "category": "code_example",
       "description": "Python (httpx) example — send yourself a notification via the msg envelope",
-      "file_path": "code-example.py.j2",
+      "file_path": "code-example-http.py.j2",
       "is_active": true,
       "is_public": true,
       "meta": {
@@ -26,6 +37,17 @@
         ]
       },
       "mime_type": "python"
+    },
+    "SMTP code example": {
+      "category": "code_example",
+      "description": "Send yourself a notification by submitting an email over SMTP",
+      "file_path": "code-example-smtp.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "meta": {
+        "output_contains": "sent"
+      },
+      "mime_type": "bash"
     }
   },
   "list_price": {
