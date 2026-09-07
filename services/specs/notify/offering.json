@@ -2,7 +2,7 @@
   "capabilities": [
     "deliver-to-preference"
   ],
-  "description": "`notify` sends a message to you, the caller — delivered however you've configured notification delivery, no recipient or channel to specify.\n\nThe gateway-native `notify://user` primitive (unitysvc#1526) resolves the caller from the gateway's own auth context, then: raises an in-app UnitySVC notification, sends the category-default platform email, and — if you've set an external destination via `PUT /v1/users/me/notification-destination` — fans the message out through that destination too (any service that accepts the `msg` envelope, or an SMTP-only destination, via unitysvc#1874). Without a saved destination, delivery is just the in-app notification and platform email.\n\nThis is the HTTP-only half of the `notify`/`smtp-notify` pair (unitysvc#2063): send by POSTing the msg envelope here. `smtp-notify` covers the same delivery for callers that can only send email.",
+  "description": "`notify` sends a message to you — no recipient or channel to specify, the platform already knows who's calling and where you want to hear from it.\n\nEvery call raises an in-app UnitySVC notification and sends you an email. If you've also set an external destination (`PUT /v1/users/me/notification-destination`), the same message is delivered there too — a webhook, chat app, or another email address, whatever you've configured. Nothing to set up on this end; just POST and it goes wherever you've already told UnitySVC to send it.\n\nCan only send email rather than make an HTTP call? Use `smtp-notify` instead — same delivery, reached by sending a message over SMTP.",
   "details": {
     "input_formats": [
       "msg"
