@@ -15,8 +15,8 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Mastodon destinations, direct",
     "gateway_price_description": "Free — direct to your Mastodon instance API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/mastodon/api/v1/statuses",
-    "gateway_url": "${ customer_secrets.MASTODON_API_BASE ?? https://mastodon.social }/api/v1/statuses",
-    "gateway_url_plus": "${ customer_secrets.MASTODON_API_BASE ?? https://mastodon.social }/api/v1/statuses",
+    "gateway_url": "${ customer_secrets._MASTODON_API_BASE ?? https://mastodon.social }/api/v1/statuses",
+    "gateway_url_plus": "${ customer_secrets._MASTODON_API_BASE ?? https://mastodon.social }/api/v1/statuses",
     "logo": "https://cdn.simpleicons.org/mastodon/6364FF",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

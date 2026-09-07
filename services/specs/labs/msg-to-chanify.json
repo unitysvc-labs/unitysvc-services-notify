@@ -14,8 +14,8 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Chanify destinations, direct",
     "gateway_price_description": "Free — direct to your Chanify sender token",
     "gateway_test_local_url": "https://mock.unitysvc.dev/chanify/v1/sender/demo123/",
-    "gateway_url": "${ customer_secrets.CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.CHANIFY_TOKEN }/",
-    "gateway_url_plus": "${ customer_secrets.CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.{{ params.token_secret }} }/",
+    "gateway_url": "${ customer_secrets._CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.CHANIFY_TOKEN }/",
+    "gateway_url_plus": "${ customer_secrets._CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.{{ params.token_secret }} }/",
     "logo": "https://raw.githubusercontent.com/chanify/chanify-ios/main/iOS/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-iTunes.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

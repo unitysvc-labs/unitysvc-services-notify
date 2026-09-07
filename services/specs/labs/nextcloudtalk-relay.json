@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.NEXTCLOUDTALK_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/spreed/api/v1/chat/${ customer_secrets.NEXTCLOUDTALK_TARGETS }",
+    "byok_base_url": "${ customer_secrets._NEXTCLOUDTALK_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/spreed/api/v1/chat/${ customer_secrets.NEXTCLOUDTALK_TARGETS }",
     "byok_headers": {
       "Authorization": "Basic ${ customer_secrets.NEXTCLOUDTALK_BASIC }"
     },
@@ -14,7 +14,7 @@
       "api_key_secret": "NEXTCLOUDTALK_BASIC",
       "base_url": "https://mock.unitysvc.dev/nextcloudtalk"
     },
-    "plus_base_url": "${ customer_secrets.NEXTCLOUDTALK_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/spreed/api/v1/chat/${ customer_secrets.NEXTCLOUDTALK_TARGETS }",
+    "plus_base_url": "${ customer_secrets._NEXTCLOUDTALK_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/spreed/api/v1/chat/${ customer_secrets.NEXTCLOUDTALK_TARGETS }",
     "plus_headers": {
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },

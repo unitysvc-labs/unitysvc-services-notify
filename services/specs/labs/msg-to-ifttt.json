@@ -14,8 +14,8 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment IFTTT destinations, direct",
     "gateway_price_description": "Free — direct to your IFTTT Webhooks endpoint",
     "gateway_test_local_url": "https://mock.unitysvc.dev/ifttt/trigger/demoevent/with/key/demo123",
-    "gateway_url": "${ customer_secrets.IFTTT_WEBHOOK_BASE ?? https://maker.ifttt.com }/trigger/${ customer_secrets.IFTTT_EVENT }/with/key/${ customer_secrets.IFTTT_WEBHOOK_ID }",
-    "gateway_url_plus": "${ customer_secrets.IFTTT_WEBHOOK_BASE ?? https://maker.ifttt.com }/trigger/${ customer_secrets.{{ params.event_secret }} }/with/key/${ customer_secrets.{{ params.webhook_id_secret }} }",
+    "gateway_url": "${ customer_secrets._IFTTT_WEBHOOK_BASE ?? https://maker.ifttt.com }/trigger/${ customer_secrets.IFTTT_EVENT }/with/key/${ customer_secrets.IFTTT_WEBHOOK_ID }",
+    "gateway_url_plus": "${ customer_secrets._IFTTT_WEBHOOK_BASE ?? https://maker.ifttt.com }/trigger/${ customer_secrets.{{ params.event_secret }} }/with/key/${ customer_secrets.{{ params.webhook_id_secret }} }",
     "logo": "https://cdn.simpleicons.org/ifttt/FFFFFF",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

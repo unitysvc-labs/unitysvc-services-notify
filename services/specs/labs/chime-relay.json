@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.CHIME_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.CHIME_WEBHOOK_ID }?token=${ customer_secrets.CHIME_TOKEN }",
+    "byok_base_url": "${ customer_secrets._CHIME_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.CHIME_WEBHOOK_ID }?token=${ customer_secrets.CHIME_TOKEN }",
     "channel_name": "chime-relay",
     "code_example_preset": "notify_relay_code_example_py_chime",
     "connectivity_preset": "notify_relay_connectivity_chime",
@@ -12,7 +12,7 @@
       "token_secret": "CHIME_TOKEN",
       "webhook_id_secret": "CHIME_WEBHOOK_ID"
     },
-    "plus_base_url": "${ customer_secrets.CHIME_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.{{ params.webhook_id_secret }} }?token=${ customer_secrets.{{ params.token_secret }} }",
+    "plus_base_url": "${ customer_secrets._CHIME_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.{{ params.webhook_id_secret }} }?token=${ customer_secrets.{{ params.token_secret }} }",
     "summary": "Relay a message to your own Amazon Chime room by posting a native Chime payload to the UnitySVC gateway.",
     "test_webhook_path": "/incomingwebhooks/demowebhookid?token=demotoken",
     "time_created": "2026-06-21T00:00:00Z",

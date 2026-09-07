@@ -14,8 +14,8 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Kodi destinations, direct",
     "gateway_price_description": "Free — direct to your Kodi JSON-RPC endpoint",
     "gateway_test_local_url": "https://mock.unitysvc.dev/kodi/jsonrpc",
-    "gateway_url": "${ customer_secrets.KODI_BASE ?? http://kodi.local:8080 }/jsonrpc",
-    "gateway_url_plus": "${ customer_secrets.KODI_BASE ?? http://kodi.local:8080 }/jsonrpc",
+    "gateway_url": "${ customer_secrets._KODI_BASE ?? http://kodi.local:8080 }/jsonrpc",
+    "gateway_url_plus": "${ customer_secrets._KODI_BASE ?? http://kodi.local:8080 }/jsonrpc",
     "logo": "https://cdn.simpleicons.org/kodi/17B2E7",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

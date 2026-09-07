@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.SYNOLOGYCHAT_BASE }/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=${ customer_secrets.SYNOLOGYCHAT_TOKEN }",
+    "byok_base_url": "${ customer_secrets._SYNOLOGYCHAT_BASE }/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=${ customer_secrets.SYNOLOGYCHAT_TOKEN }",
     "channel_name": "synologychat-relay",
     "code_example_preset": "notify_relay_code_example_py_synologychat",
     "connectivity_preset": "notify_relay_connectivity_synologychat",
@@ -11,7 +11,7 @@
       "base_url": "https://mock.unitysvc.dev/synologychat",
       "token_secret": "SYNOLOGYCHAT_TOKEN"
     },
-    "plus_base_url": "${ customer_secrets.SYNOLOGYCHAT_BASE }/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=${ customer_secrets.{{ params.token_secret }} }",
+    "plus_base_url": "${ customer_secrets._SYNOLOGYCHAT_BASE }/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=${ customer_secrets.{{ params.token_secret }} }",
     "summary": "Relay a message through your own Synology Chat by posting a native Synology Chat payload to the UnitySVC gateway.",
     "test_webhook_path": "/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=demotoken",
     "time_created": "2026-06-21T00:00:00Z",

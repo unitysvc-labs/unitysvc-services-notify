@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.FLUXER_BASE ?? https://api.fluxer.app }/webhooks/${ customer_secrets.FLUXER_WEBHOOK_ID }/${ customer_secrets.FLUXER_WEBHOOK_TOKEN }",
+    "byok_base_url": "${ customer_secrets._FLUXER_BASE ?? https://api.fluxer.app }/webhooks/${ customer_secrets.FLUXER_WEBHOOK_ID }/${ customer_secrets.FLUXER_WEBHOOK_TOKEN }",
     "channel_name": "fluxer-relay",
     "code_example_preset": "notify_relay_code_example_py_fluxer",
     "connectivity_preset": "notify_relay_connectivity_fluxer",
@@ -12,7 +12,7 @@
       "webhook_id_secret": "FLUXER_WEBHOOK_ID",
       "webhook_token_secret": "FLUXER_WEBHOOK_TOKEN"
     },
-    "plus_base_url": "${ customer_secrets.FLUXER_BASE ?? https://api.fluxer.app }/webhooks/${ customer_secrets.{{ params.webhook_id_secret }} }/${ customer_secrets.{{ params.webhook_token_secret }} }",
+    "plus_base_url": "${ customer_secrets._FLUXER_BASE ?? https://api.fluxer.app }/webhooks/${ customer_secrets.{{ params.webhook_id_secret }} }/${ customer_secrets.{{ params.webhook_token_secret }} }",
     "summary": "Relay a message to your own Fluxer by posting a native `fluxer` payload to the UnitySVC gateway.",
     "test_webhook_path": "/webhooks/demoid/demotoken",
     "time_created": "2026-06-21T00:00:00Z",

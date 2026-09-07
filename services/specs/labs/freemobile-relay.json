@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.FREEMOBILE_BASE ?? https://smsapi.free-mobile.fr }/sendmsg",
+    "byok_base_url": "${ customer_secrets._FREEMOBILE_BASE ?? https://smsapi.free-mobile.fr }/sendmsg",
     "channel_name": "freemobile-relay",
     "code_example_preset": "notify_relay_code_example_py_freemobile",
     "connectivity_preset": "notify_relay_connectivity_freemobile",
@@ -10,7 +10,7 @@
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/freemobile"
     },
-    "plus_base_url": "${ customer_secrets.FREEMOBILE_BASE ?? https://smsapi.free-mobile.fr }/sendmsg",
+    "plus_base_url": "${ customer_secrets._FREEMOBILE_BASE ?? https://smsapi.free-mobile.fr }/sendmsg",
     "summary": "Relay an SMS to your own Free Mobile by posting a native `freemobile` payload to the UnitySVC gateway.",
     "test_webhook_path": "/sendmsg",
     "time_created": "2026-06-21T00:00:00Z",

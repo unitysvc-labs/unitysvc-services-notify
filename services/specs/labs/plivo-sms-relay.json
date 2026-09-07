@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.PLIVO_SMS_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.PLIVO_SMS_AUTH_ID }/Message/",
+    "byok_base_url": "${ customer_secrets._PLIVO_SMS_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.PLIVO_SMS_AUTH_ID }/Message/",
     "byok_headers": {
       "Authorization": "Basic ${ customer_secrets.PLIVO_SMS_BASIC }"
     },
@@ -14,7 +14,7 @@
       "api_key_secret": "PLIVO_SMS_BASIC",
       "base_url": "https://mock.unitysvc.dev/plivo_sms"
     },
-    "plus_base_url": "${ customer_secrets.PLIVO_SMS_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.PLIVO_SMS_AUTH_ID }/Message/",
+    "plus_base_url": "${ customer_secrets._PLIVO_SMS_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.PLIVO_SMS_AUTH_ID }/Message/",
     "plus_headers": {
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },

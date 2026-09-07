@@ -1,7 +1,7 @@
 {
   "parameters": {
     "byok_api_key": "${ customer_secrets.DOT_APIKEY ?? }",
-    "byok_base_url": "${ customer_secrets.DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/${ customer_secrets.DOT_DEVICE_ID }/text",
+    "byok_base_url": "${ customer_secrets._DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/${ customer_secrets.DOT_DEVICE_ID }/text",
     "channel_name": "dot-relay",
     "code_example_preset": "notify_relay_code_example_py_dot",
     "connectivity_preset": "notify_relay_connectivity_dot",
@@ -13,7 +13,7 @@
       "base_url": "https://mock.unitysvc.dev/dot"
     },
     "plus_api_key": "${ customer_secrets.{{ params.api_key_secret }} ?? }",
-    "plus_base_url": "${ customer_secrets.DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/${ customer_secrets.DOT_DEVICE_ID }/text",
+    "plus_base_url": "${ customer_secrets._DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/${ customer_secrets.DOT_DEVICE_ID }/text",
     "summary": "Relay a message through your own Dot device by posting a native Dot payload to the UnitySVC gateway.",
     "test_webhook_path": "/api/authV2/open/device/demodevice/text",
     "time_created": "2026-06-21T00:00:00Z",

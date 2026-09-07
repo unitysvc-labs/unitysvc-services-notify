@@ -14,8 +14,8 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment GroupMe destinations, direct",
     "gateway_price_description": "Free — direct to GroupMe bot post API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/groupme/v3/bots/post",
-    "gateway_url": "${ customer_secrets.GROUPME_MSG_BASE ?? https://api.groupme.com }/v3/bots/post",
-    "gateway_url_plus": "${ customer_secrets.GROUPME_MSG_BASE ?? https://api.groupme.com }/v3/bots/post",
+    "gateway_url": "${ customer_secrets._GROUPME_MSG_BASE ?? https://api.groupme.com }/v3/bots/post",
+    "gateway_url_plus": "${ customer_secrets._GROUPME_MSG_BASE ?? https://api.groupme.com }/v3/bots/post",
     "logo": "https://cdn.simpleicons.org/groupme/00AFF0",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

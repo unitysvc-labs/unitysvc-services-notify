@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.BURSTSMS_SMS_BASE ?? https://api.transmitsms.com }/send-sms.json",
+    "byok_base_url": "${ customer_secrets._BURSTSMS_SMS_BASE ?? https://api.transmitsms.com }/send-sms.json",
     "byok_headers": {
       "Authorization": "Basic ${ customer_secrets.BURSTSMS_SMS_BASIC }"
     },
@@ -14,7 +14,7 @@
       "api_key_secret": "BURSTSMS_SMS_BASIC",
       "base_url": "https://mock.unitysvc.dev/burstsms_sms"
     },
-    "plus_base_url": "${ customer_secrets.BURSTSMS_SMS_BASE ?? https://api.transmitsms.com }/send-sms.json",
+    "plus_base_url": "${ customer_secrets._BURSTSMS_SMS_BASE ?? https://api.transmitsms.com }/send-sms.json",
     "plus_headers": {
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },

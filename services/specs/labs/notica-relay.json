@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.NOTICA_BASE ?? https://notica.us }/${ customer_secrets.NOTICA_TOKEN }",
+    "byok_base_url": "${ customer_secrets._NOTICA_BASE ?? https://notica.us }/${ customer_secrets.NOTICA_TOKEN }",
     "channel_name": "notica-relay",
     "code_example_preset": "notify_relay_code_example_py_notica",
     "connectivity_preset": "notify_relay_connectivity_notica",
@@ -11,7 +11,7 @@
       "base_url": "https://mock.unitysvc.dev/notica",
       "token_secret": "NOTICA_TOKEN"
     },
-    "plus_base_url": "${ customer_secrets.NOTICA_BASE ?? https://notica.us }/${ customer_secrets.{{ params.token_secret }} }",
+    "plus_base_url": "${ customer_secrets._NOTICA_BASE ?? https://notica.us }/${ customer_secrets.{{ params.token_secret }} }",
     "summary": "Relay a message through your own Notica by posting a native Notica payload to the UnitySVC gateway.",
     "test_webhook_path": "/demotoken",
     "time_created": "2026-06-21T00:00:00Z",

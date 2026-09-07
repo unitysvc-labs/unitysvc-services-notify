@@ -17,8 +17,8 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Viber destinations, direct",
     "gateway_price_description": "Free — direct to Viber Bot API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/viber/pa/send_message",
-    "gateway_url": "${ customer_secrets.VIBER_API_BASE ?? https://chatapi.viber.com }/pa/send_message",
-    "gateway_url_plus": "${ customer_secrets.VIBER_API_BASE ?? https://chatapi.viber.com }/pa/send_message",
+    "gateway_url": "${ customer_secrets._VIBER_API_BASE ?? https://chatapi.viber.com }/pa/send_message",
+    "gateway_url_plus": "${ customer_secrets._VIBER_API_BASE ?? https://chatapi.viber.com }/pa/send_message",
     "logo": "https://cdn.simpleicons.org/viber/7360F2",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

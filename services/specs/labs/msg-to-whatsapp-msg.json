@@ -15,8 +15,8 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment WhatsApp destinations, direct",
     "gateway_price_description": "Free — direct to the WhatsApp Cloud API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/whatsapp/v17.0/1234567890/messages",
-    "gateway_url": "${ customer_secrets.WHATSAPP_API_BASE ?? https://graph.facebook.com }/v17.0/${ customer_secrets.WHATSAPP_MSG_FROM_PHONE_ID }/messages",
-    "gateway_url_plus": "${ customer_secrets.WHATSAPP_API_BASE ?? https://graph.facebook.com }/v17.0/${ customer_secrets.{{ params.from_phone_id_secret }} }/messages",
+    "gateway_url": "${ customer_secrets._WHATSAPP_API_BASE ?? https://graph.facebook.com }/v17.0/${ customer_secrets.WHATSAPP_MSG_FROM_PHONE_ID }/messages",
+    "gateway_url_plus": "${ customer_secrets._WHATSAPP_API_BASE ?? https://graph.facebook.com }/v17.0/${ customer_secrets.{{ params.from_phone_id_secret }} }/messages",
     "logo": "https://cdn.simpleicons.org/whatsapp/25D366",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

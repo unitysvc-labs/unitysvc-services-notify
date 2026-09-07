@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.ZULIP_BASE ?? https://zulip.example.com }/api/v1/messages",
+    "byok_base_url": "${ customer_secrets._ZULIP_BASE ?? https://zulip.example.com }/api/v1/messages",
     "byok_headers": {
       "Authorization": "Basic ${ customer_secrets.ZULIP_BASIC }"
     },
@@ -14,7 +14,7 @@
       "api_key_secret": "ZULIP_BASIC",
       "base_url": "https://mock.unitysvc.dev/zulip"
     },
-    "plus_base_url": "${ customer_secrets.ZULIP_BASE ?? https://zulip.example.com }/api/v1/messages",
+    "plus_base_url": "${ customer_secrets._ZULIP_BASE ?? https://zulip.example.com }/api/v1/messages",
     "plus_headers": {
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },

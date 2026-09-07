@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.TWILIO_SMS_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/${ customer_secrets.TWILIO_SMS_ACCOUNT_SID }/Messages.json",
+    "byok_base_url": "${ customer_secrets._TWILIO_SMS_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/${ customer_secrets.TWILIO_SMS_ACCOUNT_SID }/Messages.json",
     "byok_headers": {
       "Authorization": "Basic ${ customer_secrets.TWILIO_SMS_BASIC }"
     },
@@ -14,7 +14,7 @@
       "api_key_secret": "TWILIO_SMS_BASIC",
       "base_url": "https://mock.unitysvc.dev/twilio_sms"
     },
-    "plus_base_url": "${ customer_secrets.TWILIO_SMS_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/${ customer_secrets.TWILIO_SMS_ACCOUNT_SID }/Messages.json",
+    "plus_base_url": "${ customer_secrets._TWILIO_SMS_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/${ customer_secrets.TWILIO_SMS_ACCOUNT_SID }/Messages.json",
     "plus_headers": {
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },

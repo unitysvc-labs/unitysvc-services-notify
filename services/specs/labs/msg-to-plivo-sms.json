@@ -17,8 +17,8 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Plivo destinations, direct",
     "gateway_price_description": "Free — direct to your Plivo number",
     "gateway_test_local_url": "https://demoauthid:demo123@mock.unitysvc.dev/plivo_sms/v1/Account/demoauthid/Message/",
-    "gateway_url": "${ customer_secrets.PLIVO_SMS_API_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.PLIVO_SMS_AUTH_ID }/Message/",
-    "gateway_url_plus": "${ customer_secrets.PLIVO_SMS_API_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.{{ params.auth_id_secret }} }/Message/",
+    "gateway_url": "${ customer_secrets._PLIVO_SMS_API_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.PLIVO_SMS_AUTH_ID }/Message/",
+    "gateway_url_plus": "${ customer_secrets._PLIVO_SMS_API_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.{{ params.auth_id_secret }} }/Message/",
     "logo": "https://www.plivo.com/favicon/favicon.svg",
     "ops_testing_parameters": {
       "auth_id_secret": "PLIVO_SMS_AUTH_ID",

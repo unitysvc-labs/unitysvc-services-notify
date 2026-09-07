@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.NOTIFIARR_BASE ?? https://notifiarr.com }/api/v1/notification/apprise",
+    "byok_base_url": "${ customer_secrets._NOTIFIARR_BASE ?? https://notifiarr.com }/api/v1/notification/apprise",
     "byok_headers": {
       "X-api-Key": "${ customer_secrets.NOTIFIARR_APIKEY }"
     },
@@ -14,7 +14,7 @@
       "api_key_secret": "NOTIFIARR_APIKEY",
       "base_url": "https://mock.unitysvc.dev/notifiarr"
     },
-    "plus_base_url": "${ customer_secrets.NOTIFIARR_BASE ?? https://notifiarr.com }/api/v1/notification/apprise",
+    "plus_base_url": "${ customer_secrets._NOTIFIARR_BASE ?? https://notifiarr.com }/api/v1/notification/apprise",
     "plus_headers": {
       "X-api-Key": "${ customer_secrets.{{ params.api_key_secret }} }"
     },

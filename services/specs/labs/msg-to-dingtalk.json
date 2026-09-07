@@ -14,8 +14,8 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment DingTalk destinations, direct",
     "gateway_price_description": "Free — direct to your DingTalk robot webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/dingtalk/robot/send?access_token=demo123",
-    "gateway_url": "${ customer_secrets.DINGTALK_BASE ?? https://oapi.dingtalk.com }/robot/send?access_token=${ customer_secrets.DINGTALK_ACCESS_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets.DINGTALK_BASE ?? https://oapi.dingtalk.com }/robot/send?access_token=${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_url": "${ customer_secrets._DINGTALK_BASE ?? https://oapi.dingtalk.com }/robot/send?access_token=${ customer_secrets.DINGTALK_ACCESS_TOKEN }",
+    "gateway_url_plus": "${ customer_secrets._DINGTALK_BASE ?? https://oapi.dingtalk.com }/robot/send?access_token=${ customer_secrets.{{ params.token_secret }} }",
     "logo": "https://api.iconify.design/ant-design:dingtalk-circle-filled.svg?color=%231677FF",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
