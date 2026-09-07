@@ -4,23 +4,29 @@
   "documents": {
     "Connectivity test (HTTP)": {
       "category": "connectivity_test",
-      "description": "POST the msg envelope through the canonical interface and expect 2xx",
+      "description": "POST the msg envelope through the canonical interface and expect 2xx, then confirm delivery landed at the configured destination",
       "file_path": "connectivity-http.sh.j2",
       "is_active": true,
       "is_public": true,
       "meta": {
-        "output_contains": "connectivity ok"
+        "output_contains": "connectivity ok",
+        "preference": {
+          "notification-destination": "http-to-sink"
+        }
       },
       "mime_type": "bash"
     },
     "Connectivity test (SMTP)": {
       "category": "connectivity_test",
-      "description": "Submit a message over SMTP through the smtp_gateway interface and expect the transaction to complete",
+      "description": "Submit a message over SMTP through the smtp_gateway interface and expect the transaction to complete, then confirm delivery landed at the configured destination",
       "file_path": "connectivity-smtp.sh.j2",
       "is_active": true,
       "is_public": true,
       "meta": {
-        "output_contains": "connectivity ok"
+        "output_contains": "connectivity ok",
+        "preference": {
+          "notification-destination": "http-to-sink"
+        }
       },
       "mime_type": "bash"
     },
@@ -32,6 +38,9 @@
       "is_public": true,
       "meta": {
         "output_contains": "sent",
+        "preference": {
+          "notification-destination": "http-to-sink"
+        },
         "requirements": [
           "httpx"
         ]
@@ -45,7 +54,10 @@
       "is_active": true,
       "is_public": true,
       "meta": {
-        "output_contains": "sent"
+        "output_contains": "sent",
+        "preference": {
+          "notification-destination": "http-to-sink"
+        }
       },
       "mime_type": "bash"
     }
