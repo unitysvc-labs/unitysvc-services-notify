@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.NEXTCLOUD_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.NEXTCLOUD_TARGETS }",
+    "byok_base_url": "${ customer_secrets._NEXTCLOUD_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.NEXTCLOUD_TARGETS }",
     "channel_name": "nextcloud-relay",
     "code_example_preset": "notify_relay_code_example_py_nextcloud",
     "connectivity_preset": "notify_relay_connectivity_nextcloud",
@@ -11,7 +11,7 @@
       "base_url": "https://mock.unitysvc.dev/nextcloud",
       "target_secret": "NEXTCLOUD_TARGETS"
     },
-    "plus_base_url": "${ customer_secrets.NEXTCLOUD_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.{{ params.target_secret }} }",
+    "plus_base_url": "${ customer_secrets._NEXTCLOUD_BASE ?? https://nextcloud.example.com }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.{{ params.target_secret }} }",
     "summary": "Relay a message through your own Nextcloud by posting a native Nextcloud payload to the UnitySVC gateway.",
     "test_webhook_path": "/ocs/v2.php/apps/notifications/api/v2/admin_notifications/demoid",
     "time_created": "2026-06-21T00:00:00Z",

@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "byok_base_url": "${ customer_secrets.EVOLUTION_BASE ?? https://evolution.example.com }/message/sendText/${ customer_secrets.EVOLUTION_INSTANCE }",
+    "byok_base_url": "${ customer_secrets._EVOLUTION_BASE ?? https://evolution.example.com }/message/sendText/${ customer_secrets.EVOLUTION_INSTANCE }",
     "byok_headers": {
       "apikey": "${ customer_secrets.EVOLUTION_APIKEY }"
     },
@@ -14,7 +14,7 @@
       "api_key_secret": "EVOLUTION_APIKEY",
       "base_url": "https://mock.unitysvc.dev/evolution"
     },
-    "plus_base_url": "${ customer_secrets.EVOLUTION_BASE ?? https://evolution.example.com }/message/sendText/${ customer_secrets.EVOLUTION_INSTANCE }",
+    "plus_base_url": "${ customer_secrets._EVOLUTION_BASE ?? https://evolution.example.com }/message/sendText/${ customer_secrets.EVOLUTION_INSTANCE }",
     "plus_headers": {
       "apikey": "${ customer_secrets.{{ params.api_key_secret }} }"
     },

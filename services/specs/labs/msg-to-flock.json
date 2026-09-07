@@ -14,8 +14,8 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Flock destinations, direct",
     "gateway_price_description": "Free — direct to your Flock incoming webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/flock/hooks/sendMessage/demotoken",
-    "gateway_url": "${ customer_secrets.FLOCK_WEBHOOK_BASE ?? https://api.flock.com }/hooks/sendMessage/${ customer_secrets.FLOCK_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets.FLOCK_WEBHOOK_BASE ?? https://api.flock.com }/hooks/sendMessage/${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_url": "${ customer_secrets._FLOCK_WEBHOOK_BASE ?? https://api.flock.com }/hooks/sendMessage/${ customer_secrets.FLOCK_TOKEN }",
+    "gateway_url_plus": "${ customer_secrets._FLOCK_WEBHOOK_BASE ?? https://api.flock.com }/hooks/sendMessage/${ customer_secrets.{{ params.token_secret }} }",
     "logo": "https://www.flock.com/hubfs/Flock%20Icon.svg",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
