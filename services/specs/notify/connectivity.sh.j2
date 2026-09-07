@@ -14,17 +14,19 @@ set -o pipefail
 {% if local_testing %}
 echo "connectivity ok (gateway-native notify://user, no upstream)"
 {% else %}
-status=$(curl -sS --max-time 10 \
+response=$(curl -sS --max-time 10 \
     -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer ${UNITYSVC_API_KEY}" \
     -d '{"title":"notify connectivity","body":"connectivity probe","type":"info","format":"text"}' \
-    -o /dev/null -w "%{http_code}" \
+    -w "\n%{http_code}" \
     "{{ service_base_url }}" 2>/dev/null)
+status="${response##*$'\n'}"
+body="${response%$'\n'*}"
 
 case "$status" in
   2??) echo "connectivity ok (HTTP $status)"; exit 0 ;;
   000) echo "connectivity failed: could not connect to {{ service_base_url }}" >&2; exit 1 ;;
-  *)   echo "connectivity failed: HTTP $status from {{ service_base_url }}" >&2; exit 1 ;;
+  *)   echo "connectivity failed: HTTP $status from {{ service_base_url }}: ${body}" >&2; exit 1 ;;
 esac
 {% endif %}
