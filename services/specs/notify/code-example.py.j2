@@ -14,6 +14,13 @@ import httpx
 print("sent (skipped: gateway-native notify://user, no upstream)")
 sys.exit(0)
 {% else %}
+# notify has an SMTP access interface too (send a plain email instead of an
+# HTTP request); this example is httpx-only, so skip cleanly on that render
+# rather than failing on an unsupported scheme.
+if "{{ service_base_url }}".startswith(("smtp://", "smtps://")):
+    print("sent (skipped: this example is HTTP-only -- send a plain email instead)")
+    sys.exit(0)
+
 response = httpx.post(
     "{{ service_base_url }}",
     headers={"Authorization": f"Bearer {k}"} if (k := os.environ.get("UNITYSVC_API_KEY")) else {},
