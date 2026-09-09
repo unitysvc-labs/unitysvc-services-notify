@@ -30,6 +30,9 @@
       },
       "mime_type": "bash"
     },
+    "Default request body": {
+      "$doc_preset": "msg_request_template"
+    },
     "Python code example (HTTP)": {
       "category": "code_example",
       "description": "Python (httpx) example — send yourself a notification via the msg envelope",
