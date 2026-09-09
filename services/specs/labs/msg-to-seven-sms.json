@@ -6,7 +6,7 @@
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "default_visibility": "private",
-    "description": "`msg-to-seven-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your seven destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional seven destinations bound per enrollment.",
+    "description": "`msg-to-seven-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your seven destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional seven destinations bound per enrollment.\n\nCreate an account at seven.io, then generate an Access Token from your account dashboard (help.seven.io/en/api-key-access) and set it as your API key secret. Provide the destination phone number(s), in international format, as the target.",
     "display_name": "seven Messages",
     "logo": "https://www.seven.io/wp-content/uploads/seven_icon.png",
     "ops_testing_parameters": {
