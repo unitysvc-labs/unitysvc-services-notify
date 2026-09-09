@@ -9,6 +9,9 @@
       "is_active": true,
       "is_public": true,
       "meta": {
+        "min_expected_metrics": {
+          "bytes_out": 1
+        },
         "output_contains": "connectivity ok"
       },
       "mime_type": "bash"
@@ -23,6 +26,9 @@
       "is_active": true,
       "is_public": true,
       "meta": {
+        "min_expected_metrics": {
+          "bytes_out": 1
+        },
         "output_contains": "sent",
         "requirements": [
           "httpx"
