@@ -5,7 +5,7 @@
     "channel_name": "msg-to-serverchan",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "`msg-to-serverchan` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your ServerChan destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own ServerChan destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional ServerChan destinations bound per enrollment.",
+    "description": "`msg-to-serverchan` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your ServerChan destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own ServerChan destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional ServerChan destinations bound per enrollment.\n\nRegister an account at sct.ftqq.com and configure a notify channel following the site's instructions. Copy the SendKey it provides and set it as SERVERCHAN_TOKEN.",
     "display_name": "ServerChan Messages",
     "gateway_body_template": "{\"title\":{* _escape_json(_body.title or \"\") *},\"desp\":{* _escape_json(_body.body or \"\") *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_serverchan",

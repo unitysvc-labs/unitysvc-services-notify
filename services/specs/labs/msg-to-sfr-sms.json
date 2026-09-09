@@ -6,7 +6,7 @@
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "default_visibility": "private",
-    "description": "`msg-to-sfr-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your SFR destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional SFR destinations bound per enrollment.",
+    "description": "`msg-to-sfr-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your SFR destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional SFR destinations bound per enrollment.\n\nSFR's DMC SMS API requires a business DMC service account; from your SFR DMC account portal you're issued a Service ID, an API password, and a Space ID (a logical grouping identifier). Set these as SFR_SMS_USER, SFR_SMS_PASSWORD, and SFR_SMS_SPACE_ID respectively, and set SFR_SMS_TARGETS to the recipient phone number(s) in international format.",
     "display_name": "SFR Messages",
     "logo": "https://static.s-sfr.fr/media/icon-512x512.png",
     "ops_testing_parameters": {

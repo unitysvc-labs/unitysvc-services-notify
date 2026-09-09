@@ -6,7 +6,7 @@
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "default_visibility": "private",
-    "description": "`msg-to-revolt` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Revolt destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional Revolt destinations bound per enrollment.",
+    "description": "`msg-to-revolt` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Revolt destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional Revolt destinations bound per enrollment.\n\nSet up an account on Revolt Chat and generate a bot token through the Revolt Admin Area; copy that token into REVOLT_BOT_TOKEN and invite the bot into the server holding the channel you want notified. Turn on Developer Mode in your Revolt settings, right-click that channel, choose \"Copy ID\", and set the result as REVOLT_TARGETS.",
     "display_name": "Revolt Messages",
     "logo": "https://cdn.simpleicons.org/revoltdotchat/FF4655",
     "ops_testing_parameters": {

@@ -6,7 +6,7 @@
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "default_visibility": "private",
-    "description": "`msg-to-fluxer` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Fluxer destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional Fluxer destinations bound per enrollment.",
+    "description": "`msg-to-fluxer` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Fluxer destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional Fluxer destinations bound per enrollment.\n\nIn Fluxer, create an incoming webhook for the channel you want to notify. Fluxer gives you a URL such as https://api.fluxer.app/webhooks/<WebhookID>/<WebhookToken> — copy the ID segment into FLUXER_WEBHOOK_ID and the token segment into FLUXER_WEBHOOK_TOKEN.",
     "display_name": "Fluxer Messages",
     "logo": "https://cdn.simpleicons.org/fluxer/4641D9",
     "ops_testing_parameters": {

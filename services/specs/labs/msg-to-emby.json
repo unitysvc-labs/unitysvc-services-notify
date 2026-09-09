@@ -6,7 +6,7 @@
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "default_visibility": "private",
-    "description": "`msg-to-emby` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Emby destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional Emby destinations bound per enrollment.",
+    "description": "`msg-to-emby` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Emby destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through [Apprise](https://github.com/caronc/apprise), the open-source notification library, driven entirely by your own stored credentials at no cost. A paid variant ($0.001 per message) delivers to additional Emby destinations bound per enrollment.\n\nThis service talks directly to your own self-hosted Emby Server, so there's nothing to obtain from a third-party dashboard: set EMBY_HOST to your server's address (host:port, default port 8096), and EMBY_USER / EMBY_PASSWORD to the login and password of an existing account on that server. UnitySVC signs in with those credentials and posts the message as a server notification.",
     "display_name": "Emby Messages",
     "logo": "https://cdn.simpleicons.org/emby/52B54B",
     "ops_testing_parameters": {
