@@ -14,58 +14,14 @@
   "summary": {{ summary | tojson }},
   "time_created": "{{ time_created | default('2026-06-19T00:00:00Z') }}",
   "upstream_access_config": {
-    "apprise": {
-      "access_method": "http",
 {%- if transformer_channel_exists | default(false) %}
-      {#- A native `gateway` channel delivers straight to the provider's own
-          API, so the Apprise relay is redundant here — and it is a path we
-          cannot exercise end-to-end against the real destination. Keep the
-          definition as documentation/fallback but disabled; the backend
-          honors is_active everywhere channels are read
-          (unitysvc/unitysvc#1844). Apprise-only services (no transformer)
-          keep this channel active — it is their sole delivery path. -#}
-      "is_active": false,
-{%- endif %}
-      "sort_order": 2,
-      "base_url": "${ customer_secrets._APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
-      "raw": {
-        "request_transformer": {
-          "body_transformer": {
-            "request": {
-              "input_format": "json",
-              "template": {{ ('{"urls":"' ~ apprise_url ~ apprise_tail) | tojson }}
-            }
-          }
-        }
-      }
-    },
-    "apprise-plus": {
-      "access_method": "http",
-{%- if transformer_channel_exists | default(false) %}
-      {#- With the transformer gateway-plus channel present, this would be a
-          SECOND enrollable channel — against the at-most-one-enrollable rule
-          (enrollments associate with exactly one channel). Keep the
-          definition as documentation/fallback but disabled; the backend
-          honors is_active everywhere channels are read
-          (unitysvc/unitysvc#1844). Apprise-only services (no transformer)
-          keep this channel active — it is their sole enrollable. -#}
-      "is_active": false,
-{%- endif %}
-      "sort_order": 4,
-      "base_url": "${ customer_secrets._APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
-      "raw": {
-        "request_transformer": {
-          "body_transformer": {
-            "request": {
-              "input_format": "json",
-              "template": {{ ('{"urls":"' ~ apprise_url_plus ~ apprise_tail) | tojson }}
-            }
-          }
-        }
-      }
-    }
-{%- if transformer_channel_exists | default(false) %}
-    ,"gateway": {
+    {#- A native `gateway` channel delivers straight to the provider's own
+        API, so an Apprise-relay fallback is redundant here — and it is a
+        path we cannot exercise end-to-end against the real destination.
+        Apprise-only services (no transformer) are the ones that define
+        `apprise`/`apprise-plus` below; transformer services skip them
+        entirely rather than carry disabled dead channels. -#}
+    "gateway": {
       "access_method": "http",
       {%- if gateway_api_key is defined %}
       "api_key": {{ gateway_api_key | tojson }},
@@ -88,6 +44,37 @@
         "body_transformer": { "request": { "input_format": "json", "template": {{ gateway_body_template | tojson }} } },
         "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }}{% if gateway_extra_headers is defined %}{% for hk, hv in gateway_extra_headers.items() %}, {{ hk | tojson }}: {{ hv | tojson }}{% endfor %}{% endif %} } } }
       } }
+    }
+{%- else %}
+    "apprise": {
+      "access_method": "http",
+      "sort_order": 2,
+      "base_url": "${ customer_secrets._APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": {{ ('{"urls":"' ~ apprise_url ~ apprise_tail) | tojson }}
+            }
+          }
+        }
+      }
+    },
+    "apprise-plus": {
+      "access_method": "http",
+      "sort_order": 4,
+      "base_url": "${ customer_secrets._APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
+      "raw": {
+        "request_transformer": {
+          "body_transformer": {
+            "request": {
+              "input_format": "json",
+              "template": {{ ('{"urls":"' ~ apprise_url_plus ~ apprise_tail) | tojson }}
+            }
+          }
+        }
+      }
     }
 {%- endif %}
   }
