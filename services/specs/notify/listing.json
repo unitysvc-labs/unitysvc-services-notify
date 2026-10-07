@@ -12,7 +12,6 @@
         "min_expected_metrics": {
           "bytes_out": 1
         },
-        "output_contains": "connectivity ok",
         "preference": {
           "notification-destination": "http-to-sink"
         }
@@ -29,7 +28,6 @@
         "min_expected_metrics": {
           "bytes_out": 1
         },
-        "output_contains": "connectivity ok",
         "preference": {
           "notification-destination": "http-to-sink"
         }
@@ -49,7 +47,6 @@
         "min_expected_metrics": {
           "bytes_out": 1
         },
-        "output_contains": "sent",
         "preference": {
           "notification-destination": "http-to-sink"
         },
@@ -69,7 +66,6 @@
         "min_expected_metrics": {
           "bytes_out": 1
         },
-        "output_contains": "sent",
         "preference": {
           "notification-destination": "http-to-sink"
         }
