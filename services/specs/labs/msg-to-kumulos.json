@@ -25,6 +25,7 @@
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "serverkey_secret": "KUMULOS_SERVERKEY"
     },
+    "status": "deprecated",
     "summary": "Send a notification to your own Kumulos destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "kumulos://12345678-1234-4123-8123-123456789abc/DKRY5CJQX4BIPW3AHOV29GNU18FMT07ELSZ6",
     "time_created": "2026-06-20T00:00:00Z",

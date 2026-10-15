@@ -41,11 +41,7 @@ ALLOWED_UNBOUND = {
         "pushplus-relay",
         "streamlabs-relay",
         "vonage-sms-relay",
-        # TODO(#52): confirm the credential really rides in the payload — their
-        # descriptions claim the URL is composed from stored secrets.
-        "popcornnotify-relay",
         "prowl-relay",
-        "pushed-relay",
         "pushsafer-relay",
     )
     for ch in ("byok", "plus")
@@ -84,6 +80,8 @@ def main() -> int:
         for offering_path in sorted(Path("specs").glob("*/*/offering.json")):
             svc = offering_path.parent.name
             offering = json.loads(offering_path.read_text())
+            if offering.get("status") == "deprecated":
+                continue  # no longer offered, so never shown as Directly Usable
             for ch, cfg in offering.get("upstream_access_config", {}).items():
                 key = f"{svc}@{ch}"
                 if channel_type(cfg) == "unbound":
