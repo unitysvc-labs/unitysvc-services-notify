@@ -22,6 +22,7 @@
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "targets_secret": "POPCORNNOTIFY_TARGETS"
     },
+    "status": "deprecated",
     "summary": "Send a notification to your own PopcornNotify destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "popcorn://dkry5cjqx4bi/+15551234567",
     "time_created": "2026-06-20T00:00:00Z",

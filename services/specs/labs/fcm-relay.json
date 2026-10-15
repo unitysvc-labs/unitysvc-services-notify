@@ -18,6 +18,7 @@
     "plus_headers": {
       "Authorization": "key=${ customer_secrets.{{ params.api_key_secret }} }"
     },
+    "status": "deprecated",
     "summary": "Relay a push message through your own FCM (legacy) account by posting a native `fcm` payload to the UnitySVC gateway.",
     "test_webhook_path": "/fcm/send",
     "time_created": "2026-06-21T00:00:00Z",
