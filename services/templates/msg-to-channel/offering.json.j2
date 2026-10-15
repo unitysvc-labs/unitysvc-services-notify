@@ -12,6 +12,11 @@
   "service_type": "notification",
   "status": "{{ status | default('ready') }}",
   "summary": {{ summary | tojson }},
+  {#- Every service here is tested only against mock upstreams (mock.unitysvc.dev).
+      The condition (unitysvc/unitysvc#2637) keeps the badge visible only until
+      the first real successful request reaches the catalog stats. A param
+      file may override `tags` once a channel is verified some other way. -#}
+  "tags": {{ tags | default(["warning:unverified?stats.successful_requests==0 | Tested against a simulated upstream only — no customer has used it yet"]) | tojson }},
   "time_created": "{{ time_created | default('2026-06-19T00:00:00Z') }}",
   "upstream_access_config": {
 {%- if transformer_channel_exists | default(false) %}
