@@ -22,6 +22,7 @@
       "app_secret_secret": "PUSHED_APP_SECRET",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
+    "status": "deprecated",
     "summary": "Send a notification to your own Pushed destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pushed://pushedappkeyxyz123/pushedappsecretxyz123",
     "time_created": "2026-06-20T00:00:00Z",

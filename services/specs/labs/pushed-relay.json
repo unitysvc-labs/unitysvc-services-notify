@@ -11,6 +11,7 @@
       "base_url": "https://mock.unitysvc.dev/pushed"
     },
     "plus_base_url": "${ customer_secrets._PUSHED_BASE ?? https://api.pushed.co }/1/push",
+    "status": "deprecated",
     "summary": "Relay a push notification through your own Pushed account by posting a native Pushed payload to the UnitySVC gateway.",
     "test_webhook_path": "/1/push",
     "time_created": "2026-06-21T00:00:00Z",

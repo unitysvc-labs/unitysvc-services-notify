@@ -41,10 +41,7 @@ ALLOWED_UNBOUND = {
         "pushplus-relay",
         "streamlabs-relay",
         "vonage-sms-relay",
-        # TODO(#52): confirm the credential really rides in the payload — their
-        # descriptions claim the URL is composed from stored secrets.
         "prowl-relay",
-        "pushed-relay",
         "pushsafer-relay",
     )
     for ch in ("byok", "plus")
