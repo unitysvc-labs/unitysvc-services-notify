@@ -12,7 +12,7 @@
     "gateway_connectivity_preset": "msg_to_channel_connectivity_bulksms_sms",
     "gateway_content_type": "application/json",
     "gateway_extra_headers": {
-      "Authorization": "Basic ZGVtbzEyM3VzZXI6ZGVtbzEyMw=="
+      "Authorization": "Basic ${ customer_secrets.BULKSMS_SMS_BASIC }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment BulkSMS destinations, direct",
     "gateway_price_description": "Free — direct to BulkSMS v1/messages",

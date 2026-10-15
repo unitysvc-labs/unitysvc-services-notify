@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+"""Render every service and check how its upstream channels bind (issue #52).
+
+The catalog's "Directly Usable" badge comes from each channel's derived type
+(unitysvc ``app/core/channel_classification.py``): a channel is ``unbound``
+unless it references ``{{ params.* }}`` / ``{{ enrollment.* }}`` or a
+``${ customer_secrets.X }`` the customer must supply (no default, or an empty
+``??``; ``_``-prefixed seller-only names don't count). A defaulted host or a
+literal demo credential silently makes a channel look directly usable, so this
+check fails when:
+
+1. a channel renders ``unbound`` but is not in ``ALLOWED_UNBOUND``;
+2. a secret whose name comes from an enrollment parameter carries a default —
+   ``${ customer_secrets.{{ params.X }} ?? … }`` makes a missing secret look
+   present;
+3. an ``Authorization`` header is a literal instead of a secret reference;
+4. a ``${ customer_secrets.X }`` name is missing from ``seller.secrets.txt``.
+
+Run from the repo root:  uv run --with unitysvc-sellers scripts/check_channel_binding.py
+"""
+
+from __future__ import annotations
+
+import json
+import re
+import sys
+from pathlib import Path
+
+from unitysvc_sellers.params_render import materialized_param_specs
+
+SERVICES = Path(__file__).resolve().parent.parent / "services"
+
+# Channels that are genuinely usable with no customer setup: the customer's
+# own credential travels in the native payload they POST, and the default host
+# is the provider's real public API.
+ALLOWED_UNBOUND = {
+    f"{svc}@{ch}"
+    for svc in (
+        "freemobile-relay",
+        "misskey-relay",
+        "pushplus-relay",
+        "streamlabs-relay",
+        "vonage-sms-relay",
+        # TODO(#52): confirm the credential really rides in the payload — their
+        # descriptions claim the URL is composed from stored secrets.
+        "popcornnotify-relay",
+        "prowl-relay",
+        "pushed-relay",
+        "pushsafer-relay",
+    )
+    for ch in ("byok", "plus")
+}
+
+REF = re.compile(
+    r"\$\{\s*customer_secrets\.(\{\{[^}]*\}\}|[A-Za-z0-9_]+)\s*(\?\?\s*([^}]*?))?\s*\}"
+)
+ENROLLMENT = re.compile(r"\{\{\s*(params|enrollment)\.")
+
+
+def channel_type(cfg: dict) -> str:
+    text = json.dumps(cfg)
+    if ENROLLMENT.search(text):
+        return "enrollable"
+    for m in REF.finditer(text):
+        name, has_default, default = m.group(1), m.group(2), (m.group(3) or "").strip()
+        if (not has_default or not default) and not name.startswith("_"):
+            return "secret_bound"
+    return "unbound"
+
+
+def auth_headers(cfg: dict) -> list[str]:
+    raw = cfg.get("raw", {}).get("request_transformer", {})
+    headers = raw.get("proxy_rewrite", {}).get("headers", {}).get("set", {})
+    return [v for k, v in headers.items() if k.lower() == "authorization"]
+
+
+def main() -> int:
+    manifest = set(
+        re.findall(r"^export ([A-Za-z0-9_]+)=", (SERVICES / "seller.secrets.txt").read_text(), re.M)
+    )
+    errors: list[str] = []
+    seen_unbound: set[str] = set()
+    with materialized_param_specs(SERVICES) as _:
+        for offering_path in sorted(Path("specs").glob("*/*/offering.json")):
+            svc = offering_path.parent.name
+            offering = json.loads(offering_path.read_text())
+            for ch, cfg in offering.get("upstream_access_config", {}).items():
+                key = f"{svc}@{ch}"
+                if channel_type(cfg) == "unbound":
+                    seen_unbound.add(key)
+                    if key not in ALLOWED_UNBOUND:
+                        errors.append(f"{key}: unbound (shown as Directly Usable) but needs customer setup?")
+                for m in REF.finditer(json.dumps(cfg)):
+                    name, has_default = m.group(1), m.group(2)
+                    if name.startswith("{{") and has_default:
+                        errors.append(f"{key}: {m.group(0)} — a param-named secret must not have a default")
+                    if not name.startswith("{{") and not name.startswith("__") and name not in manifest:
+                        errors.append(f"{key}: customer secret {name} missing from seller.secrets.txt")
+                for value in auth_headers(cfg):
+                    if "${" not in value:
+                        errors.append(f"{key}: literal Authorization header {value!r}")
+    for stale in sorted(ALLOWED_UNBOUND - seen_unbound):
+        errors.append(f"{stale}: in ALLOWED_UNBOUND but no longer unbound — drop it from the list")
+    for e in errors:
+        print(f"::error::{e}")
+    print(f"checked channel binding: {len(errors)} problem(s)")
+    return 1 if errors else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

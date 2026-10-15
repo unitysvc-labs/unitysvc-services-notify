@@ -1,7 +1,7 @@
 {
   "parameters": {
     "apprise_url": "xmls://${ customer_secrets.XML_WEBHOOK_HOST }",
-    "apprise_url_plus": "xmls://${ customer_secrets.{{ params.host_secret }} }",
+    "apprise_url_plus": "xmls://${ customer_secrets.{{ params.url_secret }} }",
     "channel_name": "msg-to-xml-webhook",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -13,12 +13,12 @@
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment XML webhook destinations, direct",
     "gateway_price_description": "Free — direct to your XML webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/xml",
-    "gateway_url": "${ customer_secrets._XML_WEBHOOK_URL ?? https://mock.unitysvc.dev/xml }",
-    "gateway_url_plus": "${ customer_secrets.{{ params.host_secret }} ?? https://mock.unitysvc.dev/xml }",
+    "gateway_url": "${ customer_secrets.XML_WEBHOOK_URL }",
+    "gateway_url_plus": "${ customer_secrets.{{ params.url_secret }} }",
     "logo": "https://api.iconify.design/mdi:xml.svg?color=%23FF9A3E",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "XML_WEBHOOK_HOST"
+      "url_secret": "XML_WEBHOOK_URL"
     },
     "summary": "Send a notification to your own XML Webhook destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "xmls://notify.example.com",
@@ -26,13 +26,13 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's XML Webhook host (apprise-plus) or full webhook URL (gateway-plus)",
+        "url_secret": {
+          "description": "Name of the customer secret holding this enrollment's XML webhook URL",
           "type": "string"
         }
       },
       "required": [
-        "host_secret"
+        "url_secret"
       ],
       "type": "object"
     }
