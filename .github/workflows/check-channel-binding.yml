@@ -1,0 +1,29 @@
+name: Check Channel Binding
+
+# Fails when a channel would be advertised as Directly Usable (`unbound`) while
+# it actually needs customer setup, when a param-named secret carries a default,
+# when an Authorization header is a literal, or when a customer secret is
+# missing from services/seller.secrets.txt (issue #52).
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - "services/**"
+      - "scripts/check_channel_binding.py"
+      - ".github/workflows/check-channel-binding.yml"
+  push:
+    branches: [main]
+    paths:
+      - "services/**"
+      - "scripts/check_channel_binding.py"
+      - ".github/workflows/check-channel-binding.yml"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv run --no-project --with unitysvc-sellers python scripts/check_channel_binding.py

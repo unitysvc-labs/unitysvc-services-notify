@@ -12,7 +12,7 @@
     "gateway_connectivity_preset": "msg_to_channel_connectivity_twilio_sms",
     "gateway_content_type": "application/x-www-form-urlencoded",
     "gateway_extra_headers": {
-      "Authorization": "Basic QUNkZW1vMTIzOmRlbW8xMjN0b2tlbg=="
+      "Authorization": "Basic ${ customer_secrets.TWILIO_SMS_BASIC }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Twilio destinations, direct",
     "gateway_price_description": "Free — direct to your Twilio number",

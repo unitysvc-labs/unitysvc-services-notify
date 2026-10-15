@@ -12,7 +12,7 @@
     "gateway_connectivity_preset": "msg_to_channel_connectivity_exotel_sms",
     "gateway_content_type": "application/x-www-form-urlencoded",
     "gateway_extra_headers": {
-      "Authorization": "Basic ZGVtbzEyM3NpZDpkZW1vMTIzdG9rZW4="
+      "Authorization": "Basic ${ customer_secrets.EXOTEL_SMS_BASIC }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Exotel destinations, direct",
     "gateway_price_description": "Free — direct to your Exotel number",
