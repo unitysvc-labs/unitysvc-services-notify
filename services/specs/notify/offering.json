@@ -27,7 +27,7 @@
       "base_url": "notify://user",
       "is_active": true,
       "is_primary": true,
-      "payload_format": "apprise"
+      "payload_format": "msg"
     }
   }
 }
