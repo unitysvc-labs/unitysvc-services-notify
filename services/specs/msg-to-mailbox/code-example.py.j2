@@ -18,8 +18,8 @@ response = httpx.post(
     "{{ service_base_url }}",
     headers={"Authorization": f"Bearer {k}"} if (k := os.environ.get("UNITYSVC_API_KEY")) else {},
     json={
-        "title": "Disk alert",
-        "body": "clickhouse disk 92%",
+        "title": "UnitySVC test notification",
+        "body": "Test message sent by the msg-to-mailbox code example. No action needed.",
         "type": "warning",
         "format": "text",
     },
