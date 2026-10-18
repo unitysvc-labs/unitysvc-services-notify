@@ -5,17 +5,64 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-smtp2go-email` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your SMTP2Go destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own SMTP2Go destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional SMTP2Go destinations bound per enrollment.\n\nCreate a free account at smtp2go.com, then generate an API key from Settings → API Keys in your dashboard and set it as SMTP2GO_EMAIL_APIKEY. Set your verified sending address as SMTP2GO_FROM and the recipient's address as SMTP2GO_TO.",
     "display_name": "SMTP2Go Messages",
-    "gateway_body_template": "{\"api_key\":\"${ customer_secrets.SMTP2GO_EMAIL_APIKEY }\",\"sender\":\"${ customer_secrets.SMTP2GO_FROM }\",\"to\":[\"${ customer_secrets.SMTP2GO_TO }\"],\"subject\":{* _escape_json(_body.title or \"\") *},\"textbody\":{* _escape_json(_body.body or \"\") *}}",
-    "gateway_body_template_plus": "{\"api_key\":\"${ customer_secrets.{{ params.apikey_secret }} }\",\"sender\":\"${ customer_secrets.{{ params.from_secret }} }\",\"to\":[\"${ customer_secrets.{{ params.to_secret }} }\"],\"subject\":{* _escape_json(_body.title or \"\") *},\"textbody\":{* _escape_json(_body.body or \"\") *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_smtp2go_email",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_smtp2go_email",
     "gateway_content_type": "application/json",
+    "gateway_field_mapping": {
+      "api_key": "${ customer_secrets.SMTP2GO_EMAIL_APIKEY }",
+      "html_body": {
+        "@map": "@msg.is_html",
+        "values": {
+          "true": "@body_br"
+        }
+      },
+      "sender": "${ customer_secrets.SMTP2GO_FROM }",
+      "subject": "@msg.title",
+      "text_body": {
+        "@map": "@msg.is_html",
+        "values": {
+          "false": "@msg.body"
+        }
+      },
+      "to": [
+        "${ customer_secrets.SMTP2GO_TO }"
+      ]
+    },
+    "gateway_field_mapping_plus": {
+      "api_key": "${ customer_secrets.{{ params.apikey_secret }} }",
+      "html_body": {
+        "@map": "@msg.is_html",
+        "values": {
+          "true": "@body_br"
+        }
+      },
+      "sender": "${ customer_secrets.{{ params.from_secret }} }",
+      "subject": "@msg.title",
+      "text_body": {
+        "@map": "@msg.is_html",
+        "values": {
+          "false": "@msg.body"
+        }
+      },
+      "to": [
+        "${ customer_secrets.{{ params.to_secret }} }"
+      ]
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment SMTP2GO destinations, direct",
     "gateway_price_description": "Free — direct to SMTP2GO v3 email/send",
     "gateway_test_local_url": "https://mock.unitysvc.dev/smtp2go/v3/email/send",
     "gateway_url": "${ customer_secrets._SMTP2GO_API_BASE ?? https://api.smtp2go.com }/v3/email/send",
     "gateway_url_plus": "${ customer_secrets._SMTP2GO_API_BASE ?? https://api.smtp2go.com }/v3/email/send",
     "logo": "https://www.vectorlogo.zone/logos/smtp2go/smtp2go-icon.svg",
+    "msg_capabilities": {
+      "formats": [
+        "html",
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": true
+    },
     "ops_testing_parameters": {
       "apikey_secret": "SMTP2GO_EMAIL_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

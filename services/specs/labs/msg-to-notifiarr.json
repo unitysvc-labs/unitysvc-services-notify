@@ -5,7 +5,6 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-notifiarr` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Notifiarr destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Notifiarr destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Notifiarr destinations bound per enrollment.\n\nThis integration passes your message through Notifiarr's Discord passthrough notification feature. Sign in to notifiarr.com and copy your global API key from your account page — set it as NOTIFIARR_APIKEY (the integration-specific keys shown elsewhere in Notifiarr won't authenticate this call). Make sure the Discord integration you want to receive the message is configured in Notifiarr to accept passthrough notifications.",
     "display_name": "Notifiarr Messages",
-    "gateway_body_template": "{\"source\":\"apprise\",\"type\":\"info\",\"notification\":{},\"discord\":{\"text\":{\"title\":{* _escape_json(_body.title or \"\") *},\"description\":{* _escape_json(_body.body or \"\") *}},\"ids\":{\"channel\":0}}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_notifiarr",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_notifiarr",
     "gateway_content_type": "application/json",
@@ -15,12 +14,34 @@
     "gateway_extra_headers_plus": {
       "X-api-Key": "${ customer_secrets.{{ params.apikey_secret }} }"
     },
+    "gateway_field_mapping": {
+      "discord": {
+        "ids": {
+          "channel": 0
+        },
+        "text": {
+          "description": "@msg.body",
+          "title": "@msg.title"
+        }
+      },
+      "notification": {},
+      "source": "apprise",
+      "type": "info"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Notifiarr destinations, direct",
     "gateway_price_description": "Free — direct to Notifiarr apprise API (no Apprise relay)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/notifiarr/api/v1/notification/apprise",
     "gateway_url": "${ customer_secrets._NOTIFIARR_API_BASE ?? https://notifiarr.com }/api/v1/notification/apprise",
     "gateway_url_plus": "${ customer_secrets._NOTIFIARR_API_BASE ?? https://notifiarr.com }/api/v1/notification/apprise",
     "logo": "https://raw.githubusercontent.com/Notifiarr/notifiarr/main/frontend/src/assets/notifiarr.svg",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": true
+    },
     "ops_testing_parameters": {
       "apikey_secret": "NOTIFIARR_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"

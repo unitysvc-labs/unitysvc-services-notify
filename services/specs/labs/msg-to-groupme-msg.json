@@ -5,17 +5,31 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-groupme-msg` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your GroupMe destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own GroupMe destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional GroupMe destinations bound per enrollment.\n\nIn GroupMe, sign in at dev.groupme.com/bots and click \"Create Bot\" — choose the group you want messages posted into, give the bot a name, and submit. Copy the bot_id GroupMe shows in the bot list and set it as GROUPME_MSG_BOT_ID; every message this service sends will post into that group as the bot.",
     "display_name": "GroupMe Messages",
-    "gateway_body_template": "{\"bot_id\":\"${ customer_secrets.GROUPME_MSG_BOT_ID }\",\"text\":{* _escape_json((_body.title or \"\")..(( (_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}",
-    "gateway_body_template_plus": "{\"bot_id\":\"${ customer_secrets.{{ params.bot_id_secret }} }\",\"text\":{* _escape_json((_body.title or \"\")..(( (_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_groupme_msg",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_groupme_msg",
     "gateway_content_type": "application/json",
+    "gateway_field_mapping": {
+      "bot_id": "${ customer_secrets.GROUPME_MSG_BOT_ID }",
+      "text": "@msg.body"
+    },
+    "gateway_field_mapping_plus": {
+      "bot_id": "${ customer_secrets.{{ params.bot_id_secret }} }",
+      "text": "@msg.body"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment GroupMe destinations, direct",
     "gateway_price_description": "Free — direct to GroupMe bot post API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/groupme/v3/bots/post",
     "gateway_url": "${ customer_secrets._GROUPME_MSG_BASE ?? https://api.groupme.com }/v3/bots/post",
     "gateway_url_plus": "${ customer_secrets._GROUPME_MSG_BASE ?? https://api.groupme.com }/v3/bots/post",
     "logo": "https://cdn.simpleicons.org/groupme/00AFF0",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": false
+    },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "bot_id_secret": "GROUPME_MSG_BOT_ID"

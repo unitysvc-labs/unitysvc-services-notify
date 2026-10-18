@@ -5,8 +5,6 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-elks-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your 46elks destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own 46elks destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional 46elks destinations bound per enrollment.\n\n46elks delivers SMS through your own 46elks account — sign up and configure a sender at 46elks.com. Set ELKS_SMS_FROM to the phone number or approved alphanumeric sender name your account is authorized to send from, and ELKS_SMS_TO to the recipient's phone number, ideally in E.164 format.",
     "display_name": "46elks Messages",
-    "gateway_body_template": "to=${ customer_secrets.ELKS_SMS_TO }&from=${ customer_secrets.ELKS_SMS_FROM }&message={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
-    "gateway_body_template_plus": "to=${ customer_secrets.{{ params.to_secret }} }&from=${ customer_secrets.{{ params.from_secret }} }&message={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_elks_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_elks_sms",
     "gateway_content_type": "application/x-www-form-urlencoded",
@@ -16,12 +14,31 @@
     "gateway_extra_headers_plus": {
       "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
     },
+    "gateway_field_mapping": {
+      "from": "${ customer_secrets.ELKS_SMS_FROM }",
+      "message": "@msg.body",
+      "to": "${ customer_secrets.ELKS_SMS_TO }"
+    },
+    "gateway_field_mapping_plus": {
+      "from": "${ customer_secrets.{{ params.from_secret }} }",
+      "message": "@msg.body",
+      "to": "${ customer_secrets.{{ params.to_secret }} }"
+    },
+    "gateway_output_format": "encoded",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment 46elks destinations, direct",
     "gateway_price_description": "Free — direct to your 46elks number",
     "gateway_test_local_url": "https://mock.unitysvc.dev/elks_sms/a1/sms",
     "gateway_url": "${ customer_secrets._ELKS_SMS_API_BASE ?? https://api.46elks.com }/a1/sms",
     "gateway_url_plus": "${ customer_secrets._ELKS_SMS_API_BASE ?? https://api.46elks.com }/a1/sms",
     "logo": "https://pipedream.com/s.v0/app_WnhPr8/logo/orig",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": false
+    },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "basic_secret": "ELKS_SMS_BASIC",

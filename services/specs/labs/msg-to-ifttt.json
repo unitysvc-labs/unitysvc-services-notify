@@ -5,16 +5,28 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-ifttt` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your IFTTT destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own IFTTT destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional IFTTT destinations bound per enrollment.\n\nIn IFTTT, connect the 'Webhooks' service, then visit ifttt.com/services/maker_webhooks/settings to find your personal key in the displayed URL (https://maker.ifttt.com/use/<key>) — that's your IFTTT_WEBHOOK_ID. Next, create (or reuse) an Applet whose trigger is 'Webhooks → Receive a web request' and give it an event name; set that same name as IFTTT_EVENT. UnitySVC posts your message's title, body, and type into that event's Value1/Value2/Value3 ingredients, firing whatever action your Applet performs.",
     "display_name": "IFTTT Messages",
-    "gateway_body_template": "{\"value1\":{* _escape_json(_body.title or \"\") *},\"value2\":{* _escape_json(_body.body or \"\") *},\"value3\":{* _escape_json(_body.type or \"\") *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_ifttt",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_ifttt",
     "gateway_content_type": "application/json",
+    "gateway_field_mapping": {
+      "value1": "@msg.title",
+      "value2": "@msg.body",
+      "value3": "@msg.type"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment IFTTT destinations, direct",
     "gateway_price_description": "Free — direct to your IFTTT Webhooks endpoint",
     "gateway_test_local_url": "https://mock.unitysvc.dev/ifttt/trigger/demoevent/with/key/demo123",
     "gateway_url": "${ customer_secrets._IFTTT_WEBHOOK_BASE ?? https://maker.ifttt.com }/trigger/${ customer_secrets.IFTTT_EVENT }/with/key/${ customer_secrets.IFTTT_WEBHOOK_ID }",
     "gateway_url_plus": "${ customer_secrets._IFTTT_WEBHOOK_BASE ?? https://maker.ifttt.com }/trigger/${ customer_secrets.{{ params.event_secret }} }/with/key/${ customer_secrets.{{ params.webhook_id_secret }} }",
     "logo": "https://cdn.simpleicons.org/ifttt/FFFFFF",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": true
+    },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "event_secret": "IFTTT_EVENT",

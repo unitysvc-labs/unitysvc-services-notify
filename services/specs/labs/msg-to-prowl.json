@@ -5,17 +5,40 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-prowl` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Prowl destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Prowl destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Prowl destinations bound per enrollment.\n\nProwl delivers push notifications to iOS devices running the Prowl app. Pre-register an account at prowlapp.com, then copy the API key it provides you into PROWL_APIKEY. Notifications are pushed to every device registered to that account.",
     "display_name": "Prowl Messages",
-    "gateway_body_template": "apikey=${ customer_secrets.PROWL_APIKEY }&application={* _escape_json(_body.title or \"UnitySVC\") *}&description={* _escape_json(_body.body or _body.title or \"\") *}&event={* _escape_json(_body.title or \"\") *}&priority=0",
-    "gateway_body_template_plus": "apikey=${ customer_secrets.{{ params.apikey_secret }} }&application={* _escape_json(_body.title or \"UnitySVC\") *}&description={* _escape_json(_body.body or _body.title or \"\") *}&event={* _escape_json(_body.title or \"\") *}&priority=0",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_prowl",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_prowl",
     "gateway_content_type": "application/x-www-form-urlencoded",
+    "gateway_field_mapping": {
+      "apikey": "${ customer_secrets.PROWL_APIKEY }",
+      "application": "UnitySVC",
+      "description": "@msg.body",
+      "event": "@msg.title",
+      "priority": "0",
+      "url": "@msg.link"
+    },
+    "gateway_field_mapping_plus": {
+      "apikey": "${ customer_secrets.{{ params.apikey_secret }} }",
+      "application": "UnitySVC",
+      "description": "@msg.body",
+      "event": "@msg.title",
+      "priority": "0",
+      "url": "@msg.link"
+    },
+    "gateway_output_format": "encoded",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Prowl destinations, direct",
     "gateway_price_description": "Free — direct to Prowl API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/prowl/publicapi/add",
     "gateway_url": "${ customer_secrets._PROWL_API_BASE ?? https://api.prowlapp.com }/publicapi/add",
     "gateway_url_plus": "${ customer_secrets._PROWL_API_BASE ?? https://api.prowlapp.com }/publicapi/add",
     "logo": "https://is1-ssl.mzstatic.com/image/thumb/Purple49/v4/1c/3d/a6/1c3da6cb-0182-e061-68f4-68573731c4d6/mzl.xbttojza.png/512x512bb.png",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 1,
+      "title": true
+    },
     "ops_testing_parameters": {
       "apikey_secret": "PROWL_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"

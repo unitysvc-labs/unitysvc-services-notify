@@ -5,8 +5,6 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-httpsms-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your httpSMS destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own httpSMS destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional httpSMS destinations bound per enrollment.\n\nSign up at httpsms.com and install the httpSMS Android app on the phone that will send messages, registering its number with your account. From your account's Settings page, copy your API key into HTTPSMS_SMS_APIKEY. Set the sending phone's number as HTTPSMS_SMS_FROM_PHONE and the recipient's number as HTTPSMS_SMS_TO_PHONE, both in E.164 format.",
     "display_name": "httpSMS Messages",
-    "gateway_body_template": "{\"from\":\"${ customer_secrets.HTTPSMS_SMS_FROM_PHONE }\",\"to\":\"${ customer_secrets.HTTPSMS_SMS_TO_PHONE }\",\"content\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}}",
-    "gateway_body_template_plus": "{\"from\":\"${ customer_secrets.{{ params.from_phone_secret }} }\",\"to\":\"${ customer_secrets.{{ params.to_phone_secret }} }\",\"content\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_httpsms_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_httpsms_sms",
     "gateway_content_type": "application/json",
@@ -16,12 +14,30 @@
     "gateway_extra_headers_plus": {
       "X-API-Key": "${ customer_secrets.{{ params.apikey_secret }} }"
     },
+    "gateway_field_mapping": {
+      "content": "@msg.body",
+      "from": "${ customer_secrets.HTTPSMS_SMS_FROM_PHONE }",
+      "to": "${ customer_secrets.HTTPSMS_SMS_TO_PHONE }"
+    },
+    "gateway_field_mapping_plus": {
+      "content": "@msg.body",
+      "from": "${ customer_secrets.{{ params.from_phone_secret }} }",
+      "to": "${ customer_secrets.{{ params.to_phone_secret }} }"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment httpSMS destinations, direct",
     "gateway_price_description": "Free — direct to httpSMS Messages API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/httpsms_sms/v1/messages/send",
     "gateway_url": "${ customer_secrets._HTTPSMS_SMS_API_BASE ?? https://api.httpsms.com }/v1/messages/send",
     "gateway_url_plus": "${ customer_secrets._HTTPSMS_SMS_API_BASE ?? https://api.httpsms.com }/v1/messages/send",
     "logo": "https://httpsms.com/img/icon.svg",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": false
+    },
     "ops_testing_parameters": {
       "apikey_secret": "HTTPSMS_SMS_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
