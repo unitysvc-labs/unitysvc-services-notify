@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "qq://${ customer_secrets.QQPUSH_TOKEN }",
-    "apprise_url_plus": "qq://${ customer_secrets.{{ params.token_secret }} }",
     "channel_name": "msg-to-qqpush",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

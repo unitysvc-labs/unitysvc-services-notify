@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "parseps://${ customer_secrets.PARSEPLATFORM_APP_ID }:${ customer_secrets.PARSEPLATFORM_MASTER_KEY }@${ customer_secrets.PARSEPLATFORM_HOST }",
-    "apprise_url_plus": "parseps://${ customer_secrets.{{ params.app_id_secret }} }:${ customer_secrets.{{ params.master_key_secret }} }@${ customer_secrets.{{ params.host_secret }} }",
     "channel_name": "msg-to-parseplatform",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -14,16 +12,18 @@
     "gateway_extra_headers": {
       "X-Parse-Master-Key": "${ customer_secrets.PARSEPLATFORM_MASTER_KEY }"
     },
+    "gateway_extra_headers_plus": {
+      "X-Parse-Master-Key": "${ customer_secrets.{{ params.master_key_secret }} }"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Parse Platform destinations, direct",
     "gateway_price_description": "Free — direct to your Parse Platform push API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/parseplatform/parse/push/",
     "gateway_url": "${ customer_secrets.PARSEPLATFORM_BASE_URL }/parse/push/",
-    "gateway_url_plus": "${ customer_secrets.PARSEPLATFORM_BASE_URL }/parse/push/",
+    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/parse/push/",
     "logo": "https://raw.githubusercontent.com/parse-community/parse-community.github.io/main/img/favicon.svg",
     "ops_testing_parameters": {
-      "app_id_secret": "PARSEPLATFORM_APP_ID",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "PARSEPLATFORM_HOST",
+      "base_url_secret": "PARSEPLATFORM_BASE_URL",
       "master_key_secret": "PARSEPLATFORM_MASTER_KEY"
     },
     "summary": "Send a notification to your own Parse Platform destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -32,12 +32,8 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "app_id_secret": {
-          "description": "Name of the customer secret holding this enrollment's Parse Platform app id",
-          "type": "string"
-        },
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's Parse Platform host",
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's PARSEPLATFORM_BASE_URL value (same format as PARSEPLATFORM_BASE_URL)",
           "type": "string"
         },
         "master_key_secret": {
@@ -46,9 +42,8 @@
         }
       },
       "required": [
-        "app_id_secret",
-        "master_key_secret",
-        "host_secret"
+        "base_url_secret",
+        "master_key_secret"
       ],
       "type": "object"
     }

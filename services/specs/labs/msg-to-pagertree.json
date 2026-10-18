@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "pagertree://${ customer_secrets.PAGERTREE_INTEGRATION }",
-    "apprise_url_plus": "pagertree://${ customer_secrets.{{ params.integration_secret }} }",
     "channel_name": "msg-to-pagertree",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

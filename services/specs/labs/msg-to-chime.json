@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "chime://${ customer_secrets.CHIME_WEBHOOK_ID }/${ customer_secrets.CHIME_TOKEN }",
-    "apprise_url_plus": "chime://${ customer_secrets.{{ params.webhook_id_secret }} }/${ customer_secrets.{{ params.token_secret }} }",
     "channel_name": "msg-to-chime",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

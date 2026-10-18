@@ -1,18 +1,20 @@
 {
   "parameters": {
-    "apprise_url": "exotel://${ customer_secrets.EXOTEL_SMS_SID }:${ customer_secrets.EXOTEL_SMS_TOKEN }@${ customer_secrets.EXOTEL_SMS_FROM_PHONE }",
-    "apprise_url_plus": "exotel://${ customer_secrets.{{ params.sid_secret }} }:${ customer_secrets.{{ params.token_secret }} }@${ customer_secrets.{{ params.from_phone_secret }} }",
     "channel_name": "msg-to-exotel-sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-exotel-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Exotel destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Exotel destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Exotel destinations bound per enrollment.\n\nIn the Exotel Dashboard (my.exotel.com), go to API Settings to find your Account SID and set it as EXOTEL_SMS_SID. Set EXOTEL_SMS_FROM to a purchased ExoPhone number or an approved Sender ID registered on your account, and EXOTEL_SMS_TO to the recipient's phone number — both including the country-code dialing prefix.",
     "display_name": "Exotel Messages",
     "gateway_body_template": "From=${ customer_secrets.EXOTEL_SMS_FROM }&To=${ customer_secrets.EXOTEL_SMS_TO }&Body={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
+    "gateway_body_template_plus": "From=${ customer_secrets.{{ params.from_secret }} }&To=${ customer_secrets.{{ params.to_secret }} }&Body={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_exotel_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_exotel_sms",
     "gateway_content_type": "application/x-www-form-urlencoded",
     "gateway_extra_headers": {
       "Authorization": "Basic ${ customer_secrets.EXOTEL_SMS_BASIC }"
+    },
+    "gateway_extra_headers_plus": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Exotel destinations, direct",
     "gateway_price_description": "Free — direct to your Exotel number",
@@ -22,9 +24,10 @@
     "logo": "https://www.moengage.com/wp-content/uploads/exotel-icon.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_phone_secret": "EXOTEL_SMS_FROM_PHONE",
+      "basic_secret": "EXOTEL_SMS_BASIC",
+      "from_secret": "EXOTEL_SMS_FROM",
       "sid_secret": "EXOTEL_SMS_SID",
-      "token_secret": "EXOTEL_SMS_TOKEN"
+      "to_secret": "EXOTEL_SMS_TO"
     },
     "summary": "Send a notification to your own Exotel destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "exotel://exotel_smssidxyz123:exotel_smstokenxyz123@+15551234567",
@@ -32,23 +35,28 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "from_phone_secret": {
-          "description": "Name of the customer secret holding this enrollment's Exotel from phone",
+        "basic_secret": {
+          "description": "Name of the customer secret holding this enrollment's EXOTEL_SMS_BASIC value (same format as EXOTEL_SMS_BASIC)",
+          "type": "string"
+        },
+        "from_secret": {
+          "description": "Name of the customer secret holding this enrollment's EXOTEL_SMS_FROM value (same format as EXOTEL_SMS_FROM)",
           "type": "string"
         },
         "sid_secret": {
           "description": "Name of the customer secret holding this enrollment's Exotel sid",
           "type": "string"
         },
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Exotel token",
+        "to_secret": {
+          "description": "Name of the customer secret holding this enrollment's EXOTEL_SMS_TO value (same format as EXOTEL_SMS_TO)",
           "type": "string"
         }
       },
       "required": [
         "sid_secret",
-        "token_secret",
-        "from_phone_secret"
+        "from_secret",
+        "to_secret",
+        "basic_secret"
       ],
       "type": "object"
     }

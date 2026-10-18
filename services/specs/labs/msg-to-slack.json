@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "slack://${ customer_secrets.SLACK_TOKEN_A }/${ customer_secrets.SLACK_TOKEN_B }/${ customer_secrets.SLACK_TOKEN_C }",
-    "apprise_url_plus": "slack://${ customer_secrets.{{ params.token_a_secret }} }/${ customer_secrets.{{ params.token_b_secret }} }/${ customer_secrets.{{ params.token_c_secret }} }",
     "channel_name": "msg-to-slack",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

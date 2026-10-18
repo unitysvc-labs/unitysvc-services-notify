@@ -1,18 +1,20 @@
 {
   "parameters": {
-    "apprise_url": "atalk://${ customer_secrets.AFRICASTALKING_SMS_APPUSER }@${ customer_secrets.AFRICASTALKING_SMS_APIKEY }/${ customer_secrets.AFRICASTALKING_SMS_TARGETS }",
-    "apprise_url_plus": "atalk://${ customer_secrets.{{ params.appuser_secret }} }@${ customer_secrets.{{ params.apikey_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
     "channel_name": "msg-to-africastalking-sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-africastalking-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Africa's Talking account — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Africa's Talking accounts — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Africa's Talking accounts bound per enrollment.\n\nSign up for Africa's Talking at africastalking.com and create (or select) an application. From the management section of your account you can access your API key and see your app username — these become AFRICASTALKING_SMS_APIKEY and AFRICASTALKING_SMS_USERNAME. Set AFRICASTALKING_SMS_FROM to your approved sender ID or short code, and AFRICASTALKING_SMS_TO to the destination phone number, including its country dialling prefix.",
     "display_name": "Africa's Talking Messages",
     "gateway_body_template": "username=${ customer_secrets.AFRICASTALKING_SMS_USERNAME }&to=${ customer_secrets.AFRICASTALKING_SMS_TO }&from=${ customer_secrets.AFRICASTALKING_SMS_FROM }&message={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
+    "gateway_body_template_plus": "username=${ customer_secrets.{{ params.username_secret }} }&to=${ customer_secrets.{{ params.to_secret }} }&from=${ customer_secrets.{{ params.from_secret }} }&message={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_africastalking_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_africastalking_sms",
     "gateway_content_type": "application/x-www-form-urlencoded",
     "gateway_extra_headers": {
       "apiKey": "${ customer_secrets.AFRICASTALKING_SMS_APIKEY }"
+    },
+    "gateway_extra_headers_plus": {
+      "apiKey": "${ customer_secrets.{{ params.apikey_secret }} }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Africa's Talking destinations, direct",
     "gateway_price_description": "Free — direct to Africa's Talking Messaging API",
@@ -22,9 +24,10 @@
     "logo": "https://api.iconify.design/boxicons:globe-africa-filled.svg?color=%232C963F",
     "ops_testing_parameters": {
       "apikey_secret": "AFRICASTALKING_SMS_APIKEY",
-      "appuser_secret": "AFRICASTALKING_SMS_APPUSER",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "targets_secret": "AFRICASTALKING_SMS_TARGETS"
+      "from_secret": "AFRICASTALKING_SMS_FROM",
+      "to_secret": "AFRICASTALKING_SMS_TO",
+      "username_secret": "AFRICASTALKING_SMS_USERNAME"
     },
     "summary": "Send an SMS to your own Africa's Talking account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "atalk://DKRY5CJQX4BI@DKRY5CJQX4BI/+15551234567",
@@ -36,19 +39,24 @@
           "description": "Name of the customer secret holding this enrollment's Africa's Talking apikey",
           "type": "string"
         },
-        "appuser_secret": {
-          "description": "Name of the customer secret holding this enrollment's Africa's Talking appuser",
+        "from_secret": {
+          "description": "Name of the customer secret holding this enrollment's AFRICASTALKING_SMS_FROM value (same format as AFRICASTALKING_SMS_FROM)",
           "type": "string"
         },
-        "targets_secret": {
-          "description": "Name of the customer secret holding this enrollment's Africa's Talking targets",
+        "to_secret": {
+          "description": "Name of the customer secret holding this enrollment's AFRICASTALKING_SMS_TO value (same format as AFRICASTALKING_SMS_TO)",
+          "type": "string"
+        },
+        "username_secret": {
+          "description": "Name of the customer secret holding this enrollment's AFRICASTALKING_SMS_USERNAME value (same format as AFRICASTALKING_SMS_USERNAME)",
           "type": "string"
         }
       },
       "required": [
-        "appuser_secret",
-        "apikey_secret",
-        "targets_secret"
+        "username_secret",
+        "to_secret",
+        "from_secret",
+        "apikey_secret"
       ],
       "type": "object"
     }

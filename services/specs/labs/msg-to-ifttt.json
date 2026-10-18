@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "ifttt://${ customer_secrets.IFTTT_WEBHOOK_ID }/${ customer_secrets.IFTTT_EVENTS }",
-    "apprise_url_plus": "ifttt://${ customer_secrets.{{ params.webhook_id_secret }} }/${ customer_secrets.{{ params.events_secret }} }",
     "channel_name": "msg-to-ifttt",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -20,7 +18,6 @@
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "event_secret": "IFTTT_EVENT",
-      "events_secret": "IFTTT_EVENTS",
       "webhook_id_secret": "IFTTT_WEBHOOK_ID"
     },
     "summary": "Send a notification to your own IFTTT destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -33,18 +30,14 @@
           "description": "Name of the customer secret holding this enrollment's IFTTT event name",
           "type": "string"
         },
-        "events_secret": {
-          "description": "Name of the customer secret holding this enrollment's IFTTT events",
-          "type": "string"
-        },
         "webhook_id_secret": {
           "description": "Name of the customer secret holding this enrollment's IFTTT webhook id",
           "type": "string"
         }
       },
       "required": [
-        "webhook_id_secret",
-        "events_secret"
+        "event_secret",
+        "webhook_id_secret"
       ],
       "type": "object"
     }

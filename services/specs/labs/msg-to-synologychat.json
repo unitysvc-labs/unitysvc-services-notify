@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "synologys://${ customer_secrets.SYNOLOGYCHAT_HOST }/${ customer_secrets.SYNOLOGYCHAT_TOKEN }",
-    "apprise_url_plus": "synologys://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.token_secret }} }",
     "channel_name": "msg-to-synologychat",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -15,11 +13,11 @@
     "gateway_price_description": "Free — direct to your own Synology Chat server",
     "gateway_test_local_url": "https://mock.unitysvc.dev/synologychat/webapi/entry.cgi?token=demo123",
     "gateway_url": "${ customer_secrets.SYNOLOGYCHAT_BASE_URL }/webapi/entry.cgi?token=${ customer_secrets.SYNOLOGYCHAT_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets.SYNOLOGYCHAT_BASE_URL }/webapi/entry.cgi?token=${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/webapi/entry.cgi?token=${ customer_secrets.{{ params.token_secret }} }",
     "logo": "https://www.synology.com/img/dsm/chat/chat_72@2x.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "SYNOLOGYCHAT_HOST",
+      "base_url_secret": "SYNOLOGYCHAT_BASE_URL",
       "token_secret": "SYNOLOGYCHAT_TOKEN"
     },
     "summary": "Send a notification to your own Synology Chat destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -28,8 +26,8 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's Synology Chat host",
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's SYNOLOGYCHAT_BASE_URL value (same format as SYNOLOGYCHAT_BASE_URL)",
           "type": "string"
         },
         "token_secret": {
@@ -38,7 +36,7 @@
         }
       },
       "required": [
-        "host_secret",
+        "base_url_secret",
         "token_secret"
       ],
       "type": "object"

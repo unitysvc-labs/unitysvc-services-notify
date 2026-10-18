@@ -12,9 +12,10 @@
     "logo": "https://lametric.com/themes/custom/lametric/favicon/apple-touch-icon.png",
     "ops_testing_parameters": {
       "api_key_secret": "LAMETRIC_BASIC",
-      "base_url": "https://mock.unitysvc.dev/lametric/api/v2/device/notifications"
+      "base_url": "https://mock.unitysvc.dev/lametric/api/v2/device/notifications",
+      "base_url_secret": "LAMETRIC_BASE_URL"
     },
-    "plus_base_url": "${ customer_secrets.LAMETRIC_BASE_URL }/api/v2/device/notifications",
+    "plus_base_url": "${ customer_secrets.{{ params.base_url_secret }} }/api/v2/device/notifications",
     "plus_headers": {
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },
@@ -26,9 +27,14 @@
         "api_key_secret": {
           "description": "Name of the customer secret holding this enrollment's base64 of user:password for HTTP basic auth",
           "type": "string"
+        },
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's LAMETRIC_BASE_URL value (same format as LAMETRIC_BASE_URL)",
+          "type": "string"
         }
       },
       "required": [
+        "base_url_secret",
         "api_key_secret"
       ],
       "type": "object"

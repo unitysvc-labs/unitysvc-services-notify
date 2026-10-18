@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "chanify://${ customer_secrets.CHANIFY_TOKEN }",
-    "apprise_url_plus": "chanify://${ customer_secrets.{{ params.token_secret }} }",
     "channel_name": "msg-to-chanify",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

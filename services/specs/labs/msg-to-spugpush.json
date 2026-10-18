@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "spugpush://${ customer_secrets.SPUGPUSH_TOKEN }",
-    "apprise_url_plus": "spugpush://${ customer_secrets.{{ params.token_secret }} }",
     "channel_name": "msg-to-spugpush",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

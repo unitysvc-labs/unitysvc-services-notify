@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "zulip://${ customer_secrets.ZULIP_BOTNAME }@${ customer_secrets.ZULIP_ORGANIZATION }/${ customer_secrets.ZULIP_TOKEN }",
-    "apprise_url_plus": "zulip://${ customer_secrets.{{ params.botname_secret }} }@${ customer_secrets.{{ params.organization_secret }} }/${ customer_secrets.{{ params.token_secret }} }",
     "channel_name": "msg-to-zulip",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -14,6 +12,9 @@
     "gateway_extra_headers": {
       "Authorization": "Basic ${ customer_secrets.ZULIP_BASIC }"
     },
+    "gateway_extra_headers_plus": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Zulip destinations, direct",
     "gateway_price_description": "Free — direct to your Zulip organization",
     "gateway_test_local_url": "https://DKRY5CJQX4BI%40DKRY5CJQX4BI:DKRY5CJQX4BIPW3AHOV29GNU18FMT07E@mock.unitysvc.dev/zulip/api/v1/messages",
@@ -23,9 +24,7 @@
     "ops_testing_parameters": {
       "base_secret": "ZULIP_BASE_URL",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "botname_secret": "ZULIP_BOTNAME",
-      "organization_secret": "ZULIP_ORGANIZATION",
-      "token_secret": "ZULIP_TOKEN"
+      "basic_secret": "ZULIP_BASIC"
     },
     "summary": "Send a notification to your own Zulip destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "zulip://DKRY5CJQX4BI@DKRY5CJQX4BI/DKRY5CJQX4BIPW3AHOV29GNU18FMT07E",
@@ -37,24 +36,14 @@
           "description": "Name of the customer secret holding this enrollment's Zulip base URL",
           "type": "string"
         },
-        "botname_secret": {
-          "description": "Name of the customer secret holding this enrollment's Zulip botname",
-          "type": "string"
-        },
-        "organization_secret": {
-          "description": "Name of the customer secret holding this enrollment's Zulip organization",
-          "type": "string"
-        },
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Zulip token",
+        "basic_secret": {
+          "description": "Name of the customer secret holding this enrollment's ZULIP_BASIC value (same format as ZULIP_BASIC)",
           "type": "string"
         }
       },
       "required": [
         "base_secret",
-        "botname_secret",
-        "organization_secret",
-        "token_secret"
+        "basic_secret"
       ],
       "type": "object"
     }

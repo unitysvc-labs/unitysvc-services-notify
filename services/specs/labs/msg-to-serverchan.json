@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "schan://${ customer_secrets.SERVERCHAN_TOKEN }",
-    "apprise_url_plus": "schan://${ customer_secrets.{{ params.token_secret }} }",
     "channel_name": "msg-to-serverchan",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

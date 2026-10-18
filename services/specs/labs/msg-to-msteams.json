@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "workflows://${ customer_secrets.MSTEAMS_HOST }/${ customer_secrets.MSTEAMS_WORKFLOW }/${ customer_secrets.MSTEAMS_SIGNATURE }",
-    "apprise_url_plus": "workflows://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.workflow_secret }} }/${ customer_secrets.{{ params.signature_secret }} }",
     "channel_name": "msg-to-msteams",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -19,10 +17,7 @@
     "logo": "https://api.iconify.design/logos:microsoft-teams.svg",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "MSTEAMS_HOST",
-      "signature_secret": "MSTEAMS_SIGNATURE",
-      "webhook_path_secret": "MSTEAMS_WEBHOOK_PATH",
-      "workflow_secret": "MSTEAMS_WORKFLOW"
+      "webhook_path_secret": "MSTEAMS_WEBHOOK_PATH"
     },
     "summary": "Send a notification to your own Microsoft Teams channel by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "workflows://hostname.example.com/workflowid/AbCdEfGhSignature",
@@ -30,27 +25,13 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's Microsoft Teams host",
-          "type": "string"
-        },
-        "signature_secret": {
-          "description": "Name of the customer secret holding this enrollment's Microsoft Teams signature",
-          "type": "string"
-        },
         "webhook_path_secret": {
           "description": "Name of the customer secret holding this enrollment's Microsoft Teams incoming-webhook path (the opaque segment after /webhookb2/); used by the gateway-plus transformer channel",
-          "type": "string"
-        },
-        "workflow_secret": {
-          "description": "Name of the customer secret holding this enrollment's Microsoft Teams workflow",
           "type": "string"
         }
       },
       "required": [
-        "host_secret",
-        "workflow_secret",
-        "signature_secret"
+        "webhook_path_secret"
       ],
       "type": "object"
     }

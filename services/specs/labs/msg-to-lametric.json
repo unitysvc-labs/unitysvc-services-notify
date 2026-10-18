@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "lametrics://${ customer_secrets.LAMETRIC_APIKEY }@${ customer_secrets.LAMETRIC_HOST }",
-    "apprise_url_plus": "lametrics://${ customer_secrets.{{ params.apikey_secret }} }@${ customer_secrets.{{ params.host_secret }} }",
     "channel_name": "msg-to-lametric",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -14,16 +12,19 @@
     "gateway_extra_headers": {
       "Authorization": "Basic ${ customer_secrets.LAMETRIC_BASIC }"
     },
+    "gateway_extra_headers_plus": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment LaMetric destinations, direct",
     "gateway_price_description": "Free — direct to your LaMetric device API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/lametric/api/v2/device/notifications",
     "gateway_url": "${ customer_secrets.LAMETRIC_BASE_URL }/api/v2/device/notifications",
-    "gateway_url_plus": "${ customer_secrets.LAMETRIC_BASE_URL }/api/v2/device/notifications",
+    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/api/v2/device/notifications",
     "logo": "https://lametric.com/themes/custom/lametric/favicon/apple-touch-icon.png",
     "ops_testing_parameters": {
-      "apikey_secret": "LAMETRIC_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "LAMETRIC_HOST"
+      "base_url_secret": "LAMETRIC_BASE_URL",
+      "basic_secret": "LAMETRIC_BASIC"
     },
     "summary": "Send a notification to your own LaMetric device by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "lametrics://lametricapikeyxyz123@notify.example.com",
@@ -31,18 +32,18 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's LaMetric apikey",
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's LAMETRIC_BASE_URL value (same format as LAMETRIC_BASE_URL)",
           "type": "string"
         },
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's LaMetric host",
+        "basic_secret": {
+          "description": "Name of the customer secret holding this enrollment's LAMETRIC_BASIC value (same format as LAMETRIC_BASIC)",
           "type": "string"
         }
       },
       "required": [
-        "apikey_secret",
-        "host_secret"
+        "base_url_secret",
+        "basic_secret"
       ],
       "type": "object"
     }

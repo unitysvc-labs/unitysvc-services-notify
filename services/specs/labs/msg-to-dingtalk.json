@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "dingtalk://${ customer_secrets.DINGTALK_TOKEN }/",
-    "apprise_url_plus": "dingtalk://${ customer_secrets.{{ params.token_secret }} }/",
     "channel_name": "msg-to-dingtalk",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

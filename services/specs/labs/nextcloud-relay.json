@@ -9,20 +9,26 @@
     "logo": "https://cdn.simpleicons.org/nextcloud/0082C9",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/nextcloud",
+      "base_url_secret": "NEXTCLOUD_BASE_URL",
       "target_secret": "NEXTCLOUD_TARGETS"
     },
-    "plus_base_url": "${ customer_secrets.NEXTCLOUD_BASE_URL }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.{{ params.target_secret }} }",
+    "plus_base_url": "${ customer_secrets.{{ params.base_url_secret }} }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.{{ params.target_secret }} }",
     "summary": "Relay a message through your own Nextcloud by posting a native Nextcloud payload to the UnitySVC gateway.",
     "test_webhook_path": "/ocs/v2.php/apps/notifications/api/v2/admin_notifications/demoid",
     "time_created": "2026-06-21T00:00:00Z",
     "user_parameters_schema": {
       "properties": {
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's NEXTCLOUD_BASE_URL value (same format as NEXTCLOUD_BASE_URL)",
+          "type": "string"
+        },
         "target_secret": {
           "description": "Name of the customer secret holding this enrollment's nextcloud targets",
           "type": "string"
         }
       },
       "required": [
+        "base_url_secret",
         "target_secret"
       ],
       "type": "object"

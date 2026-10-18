@@ -12,9 +12,11 @@
     "logo": "https://cdn.simpleicons.org/humhub/1B8291",
     "ops_testing_parameters": {
       "api_key_secret": "HUMHUB_BASIC",
-      "base_url": "https://mock.unitysvc.dev/humhub"
+      "base_url": "https://mock.unitysvc.dev/humhub",
+      "base_url_secret": "HUMHUB_BASE_URL",
+      "targets_secret": "HUMHUB_TARGETS"
     },
-    "plus_base_url": "${ customer_secrets.HUMHUB_BASE_URL }/api/v1/post/container/${ customer_secrets.HUMHUB_TARGETS }",
+    "plus_base_url": "${ customer_secrets.{{ params.base_url_secret }} }/api/v1/post/container/${ customer_secrets.{{ params.targets_secret }} }",
     "plus_headers": {
       "Authorization": "Basic ${ customer_secrets.{{ params.api_key_secret }} }"
     },
@@ -26,9 +28,19 @@
         "api_key_secret": {
           "description": "Name of the customer secret holding this enrollment's base64 of user:password for HTTP basic auth",
           "type": "string"
+        },
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's HUMHUB_BASE_URL value (same format as HUMHUB_BASE_URL)",
+          "type": "string"
+        },
+        "targets_secret": {
+          "description": "Name of the customer secret holding this enrollment's HUMHUB_TARGETS value (same format as HUMHUB_TARGETS)",
+          "type": "string"
         }
       },
       "required": [
+        "base_url_secret",
+        "targets_secret",
         "api_key_secret"
       ],
       "type": "object"

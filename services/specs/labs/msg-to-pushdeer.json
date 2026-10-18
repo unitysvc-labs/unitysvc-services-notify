@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "pushdeers://${ customer_secrets.PUSHDEER_PUSHKEY }",
-    "apprise_url_plus": "pushdeers://${ customer_secrets.{{ params.pushkey_secret }} }",
     "channel_name": "msg-to-pushdeer",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

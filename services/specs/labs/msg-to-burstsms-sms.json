@@ -1,18 +1,20 @@
 {
   "parameters": {
-    "apprise_url": "burstsms://${ customer_secrets.BURSTSMS_SMS_APIKEY }:${ customer_secrets.BURSTSMS_SMS_SECRET }@${ customer_secrets.BURSTSMS_SMS_SENDER_ID }/${ customer_secrets.BURSTSMS_SMS_TARGETS }",
-    "apprise_url_plus": "burstsms://${ customer_secrets.{{ params.apikey_secret }} }:${ customer_secrets.{{ params.secret_secret }} }@${ customer_secrets.{{ params.sender_id_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
     "channel_name": "msg-to-burstsms-sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-burstsms-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Burst SMS account — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Burst SMS accounts — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Burst SMS accounts bound per enrollment.\n\nSign up for a Burst SMS account at burstsms.com, then open your account profile at can.transmitsms.com/profile to find the Sender ID (a phone number or short alphanumeric name) Burst SMS has assigned you for outbound messages, and set that as your sender value. Set the destination mobile number you want to notify, in international format (e.g. +18005551234), as the recipient value.",
     "display_name": "Burst SMS Messages",
     "gateway_body_template": "to=${ customer_secrets.BURSTSMS_SMS_TO }&from=${ customer_secrets.BURSTSMS_SMS_FROM }&message={* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
+    "gateway_body_template_plus": "to=${ customer_secrets.{{ params.to_secret }} }&from=${ customer_secrets.{{ params.from_secret }} }&message={* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_burstsms_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_burstsms_sms",
     "gateway_content_type": "application/x-www-form-urlencoded",
     "gateway_extra_headers": {
       "Authorization": "Basic ${ customer_secrets.BURSTSMS_SMS_BASIC }"
+    },
+    "gateway_extra_headers_plus": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Burst SMS destinations, direct",
     "gateway_price_description": "Free — direct to your Burst SMS account",
@@ -21,11 +23,10 @@
     "gateway_url_plus": "${ customer_secrets._BURSTSMS_SMS_API_BASE ?? https://api.transmitsms.com }/send-sms.json",
     "logo": "https://kudosity.com/favicon/favicon.svg",
     "ops_testing_parameters": {
-      "apikey_secret": "BURSTSMS_SMS_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "secret_secret": "BURSTSMS_SMS_SECRET",
-      "sender_id_secret": "BURSTSMS_SMS_SENDER_ID",
-      "targets_secret": "BURSTSMS_SMS_TARGETS"
+      "basic_secret": "BURSTSMS_SMS_BASIC",
+      "from_secret": "BURSTSMS_SMS_FROM",
+      "to_secret": "BURSTSMS_SMS_TO"
     },
     "summary": "Send an SMS to your own Burst SMS account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "burstsms://dkry5cjqx4bi:dkry5cjqx4bi@+15551234567/+15551234567",
@@ -33,28 +34,23 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's Burst SMS apikey",
+        "basic_secret": {
+          "description": "Name of the customer secret holding this enrollment's BURSTSMS_SMS_BASIC value (same format as BURSTSMS_SMS_BASIC)",
           "type": "string"
         },
-        "secret_secret": {
-          "description": "Name of the customer secret holding this enrollment's Burst SMS secret",
+        "from_secret": {
+          "description": "Name of the customer secret holding this enrollment's BURSTSMS_SMS_FROM value (same format as BURSTSMS_SMS_FROM)",
           "type": "string"
         },
-        "sender_id_secret": {
-          "description": "Name of the customer secret holding this enrollment's Burst SMS sender id",
-          "type": "string"
-        },
-        "targets_secret": {
-          "description": "Name of the customer secret holding this enrollment's Burst SMS targets",
+        "to_secret": {
+          "description": "Name of the customer secret holding this enrollment's BURSTSMS_SMS_TO value (same format as BURSTSMS_SMS_TO)",
           "type": "string"
         }
       },
       "required": [
-        "apikey_secret",
-        "secret_secret",
-        "sender_id_secret",
-        "targets_secret"
+        "to_secret",
+        "from_secret",
+        "basic_secret"
       ],
       "type": "object"
     }
