@@ -5,8 +5,6 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-twilio-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Twilio destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Twilio destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Twilio destinations bound per enrollment.\n\nIn your Twilio Console (twilio.com/console), copy your Account SID as TWILIO_SMS_ACCOUNT_SID. Under Phone Numbers → Manage → Active Numbers, pick one of your Twilio numbers as TWILIO_SMS_FROM, and set the recipient's number as TWILIO_SMS_TO — both including the country calling code (e.g. +15551234567). UnitySVC sends each message as an SMS from the first number to the second through the Twilio API.",
     "display_name": "Twilio Messages",
-    "gateway_body_template": "To=${ customer_secrets.TWILIO_SMS_TO }&From=${ customer_secrets.TWILIO_SMS_FROM }&Body={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
-    "gateway_body_template_plus": "To=${ customer_secrets.{{ params.to_secret }} }&From=${ customer_secrets.{{ params.from_secret }} }&Body={* ((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_twilio_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_twilio_sms",
     "gateway_content_type": "application/x-www-form-urlencoded",
@@ -16,12 +14,31 @@
     "gateway_extra_headers_plus": {
       "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
     },
+    "gateway_field_mapping": {
+      "Body": "@msg.body",
+      "From": "${ customer_secrets.TWILIO_SMS_FROM }",
+      "To": "${ customer_secrets.TWILIO_SMS_TO }"
+    },
+    "gateway_field_mapping_plus": {
+      "Body": "@msg.body",
+      "From": "${ customer_secrets.{{ params.from_secret }} }",
+      "To": "${ customer_secrets.{{ params.to_secret }} }"
+    },
+    "gateway_output_format": "encoded",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Twilio destinations, direct",
     "gateway_price_description": "Free — direct to your Twilio number",
     "gateway_test_local_url": "https://ACdeadbeefdeadbeef:dkry5cjqx4bi@mock.unitysvc.dev/twilio/2010-04-01/Accounts/ACdeadbeefdeadbeef/Messages.json",
     "gateway_url": "${ customer_secrets._TWILIO_SMS_API_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/${ customer_secrets.TWILIO_SMS_ACCOUNT_SID }/Messages.json",
     "gateway_url_plus": "${ customer_secrets._TWILIO_SMS_API_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/${ customer_secrets.{{ params.account_sid_secret }} }/Messages.json",
     "logo": "https://api.iconify.design/logos:twilio-icon.svg",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": false
+    },
     "ops_testing_parameters": {
       "account_sid_secret": "TWILIO_SMS_ACCOUNT_SID",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",

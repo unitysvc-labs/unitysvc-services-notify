@@ -47,7 +47,7 @@
             the upstream body from the normalized msg; without one, the
             body_transformer template reads the normalized msg as `_body`. -#}
         {%- if msg_capabilities is defined %}
-        "msg_transformer": { "capabilities": {{ msg_capabilities | tojson }}{% if gateway_field_mapping is defined %}, "field_mapping": {{ gateway_field_mapping | tojson }}{% endif %} },
+        "msg_transformer": { "capabilities": {{ msg_capabilities | tojson }}{% if gateway_field_mapping is defined %}, "field_mapping": {{ gateway_field_mapping | tojson }}{% if gateway_output_format is defined %}, "output_format": {{ gateway_output_format | tojson }}{% endif %}{% endif %} },
         {%- endif %}
         {%- if gateway_field_mapping is not defined %}
         "body_transformer": { "request": { "input_format": "json", "template": {{ gateway_body_template | tojson }} } },
@@ -69,7 +69,7 @@
       "base_url": {{ gateway_url_plus | tojson }},
       "raw": { "request_transformer": {
         {%- if msg_capabilities is defined %}
-        "msg_transformer": { "capabilities": {{ msg_capabilities | tojson }}{% if gateway_field_mapping is defined %}, "field_mapping": {{ (gateway_field_mapping_plus | default(gateway_field_mapping)) | tojson }}{% endif %} },
+        "msg_transformer": { "capabilities": {{ msg_capabilities | tojson }}{% if gateway_field_mapping is defined %}, "field_mapping": {{ (gateway_field_mapping_plus | default(gateway_field_mapping)) | tojson }}{% if gateway_output_format is defined %}, "output_format": {{ gateway_output_format | tojson }}{% endif %}{% endif %} },
         {%- endif %}
         {%- if gateway_field_mapping is not defined %}
         "body_transformer": { "request": { "input_format": "json", "template": {{ (gateway_body_template_plus | default(gateway_body_template)) | tojson }} } },

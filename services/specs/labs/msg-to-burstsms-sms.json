@@ -5,8 +5,6 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-burstsms-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Burst SMS account — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Burst SMS accounts — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Burst SMS accounts bound per enrollment.\n\nSign up for a Burst SMS account at burstsms.com, then open your account profile at can.transmitsms.com/profile to find the Sender ID (a phone number or short alphanumeric name) Burst SMS has assigned you for outbound messages, and set that as your sender value. Set the destination mobile number you want to notify, in international format (e.g. +18005551234), as the recipient value.",
     "display_name": "Burst SMS Messages",
-    "gateway_body_template": "to=${ customer_secrets.BURSTSMS_SMS_TO }&from=${ customer_secrets.BURSTSMS_SMS_FROM }&message={* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
-    "gateway_body_template_plus": "to=${ customer_secrets.{{ params.to_secret }} }&from=${ customer_secrets.{{ params.from_secret }} }&message={* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_burstsms_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_burstsms_sms",
     "gateway_content_type": "application/x-www-form-urlencoded",
@@ -16,12 +14,31 @@
     "gateway_extra_headers_plus": {
       "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
     },
+    "gateway_field_mapping": {
+      "from": "${ customer_secrets.BURSTSMS_SMS_FROM }",
+      "message": "@msg.body",
+      "to": "${ customer_secrets.BURSTSMS_SMS_TO }"
+    },
+    "gateway_field_mapping_plus": {
+      "from": "${ customer_secrets.{{ params.from_secret }} }",
+      "message": "@msg.body",
+      "to": "${ customer_secrets.{{ params.to_secret }} }"
+    },
+    "gateway_output_format": "encoded",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Burst SMS destinations, direct",
     "gateway_price_description": "Free — direct to your Burst SMS account",
     "gateway_test_local_url": "https://demo123:demo123@mock.unitysvc.dev/burstsms_sms/send-sms.json",
     "gateway_url": "${ customer_secrets._BURSTSMS_SMS_API_BASE ?? https://api.transmitsms.com }/send-sms.json",
     "gateway_url_plus": "${ customer_secrets._BURSTSMS_SMS_API_BASE ?? https://api.transmitsms.com }/send-sms.json",
     "logo": "https://kudosity.com/favicon/favicon.svg",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": false
+    },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "basic_secret": "BURSTSMS_SMS_BASIC",

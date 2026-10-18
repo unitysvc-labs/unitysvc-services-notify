@@ -5,7 +5,6 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-lametric` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your LaMetric device — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own LaMetric devices — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional LaMetric devices bound per enrollment.",
     "display_name": "LaMetric Messages",
-    "gateway_body_template": "{\"model\":{\"cycles\":1,\"frames\":[{\"icon\":0,\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \"\\n\" or \"\")..(_body.body or \"\")) *}}]}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_lametric",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_lametric",
     "gateway_content_type": "application/json",
@@ -15,12 +14,31 @@
     "gateway_extra_headers_plus": {
       "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
     },
+    "gateway_field_mapping": {
+      "model": {
+        "cycles": 1,
+        "frames": [
+          {
+            "icon": 0,
+            "text": "@msg.body"
+          }
+        ]
+      }
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment LaMetric destinations, direct",
     "gateway_price_description": "Free — direct to your LaMetric device API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/lametric/api/v2/device/notifications",
     "gateway_url": "${ customer_secrets.LAMETRIC_BASE_URL }/api/v2/device/notifications",
     "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/api/v2/device/notifications",
     "logo": "https://lametric.com/themes/custom/lametric/favicon/apple-touch-icon.png",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": false
+    },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "base_url_secret": "LAMETRIC_BASE_URL",

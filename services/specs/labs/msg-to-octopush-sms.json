@@ -5,8 +5,6 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-octopush-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Octopush destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Octopush destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Octopush destinations bound per enrollment.\n\nSign up for an account at octopush.com, then find your API Login (the email address you registered with) and API Key in your account dashboard, and set both as the matching secrets. Optionally set a custom alphanumeric sender name (3–11 characters) if you want messages to appear from a recognizable name rather than a number, and provide the destination phone number in international format as the recipient.",
     "display_name": "Octopush Messages",
-    "gateway_body_template": "{\"recipients\":[{\"phone_number\":\"${ customer_secrets.OCTOPUSH_SMS_TO }\"}],\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *},\"purpose\":\"alert\",\"sender\":\"${ customer_secrets.OCTOPUSH_SMS_FROM }\"}",
-    "gateway_body_template_plus": "{\"recipients\":[{\"phone_number\":\"${ customer_secrets.{{ params.to_secret }} }\"}],\"text\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *},\"purpose\":\"alert\",\"sender\":\"${ customer_secrets.{{ params.from_secret }} }\"}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_octopush_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_octopush_sms",
     "gateway_content_type": "application/json",
@@ -18,12 +16,40 @@
       "api-key": "${ customer_secrets.{{ params.api_key_secret }} }",
       "api-login": "${ customer_secrets.{{ params.api_login_secret }} }"
     },
+    "gateway_field_mapping": {
+      "purpose": "alert",
+      "recipients": [
+        {
+          "phone_number": "${ customer_secrets.OCTOPUSH_SMS_TO }"
+        }
+      ],
+      "sender": "${ customer_secrets.OCTOPUSH_SMS_FROM }",
+      "text": "@msg.body"
+    },
+    "gateway_field_mapping_plus": {
+      "purpose": "alert",
+      "recipients": [
+        {
+          "phone_number": "${ customer_secrets.{{ params.to_secret }} }"
+        }
+      ],
+      "sender": "${ customer_secrets.{{ params.from_secret }} }",
+      "text": "@msg.body"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Octopush destinations, direct",
     "gateway_price_description": "Free — direct to Octopush SMS Campaign API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/octopush_sms/v1/public/sms-campaign/send",
     "gateway_url": "${ customer_secrets._OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
     "gateway_url_plus": "${ customer_secrets._OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
     "logo": "https://api.iconify.design/boxicons:octopus-filled.svg?color=%23FFFFFF",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": false
+    },
     "ops_testing_parameters": {
       "api_key_secret": "OCTOPUSH_SMS_API_KEY",
       "api_login_secret": "OCTOPUSH_SMS_API_LOGIN",

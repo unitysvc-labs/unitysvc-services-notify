@@ -5,17 +5,41 @@
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-pagerduty` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your PagerDuty destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own PagerDuty destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional PagerDuty destinations bound per enrollment.\n\nIn PagerDuty, open Services, select (or create) the service you want alerted, go to its Integrations tab, click Add Integration, and choose \"Events API v2\". Save it and copy the generated Integration Key as PAGERDUTY_ROUTING_KEY. Set PAGERDUTY_SOURCE to a name identifying the sending system, such as its hostname — it's shown in the PagerDuty incident so responders know the source at a glance.",
     "display_name": "PagerDuty Messages",
-    "gateway_body_template": "{\"routing_key\":\"${ customer_secrets.PAGERDUTY_ROUTING_KEY }\",\"event_action\":\"trigger\",\"payload\":{\"summary\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \" — \" or \"\")..(_body.body or \"\")) *},\"source\":\"${ customer_secrets.PAGERDUTY_SOURCE }\",\"severity\":\"error\"}}",
-    "gateway_body_template_plus": "{\"routing_key\":\"${ customer_secrets.{{ params.routing_key_secret }} }\",\"event_action\":\"trigger\",\"payload\":{\"summary\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \" — \" or \"\")..(_body.body or \"\")) *},\"source\":\"${ customer_secrets.{{ params.source_secret }} }\",\"severity\":\"error\"}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_pagerduty",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_pagerduty",
     "gateway_content_type": "application/json",
+    "gateway_field_mapping": {
+      "event_action": "trigger",
+      "payload": {
+        "severity": "error",
+        "source": "${ customer_secrets.PAGERDUTY_SOURCE }",
+        "summary": "@msg.body"
+      },
+      "routing_key": "${ customer_secrets.PAGERDUTY_ROUTING_KEY }"
+    },
+    "gateway_field_mapping_plus": {
+      "event_action": "trigger",
+      "payload": {
+        "severity": "error",
+        "source": "${ customer_secrets.{{ params.source_secret }} }",
+        "summary": "@msg.body"
+      },
+      "routing_key": "${ customer_secrets.{{ params.routing_key_secret }} }"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment PagerDuty destinations, direct",
     "gateway_price_description": "Free — direct to PagerDuty Events API v2",
     "gateway_test_local_url": "https://mock.unitysvc.dev/pagerduty/v2/enqueue",
     "gateway_url": "${ customer_secrets._PAGERDUTY_API_BASE ?? https://events.pagerduty.com }/v2/enqueue",
     "gateway_url_plus": "${ customer_secrets._PAGERDUTY_API_BASE ?? https://events.pagerduty.com }/v2/enqueue",
     "logo": "https://cdn.simpleicons.org/pagerduty/06AC38",
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 0,
+      "title": false
+    },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "routing_key_secret": "PAGERDUTY_ROUTING_KEY",
