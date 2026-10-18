@@ -1,14 +1,14 @@
 {
   "parameters": {
-    "apprise_url": "whatsapp://${ customer_secrets.WHATSAPP_MSG_TOKEN }@${ customer_secrets.WHATSAPP_MSG_FROM_PHONE_ID }/${ customer_secrets.WHATSAPP_MSG_TARGETS }",
-    "apprise_url_plus": "whatsapp://${ customer_secrets.{{ params.token_secret }} }@${ customer_secrets.{{ params.from_phone_id_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
     "channel_name": "msg-to-whatsapp-msg",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-whatsapp-msg` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your WhatsApp destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own WhatsApp destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional WhatsApp destinations bound per enrollment.\n\nWhatsApp setup spans two Meta portals. In Meta Business Manager (business.facebook.com), go to Settings → Users → System Users, create a System User, click \"Add Assets\" to attach your WhatsApp app, grant it the whatsapp_business_messaging permission, and click \"Generate Token\" — that permanent token is WHATSAPP_MSG_TOKEN. In the Meta Developer Dashboard (developers.facebook.com), open your app's WhatsApp → API Setup page to find your From Phone Number ID (a ~14-digit numeric ID, not your actual phone number) and set it as WHATSAPP_MSG_FROM_PHONE_ID. Set WHATSAPP_MSG_TO to the recipient's number in E.164 format; sandbox numbers must be verified through Meta's interface first, and production sending requires a verified business.",
     "display_name": "WhatsApp Messages",
     "gateway_api_key": "${ customer_secrets.WHATSAPP_MSG_TOKEN }",
+    "gateway_api_key_plus": "${ customer_secrets.{{ params.token_secret }} }",
     "gateway_body_template": "{\"messaging_product\":\"whatsapp\",\"to\":\"${ customer_secrets.WHATSAPP_MSG_TO }\",\"type\":\"text\",\"text\":{\"body\":{* _escape_json(((_body.title and _body.title ~= \"\") and (_body.title .. \"\\n\\n\") or \"\") .. (_body.body or \"\")) *}}}",
+    "gateway_body_template_plus": "{\"messaging_product\":\"whatsapp\",\"to\":\"${ customer_secrets.{{ params.to_secret }} }\",\"type\":\"text\",\"text\":{\"body\":{* _escape_json(((_body.title and _body.title ~= \"\") and (_body.title .. \"\\n\\n\") or \"\") .. (_body.body or \"\")) *}}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_whatsapp_msg",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_whatsapp_msg",
     "gateway_content_type": "application/json",
@@ -21,7 +21,7 @@
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_phone_id_secret": "WHATSAPP_MSG_FROM_PHONE_ID",
-      "targets_secret": "WHATSAPP_MSG_TARGETS",
+      "to_secret": "WHATSAPP_MSG_TO",
       "token_secret": "WHATSAPP_MSG_TOKEN"
     },
     "summary": "Send a notification to your own WhatsApp destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -34,8 +34,8 @@
           "description": "Name of the customer secret holding this enrollment's WhatsApp from phone id",
           "type": "string"
         },
-        "targets_secret": {
-          "description": "Name of the customer secret holding this enrollment's WhatsApp targets",
+        "to_secret": {
+          "description": "Name of the customer secret holding this enrollment's WHATSAPP_MSG_TO value (same format as WHATSAPP_MSG_TO)",
           "type": "string"
         },
         "token_secret": {
@@ -44,9 +44,9 @@
         }
       },
       "required": [
-        "token_secret",
         "from_phone_id_secret",
-        "targets_secret"
+        "to_secret",
+        "token_secret"
       ],
       "type": "object"
     }

@@ -13,12 +13,13 @@
     "logo": "https://api.iconify.design/boxicons:octopus-filled.svg?color=%23FFFFFF",
     "ops_testing_parameters": {
       "api_key_secret": "OCTOPUSH_SMS_API_KEY",
+      "api_login_secret": "OCTOPUSH_SMS_API_LOGIN",
       "base_url": "https://mock.unitysvc.dev/octopush_sms"
     },
     "plus_base_url": "${ customer_secrets._OCTOPUSH_SMS_BASE ?? https://api.octopush.com }/v1/public/sms-campaign/send",
     "plus_headers": {
       "api-key": "${ customer_secrets.{{ params.api_key_secret }} }",
-      "api-login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }"
+      "api-login": "${ customer_secrets.{{ params.api_login_secret }} }"
     },
     "summary": "Relay an SMS through your own Octopush account by posting a native Octopush payload to the UnitySVC gateway.",
     "test_webhook_path": "/v1/public/sms-campaign/send",
@@ -28,10 +29,15 @@
         "api_key_secret": {
           "description": "Name of the customer secret holding this enrollment's API key",
           "type": "string"
+        },
+        "api_login_secret": {
+          "description": "Name of the customer secret holding this enrollment's OCTOPUSH_SMS_API_LOGIN value (same format as OCTOPUSH_SMS_API_LOGIN)",
+          "type": "string"
         }
       },
       "required": [
-        "api_key_secret"
+        "api_key_secret",
+        "api_login_secret"
       ],
       "type": "object"
     }

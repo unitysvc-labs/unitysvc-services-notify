@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "nctalks://${ customer_secrets.NEXTCLOUDTALK_USER }:${ customer_secrets.NEXTCLOUDTALK_PASSWORD }@${ customer_secrets.NEXTCLOUDTALK_HOST }/${ customer_secrets.NEXTCLOUDTALK_TARGETS }",
-    "apprise_url_plus": "nctalks://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
     "channel_name": "msg-to-nextcloudtalk",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -14,19 +12,20 @@
     "gateway_extra_headers": {
       "Authorization": "Basic ${ customer_secrets.NEXTCLOUDTALK_BASIC }"
     },
+    "gateway_extra_headers_plus": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Nextcloud Talk destinations, direct",
     "gateway_price_description": "Free — direct to your Nextcloud Talk server",
     "gateway_test_local_url": "https://mock.unitysvc.dev/nextcloudtalk/ocs/v2.php/apps/spreed/api/v1/chat/demoroom123",
     "gateway_url": "${ customer_secrets.NEXTCLOUDTALK_BASE_URL }/ocs/v2.php/apps/spreed/api/v1/chat/${ customer_secrets.NEXTCLOUDTALK_ROOMID }",
-    "gateway_url_plus": "${ customer_secrets.NEXTCLOUDTALK_BASE_URL }/ocs/v2.php/apps/spreed/api/v1/chat/${ customer_secrets.{{ params.roomid_secret }} }",
+    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/ocs/v2.php/apps/spreed/api/v1/chat/${ customer_secrets.{{ params.roomid_secret }} }",
     "logo": "https://cdn.simpleicons.org/nextcloud/0082C9",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "NEXTCLOUDTALK_HOST",
-      "password_secret": "NEXTCLOUDTALK_PASSWORD",
-      "roomid_secret": "NEXTCLOUDTALK_ROOMID",
-      "targets_secret": "NEXTCLOUDTALK_TARGETS",
-      "user_secret": "NEXTCLOUDTALK_USER"
+      "base_url_secret": "NEXTCLOUDTALK_BASE_URL",
+      "basic_secret": "NEXTCLOUDTALK_BASIC",
+      "roomid_secret": "NEXTCLOUDTALK_ROOMID"
     },
     "summary": "Send a notification to your own Nextcloud Talk destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "nctalks://nextcloudtalkuser:nextcloudtalkpass@notify.example.com/nextcloudtalktargetroomidxyz123",
@@ -34,32 +33,23 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's Nextcloud Talk host",
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's NEXTCLOUDTALK_BASE_URL value (same format as NEXTCLOUDTALK_BASE_URL)",
           "type": "string"
         },
-        "password_secret": {
-          "description": "Name of the customer secret holding this enrollment's Nextcloud Talk password",
+        "basic_secret": {
+          "description": "Name of the customer secret holding this enrollment's NEXTCLOUDTALK_BASIC value (same format as NEXTCLOUDTALK_BASIC)",
           "type": "string"
         },
         "roomid_secret": {
           "description": "Name of the customer secret holding this enrollment's Nextcloud Talk room ID; used by the gateway-plus transformer channel",
           "type": "string"
-        },
-        "targets_secret": {
-          "description": "Name of the customer secret holding this enrollment's Nextcloud Talk targets",
-          "type": "string"
-        },
-        "user_secret": {
-          "description": "Name of the customer secret holding this enrollment's Nextcloud Talk user",
-          "type": "string"
         }
       },
       "required": [
-        "user_secret",
-        "password_secret",
-        "host_secret",
-        "targets_secret"
+        "base_url_secret",
+        "roomid_secret",
+        "basic_secret"
       ],
       "type": "object"
     }

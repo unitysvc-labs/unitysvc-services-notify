@@ -14,7 +14,14 @@ check fails when:
    ``${ customer_secrets.{{ params.X }} ?? … }`` makes a missing secret look
    present;
 3. an ``Authorization`` header is a literal instead of a secret reference;
-4. a ``${ customer_secrets.X }`` name is missing from ``seller.secrets.txt``.
+4. a ``${ customer_secrets.X }`` name is missing from ``seller.secrets.txt``;
+5. the listing requires enrollment parameters but no channel is ``enrollable``.
+   The platform then attributes the enrollment to the first channel — the free
+   one — and shows the paid ``-plus`` channel as the one needing only secrets;
+6. a required enrollment parameter is used by no ``enrollable`` channel;
+7. an ``enrollable`` channel reads a customer secret by its fixed name (one the
+   customer must supply, not ``_``-prefixed or defaulted): it then reaches the
+   free channel's destination instead of the enrollment's own.
 
 Run from the repo root:  uv run --with unitysvc-sellers scripts/check_channel_binding.py
 """
@@ -51,6 +58,26 @@ REF = re.compile(
     r"\$\{\s*customer_secrets\.(\{\{[^}]*\}\}|[A-Za-z0-9_]+)\s*(\?\?\s*([^}]*?))?\s*\}"
 )
 ENROLLMENT = re.compile(r"\{\{\s*(params|enrollment)\.")
+PARAM = re.compile(r"\{\{\s*params\.([A-Za-z0-9_]+)")
+
+
+def fixed_secrets(cfg: dict) -> list[str]:
+    """Customer secrets the channel reads by a fixed name the customer must supply."""
+    names = []
+    for m in REF.finditer(json.dumps(cfg)):
+        name, has_default, default = m.group(1), m.group(2), (m.group(3) or "").strip()
+        if name.startswith(("{{", "_")) or (has_default and default):
+            continue
+        names.append(name)
+    return sorted(set(names))
+
+
+def required_params(service_dir: Path) -> list[str]:
+    required: set[str] = set()
+    for listing_path in service_dir.glob("listing*.json"):
+        schema = json.loads(listing_path.read_text()).get("user_parameters_schema") or {}
+        required.update(schema.get("required") or [])
+    return sorted(required)
 
 
 def channel_type(cfg: dict) -> str:
@@ -82,7 +109,29 @@ def main() -> int:
             offering = json.loads(offering_path.read_text())
             if offering.get("status") == "deprecated":
                 continue  # no longer offered, so never shown as Directly Usable
-            for ch, cfg in offering.get("upstream_access_config", {}).items():
+            channels = {
+                ch: cfg
+                for ch, cfg in offering.get("upstream_access_config", {}).items()
+                if cfg.get("is_active") is not False
+            }
+            enrollable = {ch: cfg for ch, cfg in channels.items() if channel_type(cfg) == "enrollable"}
+            required = required_params(offering_path.parent)
+            if required and not enrollable:
+                errors.append(
+                    f"{svc}: requires enrollment parameters {required} but no channel uses them, "
+                    "so the enrollment lands on the free channel"
+                )
+            if enrollable:
+                used = {p for cfg in enrollable.values() for p in PARAM.findall(json.dumps(cfg))}
+                for param in sorted(set(required) - used):
+                    errors.append(f"{svc}: required parameter {param} is used by no enrollable channel")
+            for ch, cfg in enrollable.items():
+                for name in fixed_secrets(cfg):
+                    errors.append(
+                        f"{svc}@{ch}: enrollable channel reads customer secret {name} by its fixed name, "
+                        "so it reaches the free channel's destination"
+                    )
+            for ch, cfg in channels.items():
                 key = f"{svc}@{ch}"
                 if channel_type(cfg) == "unbound":
                     seen_unbound.add(key)

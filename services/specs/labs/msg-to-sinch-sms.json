@@ -1,14 +1,14 @@
 {
   "parameters": {
-    "apprise_url": "sinch://${ customer_secrets.SINCH_SMS_SERVICE_PLAN_ID }:${ customer_secrets.SINCH_SMS_API_TOKEN }@${ customer_secrets.SINCH_SMS_FROM_PHONE }",
-    "apprise_url_plus": "sinch://${ customer_secrets.{{ params.service_plan_id_secret }} }:${ customer_secrets.{{ params.api_token_secret }} }@${ customer_secrets.{{ params.from_phone_secret }} }",
     "channel_name": "msg-to-sinch-sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-sinch-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Sinch SMS destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Sinch SMS destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Sinch SMS destinations bound per enrollment.\n\nIn the Sinch dashboard at dashboard.sinch.com/sms/overview (or the API section under dashboard.sinch.com/sms/api/rest), copy your Service Plan ID and API Token as SINCH_SMS_SERVICE_PLAN_ID and SINCH_SMS_API_TOKEN. Under Numbers → Your Numbers, note an active phone number registered to your account to send from and set it as SINCH_SMS_FROM_PHONE in E.164 format, then set SINCH_SMS_TO_PHONE to the recipient's number in the same format. Sinch runs a separate API per region; if your account is not in the US region (the default), set SINCH_SMS_BASE_URL to your region's API, e.g. https://eu.sms.api.sinch.com (also au., br., ca.).",
     "display_name": "Sinch Messages",
     "gateway_api_key": "${ customer_secrets.SINCH_SMS_API_TOKEN }",
+    "gateway_api_key_plus": "${ customer_secrets.{{ params.api_token_secret }} }",
     "gateway_body_template": "{\"from\":\"${ customer_secrets.SINCH_SMS_FROM_PHONE }\",\"to\":[\"${ customer_secrets.SINCH_SMS_TO_PHONE }\"],\"body\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *}}",
+    "gateway_body_template_plus": "{\"from\":\"${ customer_secrets.{{ params.from_phone_secret }} }\",\"to\":[\"${ customer_secrets.{{ params.to_phone_secret }} }\"],\"body\":{* _escape_json((_body.title or \"\")..(((_body.title or \"\")~=\"\" and (_body.body or \"\")~=\"\") and \": \" or \"\")..(_body.body or \"\")) *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_sinch_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_sinch_sms",
     "gateway_content_type": "application/json",
@@ -22,7 +22,8 @@
       "api_token_secret": "SINCH_SMS_API_TOKEN",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_phone_secret": "SINCH_SMS_FROM_PHONE",
-      "service_plan_id_secret": "SINCH_SMS_SERVICE_PLAN_ID"
+      "service_plan_id_secret": "SINCH_SMS_SERVICE_PLAN_ID",
+      "to_phone_secret": "SINCH_SMS_TO_PHONE"
     },
     "summary": "Send a notification to your own Sinch SMS destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "sinch://d4b2907e5c3a:d4b2907e5c3a@+15551234567",
@@ -41,12 +42,17 @@
         "service_plan_id_secret": {
           "description": "Name of the customer secret holding this enrollment's Sinch service plan id",
           "type": "string"
+        },
+        "to_phone_secret": {
+          "description": "Name of the customer secret holding this enrollment's SINCH_SMS_TO_PHONE value (same format as SINCH_SMS_TO_PHONE)",
+          "type": "string"
         }
       },
       "required": [
         "service_plan_id_secret",
-        "api_token_secret",
-        "from_phone_secret"
+        "from_phone_secret",
+        "to_phone_secret",
+        "api_token_secret"
       ],
       "type": "object"
     }

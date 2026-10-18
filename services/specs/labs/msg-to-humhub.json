@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "humhubs://${ customer_secrets.HUMHUB_USER }:${ customer_secrets.HUMHUB_PASSWORD }@${ customer_secrets.HUMHUB_HOST }/${ customer_secrets.HUMHUB_TARGETS }",
-    "apprise_url_plus": "humhubs://${ customer_secrets.{{ params.user_secret }} }:${ customer_secrets.{{ params.password_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
     "channel_name": "msg-to-humhub",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -14,19 +12,20 @@
     "gateway_extra_headers": {
       "Authorization": "Basic ${ customer_secrets.HUMHUB_BASIC }"
     },
+    "gateway_extra_headers_plus": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment HumHub destinations, direct",
     "gateway_price_description": "Free — direct to your HumHub post API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/humhub/api/v1/post/container/123",
     "gateway_url": "${ customer_secrets.HUMHUB_BASE_URL }/api/v1/post/container/${ customer_secrets.HUMHUB_CONTAINER_ID }",
-    "gateway_url_plus": "${ customer_secrets.HUMHUB_BASE_URL }/api/v1/post/container/${ customer_secrets.{{ params.container_id_secret }} }",
+    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/api/v1/post/container/${ customer_secrets.{{ params.container_id_secret }} }",
     "logo": "https://cdn.simpleicons.org/humhub/1B8291",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "container_id_secret": "HUMHUB_CONTAINER_ID",
-      "host_secret": "HUMHUB_HOST",
-      "password_secret": "HUMHUB_PASSWORD",
-      "targets_secret": "HUMHUB_TARGETS",
-      "user_secret": "HUMHUB_USER"
+      "base_url_secret": "HUMHUB_BASE_URL",
+      "basic_secret": "HUMHUB_BASIC",
+      "container_id_secret": "HUMHUB_CONTAINER_ID"
     },
     "summary": "Send a notification to your own HumHub instance by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "humhubs://humhubuser:humhubpass@notify.example.com/123",
@@ -34,33 +33,23 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's HUMHUB_BASE_URL value (same format as HUMHUB_BASE_URL)",
+          "type": "string"
+        },
+        "basic_secret": {
+          "description": "Name of the customer secret holding this enrollment's HUMHUB_BASIC value (same format as HUMHUB_BASIC)",
+          "type": "string"
+        },
         "container_id_secret": {
           "description": "Name of the customer secret holding this enrollment's HumHub container ID",
-          "type": "string"
-        },
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's HumHub host",
-          "type": "string"
-        },
-        "password_secret": {
-          "description": "Name of the customer secret holding this enrollment's HumHub password",
-          "type": "string"
-        },
-        "targets_secret": {
-          "description": "Name of the customer secret holding this enrollment's HumHub targets",
-          "type": "string"
-        },
-        "user_secret": {
-          "description": "Name of the customer secret holding this enrollment's HumHub user",
           "type": "string"
         }
       },
       "required": [
-        "user_secret",
-        "password_secret",
-        "host_secret",
-        "targets_secret",
-        "container_id_secret"
+        "base_url_secret",
+        "container_id_secret",
+        "basic_secret"
       ],
       "type": "object"
     }

@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "napi://${ customer_secrets.NOTIFICATIONAPI_CLIENT_ID }/${ customer_secrets.NOTIFICATIONAPI_CLIENT_SECRET }/${ customer_secrets.NOTIFICATIONAPI_TARGETS }",
-    "apprise_url_plus": "napi://${ customer_secrets.{{ params.client_id_secret }} }/${ customer_secrets.{{ params.client_secret_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
     "channel_name": "msg-to-notificationapi",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -19,9 +17,7 @@
     "logo": "https://www.notificationapi.com/images/pingram/pingram-favicon-dark.svg",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "client_id_secret": "NOTIFICATIONAPI_CLIENT_ID",
-      "client_secret_secret": "NOTIFICATIONAPI_CLIENT_SECRET",
-      "targets_secret": "NOTIFICATIONAPI_TARGETS"
+      "client_id_secret": "NOTIFICATIONAPI_CLIENT_ID"
     },
     "summary": "Send a notification to your own NotificationAPI destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "napi://notificationapiclientidxyz123/notificationapiclientsecretxyz123/userid123",
@@ -32,20 +28,10 @@
         "client_id_secret": {
           "description": "Name of the customer secret holding this enrollment's NotificationAPI client id",
           "type": "string"
-        },
-        "client_secret_secret": {
-          "description": "Name of the customer secret holding this enrollment's NotificationAPI client secret",
-          "type": "string"
-        },
-        "targets_secret": {
-          "description": "Name of the customer secret holding this enrollment's NotificationAPI targets",
-          "type": "string"
         }
       },
       "required": [
-        "client_id_secret",
-        "client_secret_secret",
-        "targets_secret"
+        "client_id_secret"
       ],
       "type": "object"
     }

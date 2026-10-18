@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "pjet://${ customer_secrets.PUSHJET_HOST }/${ customer_secrets.PUSHJET_SECRET_KEY }",
-    "apprise_url_plus": "pjet://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.secret_key_secret }} }",
     "channel_name": "msg-to-pushjet",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -15,11 +13,11 @@
     "gateway_price_description": "Free — direct to your own Pushjet server",
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushjet/message?secret=demo123",
     "gateway_url": "${ customer_secrets.PUSHJET_BASE_URL }/message?secret=${ customer_secrets.PUSHJET_SECRET_KEY }",
-    "gateway_url_plus": "${ customer_secrets.PUSHJET_BASE_URL }/message?secret=${ customer_secrets.{{ params.secret_key_secret }} }",
+    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/message?secret=${ customer_secrets.{{ params.secret_key_secret }} }",
     "logo": "https://raw.githubusercontent.com/Pushjet/Pushjet-Android/master/app/src/main/res/drawable-xxhdpi/ic_launcher.png",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "PUSHJET_HOST",
+      "base_url_secret": "PUSHJET_BASE_URL",
       "secret_key_secret": "PUSHJET_SECRET_KEY"
     },
     "summary": "Send a notification to your own Pushjet destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -28,8 +26,8 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's Pushjet host",
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's PUSHJET_BASE_URL value (same format as PUSHJET_BASE_URL)",
           "type": "string"
         },
         "secret_key_secret": {
@@ -38,7 +36,7 @@
         }
       },
       "required": [
-        "host_secret",
+        "base_url_secret",
         "secret_key_secret"
       ],
       "type": "object"

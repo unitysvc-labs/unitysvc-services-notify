@@ -12,9 +12,11 @@
     "logo": "https://raw.githubusercontent.com/EvolutionAPI/evolution-api/main/public/images/evolution-logo.png",
     "ops_testing_parameters": {
       "api_key_secret": "EVOLUTION_APIKEY",
-      "base_url": "https://mock.unitysvc.dev/evolution"
+      "base_url": "https://mock.unitysvc.dev/evolution",
+      "base_url_secret": "EVOLUTION_BASE_URL",
+      "instance_secret": "EVOLUTION_INSTANCE"
     },
-    "plus_base_url": "${ customer_secrets.EVOLUTION_BASE_URL }/message/sendText/${ customer_secrets.EVOLUTION_INSTANCE }",
+    "plus_base_url": "${ customer_secrets.{{ params.base_url_secret }} }/message/sendText/${ customer_secrets.{{ params.instance_secret }} }",
     "plus_headers": {
       "apikey": "${ customer_secrets.{{ params.api_key_secret }} }"
     },
@@ -26,9 +28,19 @@
         "api_key_secret": {
           "description": "Name of the customer secret holding this enrollment's API credential",
           "type": "string"
+        },
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's EVOLUTION_BASE_URL value (same format as EVOLUTION_BASE_URL)",
+          "type": "string"
+        },
+        "instance_secret": {
+          "description": "Name of the customer secret holding this enrollment's EVOLUTION_INSTANCE value (same format as EVOLUTION_INSTANCE)",
+          "type": "string"
         }
       },
       "required": [
+        "base_url_secret",
+        "instance_secret",
         "api_key_secret"
       ],
       "type": "object"

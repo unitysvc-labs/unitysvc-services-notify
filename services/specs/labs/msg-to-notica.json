@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "noticas://${ customer_secrets.NOTICA_TOKEN }",
-    "apprise_url_plus": "noticas://${ customer_secrets.{{ params.token_secret }} }",
     "channel_name": "msg-to-notica",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "notifiarr://${ customer_secrets.NOTIFIARR_APIKEY }/${ customer_secrets.NOTIFIARR_TARGETS }",
-    "apprise_url_plus": "notifiarr://${ customer_secrets.{{ params.apikey_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
     "channel_name": "msg-to-notifiarr",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -14,6 +12,9 @@
     "gateway_extra_headers": {
       "X-api-Key": "${ customer_secrets.NOTIFIARR_APIKEY }"
     },
+    "gateway_extra_headers_plus": {
+      "X-api-Key": "${ customer_secrets.{{ params.apikey_secret }} }"
+    },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Notifiarr destinations, direct",
     "gateway_price_description": "Free — direct to Notifiarr apprise API (no Apprise relay)",
     "gateway_test_local_url": "https://mock.unitysvc.dev/notifiarr/api/v1/notification/apprise",
@@ -22,8 +23,7 @@
     "logo": "https://raw.githubusercontent.com/Notifiarr/notifiarr/main/frontend/src/assets/notifiarr.svg",
     "ops_testing_parameters": {
       "apikey_secret": "NOTIFIARR_APIKEY",
-      "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "targets_secret": "NOTIFIARR_TARGETS"
+      "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Notifiarr destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "notifiarr://notifiarrapikeyxyz123/notifiarrtargetchannelxyz123",
@@ -34,15 +34,10 @@
         "apikey_secret": {
           "description": "Name of the customer secret holding this enrollment's Notifiarr apikey",
           "type": "string"
-        },
-        "targets_secret": {
-          "description": "Name of the customer secret holding this enrollment's Notifiarr targets",
-          "type": "string"
         }
       },
       "required": [
-        "apikey_secret",
-        "targets_secret"
+        "apikey_secret"
       ],
       "type": "object"
     }

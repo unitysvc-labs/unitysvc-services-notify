@@ -1,18 +1,20 @@
 {
   "parameters": {
-    "apprise_url": "brevo://${ customer_secrets.BREVO_EMAIL_APIKEY }:${ customer_secrets.BREVO_EMAIL_FROM_EMAIL }",
-    "apprise_url_plus": "brevo://${ customer_secrets.{{ params.apikey_secret }} }:${ customer_secrets.{{ params.from_email_secret }} }",
     "channel_name": "msg-to-brevo-email",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-brevo-email` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Brevo account — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Brevo accounts — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Brevo accounts bound per enrollment.\n\nSign in to Brevo, open SMTP & API, and create a Transactional email API key with send permission — set that key as BREVO_APIKEY. Make sure the address you want to send from is a verified sender (or part of an authenticated domain) in Brevo, and set it as BREVO_FROM_EMAIL; set the address that should receive the notification as BREVO_TO_EMAIL. Note: Brevo may email you a one-time IP-verification link the first time a new server calls the API — approve it to keep delivery running smoothly.",
     "display_name": "Brevo Email Messages",
     "gateway_body_template": "{\"sender\":{\"email\":\"${ customer_secrets.BREVO_FROM_EMAIL }\"},\"to\":[{\"email\":\"${ customer_secrets.BREVO_TO_EMAIL }\"}],\"subject\":{* _escape_json(_body.title or \"\") *},\"textContent\":{* _escape_json(_body.body or \"\") *}}",
+    "gateway_body_template_plus": "{\"sender\":{\"email\":\"${ customer_secrets.{{ params.from_email_secret }} }\"},\"to\":[{\"email\":\"${ customer_secrets.{{ params.to_email_secret }} }\"}],\"subject\":{* _escape_json(_body.title or \"\") *},\"textContent\":{* _escape_json(_body.body or \"\") *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_brevo_email",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_brevo_email",
     "gateway_content_type": "application/json",
     "gateway_extra_headers": {
       "api-key": "${ customer_secrets.BREVO_APIKEY }"
+    },
+    "gateway_extra_headers_plus": {
+      "api-key": "${ customer_secrets.{{ params.apikey_secret }} }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Brevo destinations, direct",
     "gateway_price_description": "Free — direct to Brevo v3 smtp/email",
@@ -21,9 +23,10 @@
     "gateway_url_plus": "${ customer_secrets._BREVO_API_BASE ?? https://api.brevo.com }/v3/smtp/email",
     "logo": "https://cdn.simpleicons.org/brevo/0B996E",
     "ops_testing_parameters": {
-      "apikey_secret": "BREVO_EMAIL_APIKEY",
+      "apikey_secret": "BREVO_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_email_secret": "BREVO_EMAIL_FROM_EMAIL"
+      "from_email_secret": "BREVO_FROM_EMAIL",
+      "to_email_secret": "BREVO_TO_EMAIL"
     },
     "summary": "Send an email through your own Brevo account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "brevo://abcdef0123456789:noreply@example.com",
@@ -32,17 +35,22 @@
     "user_parameters_schema": {
       "properties": {
         "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's Brevo Email apikey",
+          "description": "Name of the customer secret holding this enrollment's BREVO_APIKEY value (same format as BREVO_APIKEY)",
           "type": "string"
         },
         "from_email_secret": {
-          "description": "Name of the customer secret holding this enrollment's Brevo Email from email",
+          "description": "Name of the customer secret holding this enrollment's BREVO_FROM_EMAIL value (same format as BREVO_FROM_EMAIL)",
+          "type": "string"
+        },
+        "to_email_secret": {
+          "description": "Name of the customer secret holding this enrollment's BREVO_TO_EMAIL value (same format as BREVO_TO_EMAIL)",
           "type": "string"
         }
       },
       "required": [
-        "apikey_secret",
-        "from_email_secret"
+        "from_email_secret",
+        "to_email_secret",
+        "apikey_secret"
       ],
       "type": "object"
     }

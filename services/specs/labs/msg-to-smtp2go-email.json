@@ -1,13 +1,12 @@
 {
   "parameters": {
-    "apprise_url": "smtp2go://${ customer_secrets.SMTP2GO_EMAIL_USER }@${ customer_secrets.SMTP2GO_EMAIL_HOST }/${ customer_secrets.SMTP2GO_EMAIL_APIKEY }/",
-    "apprise_url_plus": "smtp2go://${ customer_secrets.{{ params.user_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.apikey_secret }} }/",
     "channel_name": "msg-to-smtp2go-email",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-smtp2go-email` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your SMTP2Go destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own SMTP2Go destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional SMTP2Go destinations bound per enrollment.\n\nCreate a free account at smtp2go.com, then generate an API key from Settings → API Keys in your dashboard and set it as SMTP2GO_EMAIL_APIKEY. Set your verified sending address as SMTP2GO_FROM and the recipient's address as SMTP2GO_TO.",
     "display_name": "SMTP2Go Messages",
     "gateway_body_template": "{\"api_key\":\"${ customer_secrets.SMTP2GO_EMAIL_APIKEY }\",\"sender\":\"${ customer_secrets.SMTP2GO_FROM }\",\"to\":[\"${ customer_secrets.SMTP2GO_TO }\"],\"subject\":{* _escape_json(_body.title or \"\") *},\"textbody\":{* _escape_json(_body.body or \"\") *}}",
+    "gateway_body_template_plus": "{\"api_key\":\"${ customer_secrets.{{ params.apikey_secret }} }\",\"sender\":\"${ customer_secrets.{{ params.from_secret }} }\",\"to\":[\"${ customer_secrets.{{ params.to_secret }} }\"],\"subject\":{* _escape_json(_body.title or \"\") *},\"textbody\":{* _escape_json(_body.body or \"\") *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_smtp2go_email",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_smtp2go_email",
     "gateway_content_type": "application/json",
@@ -20,8 +19,8 @@
     "ops_testing_parameters": {
       "apikey_secret": "SMTP2GO_EMAIL_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "SMTP2GO_EMAIL_HOST",
-      "user_secret": "SMTP2GO_EMAIL_USER"
+      "from_secret": "SMTP2GO_FROM",
+      "to_secret": "SMTP2GO_TO"
     },
     "summary": "Send an email to your own SMTP2Go destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "smtp2go://smtp2go_emailuser@notify.example.com/smtp2go_emailapikeyxyz123/",
@@ -33,19 +32,19 @@
           "description": "Name of the customer secret holding this enrollment's SMTP2Go apikey",
           "type": "string"
         },
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's SMTP2Go host",
+        "from_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMTP2GO_FROM value (same format as SMTP2GO_FROM)",
           "type": "string"
         },
-        "user_secret": {
-          "description": "Name of the customer secret holding this enrollment's SMTP2Go user",
+        "to_secret": {
+          "description": "Name of the customer secret holding this enrollment's SMTP2GO_TO value (same format as SMTP2GO_TO)",
           "type": "string"
         }
       },
       "required": [
-        "user_secret",
-        "host_secret",
-        "apikey_secret"
+        "apikey_secret",
+        "from_secret",
+        "to_secret"
       ],
       "type": "object"
     }

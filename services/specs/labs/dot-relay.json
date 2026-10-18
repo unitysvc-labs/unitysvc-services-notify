@@ -10,10 +10,11 @@
     "logo": "https://api.iconify.design/mdi:message-text-fast-outline.svg?color=%2300BCEB",
     "ops_testing_parameters": {
       "api_key_secret": "DOT_APIKEY",
-      "base_url": "https://mock.unitysvc.dev/dot"
+      "base_url": "https://mock.unitysvc.dev/dot",
+      "device_id_secret": "DOT_DEVICE_ID"
     },
     "plus_api_key": "${ customer_secrets.{{ params.api_key_secret }} }",
-    "plus_base_url": "${ customer_secrets._DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/${ customer_secrets.DOT_DEVICE_ID }/text",
+    "plus_base_url": "${ customer_secrets._DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/${ customer_secrets.{{ params.device_id_secret }} }/text",
     "summary": "Relay a message through your own Dot device by posting a native Dot payload to the UnitySVC gateway.",
     "test_webhook_path": "/api/authV2/open/device/demodevice/text",
     "time_created": "2026-06-21T00:00:00Z",
@@ -22,9 +23,14 @@
         "api_key_secret": {
           "description": "Name of the customer secret holding this enrollment's Bearer access token",
           "type": "string"
+        },
+        "device_id_secret": {
+          "description": "Name of the customer secret holding this enrollment's DOT_DEVICE_ID value (same format as DOT_DEVICE_ID)",
+          "type": "string"
         }
       },
       "required": [
+        "device_id_secret",
         "api_key_secret"
       ],
       "type": "object"

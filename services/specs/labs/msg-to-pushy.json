@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "pushy://${ customer_secrets.PUSHY_APIKEY }/${ customer_secrets.PUSHY_TARGETS }",
-    "apprise_url_plus": "pushy://${ customer_secrets.{{ params.apikey_secret }} }/${ customer_secrets.{{ params.targets_secret }} }",
     "channel_name": "msg-to-pushy",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

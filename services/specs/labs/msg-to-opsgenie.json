@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "opsgenie://${ customer_secrets.OPSGENIE_APIKEY }",
-    "apprise_url_plus": "opsgenie://${ customer_secrets.{{ params.apikey_secret }} }",
     "channel_name": "msg-to-opsgenie",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -13,6 +11,9 @@
     "gateway_content_type": "application/json",
     "gateway_extra_headers": {
       "Authorization": "GenieKey ${ customer_secrets.OPSGENIE_APIKEY }"
+    },
+    "gateway_extra_headers_plus": {
+      "Authorization": "GenieKey ${ customer_secrets.{{ params.apikey_secret }} }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Opsgenie destinations, direct",
     "gateway_price_description": "Free — direct to Opsgenie Alerts API",

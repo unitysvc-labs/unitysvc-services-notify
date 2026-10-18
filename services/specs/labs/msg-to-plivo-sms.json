@@ -1,18 +1,20 @@
 {
   "parameters": {
-    "apprise_url": "plivo://${ customer_secrets.PLIVO_SMS_AUTH_ID }@${ customer_secrets.PLIVO_SMS_TOKEN }/${ customer_secrets.PLIVO_SMS_SOURCE }",
-    "apprise_url_plus": "plivo://${ customer_secrets.{{ params.auth_id_secret }} }@${ customer_secrets.{{ params.token_secret }} }/${ customer_secrets.{{ params.source_secret }} }",
     "channel_name": "msg-to-plivo-sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-plivo-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Plivo destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Plivo destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Plivo destinations bound per enrollment.\n\nSign up for a Plivo account at plivo.com; from your account you can generate your Auth ID — set it as PLIVO_SMS_AUTH_ID. Set PLIVO_SMS_FROM to a phone number registered to your Plivo account, and PLIVO_SMS_TO to the recipient's number — both in E.164 format (e.g. +15555550123).",
     "display_name": "Plivo Messages",
     "gateway_body_template": "{\"src\": \"${ customer_secrets.PLIVO_SMS_FROM }\", \"dst\": \"${ customer_secrets.PLIVO_SMS_TO }\", \"text\": {* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}}",
+    "gateway_body_template_plus": "{\"src\": \"${ customer_secrets.{{ params.from_secret }} }\", \"dst\": \"${ customer_secrets.{{ params.to_secret }} }\", \"text\": {* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_plivo_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_plivo_sms",
     "gateway_content_type": "application/json",
     "gateway_extra_headers": {
       "Authorization": "Basic ${ customer_secrets.PLIVO_SMS_BASIC }"
+    },
+    "gateway_extra_headers_plus": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Plivo destinations, direct",
     "gateway_price_description": "Free — direct to your Plivo number",
@@ -23,8 +25,9 @@
     "ops_testing_parameters": {
       "auth_id_secret": "PLIVO_SMS_AUTH_ID",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "source_secret": "PLIVO_SMS_SOURCE",
-      "token_secret": "PLIVO_SMS_TOKEN"
+      "basic_secret": "PLIVO_SMS_BASIC",
+      "from_secret": "PLIVO_SMS_FROM",
+      "to_secret": "PLIVO_SMS_TO"
     },
     "summary": "Send an SMS to your own Plivo destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "plivo://dkry5cjqx4bipw3ahov2@dkry5cjqx4bipw3ahov29gnu18fmt0/+15551234567",
@@ -36,19 +39,24 @@
           "description": "Name of the customer secret holding this enrollment's Plivo auth id",
           "type": "string"
         },
-        "source_secret": {
-          "description": "Name of the customer secret holding this enrollment's Plivo source",
+        "basic_secret": {
+          "description": "Name of the customer secret holding this enrollment's PLIVO_SMS_BASIC value (same format as PLIVO_SMS_BASIC)",
           "type": "string"
         },
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Plivo token",
+        "from_secret": {
+          "description": "Name of the customer secret holding this enrollment's PLIVO_SMS_FROM value (same format as PLIVO_SMS_FROM)",
+          "type": "string"
+        },
+        "to_secret": {
+          "description": "Name of the customer secret holding this enrollment's PLIVO_SMS_TO value (same format as PLIVO_SMS_TO)",
           "type": "string"
         }
       },
       "required": [
         "auth_id_secret",
-        "token_secret",
-        "source_secret"
+        "from_secret",
+        "to_secret",
+        "basic_secret"
       ],
       "type": "object"
     }

@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "xmls://${ customer_secrets.XML_WEBHOOK_HOST }",
-    "apprise_url_plus": "xmls://${ customer_secrets.{{ params.url_secret }} }",
     "channel_name": "msg-to-xml-webhook",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",

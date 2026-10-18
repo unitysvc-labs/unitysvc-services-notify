@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "kodis://${ customer_secrets.KODI_HOST }",
-    "apprise_url_plus": "kodis://${ customer_secrets.{{ params.host_secret }} }",
     "channel_name": "msg-to-kodi",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -15,11 +13,11 @@
     "gateway_price_description": "Free — direct to your Kodi JSON-RPC endpoint",
     "gateway_test_local_url": "https://mock.unitysvc.dev/kodi/jsonrpc",
     "gateway_url": "${ customer_secrets.KODI_BASE_URL }/jsonrpc",
-    "gateway_url_plus": "${ customer_secrets.KODI_BASE_URL }/jsonrpc",
+    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/jsonrpc",
     "logo": "https://cdn.simpleicons.org/kodi/17B2E7",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "KODI_HOST"
+      "base_url_secret": "KODI_BASE_URL"
     },
     "summary": "Send a notification to your own Kodi/XBMC media center by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "kodis://notify.example.com",
@@ -27,13 +25,13 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's Kodi/XBMC host",
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's KODI_BASE_URL value (same format as KODI_BASE_URL)",
           "type": "string"
         }
       },
       "required": [
-        "host_secret"
+        "base_url_secret"
       ],
       "type": "object"
     }

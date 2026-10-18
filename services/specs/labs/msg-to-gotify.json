@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "gotify://${ customer_secrets.GOTIFY_HOST }/${ customer_secrets.GOTIFY_TOKEN }",
-    "apprise_url_plus": "gotify://${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.token_secret }} }",
     "channel_name": "msg-to-gotify",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -15,11 +13,11 @@
     "gateway_price_description": "Free — direct to your own Gotify server",
     "gateway_test_local_url": "https://mock.unitysvc.dev/gotify/message?token=demo123",
     "gateway_url": "${ customer_secrets.GOTIFY_BASE_URL }/message?token=${ customer_secrets.GOTIFY_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets.GOTIFY_BASE_URL }/message?token=${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/message?token=${ customer_secrets.{{ params.token_secret }} }",
     "logo": "https://raw.githubusercontent.com/gotify/logo/master/gotify-logo.svg",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "GOTIFY_HOST",
+      "base_url_secret": "GOTIFY_BASE_URL",
       "token_secret": "GOTIFY_TOKEN"
     },
     "summary": "Send a notification to your own Gotify server by posting a simple `msg` request to the UnitySVC gateway.",
@@ -28,8 +26,8 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's Gotify host",
+        "base_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's GOTIFY_BASE_URL value (same format as GOTIFY_BASE_URL)",
           "type": "string"
         },
         "token_secret": {
@@ -38,7 +36,7 @@
         }
       },
       "required": [
-        "host_secret",
+        "base_url_secret",
         "token_secret"
       ],
       "type": "object"

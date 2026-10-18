@@ -1,18 +1,20 @@
 {
   "parameters": {
-    "apprise_url": "mailgun://${ customer_secrets.MAILGUN_EMAIL_USER }@${ customer_secrets.MAILGUN_EMAIL_HOST }/${ customer_secrets.MAILGUN_EMAIL_APIKEY }/",
-    "apprise_url_plus": "mailgun://${ customer_secrets.{{ params.user_secret }} }@${ customer_secrets.{{ params.host_secret }} }/${ customer_secrets.{{ params.apikey_secret }} }/",
     "channel_name": "msg-to-mailgun-email",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-mailgun-email` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your Mailgun account — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own Mailgun accounts — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional Mailgun accounts bound per enrollment.\n\nSign up at mailgun.com and open the Domains page of your dashboard (app.mailgun.com/app/domains) to find the domain you want to send from — your own verified domain, or the sandbox domain provided on a free account. Set that domain as MAILGUN_EMAIL_HOST, choose a sender address at that domain for MAILGUN_EMAIL_FROM, and set the recipient's address as MAILGUN_EMAIL_TO.",
     "display_name": "Mailgun Messages",
     "gateway_body_template": "from=${ customer_secrets.MAILGUN_EMAIL_FROM }&to=${ customer_secrets.MAILGUN_EMAIL_TO }&subject={* _escape_json(_body.title or \"\") *}&text={* _escape_json(_body.body or \"\") *}",
+    "gateway_body_template_plus": "from=${ customer_secrets.{{ params.from_secret }} }&to=${ customer_secrets.{{ params.to_secret }} }&subject={* _escape_json(_body.title or \"\") *}&text={* _escape_json(_body.body or \"\") *}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_mailgun_email",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_mailgun_email",
     "gateway_content_type": "application/x-www-form-urlencoded",
     "gateway_extra_headers": {
       "Authorization": "Basic ${ customer_secrets.MAILGUN_EMAIL_BASIC }"
+    },
+    "gateway_extra_headers_plus": {
+      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Mailgun destinations, direct",
     "gateway_price_description": "Free — direct to your Mailgun sending domain",
@@ -21,10 +23,11 @@
     "gateway_url_plus": "${ customer_secrets._MAILGUN_EMAIL_BASE ?? https://api.mailgun.net }/v3/${ customer_secrets.{{ params.host_secret }} }/messages",
     "logo": "https://cdn.simpleicons.org/mailgun/F06B66",
     "ops_testing_parameters": {
-      "apikey_secret": "MAILGUN_EMAIL_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
+      "basic_secret": "MAILGUN_EMAIL_BASIC",
+      "from_secret": "MAILGUN_EMAIL_FROM",
       "host_secret": "MAILGUN_EMAIL_HOST",
-      "user_secret": "MAILGUN_EMAIL_USER"
+      "to_secret": "MAILGUN_EMAIL_TO"
     },
     "summary": "Send an email notification through your own Mailgun account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "mailgun://mailgun_emailuser@notify.example.com/mailgun_emailapikeyxyz123/",
@@ -32,23 +35,28 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's Mailgun apikey",
+        "basic_secret": {
+          "description": "Name of the customer secret holding this enrollment's MAILGUN_EMAIL_BASIC value (same format as MAILGUN_EMAIL_BASIC)",
+          "type": "string"
+        },
+        "from_secret": {
+          "description": "Name of the customer secret holding this enrollment's MAILGUN_EMAIL_FROM value (same format as MAILGUN_EMAIL_FROM)",
           "type": "string"
         },
         "host_secret": {
           "description": "Name of the customer secret holding this enrollment's Mailgun host",
           "type": "string"
         },
-        "user_secret": {
-          "description": "Name of the customer secret holding this enrollment's Mailgun user",
+        "to_secret": {
+          "description": "Name of the customer secret holding this enrollment's MAILGUN_EMAIL_TO value (same format as MAILGUN_EMAIL_TO)",
           "type": "string"
         }
       },
       "required": [
-        "user_secret",
         "host_secret",
-        "apikey_secret"
+        "from_secret",
+        "to_secret",
+        "basic_secret"
       ],
       "type": "object"
     }

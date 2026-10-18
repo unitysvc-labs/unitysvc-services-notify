@@ -1,18 +1,20 @@
 {
   "parameters": {
-    "apprise_url": "msgbird://${ customer_secrets.MESSAGEBIRD_SMS_APIKEY }/${ customer_secrets.MESSAGEBIRD_SMS_SOURCE }",
-    "apprise_url_plus": "msgbird://${ customer_secrets.{{ params.apikey_secret }} }/${ customer_secrets.{{ params.source_secret }} }",
     "channel_name": "msg-to-messagebird-sms",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
     "description": "`msg-to-messagebird-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your MessageBird destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own MessageBird destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional MessageBird destinations bound per enrollment.\n\nCreate a MessageBird account at messagebird.com, then copy your API key from the MessageBird dashboard and set it as MESSAGEBIRD_SMS_APIKEY. Set MESSAGEBIRD_SMS_FROM to the phone number you registered with MessageBird (including its country code), and MESSAGEBIRD_SMS_TO to the destination phone number, e.g. +14155551234.",
     "display_name": "MessageBird SMS Messages",
     "gateway_body_template": "{\"recipients\":[\"${ customer_secrets.MESSAGEBIRD_SMS_TO }\"],\"originator\":\"${ customer_secrets.MESSAGEBIRD_SMS_FROM }\",\"body\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}}",
+    "gateway_body_template_plus": "{\"recipients\":[\"${ customer_secrets.{{ params.to_secret }} }\"],\"originator\":\"${ customer_secrets.{{ params.from_secret }} }\",\"body\":{* _escape_json((_body.title or \"\") .. ((_body.title and _body.title ~= \"\" and _body.body and _body.body ~= \"\") and \": \" or \"\") .. (_body.body or \"\")) *}}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_messagebird_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_messagebird_sms",
     "gateway_content_type": "application/json",
     "gateway_extra_headers": {
       "Authorization": "AccessKey ${ customer_secrets.MESSAGEBIRD_SMS_APIKEY }"
+    },
+    "gateway_extra_headers_plus": {
+      "Authorization": "AccessKey ${ customer_secrets.{{ params.apikey_secret }} }"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment MessageBird SMS destinations, direct",
     "gateway_price_description": "Free — direct to MessageBird Messages API",
@@ -23,7 +25,8 @@
     "ops_testing_parameters": {
       "apikey_secret": "MESSAGEBIRD_SMS_APIKEY",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "source_secret": "MESSAGEBIRD_SMS_SOURCE"
+      "from_secret": "MESSAGEBIRD_SMS_FROM",
+      "to_secret": "MESSAGEBIRD_SMS_TO"
     },
     "summary": "Send an SMS notification to your own MessageBird destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "msgbird://abcdefghij0123456789abcde/15551234567",
@@ -35,14 +38,19 @@
           "description": "Name of the customer secret holding this enrollment's MessageBird SMS apikey",
           "type": "string"
         },
-        "source_secret": {
-          "description": "Name of the customer secret holding this enrollment's MessageBird SMS source",
+        "from_secret": {
+          "description": "Name of the customer secret holding this enrollment's MESSAGEBIRD_SMS_FROM value (same format as MESSAGEBIRD_SMS_FROM)",
+          "type": "string"
+        },
+        "to_secret": {
+          "description": "Name of the customer secret holding this enrollment's MESSAGEBIRD_SMS_TO value (same format as MESSAGEBIRD_SMS_TO)",
           "type": "string"
         }
       },
       "required": [
-        "apikey_secret",
-        "source_secret"
+        "to_secret",
+        "from_secret",
+        "apikey_secret"
       ],
       "type": "object"
     }

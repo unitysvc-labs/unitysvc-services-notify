@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "apprise_url": "json://${ customer_secrets.JSON_HOST }",
-    "apprise_url_plus": "json://${ customer_secrets.{{ params.host_secret }} }",
     "channel_name": "msg-to-json",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
@@ -15,11 +13,11 @@
     "gateway_price_description": "Free — direct to your JSON webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/json",
     "gateway_url": "${ customer_secrets.JSON_WEBHOOK_URL }",
-    "gateway_url_plus": "${ customer_secrets.JSON_WEBHOOK_URL }",
+    "gateway_url_plus": "${ customer_secrets.{{ params.webhook_url_secret }} }",
     "logo": "https://api.iconify.design/logos:json.svg",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "JSON_HOST"
+      "webhook_url_secret": "JSON_WEBHOOK_URL"
     },
     "summary": "Send a notification to your own JSON webhook by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "json://hostname.example.com",
@@ -27,13 +25,13 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's JSON Webhook host",
+        "webhook_url_secret": {
+          "description": "Name of the customer secret holding this enrollment's JSON_WEBHOOK_URL value (same format as JSON_WEBHOOK_URL)",
           "type": "string"
         }
       },
       "required": [
-        "host_secret"
+        "webhook_url_secret"
       ],
       "type": "object"
     }
