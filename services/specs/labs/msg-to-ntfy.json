@@ -3,17 +3,63 @@
     "channel_name": "msg-to-ntfy",
     "code_example_preset": "msg_to_apprise_code_example_py",
     "connectivity_preset": "msg_to_apprise_connectivity",
-    "description": "`msg-to-ntfy` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your ntfy destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own ntfy destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional ntfy destinations bound per enrollment.\n\nntfy topics need no account or registration — just pick a topic name (letters, numbers, underscores, and hyphens) and set it as NTFY_TOPIC. Then subscribe to that exact same topic name in the ntfy mobile app, or by visiting ntfy.sh/<topic> in a browser, to start receiving the notifications this service sends.",
+    "description": "`msg-to-ntfy` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`, plus optional `links` and `attachment`), attaches the credentials in your stored secrets, and delivers the message to your ntfy destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own ntfy destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional ntfy destinations bound per enrollment. The gateway posts ntfy's JSON form to the server root: markdown bodies render as markdown, the first link becomes the tap target and up to three links become action buttons, and the first image attachment URL is shown with the notification.\n\nntfy topics need no account or registration — just pick a topic name (letters, numbers, underscores, and hyphens) and set it as NTFY_TOPIC. Then subscribe to that exact same topic name in the ntfy mobile app, or by visiting ntfy.sh/<topic> in a browser, to start receiving the notifications this service sends.",
     "display_name": "ntfy Messages",
-    "gateway_body_template": "{\"title\":{* _escape_json(_body.title or \"\") *},\"message\":{* _escape_json(_body.body or \"\") *},\"priority\":{* ({info=3,success=3,warning=4,failure=5})[_body.type or \"info\"] or 3 *}}",
+    "gateway_body_mapping": {
+      "actions": "@ntfy_actions",
+      "attach": "@msg.image_url",
+      "click": "@msg.link",
+      "markdown": "@msg.is_markdown",
+      "message": "@msg.body",
+      "priority": {
+        "@map": "@msg.type",
+        "default": 3,
+        "values": {
+          "failure": 5,
+          "info": 3,
+          "success": 3,
+          "warning": 4
+        }
+      },
+      "title": "@msg.title",
+      "topic": "${ customer_secrets.NTFY_TOPIC }"
+    },
+    "gateway_body_mapping_plus": {
+      "actions": "@ntfy_actions",
+      "attach": "@msg.image_url",
+      "click": "@msg.link",
+      "markdown": "@msg.is_markdown",
+      "message": "@msg.body",
+      "priority": {
+        "@map": "@msg.type",
+        "default": 3,
+        "values": {
+          "failure": 5,
+          "info": 3,
+          "success": 3,
+          "warning": 4
+        }
+      },
+      "title": "@msg.title",
+      "topic": "${ customer_secrets.{{ params.topic_secret }} }"
+    },
     "gateway_code_example_preset": "msg_to_channel_code_example_py_ntfy",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_ntfy",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment ntfy destinations, direct",
     "gateway_price_description": "Free — direct to your own ntfy server",
     "gateway_test_local_url": "https://mock.unitysvc.dev/ntfy/demo",
-    "gateway_url": "${ customer_secrets._NTFY_BASE ?? https://ntfy.sh }/${ customer_secrets.NTFY_TOPIC }",
-    "gateway_url_plus": "${ customer_secrets._NTFY_BASE ?? https://ntfy.sh }/${ customer_secrets.{{ params.topic_secret }} }",
+    "gateway_url": "${ customer_secrets._NTFY_BASE ?? https://ntfy.sh }",
+    "gateway_url_plus": "${ customer_secrets._NTFY_BASE ?? https://ntfy.sh }",
     "logo": "https://cdn.simpleicons.org/ntfy/317F6F",
+    "msg_capabilities": {
+      "formats": [
+        "markdown",
+        "text"
+      ],
+      "images": 1,
+      "links": 3,
+      "title": true
+    },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "topic_secret": "NTFY_TOPIC"

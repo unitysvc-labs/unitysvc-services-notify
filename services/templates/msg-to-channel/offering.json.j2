@@ -1,11 +1,19 @@
-{%- set apprise_tail = '","title":{* _escape_json(_body.title or "") *},"body":{* _escape_json(_body.body or "") *},"type":{* _escape_json(_body.type or "info") *},"format":{* _escape_json(_body.format or "text") *}}' -%}
+{#- Apprise relay (#2650): apprise-api converts the format and uploads the
+    attachments per plugin itself, so the relay declares every format and no
+    links — the gateway folds links into the body and passes `format` and the
+    validated `attachment` list through. -#}
+{%- set apprise_caps = {"formats": ["markdown", "html", "text"], "images": 0, "links": 0, "title": true} -%}
+{%- set apprise_fields = {"attachment": "@msg.attachment", "body": "@msg.body", "format": "@msg.format", "title": "@msg.title", "type": "@msg.type"} -%}
 {
   "capabilities": [
     "deliver-message"
   ],
   "description": {{ description | tojson }},
   "details": {
-    "input_formats": ["msg"]
+    "input_formats": ["msg"]{% if msg_capabilities is defined or not (transformer_channel_exists | default(false)) %},
+    {#- What the channel can carry of the `msg` envelope (#2650). The same
+        declaration drives the gateway normalizer below. -#}
+    "msg_capabilities": {{ (msg_capabilities if msg_capabilities is defined else apprise_caps) | tojson }}{% endif %}
   },{% if logo %}
   "logo": {{ logo | tojson }},{% endif %}
   "name": "{{ channel_name }}",
@@ -34,7 +42,10 @@
       "sort_order": 1,
       "base_url": {{ gateway_url | tojson }},
       "raw": { "request_transformer": {
-        "body_transformer": { "request": { "input_format": "json", "template": {{ gateway_body_template | tojson }} } },
+        {#- A channel that declares msg_capabilities gets the gateway's
+            normalized `_msg` view; with gateway_body_mapping its body is a
+            declarative field mapping instead of a Lua template (#2650). -#}
+        "body_transformer": { "request": { "input_format": "json"{% if msg_capabilities is defined %}, "msg_capabilities": {{ msg_capabilities | tojson }}{% endif %}, {% if gateway_body_mapping is defined %}"mapping": {{ gateway_body_mapping | tojson }}{% else %}"template": {{ gateway_body_template | tojson }}{% endif %} } },
         "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }}{% if gateway_extra_headers is defined %}{% for hk, hv in gateway_extra_headers.items() %}, {{ hk | tojson }}: {{ hv | tojson }}{% endfor %}{% endif %} } } }
       } }
     },
@@ -51,7 +62,7 @@
       "sort_order": 3,
       "base_url": {{ gateway_url_plus | tojson }},
       "raw": { "request_transformer": {
-        "body_transformer": { "request": { "input_format": "json", "template": {{ (gateway_body_template_plus | default(gateway_body_template)) | tojson }} } },
+        "body_transformer": { "request": { "input_format": "json"{% if msg_capabilities is defined %}, "msg_capabilities": {{ msg_capabilities | tojson }}{% endif %}, {% if gateway_body_mapping is defined %}"mapping": {{ (gateway_body_mapping_plus | default(gateway_body_mapping)) | tojson }}{% else %}"template": {{ (gateway_body_template_plus | default(gateway_body_template)) | tojson }}{% endif %} } },
         "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }}{% set _plus_headers = gateway_extra_headers_plus | default(gateway_extra_headers) %}{% if _plus_headers is defined %}{% for hk, hv in _plus_headers.items() %}, {{ hk | tojson }}: {{ hv | tojson }}{% endfor %}{% endif %} } } }
       } }
     }
@@ -65,7 +76,8 @@
           "body_transformer": {
             "request": {
               "input_format": "json",
-              "template": {{ ('{"urls":"' ~ apprise_url ~ apprise_tail) | tojson }}
+              "msg_capabilities": {{ apprise_caps | tojson }},
+              "mapping": {{ dict(apprise_fields, urls=apprise_url) | tojson }}
             }
           }
         }
@@ -80,7 +92,8 @@
           "body_transformer": {
             "request": {
               "input_format": "json",
-              "template": {{ ('{"urls":"' ~ apprise_url_plus ~ apprise_tail) | tojson }}
+              "msg_capabilities": {{ apprise_caps | tojson }},
+              "mapping": {{ dict(apprise_fields, urls=apprise_url_plus) | tojson }}
             }
           }
         }
