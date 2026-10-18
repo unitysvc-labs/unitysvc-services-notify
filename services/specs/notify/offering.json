@@ -7,7 +7,15 @@
     "input_formats": [
       "msg",
       "smtp"
-    ]
+    ],
+    "msg_capabilities": {
+      "formats": [
+        "text"
+      ],
+      "images": 0,
+      "links": 1,
+      "title": true
+    }
   },
   "logo": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Alert/SVG/ic_fluent_alert_32_color.svg",
   "name": "notify",
@@ -27,7 +35,21 @@
       "base_url": "notify://user",
       "is_active": true,
       "is_primary": true,
-      "payload_format": "msg"
+      "payload_format": "msg",
+      "raw": {
+        "request_transformer": {
+          "msg_transformer": {
+            "capabilities": {
+              "formats": [
+                "text"
+              ],
+              "images": 0,
+              "links": 1,
+              "title": true
+            }
+          }
+        }
+      }
     }
   }
 }
