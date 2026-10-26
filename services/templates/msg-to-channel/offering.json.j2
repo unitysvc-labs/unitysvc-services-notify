@@ -41,7 +41,7 @@
       {%- endif %}
       "sort_order": 1,
       "base_url": {{ gateway_url | tojson }},
-      "raw": { "request_transformer": {
+      "request_transformer": {
         {#- A channel that declares msg_capabilities runs the gateway's
             msg_transformer first (#2650): with gateway_field_mapping it builds
             the upstream body from the normalized msg; without one, the
@@ -53,7 +53,7 @@
         "body_transformer": { "request": { "input_format": "json", "template": {{ gateway_body_template | tojson }} } },
         {%- endif %}
         "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }}{% if gateway_extra_headers is defined %}{% for hk, hv in gateway_extra_headers.items() %}, {{ hk | tojson }}: {{ hv | tojson }}{% endfor %}{% endif %} } } }
-      } }
+      }
     },
     {#- The plus channel reaches the enrollment's own destination: every value
         that names a customer secret has a `_plus` variant reading it through
@@ -67,7 +67,7 @@
       {%- endif %}
       "sort_order": 3,
       "base_url": {{ gateway_url_plus | tojson }},
-      "raw": { "request_transformer": {
+      "request_transformer": {
         {%- if msg_capabilities is defined %}
         "msg_transformer": { "capabilities": {{ msg_capabilities | tojson }}{% if gateway_field_mapping is defined %}, "field_mapping": {{ (gateway_field_mapping_plus | default(gateway_field_mapping)) | tojson }}{% if gateway_output_format is defined %}, "output_format": {{ gateway_output_format | tojson }}{% endif %}{% endif %} },
         {%- endif %}
@@ -75,19 +75,17 @@
         "body_transformer": { "request": { "input_format": "json", "template": {{ (gateway_body_template_plus | default(gateway_body_template)) | tojson }} } },
         {%- endif %}
         "proxy_rewrite": { "headers": { "set": { "Content-Type": {{ gateway_content_type | default('application/json') | tojson }}{% set _plus_headers = gateway_extra_headers_plus | default(gateway_extra_headers) %}{% if _plus_headers is defined %}{% for hk, hv in _plus_headers.items() %}, {{ hk | tojson }}: {{ hv | tojson }}{% endfor %}{% endif %} } } }
-      } }
+      }
     }
 {%- else %}
     "apprise": {
       "access_method": "http",
       "sort_order": 2,
       "base_url": "${ customer_secrets._APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
-      "raw": {
-        "request_transformer": {
-          "msg_transformer": {
-            "capabilities": {{ apprise_caps | tojson }},
-            "field_mapping": {{ dict(apprise_fields, urls=apprise_url) | tojson }}
-          }
+      "request_transformer": {
+        "msg_transformer": {
+          "capabilities": {{ apprise_caps | tojson }},
+          "field_mapping": {{ dict(apprise_fields, urls=apprise_url) | tojson }}
         }
       }
     },
@@ -95,12 +93,10 @@
       "access_method": "http",
       "sort_order": 4,
       "base_url": "${ customer_secrets._APPRISE_BASE ?? https://apprise.unitysvc.dev }/notify",
-      "raw": {
-        "request_transformer": {
-          "msg_transformer": {
-            "capabilities": {{ apprise_caps | tojson }},
-            "field_mapping": {{ dict(apprise_fields, urls=apprise_url_plus) | tojson }}
-          }
+      "request_transformer": {
+        "msg_transformer": {
+          "capabilities": {{ apprise_caps | tojson }},
+          "field_mapping": {{ dict(apprise_fields, urls=apprise_url_plus) | tojson }}
         }
       }
     }
