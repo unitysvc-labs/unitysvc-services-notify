@@ -26,27 +26,25 @@
     "default": {
       "access_method": "http",
       "base_url": "notify://email",
-      "raw": {
-        "request_transformer": {
-          "msg_transformer": {
-            "capabilities": {
-              "formats": [
-                "text"
-              ],
-              "images": 0,
-              "links": 0,
-              "title": true
-            },
-            "field_mapping": {
-              "attachment": "@msg.attachment",
-              "body": "@msg.body",
-              "format": "@msg.format",
-              "title": "@msg.title",
-              "to": [
-                "${ customer_secrets.__PRIMARY_USER_EMAIL }"
-              ],
-              "type": "@msg.type"
-            }
+      "request_transformer": {
+        "msg_transformer": {
+          "capabilities": {
+            "formats": [
+              "text"
+            ],
+            "images": 0,
+            "links": 0,
+            "title": true
+          },
+          "field_mapping": {
+            "attachment": "@msg.attachment",
+            "body": "@msg.body",
+            "format": "@msg.format",
+            "title": "@msg.title",
+            "to": [
+              "${ customer_secrets.__PRIMARY_USER_EMAIL }"
+            ],
+            "type": "@msg.type"
           }
         }
       },
