@@ -65,17 +65,10 @@ ENROLLMENT = re.compile(r"\{\{\s*(params|enrollment)\.")
 PARAM = re.compile(r"\{\{\s*params\.([A-Za-z0-9_]+)")
 
 
-def binding_text(cfg: dict) -> str:
-    """The channel config that decides its binding: a ``request_rules`` reference is an
-    optional override that never makes a channel need a secret or an enrollment
-    (unitysvc/unitysvc#2948, unitysvc/apisix-gateways#96)."""
-    return json.dumps({k: v for k, v in cfg.items() if k != "request_rules"})
-
-
 def fixed_secrets(cfg: dict) -> list[str]:
     """Customer secrets the channel reads by a fixed name the customer must supply."""
     names = []
-    for m in REF.finditer(binding_text(cfg)):
+    for m in REF.finditer(json.dumps(cfg)):
         name, has_default, default = m.group(1), m.group(2), (m.group(3) or "").strip()
         if name.startswith(("{{", "_")) or (has_default and default):
             continue
@@ -95,7 +88,7 @@ def channel_body(cfg: dict) -> dict:
 
 
 def channel_type(cfg: dict) -> str:
-    text = binding_text(cfg)
+    text = json.dumps(cfg)
     if ENROLLMENT.search(text):
         return "enrollable"
     for m in REF.finditer(text):

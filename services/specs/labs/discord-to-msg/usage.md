@@ -29,7 +29,11 @@ Several Discord channels into several rooms: one connector per Discord channel, 
 
 If the room also *sends* to that Discord channel through `msg-to-discord`, WebhookBridge forwards those webhook posts back as new events, and they would reappear in the room. Each such echo carries your webhook's id as its `user_id`: the `<WEBHOOK_ID>` in the `DISCORD_WEBHOOK_URL` you already set for `msg-to-discord` (`https://discord.com/api/webhooks/<WEBHOOK_ID>/<WEBHOOK_TOKEN>`). There is nothing extra to set.
 
-The gateway answers an event whose `user_id` is exactly that id with `204 No Content` (header `X-UnitySVC-Rule: own-webhook-echo`) before anything is posted, free of charge. Messages from people, even ones using the same display name, are delivered as before; without `DISCORD_WEBHOOK_URL` nothing is dropped. One webhook is checked: a channel that receives from several of your webhooks gets echoes from the others.
+The gateway answers an event whose `user_id` is exactly that id with `204 No Content` (header `X-UnitySVC-Rule: own-webhook-echo`) before anything is posted, free of charge. Messages from people, even ones using the same display name, are delivered as before; without `DISCORD_WEBHOOK_URL` nothing is dropped. One webhook is checked per connector: a channel that receives from several of your webhooks gets echoes from the others.
+
+### When the room sends through `msg-to-discord` plus
+
+If the room posts through `msg-to-discord`'s **gateway-plus** channel, its webhook URL is in a secret of your own naming (the enrollment's `webhook_url_secret`), not `DISCORD_WEBHOOK_URL`. Enroll in this service's **gateway-plus** channel ($0.001 / message) and set its `webhook_url_secret` parameter to the name of that same secret. In the room's Delivery, choose the enrollment as the connector's inbound service; its webhook URL then reads `https://api.svcpass.com/webhook/<KEY>/e/<CODE>/<connector id>`. Echoes of that webhook get the same free `204`.
 
 ## How the URL works
 
