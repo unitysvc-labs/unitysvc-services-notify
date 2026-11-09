@@ -12,8 +12,8 @@
 #                   posted). With no connector id in the URL it lands in the
 #                   caller's own `me` room, so the test needs no setup.
 #                   Then POST the echo of our own webhook's post (user_id =
-#                   DISCORD_WEBHOOK_ID, "demo" in seller.secrets.txt, which the
-#                   test customer resolves from the seller store) and expect
+#                   the id in DISCORD_WEBHOOK_URL, "demo" in seller.secrets.txt,
+#                   which the test customer resolves from the seller store) and expect
 #                   the gateway's own 204 from the own-webhook-echo rule.
 set -o pipefail
 

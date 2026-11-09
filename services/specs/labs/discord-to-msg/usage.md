@@ -23,17 +23,13 @@ Everything else in the event (`guild_id`, `channel_id`, `user_id`, `username`, `
 3. **Give WebhookBridge that URL** as the channel's destination. It carries a key that may post into the room, so treat it as a secret; rotating the connector's key invalidates the old URL.
 4. Post in the Discord channel; the message appears in the room, attributed to the Discord author.
 
-Several Discord channels into several rooms: one connector per Discord channel, each with its own URL. Nothing else to configure — no enrollment, and one optional secret (below).
+Several Discord channels into several rooms: one connector per Discord channel, each with its own URL. Nothing else to configure — no enrollment, and no secret of its own (below).
 
 ## Stop your own messages coming back
 
-If the room also *sends* to that Discord channel through `msg-to-discord`, WebhookBridge forwards those webhook posts back as new events, and they would reappear in the room. Each such echo carries your webhook's id as its `user_id`, so set one more secret:
+If the room also *sends* to that Discord channel through `msg-to-discord`, WebhookBridge forwards those webhook posts back as new events, and they would reappear in the room. Each such echo carries your webhook's id as its `user_id`: the `<WEBHOOK_ID>` in the `DISCORD_WEBHOOK_URL` you already set for `msg-to-discord` (`https://discord.com/api/webhooks/<WEBHOOK_ID>/<WEBHOOK_TOKEN>`). There is nothing extra to set.
 
-| Secret | Value |
-| --- | --- |
-| `DISCORD_WEBHOOK_ID` | the `<WEBHOOK_ID>` part of your `DISCORD_WEBHOOK_URL`, `https://discord.com/api/webhooks/<WEBHOOK_ID>/<WEBHOOK_TOKEN>` (a long number) |
-
-The gateway then answers an event whose `user_id` equals it with `204 No Content` (header `X-UnitySVC-Rule: own-webhook-echo`) before anything is posted, free of charge. Messages from people, even ones using the same display name, are delivered as before; without the secret nothing is dropped. One webhook id is checked: a channel that receives from several of your webhooks gets echoes from the others.
+The gateway answers an event whose `user_id` is exactly that id with `204 No Content` (header `X-UnitySVC-Rule: own-webhook-echo`) before anything is posted, free of charge. Messages from people, even ones using the same display name, are delivered as before; without `DISCORD_WEBHOOK_URL` nothing is dropped. One webhook is checked: a channel that receives from several of your webhooks gets echoes from the others.
 
 ## How the URL works
 
@@ -45,7 +41,7 @@ WebhookBridge sends no headers, so the key rides in the URL: the platform's ingr
 - **401 from the service** — the URL is not a connector's webhook URL, or its key was rotated: copy the current URL from Delivery.
 - **403 from the service** — the connector belongs to another account than the key's: copy the URL from the room's own Delivery page.
 - **The same message twice** — only if the Discord message id changed; the room drops repeats of one id.
-- **Your own room messages come back from Discord** — set `DISCORD_WEBHOOK_ID` to the id in the webhook URL `msg-to-discord` posts to (see above).
+- **Your own room messages come back from Discord** — set `DISCORD_WEBHOOK_URL` to the same webhook URL `msg-to-discord` posts to (see above).
 - **Images stop loading later** — the room keeps Discord's CDN URL rather than copying the file; the URL can expire at Discord.
 
 ## Two-way room connectors and echo refusal
@@ -70,7 +66,7 @@ names without that marker must not be discarded. Six characters are a
 loop-prevention convention, not authenticated identity; copying a matching
 marker can cause a user's own message to be discarded.
 
-Apart from the optional `DISCORD_WEBHOOK_ID` rule above (which matches the
+Apart from the `own-webhook-echo` rule above (which matches the
 webhook's `user_id`, not the marker), this service performs no gateway-side
 filtering or name rewriting. The backend check is a deployment prerequisite, and is not
 implemented by this service spec or backend metadata PR #2944. Until that
