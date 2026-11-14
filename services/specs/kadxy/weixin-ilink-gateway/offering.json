@@ -1,0 +1,64 @@
+{
+  "description": "Run a private WeChat iLink Bot HTTP gateway with QR login, messaging, media, and webhook support.\n\nUnitySVC starts the MIT-licensed Kadxy gateway in an isolated container for each enrollment. This free staging prototype uses temporary storage: login credentials, message cursors, and buffered messages are lost when the instance is replaced or stopped. The upstream image is pinned by digest.\n\nEnroll in the base channel, obtain your instance URL and its generated API key, and open /console to scan the WeChat login QR code. Use the REST API with that key. The connectivity test verifies readiness and authenticated /status without logging into WeChat; see How to use this service for the limitations.",
+  "details": {
+    "links": {
+      "homepage": "https://github.com/Kadxy/weixin-ilink-gateway",
+      "source_code": "https://github.com/Kadxy/weixin-ilink-gateway"
+    }
+  },
+  "documents": {
+    "Application": {
+      "category": "instance_spec",
+      "file_path": "compose.yaml",
+      "is_public": false,
+      "meta": {
+        "format": "compose"
+      },
+      "mime_type": "text"
+    }
+  },
+  "name": "weixin-ilink-gateway",
+  "payout_price": {
+    "description": "Free staging prototype",
+    "price": "0",
+    "type": "constant"
+  },
+  "service_type": "container",
+  "status": "ready",
+  "summary": "A private WeChat iLink Bot HTTP gateway per enrollment, with QR login, messaging, media, and webhooks.",
+  "time_created": "2026-11-14T00:00:00Z",
+  "upstream_access_config": {
+    "base": {
+      "access_method": "container",
+      "customer_access_requests": [
+        {
+          "justification": "Run one isolated gateway instance for this enrollment",
+          "object": "resource:container",
+          "permissions": [
+            "create"
+          ],
+          "required": true
+        }
+      ],
+      "description": "One isolated gateway for one enrollment; temporary storage.",
+      "entries": [
+        {
+          "auth": "app",
+          "name": "api",
+          "path": "/console",
+          "port": 3000,
+          "service": "gateway"
+        }
+      ],
+      "resources": {
+        "limits": {
+          "cpu": "250m",
+          "ephemeral-storage": "1Gi",
+          "memory": "256Mi"
+        }
+      },
+      "spec": "Application",
+      "type": "enrollable"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "probes": [
+    {
+      "entry": "api",
+      "expect_body_contains": "\"logged_in\":false",
+      "expect_status": 200,
+      "path": "/status"
+    }
+  ]
+}
