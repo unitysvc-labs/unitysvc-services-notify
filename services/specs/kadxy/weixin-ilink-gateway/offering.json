@@ -6,17 +6,7 @@
       "source_code": "https://github.com/Kadxy/weixin-ilink-gateway"
     }
   },
-  "documents": {
-    "Application": {
-      "category": "instance_spec",
-      "file_path": "compose.yaml",
-      "is_public": false,
-      "meta": {
-        "format": "compose"
-      },
-      "mime_type": "text"
-    }
-  },
+  "instance_spec": "compose.yaml",
   "name": "weixin-ilink-gateway",
   "payout_price": {
     "description": "Free staging prototype",
@@ -57,7 +47,6 @@
           "memory": "256Mi"
         }
       },
-      "spec": "Application",
       "type": "enrollable"
     }
   }
