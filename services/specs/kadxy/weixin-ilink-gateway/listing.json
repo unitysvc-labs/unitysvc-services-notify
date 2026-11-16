@@ -2,6 +2,9 @@
   "currency": "USD",
   "display_name": "WeChat iLink Gateway",
   "documents": {
+    "Connectivity test": {
+      "$doc_preset": "container_connectivity"
+    },
     "How to use this service": {
       "category": "getting_started",
       "file_path": "usage.md",
