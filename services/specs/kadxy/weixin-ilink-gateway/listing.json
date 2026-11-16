@@ -3,15 +3,7 @@
   "display_name": "WeChat iLink Gateway",
   "documents": {
     "Connectivity test": {
-      "category": "connectivity_test",
-      "description": "Start the instance through the customer API, fetch its entry, then stop it",
-      "file_path": "connectivity.py.j2",
-      "is_active": true,
-      "is_public": false,
-      "meta": {
-        "timeout": 300
-      },
-      "mime_type": "python"
+      "$doc_preset": "container_connectivity"
     },
     "How to use this service": {
       "category": "getting_started",
