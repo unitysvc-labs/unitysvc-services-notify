@@ -1,0 +1,38 @@
+#!/bin/bash
+# Simulate what a Kadxy WeChat iLink gateway emits for one WeChat message, and
+# send it through labs/weixin-to-msg. The body is the raw iLink message object,
+# exactly as the gateway POSTs it to its WEBHOOK_URLS and lists it under
+# GET /messages/updates: the service reads message_id, from_user_id and
+# item_list and drops the rest (context_token included).
+#
+# In production the message reaches the connector's Inbound URL (the room →
+# Configure → Notifications → the connector),
+# https://api.svcpass.com/webhook/<KEY>/labs/weixin-to-msg/<connector id>,
+# either pushed by a gateway you host (WEBHOOK_URLS) or forwarded by the
+# Python reader example from a platform instance. This example sends the key
+# as a header instead, which the gateway takes equally, and names no
+# connector, so the message lands in the caller's own `me` room.
+#   local_testing : there is no upstream to reach (gateway-native rooms://post).
+#   gateway       : POST the message to the service (Bearer auth).
+set -o pipefail
+
+{% if local_testing %}
+echo "delivered (skipped: gateway-native rooms://post, no upstream)"
+exit 0
+{% else %}
+URL="{{ service_base_url }}"
+MESSAGE_ID="$(date +%s)$RANDOM"   # the room drops repeats of one message id
+status=$(curl -sS --max-time 15 \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer ${UNITYSVC_API_KEY}" \
+    -d "{\"seq\":12,\"message_id\":\"$MESSAGE_ID\",\"from_user_id\":\"o3Fx8w1LqXb9u2Zy@im.wechat\",\"to_user_id\":\"bot_7f3a1c@im.bot\",\"client_id\":\"\",\"create_time_ms\":1763280000000,\"update_time_ms\":1763280000000,\"session_id\":\"s_8c2e\",\"message_type\":1,\"message_state\":2,\"item_list\":[{\"type\":1,\"msg_id\":\"$MESSAGE_ID\",\"create_time_ms\":1763280000000,\"is_completed\":true,\"text_item\":{\"text\":\"Hello from WeChat\"}}],\"context_token\":\"ctx_demo\"}" \
+    -o /dev/null -w "%{http_code}" \
+    "$URL" 2>/dev/null)
+
+case "$status" in
+  2??) echo "delivered (HTTP $status)"; exit 0 ;;
+  000) echo "send failed: could not connect to $URL" >&2; exit 1 ;;
+  *)   echo "send failed: HTTP $status from $URL" >&2; exit 1 ;;
+esac
+{% endif %}

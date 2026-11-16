@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+"""Read a WeChat iLink gateway and post each message into your room through labs/weixin-to-msg.
+
+A Kadxy weixin-ilink-gateway keeps the messages its WeChat bot receives in a
+buffer, listed by GET /messages/updates?after=<seq> with the gateway's API key.
+An instance of the kadxy/weixin-ilink-gateway container service cannot push
+them anywhere, so this reader polls it and forwards each message, unchanged,
+to this service, which converts it into the msg envelope and posts it into the
+room. The room drops repeats of one message id, so a message read twice is
+posted once. The last forwarded seq is kept in a file and the next pass asks
+the gateway only for what came after it.
+
+Environment:
+  WEIXIN_GATEWAY_URL      the gateway's address, e.g. https://<enrollment code>.staging.unitysvc.app
+  WEIXIN_GATEWAY_API_KEY  its API key (a platform instance's key is in the enrollment's instance details)
+  UNITYSVC_API_KEY        your UnitySVC key, the bearer of each post
+  WEIXIN_ROOM_CONNECTOR   optional: the room connector id to post through; without it
+                          the messages land in your own `me` room
+  WEIXIN_CURSOR_FILE      optional: where the last forwarded seq is kept
+                          (default .weixin-to-msg.cursor in the current directory)
+
+Usage: python reader.py [--follow [SECONDS]]
+  One pass by default. --follow keeps polling every SECONDS (default 5) until stopped.
+  Exit 0 when every message read was posted (or there was none), 1 on a failure.
+"""
+
+import json
+import os
+import sys
+import time
+import urllib.error
+import urllib.request
+
+GATEWAY = os.environ.get("WEIXIN_GATEWAY_URL", "").rstrip("/")
+GATEWAY_KEY = os.environ.get("WEIXIN_GATEWAY_API_KEY", "")
+UNITYSVC_KEY = os.environ.get("UNITYSVC_API_KEY", "")
+CURSOR_FILE = os.environ.get("WEIXIN_CURSOR_FILE", ".weixin-to-msg.cursor")
+{% if local_testing %}
+# Local run: read the gateway and show what would be forwarded, post nothing.
+DRY_RUN = True
+TARGET = ""
+{% else %}
+DRY_RUN = False
+TARGET = "{{ service_base_url }}".rstrip("/")
+if os.environ.get("WEIXIN_ROOM_CONNECTOR", "").strip("/"):
+    TARGET += "/" + os.environ["WEIXIN_ROOM_CONNECTOR"].strip("/")
+{% endif %}
+
+ITEM_TYPES = {1: "text", 2: "image", 3: "voice", 4: "file", 5: "video"}
+
+
+def request(method, url, key, body=None, timeout=20):
+    """(status, bytes) of one call; status 0 when nothing answered."""
+    data = None if body is None else json.dumps(body).encode()
+    req = urllib.request.Request(
+        url,
+        data=data,
+        method=method,
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json", "Accept": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.status, resp.read()
+    except urllib.error.HTTPError as e:
+        return e.code, e.read()
+    except (urllib.error.URLError, OSError) as e:
+        return 0, str(e).encode()
+
+
+def read_cursor():
+    try:
+        with open(CURSOR_FILE) as f:
+            return int(f.read().strip() or 0)
+    except (OSError, ValueError):
+        return 0
+
+
+def write_cursor(seq):
+    with open(CURSOR_FILE, "w") as f:
+        f.write(f"{seq}\n")
+
+
+def summary(msg):
+    """One line describing a message, for the log."""
+    kinds = []
+    for item in msg.get("item_list") or []:
+        kind = ITEM_TYPES.get(item.get("type"), "item")
+        if kind == "text":
+            kinds.append(repr((item.get("text_item") or {}).get("text", ""))[:60])
+        else:
+            kinds.append(f"[{kind}]")
+    head = f"seq {msg.get('seq')} id {msg.get('message_id')} from {msg.get('from_user_id')}"
+    return f"{head}: {' '.join(kinds) or '(no items)'}"
+
+
+def fetch(after):
+    """The gateway's messages with seq > after, oldest first; None after a reported failure."""
+    status, raw = request("GET", f"{GATEWAY}/messages/updates?after={after}", GATEWAY_KEY)
+    if status == 0:
+        print(f"could not connect to {GATEWAY}: {raw.decode(errors='replace')}", file=sys.stderr)
+        return None
+    if status == 401:
+        if b"Not logged in" in raw:
+            why = "no WeChat account is logged in: open /console and scan the QR code"
+        else:
+            why = "wrong WEIXIN_GATEWAY_API_KEY"
+        print(f"the gateway refused the request (HTTP 401): {why}", file=sys.stderr)
+        return None
+    if status != 200:
+        print(f"HTTP {status} from {GATEWAY}/messages/updates: {raw[:200].decode(errors='replace')}", file=sys.stderr)
+        return None
+    try:
+        messages = json.loads(raw).get("messages") or []
+    except ValueError:
+        print(f"{GATEWAY}/messages/updates did not answer JSON", file=sys.stderr)
+        return None
+    return sorted(messages, key=lambda m: m.get("seq") or 0)
+
+
+def forward(msg):
+    """Post one raw gateway message through the service; True when it was taken."""
+    if DRY_RUN:
+        print(f"would forward {summary(msg)}")
+        return True
+    status, raw = request("POST", TARGET, UNITYSVC_KEY, msg)
+    if status == 204:
+        print(f"skipped by the service (HTTP 204, the bot's own message): {summary(msg)}")
+        return True
+    if 200 <= status < 300:
+        print(f"posted (HTTP {status}): {summary(msg)}")
+        return True
+    if status == 0:
+        print(f"could not connect to {TARGET}: {raw.decode(errors='replace')}", file=sys.stderr)
+    else:
+        print(f"HTTP {status} from {TARGET} for {summary(msg)}: {raw[:200].decode(errors='replace')}", file=sys.stderr)
+    return False
+
+
+def one_pass():
+    """Forward everything after the cursor; the number forwarded, or None on a failure."""
+    after = read_cursor()
+    messages = fetch(after)
+    if messages is None:
+        return None
+    count = 0
+    for msg in messages:
+        if not forward(msg):
+            return None  # the cursor stays before this message: it is retried next pass
+        write_cursor(msg.get("seq") or after)
+        count += 1
+    return count
+
+
+def main(argv):
+    if not GATEWAY or not GATEWAY_KEY:
+        print("skipped: set WEIXIN_GATEWAY_URL and WEIXIN_GATEWAY_API_KEY to the gateway's address and API key")
+        return 0
+    if not DRY_RUN and not UNITYSVC_KEY:
+        print("set UNITYSVC_API_KEY to the UnitySVC key that posts into the room", file=sys.stderr)
+        return 1
+    follow = "--follow" in argv
+    interval = 5.0
+    if follow:
+        rest = argv[argv.index("--follow") + 1 :]
+        if rest and rest[0].replace(".", "", 1).isdigit():
+            interval = float(rest[0])
+    while True:
+        count = one_pass()
+        if count is None:
+            return 1
+        plural = "s" if count != 1 else ""
+        print(f"{count} message{plural} after seq {read_cursor()}{' (dry run)' if DRY_RUN else ''}")
+        if not follow:
+            return 0
+        try:
+            time.sleep(interval)
+        except KeyboardInterrupt:
+            return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

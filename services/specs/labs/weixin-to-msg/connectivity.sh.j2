@@ -1,0 +1,77 @@
+#!/bin/bash
+# Connectivity test for labs/weixin-to-msg — a WeChat iLink gateway message
+# (the raw object the Kadxy weixin-ilink-gateway pushes to its WEBHOOK_URLS
+# and lists under /messages/updates) converted by the channel's
+# body_transformer into the msg envelope and posted into a room by the
+# gateway-native rooms://post upstream. There is NO seller upstream.
+#   local_testing : nothing to convert here. When WEIXIN_GATEWAY_URL and
+#                   WEIXIN_GATEWAY_API_KEY name a reachable gateway, its
+#                   /status is probed with the key instead (a real instance
+#                   check); otherwise the branch passes and only confirms wiring.
+#   gateway       : POST a text message through the gateway (Bearer auth) and
+#                   expect 2xx (202: posted into the caller's own `me` room, so
+#                   the test needs no setup); POST an image-only message and
+#                   expect 2xx (its body is the "[image]" placeholder); POST
+#                   the bot's own message (message_type 2) and expect the
+#                   gateway's own 204 from the own-echo rule.
+set -o pipefail
+
+{% if local_testing %}
+if [ -n "${WEIXIN_GATEWAY_URL:-}" ]; then
+  URL="${WEIXIN_GATEWAY_URL%/}/status"
+  reply=$(mktemp)
+  status=$(curl -sS --max-time 15 \
+      -H "Authorization: Bearer ${WEIXIN_GATEWAY_API_KEY:-}" \
+      -o "$reply" -w "%{http_code}" "$URL" 2>/dev/null)
+  case "$status" in
+    200) echo "connectivity ok (gateway answered $URL: $(tr -d '\n' < "$reply" | cut -c1-200))" ;;
+    401) echo "connectivity failed: $URL refused the key (HTTP 401): check WEIXIN_GATEWAY_API_KEY" >&2; rm -f "$reply"; exit 1 ;;
+    000) echo "connectivity failed: could not connect to $URL" >&2; rm -f "$reply"; exit 1 ;;
+    *)   echo "connectivity failed: HTTP $status from $URL" >&2; rm -f "$reply"; exit 1 ;;
+  esac
+  rm -f "$reply"
+else
+  echo "connectivity ok (gateway-native rooms://post, no upstream; set WEIXIN_GATEWAY_URL to probe a gateway)"
+fi
+{% else %}
+URL="{{ service_base_url }}"
+MARKER="$(date +%s)$RANDOM"
+
+# $1 message_type, $2 message_id, $3 item_list JSON. A fresh message_id each
+# call: the room drops repeats of one id.
+weixin_post() {
+  curl -sS --max-time 15 -D - -o /dev/null \
+      -X POST \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer ${UNITYSVC_API_KEY}" \
+      -d "{\"seq\":1,\"message_id\":\"$2\",\"from_user_id\":\"o3Fx8w1LqXb9u2Zy@im.wechat\",\"to_user_id\":\"bot_7f3a1c@im.bot\",\"create_time_ms\":1763280000000,\"session_id\":\"s_8c2e\",\"message_type\":$1,\"message_state\":2,\"item_list\":$3,\"context_token\":\"ctx_demo\"}" \
+      "$URL" 2>/dev/null
+}
+status_of() { printf '%s' "$1" | awk '/^HTTP\// {s=$2} END {print s}'; }
+rule_of() { printf '%s' "$1" | tr -d '\r' | awk 'tolower($1)=="x-unitysvc-rule:" {print $2}'; }
+
+posted=$(weixin_post 1 "$MARKER" '[{"type":1,"msg_id":"'"$MARKER"'","is_completed":true,"text_item":{"text":"connectivity probe"}}]')
+status=$(status_of "$posted")
+if [ -z "$status" ]; then
+  echo "connectivity failed: could not connect to $URL" >&2; exit 1
+fi
+if [ -n "$(rule_of "$posted")" ]; then
+  echo "connectivity failed: HTTP $status, the $(rule_of "$posted") rule dropped a person's message" >&2; exit 1
+fi
+case "$status" in
+  2??) echo "delivery ok (HTTP $status)" ;;
+  *)   echo "connectivity failed: HTTP $status from $URL" >&2; exit 1 ;;
+esac
+
+image=$(weixin_post 1 "$MARKER-image" '[{"type":2,"image_item":{"media":{"encrypt_query_param":"demo","aes_key":"demo"}}}]')
+case "$(status_of "$image")" in
+  2??) echo "image-only message ok (HTTP $(status_of "$image"), posted as its placeholder)" ;;
+  *)   echo "connectivity failed: an image-only message got HTTP $(status_of "$image"), not 2xx" >&2; exit 1 ;;
+esac
+
+echoed=$(weixin_post 2 "$MARKER-echo" '[{"type":1,"text_item":{"text":"echo probe"}}]')
+if [ "$(status_of "$echoed")" != "204" ] || [ "$(rule_of "$echoed")" != "own-echo" ]; then
+  echo "connectivity failed: the bot's own message got HTTP $(status_of "$echoed"), not 204 from the own-echo rule" >&2; exit 1
+fi
+echo "connectivity ok (bot's own message answered 204 by the own-echo rule)"
+{% endif %}

@@ -1,0 +1,48 @@
+{
+  "capabilities": [
+    "receive-message"
+  ],
+  "description": "`weixin-to-msg` accepts the messages a Kadxy WeChat iLink gateway emits and converts each into UnitySVC's native `msg` format, posted into one of your rooms.\n\nA Kadxy weixin-ilink-gateway — an instance of the `kadxy/weixin-ilink-gateway` container service, or one you host — logs a WeChat account in by QR code and long-polls WeChat for the messages people send its bot. It emits each one as the raw iLink message object (`message_id`, `from_user_id`, `item_list`, …): pushed as JSON to the URLs in its WEBHOOK_URLS setting, and listed by `GET /messages/updates?after=<seq>` for a reader that polls it with the gateway's API key. The service maps that object onto the `msg` fields a room takes: the text items joined as a plain-text `body` (an image, file or video item becomes a placeholder, a voice item its transcript, a quoted message a leading `>` line), and an `origin` of `weixin` carrying the WeChat message id and the sender's iLink user id (stored as the message's origin author). It posts the result into the room as the member of the connector it came in through, attributed to that connector. The message id doubles as the idempotency key, so a message read twice is posted once. The bot's own messages (`message_type` 2) are answered 204 by the own-echo rule and posted nowhere, so what the room sends back to WeChat does not come back. Media stays in WeChat's encrypted CDN and is not attached. Free.\n\nIn UnitySVC open the room → Configure → Notifications, set a connector's Inbound to “Through a converter service…” with `labs/weixin-to-msg`, and give the gateway the connector's Inbound URL: a gateway you host pushes to it through WEBHOOK_URLS; an instance of the `kadxy/weixin-ilink-gateway` container service cannot push, so run the reader example with WEIXIN_GATEWAY_URL and WEIXIN_GATEWAY_API_KEY set to the instance's address and key — it polls the instance and forwards each message to the connector, keeping its place. No secrets and no enrollment to set up. See “How to use this service” for the walkthrough.",
+  "details": {
+    "input_formats": [
+      "x-weixin-ilink-message"
+    ],
+    "output_formats": [
+      "msg"
+    ]
+  },
+  "logo": "https://cdn.simpleicons.org/wechat/07C160",
+  "name": "weixin-to-msg",
+  "service_type": "notification",
+  "status": "ready",
+  "summary": "Bring WeChat messages into a UnitySVC room: a Kadxy WeChat iLink gateway emits each message its bot receives, the gateway converts it into a `msg` and delivers it through your room connector.",
+  "tags": [
+    "warning:unverified?stats.successful_requests==0 | Tested against a simulated upstream only — no customer has used it yet"
+  ],
+  "time_created": "2026-11-16T00:00:00Z",
+  "upstream_access_config": {
+    "gateway": {
+      "access_method": "http",
+      "base_url": "rooms://post",
+      "payload_format": "msg",
+      "request_rules": [
+        {
+          "name": "own-echo",
+          "respond": {
+            "status": 204
+          },
+          "when": "body.message_type == 2"
+        }
+      ],
+      "request_transformer": {
+        "body_transformer": {
+          "request": {
+            "input_format": "json",
+            "template": "{* (function(b) if type(b) ~= \"table\" then b = {} end local parts = {} local function add(s) if type(s) == \"string\" and s ~= \"\" then parts[#parts + 1] = s end end for _, it in ipairs(type(b.item_list) == \"table\" and b.item_list or {}) do if type(it) == \"table\" then local ref = it.ref_msg if type(ref) == \"table\" and type(ref.title) == \"string\" and ref.title ~= \"\" then add(\"> \" .. ref.title) end local t = it.type if t == 1 then add(type(it.text_item) == \"table\" and it.text_item.text or nil) elseif t == 2 then add(\"[image]\") elseif t == 3 then local v = it.voice_item add(type(v) == \"table\" and type(v.text) == \"string\" and v.text ~= \"\" and v.text or \"[voice]\") elseif t == 4 then local f = it.file_item add(\"[file: \" .. (type(f) == \"table\" and type(f.file_name) == \"string\" and f.file_name or \"\") .. \"]\") elseif t == 5 then add(\"[video]\") end end end local out = { body = table.concat(parts, \"\\n\"), format = \"text\", type = \"info\", origin = { service = \"weixin\" } } local id = b.message_id if type(id) == \"number\" then id = string.format(\"%.0f\", id) end if type(id) == \"string\" and id ~= \"\" then out.origin.external_id = id end if type(b.from_user_id) == \"string\" and b.from_user_id ~= \"\" then out.origin.author = b.from_user_id end return _escape_json(out) end)(_body) *}"
+          }
+        }
+      },
+      "sort_order": 1
+    }
+  }
+}
