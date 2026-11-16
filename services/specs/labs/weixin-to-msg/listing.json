@@ -1,0 +1,52 @@
+{
+  "currency": "USD",
+  "display_name": "WeChat to Messages",
+  "documents": {
+    "Connectivity test": {
+      "category": "connectivity_test",
+      "description": "POST a WeChat iLink gateway message through the gateway: a text message and an image-only message are posted, the bot's own message gets 204",
+      "file_path": "connectivity.sh.j2",
+      "is_active": true,
+      "is_public": false,
+      "mime_type": "bash"
+    },
+    "How to use this service": {
+      "category": "getting_started",
+      "description": "Point a WeChat iLink gateway at your room connector, run the reader for a platform instance, and what the room receives",
+      "file_path": "usage.md",
+      "is_active": true,
+      "is_public": true,
+      "mime_type": "markdown"
+    },
+    "Python reader": {
+      "category": "code_example",
+      "description": "Poll a gateway instance's /messages/updates and forward each message to your room connector, keeping its place",
+      "file_path": "reader.py.j2",
+      "is_active": true,
+      "is_public": true,
+      "mime_type": "python"
+    },
+    "Shell code example": {
+      "category": "code_example",
+      "description": "Simulate a WeChat iLink gateway message with curl",
+      "file_path": "code-example.sh.j2",
+      "is_active": true,
+      "is_public": true,
+      "mime_type": "bash"
+    }
+  },
+  "list_price": {
+    "description": "Free",
+    "price": "0",
+    "type": "constant"
+  },
+  "name": "labs/weixin-to-msg",
+  "status": "ready",
+  "time_created": "2026-11-16T00:00:00Z",
+  "user_access_interfaces": {
+    "canonical": {
+      "access_method": "http",
+      "base_url": "${API_GATEWAY_BASE_URL}/{{ service_name }}"
+    }
+  }
+}
