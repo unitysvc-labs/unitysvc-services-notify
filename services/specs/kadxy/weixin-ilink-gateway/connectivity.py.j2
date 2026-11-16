@@ -42,6 +42,11 @@ def call(method, url, key=KEY, timeout=70):
         return status, body
 
 
+def platform_down(status):
+    """The control plane did not answer (0) or answered 5xx: the platform's problem, retry later."""
+    return status == 0 or status >= 500
+
+
 def fail(message, code=1):
     print(f"connectivity failed: {message}", file=sys.stderr)
     return code
@@ -49,7 +54,7 @@ def fail(message, code=1):
 
 def run():
     status, state = call("POST", f"{INSTANCE}/start")
-    if status == 0 or status == 503:
+    if platform_down(status):
         return fail(f"the platform could not take the request ({status}: {state})", PLATFORM_FAULT)
     if status != 202:
         return fail(f"start was refused: HTTP {status} {state}")
@@ -59,7 +64,7 @@ def run():
             return fail(f"the instance was not ready in {START_TIMEOUT}s (status {state.get('status')})", PLATFORM_FAULT)
         status, state = call("GET", f"{INSTANCE}?wait=30")
         if status != 200:
-            return fail(f"status read failed: HTTP {status} {state}", PLATFORM_FAULT if status in (0, 502, 503, 504) else 1)
+            return fail(f"status read failed: HTTP {status} {state}", PLATFORM_FAULT if platform_down(status) else 1)
     if state["status"] == "failed":
         code = PLATFORM_FAULT if state.get("fault") == "platform" else 1
         return fail(f"the instance failed: {state.get('reason')} (fault: {state.get('fault')})", code)
@@ -72,7 +77,10 @@ def run():
             if key is None:
                 status, creds = call("GET", f"{INSTANCE}/credentials")
                 if status != 200:
-                    return fail(f"could not read the instance key: HTTP {status}")
+                    return fail(
+                        f"could not read the instance key: HTTP {status}",
+                        PLATFORM_FAULT if platform_down(status) else 1,
+                    )
                 key = creds["key"]
             headers_key = key
         last = None
