@@ -91,6 +91,10 @@ def channel_body(cfg: dict) -> dict:
 
 
 def channel_type(cfg: dict) -> str:
+    # An isolated instance is created for an enrollment even without params.
+    # Match central channel_classification: container channels are enrollable.
+    if cfg.get("access_method") == "container":
+        return "enrollable"
     text = json.dumps(cfg)
     if ENROLLMENT.search(text):
         return "enrollable"
