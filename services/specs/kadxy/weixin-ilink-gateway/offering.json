@@ -1,5 +1,5 @@
 {
-  "description": "Run a private WeChat iLink Bot HTTP gateway with QR login, messaging, media, and webhook support.\n\nUnitySVC starts the MIT-licensed Kadxy gateway in an isolated container for each enrollment. This prototype uses temporary storage: login credentials, message cursors, and buffered messages are lost when the instance is replaced or stopped. The upstream image is pinned by digest.\n\nEnroll in the base channel, obtain your instance URL and its generated API key, and open /console to scan the WeChat login QR code. Use the REST API with that key. See How to use this service for the limitations.",
+  "description": "Run a private WeChat iLink Bot HTTP gateway with QR login, messaging, media, and webhook support.\n\nUnitySVC starts the MIT-licensed Kadxy gateway in an isolated container for each enrollment. This prototype uses temporary storage: login credentials, message cursors, and buffered messages are lost when the instance is replaced or stopped. The upstream image is pinned by digest.\n\nEnroll in the base channel, get your instance URL and the API key shown in the form (generated for you; you may replace it), and open /console to scan the WeChat login QR code. Use the REST API with that key. See How to use this service for the limitations.",
   "details": {
     "links": {
       "homepage": "https://github.com/Kadxy/weixin-ilink-gateway",
@@ -40,6 +40,24 @@
           "service": "gateway"
         }
       ],
+      "params": {
+        "schema": {
+          "properties": {
+            "WEIXIN_API_KEY": {
+              "default": "{{ token_urlsafe(32) }}",
+              "description": "Generated for this enrollment; you can enter your own key of at least 12 characters instead. The gateway requires it as a Bearer token for its REST API, and the console asks for it at login.",
+              "format": "password",
+              "minLength": 12,
+              "title": "Weixin API key",
+              "type": "string"
+            }
+          },
+          "required": [
+            "WEIXIN_API_KEY"
+          ],
+          "type": "object"
+        }
+      },
       "resources": {
         "limits": {
           "cpu": "500m",
