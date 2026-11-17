@@ -55,6 +55,9 @@
             "WEIXIN_API_KEY"
           ],
           "type": "object"
+        },
+        "testing_defaults": {
+          "WEIXIN_API_KEY": "unitysvc-ops-test-key-weixin-0001"
         }
       },
       "resources": {
