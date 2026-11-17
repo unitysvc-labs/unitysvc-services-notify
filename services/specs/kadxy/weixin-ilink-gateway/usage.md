@@ -2,7 +2,7 @@
 
 Each enrollment runs a separate [Kadxy weixin-ilink-gateway](https://github.com/Kadxy/weixin-ilink-gateway) instance. The provider is Kadxy; UnitySVC Labs operates this prototype.
 
-1. Enroll in **base** and approve `resource:container` creation.
+1. Enroll in **base**.
 2. Wait for the instance to become ready. Its address is `https://<enrollment-code>.staging.unitysvc.app` on staging (HTTPS port 443).
 3. The enrollment form shows a generated **Weixin API key**; keep it or replace it with your own (at least 12 characters), then save. It is stored with the enrollment (view and copy it from the enrollment's instance details) and given to the gateway as its `API_KEY`. This is an application key, not your UnitySVC API key. Changing it later restarts the instance with the new key.
 4. Open `/console`, enter the instance key, and start QR login. Scan the QR code with the WeChat account you want the bot to use.
