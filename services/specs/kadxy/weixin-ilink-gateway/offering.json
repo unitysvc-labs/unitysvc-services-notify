@@ -45,8 +45,7 @@
           "properties": {
             "WEIXIN_API_KEY": {
               "default": "{{ token_urlsafe(32) }}",
-              "description": "Generated for this enrollment; you can enter your own key of at least 12 characters instead. The gateway requires it as a Bearer token for its REST API, and the console asks for it at login.",
-              "format": "password",
+              "description": "Generated for this enrollment; keep it or enter your own key of at least 12 characters, and save it. It is the Bearer token for the gateway's REST API and what the console asks for at login. Set it before the instance starts; changing it later restarts the instance.",
               "minLength": 12,
               "title": "Weixin API key",
               "type": "string"
