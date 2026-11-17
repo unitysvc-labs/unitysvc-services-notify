@@ -40,6 +40,11 @@
           "service": "gateway"
         }
       ],
+      "environment": {
+        "gateway": {
+          "API_KEY": "{{ params.WEIXIN_API_KEY }}"
+        }
+      },
       "params": {
         "schema": {
           "properties": {

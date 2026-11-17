@@ -4,7 +4,7 @@ services:
     ports:
       - 3000
     environment:
-      API_KEY: "{{ params.WEIXIN_API_KEY }}"
+      API_KEY: change-me-at-least-12-chars
       PORT: "3000"
       DATA_DIR: /tmp/weixin-ilink
       MAX_BUFFER_SIZE: "100"

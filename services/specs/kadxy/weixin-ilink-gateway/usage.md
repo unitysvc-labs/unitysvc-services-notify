@@ -16,4 +16,4 @@ Storage is temporary. Stopping, replacing, or deleting the instance loses WeChat
 
 The console is publicly reachable, while the REST API requires the instance key; keep that key private.
 
-The spec holds only a reference, `API_KEY: "{{ params.WEIXIN_API_KEY }}"`; UnitySVC fills in the enrollment's saved key when it starts the instance. For manual local Compose use, replace that value with a fresh random token of at least 12 characters; never commit a real key in the spec.
+The Compose file is plain: its `API_KEY` is a placeholder. The channel's `environment` sets `API_KEY` from the enrollment's `WEIXIN_API_KEY` parameter when UnitySVC starts the instance. For manual local Compose use, set `API_KEY` to a fresh random token of at least 12 characters.
