@@ -20,16 +20,6 @@
   "upstream_access_config": {
     "base": {
       "access_method": "container",
-      "customer_access_requests": [
-        {
-          "justification": "Run one isolated gateway instance for this enrollment",
-          "object": "resource:container",
-          "permissions": [
-            "create"
-          ],
-          "required": true
-        }
-      ],
       "description": "One isolated gateway for one enrollment; temporary storage.",
       "entries": [
         {
