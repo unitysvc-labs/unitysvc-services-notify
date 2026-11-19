@@ -65,13 +65,7 @@
           "WEIXIN_API_KEY": "unitysvc-ops-test-key-weixin-0001"
         }
       },
-      "resources": {
-        "limits": {
-          "cpu": "500m",
-          "ephemeral-storage": "1Gi",
-          "memory": "256Mi"
-        }
-      },
+      "resources": "nano",
       "type": "enrollable"
     }
   }
