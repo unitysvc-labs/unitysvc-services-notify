@@ -32,12 +32,20 @@
       ],
       "environment": {
         "gateway": {
-          "API_KEY": "{{ params.WEIXIN_API_KEY }}"
+          "API_KEY": "{{ params.WEIXIN_API_KEY }}",
+          "WEBHOOK_TOKEN": "{{ params.WEBHOOK_TOKEN }}"
         }
       },
       "params": {
         "schema": {
           "properties": {
+            "WEBHOOK_TOKEN": {
+              "default": "{{ token_urlsafe(24) }}",
+              "description": "Generated for this enrollment; keep it or enter your own (at least 12 characters). It is the secret in the gateway's inbound webhook URL, https://<instance>/webhook/<token>: anyone with that URL can send a message to the WeChat account you log in with, so keep it private. Use it with the msg-to-wechat service.",
+              "minLength": 12,
+              "title": "Webhook token",
+              "type": "string"
+            },
             "WEIXIN_API_KEY": {
               "default": "{{ token_urlsafe(32) }}",
               "description": "Generated for this enrollment; keep it or enter your own key of at least 12 characters, and save it. It is the Bearer token for the gateway's REST API and what the console asks for at login. Set it before the instance starts; changing it later restarts the instance.",
@@ -47,21 +55,17 @@
             }
           },
           "required": [
+            "WEBHOOK_TOKEN",
             "WEIXIN_API_KEY"
           ],
           "type": "object"
         },
         "testing_defaults": {
+          "WEBHOOK_TOKEN": "unitysvc-ops-test-webhook-0001",
           "WEIXIN_API_KEY": "unitysvc-ops-test-key-weixin-0001"
         }
       },
-      "resources": {
-        "limits": {
-          "cpu": "500m",
-          "ephemeral-storage": "1Gi",
-          "memory": "256Mi"
-        }
-      },
+      "resources": "nano",
       "type": "enrollable"
     }
   }
