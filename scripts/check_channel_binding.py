@@ -41,18 +41,6 @@ SERVICES = Path(__file__).resolve().parent.parent / "services"
 # own credential travels in the native payload they POST, and the default host
 # is the provider's real public API.
 ALLOWED_UNBOUND = {
-    f"{svc}@{ch}"
-    for svc in (
-        "freemobile-relay",
-        "misskey-relay",
-        "pushplus-relay",
-        "streamlabs-relay",
-        "vonage-sms-relay",
-        "prowl-relay",
-        "pushsafer-relay",
-    )
-    for ch in ("byok", "plus")
-} | {
     # Gateway-native upstream (rooms://post): the room comes from the connector
     # id in the URL and the credential is the key, so there is no secret to set.
     "discord-to-msg@gateway",
