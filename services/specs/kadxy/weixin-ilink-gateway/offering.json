@@ -41,7 +41,7 @@
           "properties": {
             "WEBHOOK_TOKEN": {
               "default": "{{ token_urlsafe(24) }}",
-              "description": "Generated for this enrollment; keep it or enter your own (at least 12 characters). It is the secret in the gateway's inbound webhook URL, https://<instance>/webhook/<token>: anyone with that URL can send a message to the WeChat account you log in with, so keep it private. Use it with the msg-to-wechat service.",
+              "description": "Generated for this enrollment; keep it or enter your own (at least 12 characters). It is the secret in the gateway's inbound webhook URL, https://<instance>/webhook/<token>: anyone with that URL can send a message to the WeChat account you log in with, so keep it private. Use it with the msg-to-weixin service.",
               "minLength": 12,
               "title": "Webhook token",
               "type": "string"

@@ -1,6 +1,9 @@
 {
+  "audience": [
+    "People with a Weixin account (Tencent's mainland China version of WeChat)"
+  ],
   "currency": "USD",
-  "display_name": "WeChat to Messages",
+  "display_name": "Tencent Weixin (Mainland) to Messages",
   "documents": {
     "Connectivity test": {
       "category": "connectivity_test",
