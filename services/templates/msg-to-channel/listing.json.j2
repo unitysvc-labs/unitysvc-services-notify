@@ -1,4 +1,7 @@
 {
+{%- if audience is defined %}
+  "audience": {{ audience | tojson }},
+{%- endif %}
   "currency": "USD",
   "display_name": "{{ display_name }}",
   "documents": {
