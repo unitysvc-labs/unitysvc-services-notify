@@ -3,7 +3,7 @@
     "People with a Weixin account (Tencent's mainland China version of WeChat)"
   ],
   "currency": "USD",
-  "display_name": "Tencent Weixin (Mainland) HTTP REST API Gateway",
+  "display_name": "Tencent Weixin (Mainland) iLink Gateway",
   "documents": {
     "Connectivity test": {
       "$doc_preset": "container_connectivity"
