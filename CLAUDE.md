@@ -1,8 +1,9 @@
 # CLAUDE.md — unitysvc-services-notify
 
-The ntfy gateway companion (`labs/msg-to-ntfy`) moved to
+The `kadxy/weixin-ilink-gateway` compute service moved to
 `unitysvc-labs/unitysvc-compute-services`, alongside the private ntfy container.
-Maintain ntfy and future compute services there.
+Notification integrations, including `labs/msg-to-ntfy`, `labs/msg-to-weixin`
+and `labs/weixin-to-msg`, remain here. Add future compute services to the compute catalog.
 
 This repository holds **UnitySVC service data** — the declarative files (plus
 tests) that define services published to the UnitySVC gateway/marketplace. It is

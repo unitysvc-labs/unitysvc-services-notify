@@ -2,11 +2,11 @@
 
 Notification delivery and incoming-message integrations published by UnitySVC Labs. Service parameters are under `services/specs/`, with shared definitions under `services/templates/`.
 
-The ntfy services now live in [unitysvc-compute-services](https://github.com/unitysvc-labs/unitysvc-compute-services):
+The container-backed compute services live in [unitysvc-compute-services](https://github.com/unitysvc-labs/unitysvc-compute-services):
 
 - `binwiederhier/ntfy-sh`: private ntfy instances on the compute cluster.
-- `labs/msg-to-ntfy`: gateway delivery to ntfy.sh or another ntfy destination.
+- `kadxy/weixin-ilink-gateway`: private Weixin iLink gateways on the compute cluster.
 
-The moved service keeps its existing marketplace name and service ID. Add compute services and ntfy changes to the compute catalog.
+The moved Weixin gateway keeps its existing marketplace name and service ID. Add future compute services to the compute catalog. Notification integrations, including `labs/msg-to-ntfy`, `labs/msg-to-weixin` and `labs/weixin-to-msg`, remain here.
 
 Run `usvc_seller specs validate`, `usvc_seller specs format --check services` and `python scripts/check_channel_binding.py` from this repository root before uploading the notification catalog.
