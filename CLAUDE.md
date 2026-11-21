@@ -1,5 +1,9 @@
 # CLAUDE.md — unitysvc-services-notify
 
+The ntfy gateway companion (`labs/msg-to-ntfy`) moved to
+`unitysvc-labs/unitysvc-compute-services`, alongside the private ntfy container.
+Maintain ntfy and future compute services there.
+
 This repository holds **UnitySVC service data** — the declarative files (plus
 tests) that define services published to the UnitySVC gateway/marketplace. It is
 *data*, not application code; there is no server here. **`unitysvc-sellers`
