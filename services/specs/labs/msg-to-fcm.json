@@ -12,7 +12,7 @@
       "Authorization": "key=${ customer_secrets.FCM_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "key=${ customer_secrets.{{ params.apikey_secret }} }"
+      "Authorization": "key={{ params.api_key }}"
     },
     "gateway_field_mapping": {
       "notification": {
@@ -26,7 +26,7 @@
         "body": "@msg.body",
         "title": "@msg.title"
       },
-      "to": "${ customer_secrets.{{ params.to_secret }} }"
+      "to": "{{ params.to }}"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment FCM destinations, direct",
     "gateway_price_description": "Free — direct to Firebase Cloud Messaging",
@@ -43,9 +43,9 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey_secret": "FCM_APIKEY",
+      "api_key": "${ customer_secrets.FCM_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "to_secret": "FCM_TO"
+      "to": "${ customer_secrets.FCM_TO }"
     },
     "status": "deprecated",
     "summary": "Send a notification to your own Firebase Cloud Messaging destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -54,18 +54,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's Firebase Cloud Messaging apikey",
-          "type": "string"
+        "api_key": {
+          "description": "This enrollment's Firebase Cloud Messaging apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's FCM_TO value (same format as FCM_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's FCM_TO value (same format as FCM_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "to_secret",
-        "apikey_secret"
+        "api_key",
+        "to"
       ],
       "type": "object"
     }

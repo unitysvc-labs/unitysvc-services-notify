@@ -6,7 +6,7 @@
     "description": "`msg-to-onesignal` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your OneSignal destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own OneSignal destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional OneSignal destinations bound per enrollment.\n\nCreate an account at onesignal.com and set up (or select) the app you want to notify through. Open that app and click Keys and IDs to reveal both values — copy the Application ID into ONESIGNAL_APP and the API Key into ONESIGNAL_APIKEY. Together they let this service push notifications to the devices, users, or segments registered with that app.",
     "display_name": "OneSignal Messages",
     "gateway_api_key": "${ customer_secrets.ONESIGNAL_APIKEY }",
-    "gateway_api_key_plus": "${ customer_secrets.{{ params.apikey_secret }} }",
+    "gateway_api_key_plus": "{{ params.api_key }}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_onesignal",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_onesignal",
     "gateway_content_type": "application/json",
@@ -26,7 +26,7 @@
       "url": "@msg.link"
     },
     "gateway_field_mapping_plus": {
-      "app_id": "${ customer_secrets.{{ params.app_secret }} }",
+      "app_id": "{{ params.app }}",
       "big_picture": "@msg.image_url",
       "chrome_web_image": "@msg.image_url",
       "contents": {
@@ -55,8 +55,8 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey_secret": "ONESIGNAL_APIKEY",
-      "app_secret": "ONESIGNAL_APP",
+      "api_key": "${ customer_secrets.ONESIGNAL_APIKEY }",
+      "app": "${ customer_secrets.ONESIGNAL_APP }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own OneSignal destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -65,18 +65,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's OneSignal apikey",
-          "type": "string"
+        "api_key": {
+          "description": "This enrollment's OneSignal apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "app_secret": {
-          "description": "Name of the customer secret holding this enrollment's OneSignal app",
-          "type": "string"
+        "app": {
+          "description": "This enrollment's OneSignal app. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "app_secret",
-        "apikey_secret"
+        "api_key",
+        "app"
       ],
       "type": "object"
     }

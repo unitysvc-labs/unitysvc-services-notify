@@ -17,7 +17,7 @@
     "gateway_price_description": "Free — direct to your Nextcloud server notification API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/nextcloud/ocs/v2.php/apps/notifications/api/v2/admin_notifications/demouser",
     "gateway_url": "${ customer_secrets.NEXTCLOUD_BASE_URL }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.NEXTCLOUD_TARGET }",
-    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/ocs/v2.php/apps/notifications/api/v2/admin_notifications/${ customer_secrets.{{ params.target_secret }} }",
+    "gateway_url_plus": "{{ params.base_url }}/ocs/v2.php/apps/notifications/api/v2/admin_notifications/{{ params.target }}",
     "logo": "https://cdn.simpleicons.org/nextcloud/0082C9",
     "msg_capabilities": {
       "formats": [
@@ -28,9 +28,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "base_url_secret": "NEXTCLOUD_BASE_URL",
-      "target_secret": "NEXTCLOUD_TARGET"
+      "base_url": "${ customer_secrets.NEXTCLOUD_BASE_URL }",
+      "target": "${ customer_secrets.NEXTCLOUD_TARGET }"
     },
     "summary": "Send a notification to your own Nextcloud server by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "nclouds://notify.example.com/nextcloudtargetuserxyz123",
@@ -38,18 +37,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "base_url_secret": {
-          "description": "Name of the customer secret holding this enrollment's NEXTCLOUD_BASE_URL value (same format as NEXTCLOUD_BASE_URL)",
-          "type": "string"
+        "base_url": {
+          "description": "This enrollment's NEXTCLOUD_BASE_URL value (same format as NEXTCLOUD_BASE_URL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "target_secret": {
-          "description": "Name of the customer secret holding this enrollment's Nextcloud target username; used by the gateway-plus transformer channel",
-          "type": "string"
+        "target": {
+          "description": "This enrollment's Nextcloud target username; used by the gateway-plus transformer channel. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "base_url_secret",
-        "target_secret"
+        "base_url",
+        "target"
       ],
       "type": "object"
     }

@@ -20,7 +20,7 @@
       "text": "@msg.body"
     },
     "gateway_field_mapping_plus": {
-      "chat_id": "${ customer_secrets.{{ params.chat_id_secret }} }",
+      "chat_id": "{{ params.chat_id }}",
       "parse_mode": {
         "@map": "@msg.is_html",
         "values": {
@@ -34,7 +34,7 @@
     "gateway_price_description": "Free — direct to the Telegram Bot API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/telegram/botdemotoken/sendMessage",
     "gateway_url": "${ customer_secrets._TELEGRAM_API_BASE ?? https://api.telegram.org }/bot${ customer_secrets.TELEGRAM_BOT_TOKEN }/sendMessage",
-    "gateway_url_plus": "${ customer_secrets._TELEGRAM_API_BASE ?? https://api.telegram.org }/bot${ customer_secrets.{{ params.bot_token_secret }} }/sendMessage",
+    "gateway_url_plus": "${ customer_secrets._TELEGRAM_API_BASE ?? https://api.telegram.org }/bot{{ params.bot_token }}/sendMessage",
     "logo": "https://cdn.simpleicons.org/telegram/26A5E4",
     "msg_capabilities": {
       "formats": [
@@ -47,8 +47,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "bot_token_secret": "TELEGRAM_BOT_TOKEN",
-      "chat_id_secret": "TELEGRAM_CHAT_ID"
+      "bot_token": "${ customer_secrets.TELEGRAM_BOT_TOKEN }",
+      "chat_id": "${ customer_secrets.TELEGRAM_CHAT_ID }"
     },
     "summary": "Send a notification to your own Telegram destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "tgram://123456:aaaaaaaaaaaaaaa/4567",
@@ -56,18 +56,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "bot_token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Telegram bot token",
-          "type": "string"
+        "bot_token": {
+          "description": "This enrollment's Telegram bot token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "chat_id_secret": {
-          "description": "Name of the customer secret holding this enrollment's Telegram chat id",
-          "type": "string"
+        "chat_id": {
+          "description": "This enrollment's Telegram chat id. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "bot_token_secret",
-        "chat_id_secret"
+        "bot_token",
+        "chat_id"
       ],
       "type": "object"
     }

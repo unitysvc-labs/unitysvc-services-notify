@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.JIRA_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "message": "@msg.body"
@@ -21,7 +21,7 @@
     "gateway_price_description": "Free — direct to your Jira REST API v2",
     "gateway_test_local_url": "https://mock.unitysvc.dev/jira/rest/api/2/issue",
     "gateway_url": "${ customer_secrets.JIRA_BASE_URL }/rest/api/2/issue",
-    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/rest/api/2/issue",
+    "gateway_url_plus": "{{ params.base_url }}/rest/api/2/issue",
     "logo": "https://cdn.simpleicons.org/jira/0052CC",
     "msg_capabilities": {
       "formats": [
@@ -32,9 +32,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "base_url_secret": "JIRA_BASE_URL",
-      "basic_secret": "JIRA_BASIC"
+      "base_url": "${ customer_secrets.JIRA_BASE_URL }",
+      "basic": "${ customer_secrets.JIRA_BASIC }"
     },
     "summary": "Send a notification to your own Jira instance by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "jira://jiraapikeyxyz123",
@@ -42,18 +41,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "base_url_secret": {
-          "description": "Name of the customer secret holding this enrollment's JIRA_BASE_URL value (same format as JIRA_BASE_URL)",
-          "type": "string"
+        "base_url": {
+          "description": "This enrollment's JIRA_BASE_URL value (same format as JIRA_BASE_URL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's JIRA_BASIC value (same format as JIRA_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's JIRA_BASIC value (same format as JIRA_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "base_url_secret",
-        "basic_secret"
+        "base_url",
+        "basic"
       ],
       "type": "object"
     }

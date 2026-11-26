@@ -1,7 +1,7 @@
 {
   "parameters": {
     "apprise_url": "jsons://${ customer_secrets.WEIXIN_GATEWAY_HOST }/webhook/${ customer_secrets.WEIXIN_WEBHOOK_TOKEN }?:message=text",
-    "apprise_url_plus": "jsons://${ customer_secrets.{{ params.host_secret }} }/webhook/${ customer_secrets.{{ params.token_secret }} }?:message=text",
+    "apprise_url_plus": "jsons://{{ params.host }}/webhook/{{ params.token }}?:message=text",
     "audience": [
       "People with a Weixin account (Tencent's mainland China version of WeChat)"
     ],
@@ -13,26 +13,30 @@
     "logo": "https://cdn.simpleicons.org/wechat/07C160",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host_secret": "WEIXIN_GATEWAY_HOST",
-      "token_secret": "WEIXIN_WEBHOOK_TOKEN"
+      "host": "${ customer_secrets.WEIXIN_GATEWAY_HOST }",
+      "token": "${ customer_secrets.WEIXIN_WEBHOOK_TOKEN }"
     },
     "summary": "Send a notification to your own Weixin account by posting a simple `msg` request to the UnitySVC gateway, delivered through your Weixin iLink Gateway instance.",
     "test_apprise_url": "jsons://wechat-gateway.example.com/webhook/demo-webhook-token?:message=text",
     "time_created": "2026-06-20T00:00:00Z",
     "user_parameters_schema": {
       "properties": {
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's Weixin iLink Gateway host (no scheme)",
-          "type": "string"
+        "host": {
+          "description": "This enrollment's Weixin iLink Gateway host (no scheme). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's gateway Webhook token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's gateway Webhook token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "host_secret",
-        "token_secret"
+        "host",
+        "token"
       ],
       "type": "object"
     }

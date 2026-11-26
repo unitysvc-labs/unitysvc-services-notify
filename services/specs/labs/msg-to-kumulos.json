@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.KUMULOS_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "content": {
@@ -39,7 +39,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic_secret": "KUMULOS_BASIC"
+      "basic": "${ customer_secrets.KUMULOS_BASIC }"
     },
     "status": "deprecated",
     "summary": "Send a notification to your own Kumulos destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -48,13 +48,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's KUMULOS_BASIC value (same format as KUMULOS_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's KUMULOS_BASIC value (same format as KUMULOS_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "basic_secret"
+        "basic"
       ],
       "type": "object"
     }

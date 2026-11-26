@@ -6,7 +6,7 @@
     "description": "`msg-to-d7networks-sms` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your D7 Networks account — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own D7 Networks accounts — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional D7 Networks accounts bound per enrollment.\n\nCreate a D7 Networks account at d7networks.com, then open your account profile's API Details section to copy your API Token — set this as D7NETWORKS_SMS_TOKEN. Set D7NETWORKS_SMS_FROM to the sender name you want recipients to see, and D7NETWORKS_SMS_TO to the destination phone number including its country code, e.g. +14155551234.",
     "display_name": "D7 Networks Messages",
     "gateway_api_key": "${ customer_secrets.D7NETWORKS_SMS_TOKEN }",
-    "gateway_api_key_plus": "${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_api_key_plus": "{{ params.token }}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_d7networks_sms",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_d7networks_sms",
     "gateway_content_type": "application/json",
@@ -28,14 +28,14 @@
     "gateway_field_mapping_plus": {
       "message_globals": {
         "channel": "sms",
-        "originator": "${ customer_secrets.{{ params.from_secret }} }"
+        "originator": "{{ params.from }}"
       },
       "messages": [
         {
           "content": "@msg.body",
           "data_coding": "auto",
           "recipients": [
-            "${ customer_secrets.{{ params.to_secret }} }"
+            "{{ params.to }}"
           ]
         }
       ]
@@ -56,9 +56,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_secret": "D7NETWORKS_SMS_FROM",
-      "to_secret": "D7NETWORKS_SMS_TO",
-      "token_secret": "D7NETWORKS_SMS_TOKEN"
+      "from": "${ customer_secrets.D7NETWORKS_SMS_FROM }",
+      "to": "${ customer_secrets.D7NETWORKS_SMS_TO }",
+      "token": "${ customer_secrets.D7NETWORKS_SMS_TOKEN }"
     },
     "summary": "Send an SMS to your own D7 Networks account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "d7sms://d7networks_smstokenxyz123@+15551234567",
@@ -66,23 +66,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "from_secret": {
-          "description": "Name of the customer secret holding this enrollment's D7NETWORKS_SMS_FROM value (same format as D7NETWORKS_SMS_FROM)",
-          "type": "string"
+        "from": {
+          "description": "This enrollment's D7NETWORKS_SMS_FROM value (same format as D7NETWORKS_SMS_FROM). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's D7NETWORKS_SMS_TO value (same format as D7NETWORKS_SMS_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's D7NETWORKS_SMS_TO value (same format as D7NETWORKS_SMS_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's D7 Networks token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's D7 Networks token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "from_secret",
-        "to_secret",
-        "token_secret"
+        "from",
+        "to",
+        "token"
       ],
       "type": "object"
     }

@@ -6,7 +6,7 @@
     "description": "`msg-to-sendgrid-email` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your SendGrid email destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own SendGrid email destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional SendGrid email destinations bound per enrollment.\n\nIn your SendGrid dashboard, authenticate the domain you plan to send from under Settings → Sender Authentication, then create an API key with 'Mail Send' permission under Settings → API Keys — that's your SENDGRID_EMAIL_APIKEY. Set SENDGRID_FROM to an address on that verified domain, and SENDGRID_TO to the recipient's address. UnitySVC sends each message as an email through SendGrid's API from the first address to the second.",
     "display_name": "SendGrid Email Messages",
     "gateway_api_key": "${ customer_secrets.SENDGRID_EMAIL_APIKEY }",
-    "gateway_api_key_plus": "${ customer_secrets.{{ params.apikey_secret }} }",
+    "gateway_api_key_plus": "{{ params.api_key }}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_sendgrid_email",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_sendgrid_email",
     "gateway_content_type": "application/json",
@@ -51,13 +51,13 @@
         }
       ],
       "from": {
-        "email": "${ customer_secrets.{{ params.from_secret }} }"
+        "email": "{{ params.from }}"
       },
       "personalizations": [
         {
           "to": [
             {
-              "email": "${ customer_secrets.{{ params.to_secret }} }"
+              "email": "{{ params.to }}"
             }
           ]
         }
@@ -80,10 +80,10 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey_secret": "SENDGRID_EMAIL_APIKEY",
+      "api_key": "${ customer_secrets.SENDGRID_EMAIL_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_secret": "SENDGRID_FROM",
-      "to_secret": "SENDGRID_TO"
+      "from": "${ customer_secrets.SENDGRID_FROM }",
+      "to": "${ customer_secrets.SENDGRID_TO }"
     },
     "summary": "Send a notification to your own SendGrid email destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "sendgrid://abcdef0123456789:noreply@example.com",
@@ -91,23 +91,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's SendGrid Email apikey",
-          "type": "string"
+        "api_key": {
+          "description": "This enrollment's SendGrid Email apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_secret": {
-          "description": "Name of the customer secret holding this enrollment's SENDGRID_FROM value (same format as SENDGRID_FROM)",
-          "type": "string"
+        "from": {
+          "description": "This enrollment's SENDGRID_FROM value (same format as SENDGRID_FROM). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's SENDGRID_TO value (same format as SENDGRID_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's SENDGRID_TO value (same format as SENDGRID_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "to_secret",
-        "from_secret",
-        "apikey_secret"
+        "api_key",
+        "from",
+        "to"
       ],
       "type": "object"
     }

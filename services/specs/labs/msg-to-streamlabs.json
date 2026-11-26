@@ -13,7 +13,7 @@
       "message": "@msg.body"
     },
     "gateway_field_mapping_plus": {
-      "access_token": "${ customer_secrets.{{ params.access_token_secret }} }",
+      "access_token": "{{ params.access_token }}",
       "message": "@msg.body"
     },
     "gateway_output_format": "encoded",
@@ -32,7 +32,7 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "access_token_secret": "STREAMLABS_ACCESS_TOKEN",
+      "access_token": "${ customer_secrets.STREAMLABS_ACCESS_TOKEN }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Streamlabs destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -41,13 +41,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "access_token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Streamlabs access token",
-          "type": "string"
+        "access_token": {
+          "description": "This enrollment's Streamlabs access token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "access_token_secret"
+        "access_token"
       ],
       "type": "object"
     }

@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.MAILGUN_EMAIL_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "from": "${ customer_secrets.MAILGUN_EMAIL_FROM }",
@@ -32,7 +32,7 @@
       "to": "${ customer_secrets.MAILGUN_EMAIL_TO }"
     },
     "gateway_field_mapping_plus": {
-      "from": "${ customer_secrets.{{ params.from_secret }} }",
+      "from": "{{ params.from }}",
       "html": {
         "@map": "@msg.is_html",
         "values": {
@@ -46,14 +46,14 @@
           "false": "@msg.body"
         }
       },
-      "to": "${ customer_secrets.{{ params.to_secret }} }"
+      "to": "{{ params.to }}"
     },
     "gateway_output_format": "encoded",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Mailgun destinations, direct",
     "gateway_price_description": "Free — direct to your Mailgun sending domain",
     "gateway_test_local_url": "https://mock.unitysvc.dev/mailgun_email/v3/notify.example.com/messages",
     "gateway_url": "${ customer_secrets._MAILGUN_EMAIL_BASE ?? https://api.mailgun.net }/v3/${ customer_secrets.MAILGUN_EMAIL_HOST }/messages",
-    "gateway_url_plus": "${ customer_secrets._MAILGUN_EMAIL_BASE ?? https://api.mailgun.net }/v3/${ customer_secrets.{{ params.host_secret }} }/messages",
+    "gateway_url_plus": "${ customer_secrets._MAILGUN_EMAIL_BASE ?? https://api.mailgun.net }/v3/{{ params.host }}/messages",
     "logo": "https://cdn.simpleicons.org/mailgun/F06B66",
     "msg_capabilities": {
       "formats": [
@@ -66,10 +66,10 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic_secret": "MAILGUN_EMAIL_BASIC",
-      "from_secret": "MAILGUN_EMAIL_FROM",
-      "host_secret": "MAILGUN_EMAIL_HOST",
-      "to_secret": "MAILGUN_EMAIL_TO"
+      "basic": "${ customer_secrets.MAILGUN_EMAIL_BASIC }",
+      "from": "${ customer_secrets.MAILGUN_EMAIL_FROM }",
+      "host": "${ customer_secrets.MAILGUN_EMAIL_HOST }",
+      "to": "${ customer_secrets.MAILGUN_EMAIL_TO }"
     },
     "summary": "Send an email notification through your own Mailgun account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "mailgun://mailgun_emailuser@notify.example.com/mailgun_emailapikeyxyz123/",
@@ -77,28 +77,36 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's MAILGUN_EMAIL_BASIC value (same format as MAILGUN_EMAIL_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's MAILGUN_EMAIL_BASIC value (same format as MAILGUN_EMAIL_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_secret": {
-          "description": "Name of the customer secret holding this enrollment's MAILGUN_EMAIL_FROM value (same format as MAILGUN_EMAIL_FROM)",
-          "type": "string"
+        "from": {
+          "description": "This enrollment's MAILGUN_EMAIL_FROM value (same format as MAILGUN_EMAIL_FROM). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "host_secret": {
-          "description": "Name of the customer secret holding this enrollment's Mailgun host",
-          "type": "string"
+        "host": {
+          "description": "This enrollment's Mailgun host. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's MAILGUN_EMAIL_TO value (same format as MAILGUN_EMAIL_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's MAILGUN_EMAIL_TO value (same format as MAILGUN_EMAIL_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "host_secret",
-        "from_secret",
-        "to_secret",
-        "basic_secret"
+        "host",
+        "from",
+        "to",
+        "basic"
       ],
       "type": "object"
     }

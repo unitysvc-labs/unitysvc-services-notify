@@ -16,7 +16,7 @@
     "gateway_price_description": "Free — direct to your SIGNL4 team webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/signl4/webhook/demosecrettoken",
     "gateway_url": "${ customer_secrets._SIGNL4_WEBHOOK_BASE ?? https://connect.signl4.com }/webhook/${ customer_secrets.SIGNL4_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets._SIGNL4_WEBHOOK_BASE ?? https://connect.signl4.com }/webhook/${ customer_secrets.{{ params.secret_secret }} }",
+    "gateway_url_plus": "${ customer_secrets._SIGNL4_WEBHOOK_BASE ?? https://connect.signl4.com }/webhook/{{ params.secret }}",
     "logo": "https://www.signl4.com/wp-content/uploads/2020/05/cropped-signl4-192x192.png",
     "msg_capabilities": {
       "formats": [
@@ -28,7 +28,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "secret_secret": "SIGNL4_SECRET"
+      "secret": "${ customer_secrets.SIGNL4_SECRET }"
     },
     "summary": "Send a notification to your own SIGNL4 destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "signl4://signl4secretxyz123",
@@ -36,13 +36,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "secret_secret": {
-          "description": "Name of the customer secret holding this enrollment's SIGNL4 team secret token",
-          "type": "string"
+        "secret": {
+          "description": "This enrollment's SIGNL4 team secret token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "secret_secret"
+        "secret"
       ],
       "type": "object"
     }

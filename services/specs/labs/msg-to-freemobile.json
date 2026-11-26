@@ -15,8 +15,8 @@
     },
     "gateway_field_mapping_plus": {
       "msg": "@msg.body",
-      "pass": "${ customer_secrets.{{ params.password_secret }} }",
-      "user": "${ customer_secrets.{{ params.user_secret }} }"
+      "pass": "{{ params.password }}",
+      "user": "{{ params.user }}"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Free-Mobile destinations, direct",
     "gateway_price_description": "Free — direct to your Free-Mobile SMS API",
@@ -34,8 +34,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "password_secret": "FREEMOBILE_PASSWORD",
-      "user_secret": "FREEMOBILE_USER"
+      "password": "${ customer_secrets.FREEMOBILE_PASSWORD }",
+      "user": "${ customer_secrets.FREEMOBILE_USER }"
     },
     "summary": "Send a notification to your own Free-Mobile destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "freemobile://freemobileuser@freemobilepass",
@@ -43,18 +43,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "password_secret": {
-          "description": "Name of the customer secret holding this enrollment's Free-Mobile password",
-          "type": "string"
+        "password": {
+          "description": "This enrollment's Free-Mobile password. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "user_secret": {
-          "description": "Name of the customer secret holding this enrollment's Free-Mobile user",
-          "type": "string"
+        "user": {
+          "description": "This enrollment's Free-Mobile user. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "user_secret",
-        "password_secret"
+        "user",
+        "password"
       ],
       "type": "object"
     }

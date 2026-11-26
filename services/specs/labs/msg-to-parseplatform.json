@@ -12,7 +12,7 @@
       "X-Parse-Master-Key": "${ customer_secrets.PARSEPLATFORM_MASTER_KEY }"
     },
     "gateway_extra_headers_plus": {
-      "X-Parse-Master-Key": "${ customer_secrets.{{ params.master_key_secret }} }"
+      "X-Parse-Master-Key": "{{ params.master_key }}"
     },
     "gateway_field_mapping": {
       "data": {
@@ -24,7 +24,7 @@
     "gateway_price_description": "Free — direct to your Parse Platform push API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/parseplatform/parse/push/",
     "gateway_url": "${ customer_secrets.PARSEPLATFORM_BASE_URL }/parse/push/",
-    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/parse/push/",
+    "gateway_url_plus": "{{ params.base_url }}/parse/push/",
     "logo": "https://raw.githubusercontent.com/parse-community/parse-community.github.io/main/img/favicon.svg",
     "msg_capabilities": {
       "formats": [
@@ -35,9 +35,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "base_url_secret": "PARSEPLATFORM_BASE_URL",
-      "master_key_secret": "PARSEPLATFORM_MASTER_KEY"
+      "base_url": "${ customer_secrets.PARSEPLATFORM_BASE_URL }",
+      "master_key": "${ customer_secrets.PARSEPLATFORM_MASTER_KEY }"
     },
     "summary": "Send a notification to your own Parse Platform destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "parseps://parseplatformappidxyz123:parseplatformmasterkeyxyz123@notify.example.com",
@@ -45,18 +44,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "base_url_secret": {
-          "description": "Name of the customer secret holding this enrollment's PARSEPLATFORM_BASE_URL value (same format as PARSEPLATFORM_BASE_URL)",
-          "type": "string"
+        "base_url": {
+          "description": "This enrollment's PARSEPLATFORM_BASE_URL value (same format as PARSEPLATFORM_BASE_URL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "master_key_secret": {
-          "description": "Name of the customer secret holding this enrollment's Parse Platform master key",
-          "type": "string"
+        "master_key": {
+          "description": "This enrollment's Parse Platform master key. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "base_url_secret",
-        "master_key_secret"
+        "base_url",
+        "master_key"
       ],
       "type": "object"
     }

@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.HUMHUB_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "data": {
@@ -23,7 +23,7 @@
     "gateway_price_description": "Free — direct to your HumHub post API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/humhub/api/v1/post/container/123",
     "gateway_url": "${ customer_secrets.HUMHUB_BASE_URL }/api/v1/post/container/${ customer_secrets.HUMHUB_CONTAINER_ID }",
-    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/api/v1/post/container/${ customer_secrets.{{ params.container_id_secret }} }",
+    "gateway_url_plus": "{{ params.base_url }}/api/v1/post/container/{{ params.container_id }}",
     "logo": "https://cdn.simpleicons.org/humhub/1B8291",
     "msg_capabilities": {
       "formats": [
@@ -34,10 +34,9 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "base_url_secret": "HUMHUB_BASE_URL",
-      "basic_secret": "HUMHUB_BASIC",
-      "container_id_secret": "HUMHUB_CONTAINER_ID"
+      "base_url": "${ customer_secrets.HUMHUB_BASE_URL }",
+      "basic": "${ customer_secrets.HUMHUB_BASIC }",
+      "container_id": "${ customer_secrets.HUMHUB_CONTAINER_ID }"
     },
     "summary": "Send a notification to your own HumHub instance by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "humhubs://humhubuser:humhubpass@notify.example.com/123",
@@ -45,23 +44,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "base_url_secret": {
-          "description": "Name of the customer secret holding this enrollment's HUMHUB_BASE_URL value (same format as HUMHUB_BASE_URL)",
-          "type": "string"
+        "base_url": {
+          "description": "This enrollment's HUMHUB_BASE_URL value (same format as HUMHUB_BASE_URL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's HUMHUB_BASIC value (same format as HUMHUB_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's HUMHUB_BASIC value (same format as HUMHUB_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "container_id_secret": {
-          "description": "Name of the customer secret holding this enrollment's HumHub container ID",
-          "type": "string"
+        "container_id": {
+          "description": "This enrollment's HumHub container ID. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "base_url_secret",
-        "container_id_secret",
-        "basic_secret"
+        "base_url",
+        "container_id",
+        "basic"
       ],
       "type": "object"
     }

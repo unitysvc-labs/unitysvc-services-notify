@@ -15,7 +15,7 @@
     "gateway_price_description": "Free — direct to your Slack incoming webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/slack/services/demo/demob/demotoken",
     "gateway_url": "${ customer_secrets._SLACK_WEBHOOK_BASE ?? https://hooks.slack.com/services }/${ customer_secrets.SLACK_TOKEN_A }/${ customer_secrets.SLACK_TOKEN_B }/${ customer_secrets.SLACK_TOKEN_C }",
-    "gateway_url_plus": "${ customer_secrets._SLACK_WEBHOOK_BASE ?? https://hooks.slack.com/services }/${ customer_secrets.{{ params.token_a_secret }} }/${ customer_secrets.{{ params.token_b_secret }} }/${ customer_secrets.{{ params.token_c_secret }} }",
+    "gateway_url_plus": "${ customer_secrets._SLACK_WEBHOOK_BASE ?? https://hooks.slack.com/services }/{{ params.token_a }}/{{ params.token_b }}/{{ params.token_c }}",
     "logo": "https://api.iconify.design/logos:slack-icon.svg",
     "msg_capabilities": {
       "formats": [
@@ -27,9 +27,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_a_secret": "SLACK_TOKEN_A",
-      "token_b_secret": "SLACK_TOKEN_B",
-      "token_c_secret": "SLACK_TOKEN_C"
+      "token_a": "${ customer_secrets.SLACK_TOKEN_A }",
+      "token_b": "${ customer_secrets.SLACK_TOKEN_B }",
+      "token_c": "${ customer_secrets.SLACK_TOKEN_C }"
     },
     "summary": "Send a notification to your own Slack destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "slack://TokenA/TokenB/TokenC",
@@ -37,23 +37,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "token_a_secret": {
-          "description": "Name of the customer secret holding this enrollment's Slack token a",
-          "type": "string"
+        "token_a": {
+          "description": "This enrollment's Slack token a. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "token_b_secret": {
-          "description": "Name of the customer secret holding this enrollment's Slack token b",
-          "type": "string"
+        "token_b": {
+          "description": "This enrollment's Slack token b. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "token_c_secret": {
-          "description": "Name of the customer secret holding this enrollment's Slack token c",
-          "type": "string"
+        "token_c": {
+          "description": "This enrollment's Slack token c. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "token_a_secret",
-        "token_b_secret",
-        "token_c_secret"
+        "token_a",
+        "token_b",
+        "token_c"
       ],
       "type": "object"
     }

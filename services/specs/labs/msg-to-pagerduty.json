@@ -21,10 +21,10 @@
       "event_action": "trigger",
       "payload": {
         "severity": "error",
-        "source": "${ customer_secrets.{{ params.source_secret }} }",
+        "source": "{{ params.source }}",
         "summary": "@msg.body"
       },
-      "routing_key": "${ customer_secrets.{{ params.routing_key_secret }} }"
+      "routing_key": "{{ params.routing_key }}"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment PagerDuty destinations, direct",
     "gateway_price_description": "Free — direct to PagerDuty Events API v2",
@@ -42,8 +42,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "routing_key_secret": "PAGERDUTY_ROUTING_KEY",
-      "source_secret": "PAGERDUTY_SOURCE"
+      "routing_key": "${ customer_secrets.PAGERDUTY_ROUTING_KEY }",
+      "source": "${ customer_secrets.PAGERDUTY_SOURCE }"
     },
     "summary": "Send a notification to your own PagerDuty destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pagerduty://integ123key@apikey456",
@@ -51,18 +51,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "routing_key_secret": {
-          "description": "Name of the customer secret holding this enrollment's PAGERDUTY_ROUTING_KEY value (same format as PAGERDUTY_ROUTING_KEY)",
-          "type": "string"
+        "routing_key": {
+          "description": "This enrollment's PAGERDUTY_ROUTING_KEY value (same format as PAGERDUTY_ROUTING_KEY). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "source_secret": {
-          "description": "Name of the customer secret holding this enrollment's PAGERDUTY_SOURCE value (same format as PAGERDUTY_SOURCE)",
-          "type": "string"
+        "source": {
+          "description": "This enrollment's PAGERDUTY_SOURCE value (same format as PAGERDUTY_SOURCE). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "routing_key_secret",
-        "source_secret"
+        "routing_key",
+        "source"
       ],
       "type": "object"
     }

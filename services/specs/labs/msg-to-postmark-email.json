@@ -12,7 +12,7 @@
       "X-Postmark-Server-Token": "${ customer_secrets.POSTMARK_SERVER_TOKEN }"
     },
     "gateway_extra_headers_plus": {
-      "X-Postmark-Server-Token": "${ customer_secrets.{{ params.server_token_secret }} }"
+      "X-Postmark-Server-Token": "{{ params.server_token }}"
     },
     "gateway_field_mapping": {
       "From": "${ customer_secrets.POSTMARK_FROM_EMAIL }",
@@ -32,7 +32,7 @@
       "To": "${ customer_secrets.POSTMARK_TO_EMAIL }"
     },
     "gateway_field_mapping_plus": {
-      "From": "${ customer_secrets.{{ params.from_email_secret }} }",
+      "From": "{{ params.from_email }}",
       "HtmlBody": {
         "@map": "@msg.is_html",
         "values": {
@@ -46,7 +46,7 @@
           "false": "@msg.body"
         }
       },
-      "To": "${ customer_secrets.{{ params.to_email_secret }} }"
+      "To": "{{ params.to_email }}"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Postmark destinations, direct",
     "gateway_price_description": "Free — direct to Postmark email API",
@@ -65,9 +65,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_email_secret": "POSTMARK_FROM_EMAIL",
-      "server_token_secret": "POSTMARK_SERVER_TOKEN",
-      "to_email_secret": "POSTMARK_TO_EMAIL"
+      "from_email": "${ customer_secrets.POSTMARK_FROM_EMAIL }",
+      "server_token": "${ customer_secrets.POSTMARK_SERVER_TOKEN }",
+      "to_email": "${ customer_secrets.POSTMARK_TO_EMAIL }"
     },
     "summary": "Send a notification to your own Postmark Email destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "postmark://abcdef0123456789:noreply@example.com",
@@ -75,23 +75,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "from_email_secret": {
-          "description": "Name of the customer secret holding this enrollment's POSTMARK_FROM_EMAIL value (same format as POSTMARK_FROM_EMAIL)",
-          "type": "string"
+        "from_email": {
+          "description": "This enrollment's POSTMARK_FROM_EMAIL value (same format as POSTMARK_FROM_EMAIL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "server_token_secret": {
-          "description": "Name of the customer secret holding this enrollment's POSTMARK_SERVER_TOKEN value (same format as POSTMARK_SERVER_TOKEN)",
-          "type": "string"
+        "server_token": {
+          "description": "This enrollment's POSTMARK_SERVER_TOKEN value (same format as POSTMARK_SERVER_TOKEN). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_email_secret": {
-          "description": "Name of the customer secret holding this enrollment's POSTMARK_TO_EMAIL value (same format as POSTMARK_TO_EMAIL)",
-          "type": "string"
+        "to_email": {
+          "description": "This enrollment's POSTMARK_TO_EMAIL value (same format as POSTMARK_TO_EMAIL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "from_email_secret",
-        "to_email_secret",
-        "server_token_secret"
+        "from_email",
+        "to_email",
+        "server_token"
       ],
       "type": "object"
     }

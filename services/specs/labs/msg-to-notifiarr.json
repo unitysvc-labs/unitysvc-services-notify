@@ -12,7 +12,7 @@
       "X-api-Key": "${ customer_secrets.NOTIFIARR_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "X-api-Key": "${ customer_secrets.{{ params.apikey_secret }} }"
+      "X-api-Key": "{{ params.api_key }}"
     },
     "gateway_field_mapping": {
       "discord": {
@@ -43,7 +43,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey_secret": "NOTIFIARR_APIKEY",
+      "api_key": "${ customer_secrets.NOTIFIARR_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Notifiarr destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -52,13 +52,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's Notifiarr apikey",
-          "type": "string"
+        "api_key": {
+          "description": "This enrollment's Notifiarr apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "apikey_secret"
+        "api_key"
       ],
       "type": "object"
     }

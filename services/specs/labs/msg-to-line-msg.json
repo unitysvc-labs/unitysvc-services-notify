@@ -6,7 +6,7 @@
     "description": "`msg-to-line-msg` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your LINE destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own LINE destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional LINE destinations bound per enrollment.\n\nIn the LINE Developers console (developers.line.biz/console), create a Provider (choose Messaging API) and a Channel, then open the Messaging API tab and issue a long-lived Channel access token — that's your token secret. On the Basic settings tab you'll find the bot's User ID (starts with U); use that, or the ID of a group/room you've added the bot to, as your target. Add the bot as a friend from your LINE mobile app by scanning the QR code shown on the Messaging API tab so it's able to message you.",
     "display_name": "LINE Messages",
     "gateway_api_key": "${ customer_secrets.LINE_MSG_TOKEN }",
-    "gateway_api_key_plus": "${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_api_key_plus": "{{ params.token }}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_line_msg",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_line_msg",
     "gateway_content_type": "application/json",
@@ -26,7 +26,7 @@
           "type": "text"
         }
       ],
-      "to": "${ customer_secrets.{{ params.targets_secret }} }"
+      "to": "{{ params.targets }}"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment LINE destinations, direct",
     "gateway_price_description": "Free — direct to LINE Messaging API push message",
@@ -44,8 +44,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "targets_secret": "LINE_MSG_TARGETS",
-      "token_secret": "LINE_MSG_TOKEN"
+      "targets": "${ customer_secrets.LINE_MSG_TARGETS }",
+      "token": "${ customer_secrets.LINE_MSG_TOKEN }"
     },
     "summary": "Send a notification to your own LINE destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "line://demotoken123456/UserOrGroupId1",
@@ -53,18 +53,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "targets_secret": {
-          "description": "Name of the customer secret holding this enrollment's LINE targets",
-          "type": "string"
+        "targets": {
+          "description": "This enrollment's LINE targets. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's LINE token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's LINE token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "targets_secret",
-        "token_secret"
+        "targets",
+        "token"
       ],
       "type": "object"
     }

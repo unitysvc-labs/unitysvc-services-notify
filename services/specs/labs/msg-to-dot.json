@@ -6,7 +6,7 @@
     "description": "`msg-to-dot` accepts an HTTP POST carrying the unified `msg` envelope (`title`, `body`, `type`, `format`), attaches the credentials in your stored secrets, and delivers the message to your DOT destination — so you run no messaging infrastructure of your own.\n\nDelivery goes out through a native gateway transformation that posts straight to your own DOT destinations — free, and driven entirely by the credentials you have stored. Paid variants ($0.001 / message) deliver to additional DOT destinations bound per enrollment.\n\nOpen the Dot. mobile app, enable the Text API content slot for your device, then retrieve the device's API token (starts with `dot_app_`) and its 12-character hex serial number from the device settings screen. Set the token as DOT_APIKEY and the serial number as DOT_DEVICE_ID; UnitySVC posts your title and body directly to that device's Text API.",
     "display_name": "DOT Messages",
     "gateway_api_key": "${ customer_secrets.DOT_APIKEY }",
-    "gateway_api_key_plus": "${ customer_secrets.{{ params.apikey_secret }} }",
+    "gateway_api_key_plus": "{{ params.api_key }}",
     "gateway_code_example_preset": "msg_to_channel_code_example_py_dot",
     "gateway_connectivity_preset": "msg_to_channel_connectivity_dot",
     "gateway_content_type": "application/json",
@@ -17,7 +17,7 @@
     "gateway_price_description": "Free — direct to DOT device API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/dot/api/authV2/open/device/demo123/text",
     "gateway_url": "${ customer_secrets._DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/${ customer_secrets.DOT_DEVICE_ID }/text",
-    "gateway_url_plus": "${ customer_secrets._DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/${ customer_secrets.{{ params.device_id_secret }} }/text",
+    "gateway_url_plus": "${ customer_secrets._DOT_BASE ?? https://dot.mindreset.tech }/api/authV2/open/device/{{ params.device_id }}/text",
     "logo": "https://api.iconify.design/mdi:message-text-fast-outline.svg?color=%2300BCEB",
     "msg_capabilities": {
       "formats": [
@@ -28,9 +28,9 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey_secret": "DOT_APIKEY",
+      "api_key": "${ customer_secrets.DOT_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "device_id_secret": "DOT_DEVICE_ID"
+      "device_id": "${ customer_secrets.DOT_DEVICE_ID }"
     },
     "summary": "Send a notification to your own DOT destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "dot://dotapikeyxyz123@dotdevice/",
@@ -38,18 +38,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's DOT apikey",
-          "type": "string"
+        "api_key": {
+          "description": "This enrollment's DOT apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "device_id_secret": {
-          "description": "Name of the customer secret holding this enrollment's DOT device id",
-          "type": "string"
+        "device_id": {
+          "description": "This enrollment's DOT device id. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "device_id_secret",
-        "apikey_secret"
+        "api_key",
+        "device_id"
       ],
       "type": "object"
     }

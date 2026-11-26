@@ -12,7 +12,7 @@
       "X-Viber-Auth-Token": "${ customer_secrets.VIBER_AUTH_TOKEN }"
     },
     "gateway_extra_headers_plus": {
-      "X-Viber-Auth-Token": "${ customer_secrets.{{ params.auth_token_secret }} }"
+      "X-Viber-Auth-Token": "{{ params.auth_token }}"
     },
     "gateway_field_mapping": {
       "receiver": "${ customer_secrets.VIBER_RECEIVER }",
@@ -20,7 +20,7 @@
       "type": "text"
     },
     "gateway_field_mapping_plus": {
-      "receiver": "${ customer_secrets.{{ params.receiver_secret }} }",
+      "receiver": "{{ params.receiver }}",
       "text": "@msg.body",
       "type": "text"
     },
@@ -39,9 +39,9 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "auth_token_secret": "VIBER_AUTH_TOKEN",
+      "auth_token": "${ customer_secrets.VIBER_AUTH_TOKEN }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "receiver_secret": "VIBER_RECEIVER"
+      "receiver": "${ customer_secrets.VIBER_RECEIVER }"
     },
     "summary": "Send a notification to your own Viber destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "viber://vibertokenxyz123/vibertarget",
@@ -49,18 +49,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "auth_token_secret": {
-          "description": "Name of the customer secret holding this enrollment's VIBER_AUTH_TOKEN value (same format as VIBER_AUTH_TOKEN)",
-          "type": "string"
+        "auth_token": {
+          "description": "This enrollment's VIBER_AUTH_TOKEN value (same format as VIBER_AUTH_TOKEN). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "receiver_secret": {
-          "description": "Name of the customer secret holding this enrollment's VIBER_RECEIVER value (same format as VIBER_RECEIVER)",
-          "type": "string"
+        "receiver": {
+          "description": "This enrollment's VIBER_RECEIVER value (same format as VIBER_RECEIVER). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "receiver_secret",
-        "auth_token_secret"
+        "receiver",
+        "auth_token"
       ],
       "type": "object"
     }

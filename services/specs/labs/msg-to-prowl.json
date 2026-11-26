@@ -17,7 +17,7 @@
       "url": "@msg.link"
     },
     "gateway_field_mapping_plus": {
-      "apikey": "${ customer_secrets.{{ params.apikey_secret }} }",
+      "apikey": "{{ params.api_key }}",
       "application": "UnitySVC",
       "description": "@msg.body",
       "event": "@msg.title",
@@ -40,7 +40,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey_secret": "PROWL_APIKEY",
+      "api_key": "${ customer_secrets.PROWL_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Prowl destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -49,13 +49,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's Prowl apikey",
-          "type": "string"
+        "api_key": {
+          "description": "This enrollment's Prowl apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "apikey_secret"
+        "api_key"
       ],
       "type": "object"
     }

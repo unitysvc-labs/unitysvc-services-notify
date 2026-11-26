@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.BURSTSMS_SMS_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "from": "${ customer_secrets.BURSTSMS_SMS_FROM }",
@@ -20,9 +20,9 @@
       "to": "${ customer_secrets.BURSTSMS_SMS_TO }"
     },
     "gateway_field_mapping_plus": {
-      "from": "${ customer_secrets.{{ params.from_secret }} }",
+      "from": "{{ params.from }}",
       "message": "@msg.body",
-      "to": "${ customer_secrets.{{ params.to_secret }} }"
+      "to": "{{ params.to }}"
     },
     "gateway_output_format": "encoded",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Burst SMS destinations, direct",
@@ -41,9 +41,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic_secret": "BURSTSMS_SMS_BASIC",
-      "from_secret": "BURSTSMS_SMS_FROM",
-      "to_secret": "BURSTSMS_SMS_TO"
+      "basic": "${ customer_secrets.BURSTSMS_SMS_BASIC }",
+      "from": "${ customer_secrets.BURSTSMS_SMS_FROM }",
+      "to": "${ customer_secrets.BURSTSMS_SMS_TO }"
     },
     "summary": "Send an SMS to your own Burst SMS account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "burstsms://dkry5cjqx4bi:dkry5cjqx4bi@+15551234567/+15551234567",
@@ -51,23 +51,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's BURSTSMS_SMS_BASIC value (same format as BURSTSMS_SMS_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's BURSTSMS_SMS_BASIC value (same format as BURSTSMS_SMS_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_secret": {
-          "description": "Name of the customer secret holding this enrollment's BURSTSMS_SMS_FROM value (same format as BURSTSMS_SMS_FROM)",
-          "type": "string"
+        "from": {
+          "description": "This enrollment's BURSTSMS_SMS_FROM value (same format as BURSTSMS_SMS_FROM). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's BURSTSMS_SMS_TO value (same format as BURSTSMS_SMS_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's BURSTSMS_SMS_TO value (same format as BURSTSMS_SMS_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "to_secret",
-        "from_secret",
-        "basic_secret"
+        "to",
+        "from",
+        "basic"
       ],
       "type": "object"
     }

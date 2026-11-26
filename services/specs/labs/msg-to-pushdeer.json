@@ -18,7 +18,7 @@
     "gateway_price_description": "Free — direct to your PushDeer pushkey",
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushdeer/message/push?pushkey=demo123",
     "gateway_url": "${ customer_secrets._PUSHDEER_BASE ?? https://api2.pushdeer.com }/message/push?pushkey=${ customer_secrets.PUSHDEER_PUSHKEY }",
-    "gateway_url_plus": "${ customer_secrets._PUSHDEER_BASE ?? https://api2.pushdeer.com }/message/push?pushkey=${ customer_secrets.{{ params.pushkey_secret }} }",
+    "gateway_url_plus": "${ customer_secrets._PUSHDEER_BASE ?? https://api2.pushdeer.com }/message/push?pushkey={{ params.pushkey }}",
     "logo": "https://www.pushdeer.com/favicon.svg",
     "msg_capabilities": {
       "formats": [
@@ -30,7 +30,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "pushkey_secret": "PUSHDEER_PUSHKEY"
+      "pushkey": "${ customer_secrets.PUSHDEER_PUSHKEY }"
     },
     "summary": "Send a notification to your own PushDeer destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pushdeers://dkry5cjqx4bi",
@@ -38,13 +38,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "pushkey_secret": {
-          "description": "Name of the customer secret holding this enrollment's PushDeer pushkey",
-          "type": "string"
+        "pushkey": {
+          "description": "This enrollment's PushDeer pushkey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "pushkey_secret"
+        "pushkey"
       ],
       "type": "object"
     }

@@ -16,7 +16,7 @@
     "gateway_price_description": "Free — direct to QQ Push API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/qqpush/send/demotoken",
     "gateway_url": "${ customer_secrets._QQPUSH_BASE ?? https://qmsg.zendee.cn }/send/${ customer_secrets.QQPUSH_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets._QQPUSH_BASE ?? https://qmsg.zendee.cn }/send/${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_url_plus": "${ customer_secrets._QQPUSH_BASE ?? https://qmsg.zendee.cn }/send/{{ params.token }}",
     "logo": "https://cdn.simpleicons.org/qq/FFFFFF",
     "msg_capabilities": {
       "formats": [
@@ -28,7 +28,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_secret": "QQPUSH_TOKEN"
+      "token": "${ customer_secrets.QQPUSH_TOKEN }"
     },
     "summary": "Send a notification to your own QQ Push destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "qq://dkry5cjqx4bipw3ahov29gnu",
@@ -36,13 +36,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's QQ Push token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's QQ Push token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "token_secret"
+        "token"
       ],
       "type": "object"
     }

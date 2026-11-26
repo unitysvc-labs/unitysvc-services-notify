@@ -13,7 +13,7 @@
       "text": "@msg.body"
     },
     "gateway_field_mapping_plus": {
-      "bot_id": "${ customer_secrets.{{ params.bot_id_secret }} }",
+      "bot_id": "{{ params.bot_id }}",
       "text": "@msg.body"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment GroupMe destinations, direct",
@@ -32,7 +32,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "bot_id_secret": "GROUPME_MSG_BOT_ID"
+      "bot_id": "${ customer_secrets.GROUPME_MSG_BOT_ID }"
     },
     "summary": "Send a notification to your own GroupMe destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "groupme://1234567890abcdef",
@@ -40,13 +40,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "bot_id_secret": {
-          "description": "Name of the customer secret holding this enrollment's GroupMe bot id",
-          "type": "string"
+        "bot_id": {
+          "description": "This enrollment's GroupMe bot id. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "bot_id_secret"
+        "bot_id"
       ],
       "type": "object"
     }

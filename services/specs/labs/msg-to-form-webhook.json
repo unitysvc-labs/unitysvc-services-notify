@@ -16,7 +16,7 @@
     "gateway_price_description": "Free — direct to your form webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/form",
     "gateway_url": "${ customer_secrets.FORM_WEBHOOK_URL }",
-    "gateway_url_plus": "${ customer_secrets.{{ params.url_secret }} }",
+    "gateway_url_plus": "{{ params.url }}",
     "logo": "https://api.iconify.design/mdi:form-select.svg?color=%2300BCEB",
     "msg_capabilities": {
       "formats": [
@@ -28,7 +28,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "url_secret": "FORM_WEBHOOK_URL"
+      "url": "${ customer_secrets.FORM_WEBHOOK_URL }"
     },
     "summary": "Send a notification to your own Form Webhook destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "forms://notify.example.com",
@@ -36,13 +36,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "url_secret": {
-          "description": "Name of the customer secret holding this enrollment's form webhook URL",
-          "type": "string"
+        "url": {
+          "description": "This enrollment's form webhook URL. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "url_secret"
+        "url"
       ],
       "type": "object"
     }

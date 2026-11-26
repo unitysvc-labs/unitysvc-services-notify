@@ -12,7 +12,7 @@
       "api-key": "${ customer_secrets.BREVO_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "api-key": "${ customer_secrets.{{ params.apikey_secret }} }"
+      "api-key": "{{ params.api_key }}"
     },
     "gateway_field_mapping": {
       "htmlContent": {
@@ -45,7 +45,7 @@
         }
       },
       "sender": {
-        "email": "${ customer_secrets.{{ params.from_email_secret }} }"
+        "email": "{{ params.from_email }}"
       },
       "subject": "@msg.title",
       "textContent": {
@@ -56,7 +56,7 @@
       },
       "to": [
         {
-          "email": "${ customer_secrets.{{ params.to_email_secret }} }"
+          "email": "{{ params.to_email }}"
         }
       ]
     },
@@ -76,10 +76,10 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey_secret": "BREVO_APIKEY",
+      "api_key": "${ customer_secrets.BREVO_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_email_secret": "BREVO_FROM_EMAIL",
-      "to_email_secret": "BREVO_TO_EMAIL"
+      "from_email": "${ customer_secrets.BREVO_FROM_EMAIL }",
+      "to_email": "${ customer_secrets.BREVO_TO_EMAIL }"
     },
     "summary": "Send an email through your own Brevo account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "brevo://abcdef0123456789:noreply@example.com",
@@ -87,23 +87,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's BREVO_APIKEY value (same format as BREVO_APIKEY)",
-          "type": "string"
+        "api_key": {
+          "description": "This enrollment's BREVO_APIKEY value (same format as BREVO_APIKEY). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_email_secret": {
-          "description": "Name of the customer secret holding this enrollment's BREVO_FROM_EMAIL value (same format as BREVO_FROM_EMAIL)",
-          "type": "string"
+        "from_email": {
+          "description": "This enrollment's BREVO_FROM_EMAIL value (same format as BREVO_FROM_EMAIL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_email_secret": {
-          "description": "Name of the customer secret holding this enrollment's BREVO_TO_EMAIL value (same format as BREVO_TO_EMAIL)",
-          "type": "string"
+        "to_email": {
+          "description": "This enrollment's BREVO_TO_EMAIL value (same format as BREVO_TO_EMAIL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "from_email_secret",
-        "to_email_secret",
-        "apikey_secret"
+        "api_key",
+        "from_email",
+        "to_email"
       ],
       "type": "object"
     }

@@ -13,8 +13,8 @@
       "api-login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }"
     },
     "gateway_extra_headers_plus": {
-      "api-key": "${ customer_secrets.{{ params.api_key_secret }} }",
-      "api-login": "${ customer_secrets.{{ params.api_login_secret }} }"
+      "api-key": "{{ params.api_key }}",
+      "api-login": "{{ params.api_login }}"
     },
     "gateway_field_mapping": {
       "purpose": "alert",
@@ -30,10 +30,10 @@
       "purpose": "alert",
       "recipients": [
         {
-          "phone_number": "${ customer_secrets.{{ params.to_secret }} }"
+          "phone_number": "{{ params.to }}"
         }
       ],
-      "sender": "${ customer_secrets.{{ params.from_secret }} }",
+      "sender": "{{ params.from }}",
       "text": "@msg.body"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Octopush destinations, direct",
@@ -51,11 +51,11 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "api_key_secret": "OCTOPUSH_SMS_API_KEY",
-      "api_login_secret": "OCTOPUSH_SMS_API_LOGIN",
+      "api_key": "${ customer_secrets.OCTOPUSH_SMS_API_KEY }",
+      "api_login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_secret": "OCTOPUSH_SMS_FROM",
-      "to_secret": "OCTOPUSH_SMS_TO"
+      "from": "${ customer_secrets.OCTOPUSH_SMS_FROM }",
+      "to": "${ customer_secrets.OCTOPUSH_SMS_TO }"
     },
     "summary": "Send an SMS to your own Octopush destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "octopush://octopush_sms@example.com/octopush_smsapikeyxyz123/+15551234567",
@@ -63,28 +63,36 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "api_key_secret": {
-          "description": "Name of the customer secret holding this enrollment's Octopush api key",
-          "type": "string"
+        "api_key": {
+          "description": "This enrollment's Octopush api key. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "api_login_secret": {
-          "description": "Name of the customer secret holding this enrollment's Octopush api login",
-          "type": "string"
+        "api_login": {
+          "description": "This enrollment's Octopush api login. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_secret": {
-          "description": "Name of the customer secret holding this enrollment's OCTOPUSH_SMS_FROM value (same format as OCTOPUSH_SMS_FROM)",
-          "type": "string"
+        "from": {
+          "description": "This enrollment's OCTOPUSH_SMS_FROM value (same format as OCTOPUSH_SMS_FROM). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's OCTOPUSH_SMS_TO value (same format as OCTOPUSH_SMS_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's OCTOPUSH_SMS_TO value (same format as OCTOPUSH_SMS_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "to_secret",
-        "from_secret",
-        "api_key_secret",
-        "api_login_secret"
+        "to",
+        "from",
+        "api_key",
+        "api_login"
       ],
       "type": "object"
     }

@@ -16,7 +16,7 @@
     "gateway_price_description": "Free — direct to SpugPush API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/spugpush/send/dkryFMT07elszGNU18fmtAHOV29gnuBI",
     "gateway_url": "${ customer_secrets._SPUGPUSH_BASE ?? https://push.spug.cc }/send/${ customer_secrets.SPUGPUSH_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets._SPUGPUSH_BASE ?? https://push.spug.cc }/send/${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_url_plus": "${ customer_secrets._SPUGPUSH_BASE ?? https://push.spug.cc }/send/{{ params.token }}",
     "logo": "https://push.spug.cc/favicon.ico",
     "msg_capabilities": {
       "formats": [
@@ -28,7 +28,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_secret": "SPUGPUSH_TOKEN"
+      "token": "${ customer_secrets.SPUGPUSH_TOKEN }"
     },
     "summary": "Send a notification to your own SpugPush destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "spugpush://dkryFMT07elszGNU18fmtAHOV29gnuBI",
@@ -36,13 +36,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's SpugPush token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's SpugPush token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "token_secret"
+        "token"
       ],
       "type": "object"
     }

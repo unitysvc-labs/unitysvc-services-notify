@@ -30,10 +30,10 @@
       },
       "message": "@msg.body",
       "title": "@msg.title",
-      "token": "${ customer_secrets.{{ params.token_secret }} }",
+      "token": "{{ params.token }}",
       "url": "@msg.link",
       "url_title": "@msg.link_label",
-      "user": "${ customer_secrets.{{ params.user_key_secret }} }"
+      "user": "{{ params.user_key }}"
     },
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushover/1/messages.json",
     "gateway_url": "${ customer_secrets._PUSHOVER_API_BASE ?? https://api.pushover.net }/1/messages.json",
@@ -50,8 +50,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_secret": "PUSHOVER_TOKEN",
-      "user_key_secret": "PUSHOVER_USER_KEY"
+      "token": "${ customer_secrets.PUSHOVER_TOKEN }",
+      "user_key": "${ customer_secrets.PUSHOVER_USER_KEY }"
     },
     "summary": "Send a notification to your own Pushover destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pover://userkey123@apptoken456",
@@ -59,18 +59,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Pushover token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's Pushover token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "user_key_secret": {
-          "description": "Name of the customer secret holding this enrollment's Pushover user key",
-          "type": "string"
+        "user_key": {
+          "description": "This enrollment's Pushover user key. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "token_secret",
-        "user_key_secret"
+        "token",
+        "user_key"
       ],
       "type": "object"
     }

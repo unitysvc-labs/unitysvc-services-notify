@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.ZULIP_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "content": "@msg.body",
@@ -23,7 +23,7 @@
     "gateway_price_description": "Free — direct to your Zulip organization",
     "gateway_test_local_url": "https://DKRY5CJQX4BI%40DKRY5CJQX4BI:DKRY5CJQX4BIPW3AHOV29GNU18FMT07E@mock.unitysvc.dev/zulip/api/v1/messages",
     "gateway_url": "${ customer_secrets.ZULIP_BASE_URL }/api/v1/messages",
-    "gateway_url_plus": "${ customer_secrets.{{ params.base_secret }} }/api/v1/messages",
+    "gateway_url_plus": "{{ params.base }}/api/v1/messages",
     "logo": "https://cdn.simpleicons.org/zulip/6492FE",
     "msg_capabilities": {
       "formats": [
@@ -35,9 +35,9 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_secret": "ZULIP_BASE_URL",
+      "base": "${ customer_secrets.ZULIP_BASE_URL }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic_secret": "ZULIP_BASIC"
+      "basic": "${ customer_secrets.ZULIP_BASIC }"
     },
     "summary": "Send a notification to your own Zulip destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "zulip://DKRY5CJQX4BI@DKRY5CJQX4BI/DKRY5CJQX4BIPW3AHOV29GNU18FMT07E",
@@ -45,18 +45,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "base_secret": {
-          "description": "Name of the customer secret holding this enrollment's Zulip base URL",
-          "type": "string"
+        "base": {
+          "description": "This enrollment's Zulip base URL. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's ZULIP_BASIC value (same format as ZULIP_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's ZULIP_BASIC value (same format as ZULIP_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "base_secret",
-        "basic_secret"
+        "base",
+        "basic"
       ],
       "type": "object"
     }

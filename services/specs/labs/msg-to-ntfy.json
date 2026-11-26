@@ -43,7 +43,7 @@
         }
       },
       "title": "@msg.title",
-      "topic": "${ customer_secrets.{{ params.topic_secret }} }"
+      "topic": "{{ params.topic }}"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment ntfy destinations, direct",
     "gateway_price_description": "Free — direct to your own ntfy server",
@@ -62,7 +62,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "topic_secret": "NTFY_TOPIC"
+      "topic": "${ customer_secrets.NTFY_TOPIC }"
     },
     "summary": "Send a notification to your own ntfy destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "ntfy://hostname.example.com/mytopic",
@@ -70,13 +70,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "topic_secret": {
-          "description": "Name of the customer secret holding this enrollment's ntfy topic",
-          "type": "string"
+        "topic": {
+          "description": "This enrollment's ntfy topic. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "topic_secret"
+        "topic"
       ],
       "type": "object"
     }

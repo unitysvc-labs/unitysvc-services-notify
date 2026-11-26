@@ -12,7 +12,7 @@
       "Access-Token": "${ customer_secrets.PUSHBULLET_ACCESSTOKEN }"
     },
     "gateway_extra_headers_plus": {
-      "Access-Token": "${ customer_secrets.{{ params.accesstoken_secret }} }"
+      "Access-Token": "{{ params.accesstoken }}"
     },
     "gateway_field_mapping": {
       "body": "@msg.body",
@@ -34,7 +34,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "accesstoken_secret": "PUSHBULLET_ACCESSTOKEN",
+      "accesstoken": "${ customer_secrets.PUSHBULLET_ACCESSTOKEN }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Pushbullet destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -43,13 +43,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "accesstoken_secret": {
-          "description": "Name of the customer secret holding this enrollment's Pushbullet accesstoken",
-          "type": "string"
+        "accesstoken": {
+          "description": "This enrollment's Pushbullet accesstoken. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "accesstoken_secret"
+        "accesstoken"
       ],
       "type": "object"
     }
