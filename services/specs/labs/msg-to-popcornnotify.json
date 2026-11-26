@@ -14,7 +14,7 @@
     },
     "gateway_field_mapping_plus": {
       "message": "@msg.body",
-      "recipients": "${ customer_secrets.{{ params.recipients_secret }} }"
+      "recipients": "{{ params.recipients }}"
     },
     "gateway_output_format": "encoded",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment PopcornNotify recipients, direct",
@@ -33,7 +33,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "recipients_secret": "POPCORNNOTIFY_RECIPIENTS"
+      "recipients": "${ secrets.POPCORNNOTIFY_RECIPIENTS }"
     },
     "status": "deprecated",
     "summary": "Send a notification to your own PopcornNotify destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -42,13 +42,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "recipients_secret": {
-          "description": "Name of the customer secret holding this enrollment's POPCORNNOTIFY_RECIPIENTS value (same format as POPCORNNOTIFY_RECIPIENTS)",
-          "type": "string"
+        "recipients": {
+          "description": "This enrollment's POPCORNNOTIFY_RECIPIENTS value (same format as POPCORNNOTIFY_RECIPIENTS). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "recipients_secret"
+        "recipients"
       ],
       "type": "object"
     }

@@ -12,7 +12,7 @@
       "authkey": "${ customer_secrets.MSG91_SMS_AUTHKEY }"
     },
     "gateway_extra_headers_plus": {
-      "authkey": "${ customer_secrets.{{ params.authkey_secret }} }"
+      "authkey": "{{ params.authkey }}"
     },
     "gateway_field_mapping": {
       "recipients": [
@@ -28,11 +28,11 @@
       "recipients": [
         {
           "body": "@msg.body",
-          "mobiles": "${ customer_secrets.{{ params.targets_secret }} }"
+          "mobiles": "{{ params.targets }}"
         }
       ],
       "short_url": 0,
-      "template_id": "${ customer_secrets.{{ params.template_secret }} }"
+      "template_id": "{{ params.template }}"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment MSG91 destinations, direct",
     "gateway_price_description": "Free — direct to MSG91 Flow API",
@@ -49,10 +49,10 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "authkey_secret": "MSG91_SMS_AUTHKEY",
+      "authkey": "${ secrets.MSG91_SMS_AUTHKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "targets_secret": "MSG91_SMS_TARGETS",
-      "template_secret": "MSG91_SMS_TEMPLATE"
+      "targets": "${ secrets.MSG91_SMS_TARGETS }",
+      "template": "${ secrets.MSG91_SMS_TEMPLATE }"
     },
     "summary": "Send an SMS notification to your own MSG91 destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "msg91://dkry5cjqx4bi@dkry5cjqx4bi/+15551234567",
@@ -60,23 +60,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "authkey_secret": {
-          "description": "Name of the customer secret holding this enrollment's MSG91 authkey",
-          "type": "string"
+        "authkey": {
+          "description": "This enrollment's MSG91 authkey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "targets_secret": {
-          "description": "Name of the customer secret holding this enrollment's MSG91 targets",
-          "type": "string"
+        "targets": {
+          "description": "This enrollment's MSG91 targets. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "template_secret": {
-          "description": "Name of the customer secret holding this enrollment's MSG91 template",
-          "type": "string"
+        "template": {
+          "description": "This enrollment's MSG91 template. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "template_secret",
-        "targets_secret",
-        "authkey_secret"
+        "template",
+        "targets",
+        "authkey"
       ],
       "type": "object"
     }

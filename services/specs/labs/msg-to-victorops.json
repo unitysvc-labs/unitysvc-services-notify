@@ -17,7 +17,7 @@
     "gateway_price_description": "Free — direct to your Splunk On-Call REST endpoint",
     "gateway_test_local_url": "https://mock.unitysvc.dev/victorops/integrations/generic/apikey123abc/alert/routingkey",
     "gateway_url": "${ customer_secrets._VICTOROPS_BASE ?? https://alert.victorops.com }/integrations/generic/${ customer_secrets.VICTOROPS_APIKEY }/alert/${ customer_secrets.VICTOROPS_ROUTING_KEY }",
-    "gateway_url_plus": "${ customer_secrets._VICTOROPS_BASE ?? https://alert.victorops.com }/integrations/generic/${ customer_secrets.{{ params.apikey_secret }} }/alert/${ customer_secrets.{{ params.routing_key_secret }} }",
+    "gateway_url_plus": "${ customer_secrets._VICTOROPS_BASE ?? https://alert.victorops.com }/integrations/generic/{{ params.apikey }}/alert/{{ params.routing_key }}",
     "logo": "https://cdn.simpleicons.org/splunk/65A637",
     "msg_capabilities": {
       "formats": [
@@ -28,9 +28,9 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey_secret": "VICTOROPS_APIKEY",
+      "apikey": "${ secrets.VICTOROPS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "routing_key_secret": "VICTOROPS_ROUTING_KEY"
+      "routing_key": "${ secrets.VICTOROPS_ROUTING_KEY }"
     },
     "summary": "Send a notification to your own Splunk On-Call destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "victorops://routingkey@apikey123abc",
@@ -38,18 +38,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's Splunk On-Call API key (api_id path segment)",
-          "type": "string"
+        "apikey": {
+          "description": "This enrollment's Splunk On-Call API key (api_id path segment). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "routing_key_secret": {
-          "description": "Name of the customer secret holding this enrollment's Splunk On-Call routing key",
-          "type": "string"
+        "routing_key": {
+          "description": "This enrollment's Splunk On-Call routing key. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "routing_key_secret",
-        "apikey_secret"
+        "routing_key",
+        "apikey"
       ],
       "type": "object"
     }

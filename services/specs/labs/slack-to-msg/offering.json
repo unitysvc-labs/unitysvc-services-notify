@@ -75,18 +75,20 @@
       "params": {
         "schema": {
           "properties": {
-            "token_secret": {
-              "description": "Name of the customer secret holding the token of the Slack outgoing webhook this enrollment receives from",
-              "type": "string"
+            "token": {
+              "description": "The token of the Slack outgoing webhook this enrollment receives from. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+              "format": "password",
+              "type": "string",
+              "writeOnly": true
             }
           },
           "required": [
-            "token_secret"
+            "token"
           ],
           "type": "object"
         },
         "testing_defaults": {
-          "token_secret": "SLACK_OUTGOING_TOKEN"
+          "token": "${ secrets.SLACK_OUTGOING_TOKEN }"
         }
       },
       "payload_format": "msg",
@@ -96,7 +98,7 @@
           "respond": {
             "status": 401
           },
-          "when": "body.token == \"\" or body.token ~= \"${ customer_secrets.{{ params.token_secret }} }\""
+          "when": "body.token == \"\" or body.token ~= \"{{ params.token }}\""
         },
         {
           "name": "own-echo",

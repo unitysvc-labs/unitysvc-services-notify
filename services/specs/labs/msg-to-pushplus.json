@@ -16,7 +16,7 @@
     "gateway_field_mapping_plus": {
       "content": "@msg.body",
       "title": "@msg.title",
-      "token": "${ customer_secrets.{{ params.token_secret }} }"
+      "token": "{{ params.token }}"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Pushplus destinations, direct",
     "gateway_price_description": "Free — direct to Pushplus send API",
@@ -34,7 +34,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_secret": "PUSHPLUS_TOKEN"
+      "token": "${ secrets.PUSHPLUS_TOKEN }"
     },
     "summary": "Send a notification to your own Pushplus destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pushplus://dkry5cjqx4bipw3ahov29gnu18fmt07e",
@@ -42,13 +42,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Pushplus token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's Pushplus token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "token_secret"
+        "token"
       ],
       "type": "object"
     }

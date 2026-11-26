@@ -16,7 +16,7 @@
     "gateway_price_description": "Free — direct to your Notica push token",
     "gateway_test_local_url": "https://mock.unitysvc.dev/notica/demo123",
     "gateway_url": "${ customer_secrets._NOTICA_BASE ?? https://notica.us }/${ customer_secrets.NOTICA_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets._NOTICA_BASE ?? https://notica.us }/${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_url_plus": "${ customer_secrets._NOTICA_BASE ?? https://notica.us }/{{ params.token }}",
     "logo": "https://notica.us/apple-touch-icon.png",
     "msg_capabilities": {
       "formats": [
@@ -28,7 +28,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_secret": "NOTICA_TOKEN"
+      "token": "${ secrets.NOTICA_TOKEN }"
     },
     "summary": "Send a notification to your own Notica destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "noticas://noticatoken123",
@@ -36,13 +36,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Notica token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's Notica token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "token_secret"
+        "token"
       ],
       "type": "object"
     }

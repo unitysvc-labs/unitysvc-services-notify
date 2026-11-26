@@ -14,7 +14,7 @@
       "t": "@msg.title"
     },
     "gateway_field_mapping_plus": {
-      "k": "${ customer_secrets.{{ params.privatekey_secret }} }",
+      "k": "{{ params.privatekey }}",
       "m": "@msg.body",
       "t": "@msg.title"
     },
@@ -35,7 +35,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "privatekey_secret": "PUSHSAFER_PRIVATEKEY"
+      "privatekey": "${ secrets.PUSHSAFER_PRIVATEKEY }"
     },
     "summary": "Send a notification to your own Pushsafer destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "psafers://pushsaferprivatekeyxyz123",
@@ -43,13 +43,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "privatekey_secret": {
-          "description": "Name of the customer secret holding this enrollment's Pushsafer privatekey",
-          "type": "string"
+        "privatekey": {
+          "description": "This enrollment's Pushsafer privatekey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "privatekey_secret"
+        "privatekey"
       ],
       "type": "object"
     }

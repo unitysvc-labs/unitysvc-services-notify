@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.PLIVO_SMS_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "dst": "${ customer_secrets.PLIVO_SMS_TO }",
@@ -20,15 +20,15 @@
       "text": "@msg.body"
     },
     "gateway_field_mapping_plus": {
-      "dst": "${ customer_secrets.{{ params.to_secret }} }",
-      "src": "${ customer_secrets.{{ params.from_secret }} }",
+      "dst": "{{ params.to }}",
+      "src": "{{ params.from }}",
       "text": "@msg.body"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Plivo destinations, direct",
     "gateway_price_description": "Free — direct to your Plivo number",
     "gateway_test_local_url": "https://demoauthid:demo123@mock.unitysvc.dev/plivo_sms/v1/Account/demoauthid/Message/",
     "gateway_url": "${ customer_secrets._PLIVO_SMS_API_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.PLIVO_SMS_AUTH_ID }/Message/",
-    "gateway_url_plus": "${ customer_secrets._PLIVO_SMS_API_BASE ?? https://api.plivo.com }/v1/Account/${ customer_secrets.{{ params.auth_id_secret }} }/Message/",
+    "gateway_url_plus": "${ customer_secrets._PLIVO_SMS_API_BASE ?? https://api.plivo.com }/v1/Account/{{ params.auth_id }}/Message/",
     "logo": "https://www.plivo.com/favicon/favicon.svg",
     "msg_capabilities": {
       "formats": [
@@ -39,11 +39,11 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "auth_id_secret": "PLIVO_SMS_AUTH_ID",
+      "auth_id": "${ secrets.PLIVO_SMS_AUTH_ID }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic_secret": "PLIVO_SMS_BASIC",
-      "from_secret": "PLIVO_SMS_FROM",
-      "to_secret": "PLIVO_SMS_TO"
+      "basic": "${ secrets.PLIVO_SMS_BASIC }",
+      "from": "${ secrets.PLIVO_SMS_FROM }",
+      "to": "${ secrets.PLIVO_SMS_TO }"
     },
     "summary": "Send an SMS to your own Plivo destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "plivo://dkry5cjqx4bipw3ahov2@dkry5cjqx4bipw3ahov29gnu18fmt0/+15551234567",
@@ -51,28 +51,36 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "auth_id_secret": {
-          "description": "Name of the customer secret holding this enrollment's Plivo auth id",
-          "type": "string"
+        "auth_id": {
+          "description": "This enrollment's Plivo auth id. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's PLIVO_SMS_BASIC value (same format as PLIVO_SMS_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's PLIVO_SMS_BASIC value (same format as PLIVO_SMS_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_secret": {
-          "description": "Name of the customer secret holding this enrollment's PLIVO_SMS_FROM value (same format as PLIVO_SMS_FROM)",
-          "type": "string"
+        "from": {
+          "description": "This enrollment's PLIVO_SMS_FROM value (same format as PLIVO_SMS_FROM). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's PLIVO_SMS_TO value (same format as PLIVO_SMS_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's PLIVO_SMS_TO value (same format as PLIVO_SMS_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "auth_id_secret",
-        "from_secret",
-        "to_secret",
-        "basic_secret"
+        "auth_id",
+        "from",
+        "to",
+        "basic"
       ],
       "type": "object"
     }

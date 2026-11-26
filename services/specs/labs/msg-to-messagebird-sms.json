@@ -12,7 +12,7 @@
       "Authorization": "AccessKey ${ customer_secrets.MESSAGEBIRD_SMS_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "AccessKey ${ customer_secrets.{{ params.apikey_secret }} }"
+      "Authorization": "AccessKey {{ params.apikey }}"
     },
     "gateway_field_mapping": {
       "body": "@msg.body",
@@ -23,9 +23,9 @@
     },
     "gateway_field_mapping_plus": {
       "body": "@msg.body",
-      "originator": "${ customer_secrets.{{ params.from_secret }} }",
+      "originator": "{{ params.from }}",
       "recipients": [
-        "${ customer_secrets.{{ params.to_secret }} }"
+        "{{ params.to }}"
       ]
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment MessageBird SMS destinations, direct",
@@ -43,10 +43,10 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey_secret": "MESSAGEBIRD_SMS_APIKEY",
+      "apikey": "${ secrets.MESSAGEBIRD_SMS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_secret": "MESSAGEBIRD_SMS_FROM",
-      "to_secret": "MESSAGEBIRD_SMS_TO"
+      "from": "${ secrets.MESSAGEBIRD_SMS_FROM }",
+      "to": "${ secrets.MESSAGEBIRD_SMS_TO }"
     },
     "summary": "Send an SMS notification to your own MessageBird destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "msgbird://abcdefghij0123456789abcde/15551234567",
@@ -54,23 +54,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's MessageBird SMS apikey",
-          "type": "string"
+        "apikey": {
+          "description": "This enrollment's MessageBird SMS apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_secret": {
-          "description": "Name of the customer secret holding this enrollment's MESSAGEBIRD_SMS_FROM value (same format as MESSAGEBIRD_SMS_FROM)",
-          "type": "string"
+        "from": {
+          "description": "This enrollment's MESSAGEBIRD_SMS_FROM value (same format as MESSAGEBIRD_SMS_FROM). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's MESSAGEBIRD_SMS_TO value (same format as MESSAGEBIRD_SMS_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's MESSAGEBIRD_SMS_TO value (same format as MESSAGEBIRD_SMS_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "to_secret",
-        "from_secret",
-        "apikey_secret"
+        "to",
+        "from",
+        "apikey"
       ],
       "type": "object"
     }

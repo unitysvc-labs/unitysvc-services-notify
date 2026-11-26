@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.LAMETRIC_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "model": {
@@ -29,7 +29,7 @@
     "gateway_price_description": "Free — direct to your LaMetric device API",
     "gateway_test_local_url": "https://mock.unitysvc.dev/lametric/api/v2/device/notifications",
     "gateway_url": "${ customer_secrets.LAMETRIC_BASE_URL }/api/v2/device/notifications",
-    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/api/v2/device/notifications",
+    "gateway_url_plus": "{{ params.base_url }}/api/v2/device/notifications",
     "logo": "https://lametric.com/themes/custom/lametric/favicon/apple-touch-icon.png",
     "msg_capabilities": {
       "formats": [
@@ -40,9 +40,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "base_url_secret": "LAMETRIC_BASE_URL",
-      "basic_secret": "LAMETRIC_BASIC"
+      "base_url": "${ secrets.LAMETRIC_BASE_URL }",
+      "basic": "${ secrets.LAMETRIC_BASIC }"
     },
     "summary": "Send a notification to your own LaMetric device by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "lametrics://lametricapikeyxyz123@notify.example.com",
@@ -50,18 +49,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "base_url_secret": {
-          "description": "Name of the customer secret holding this enrollment's LAMETRIC_BASE_URL value (same format as LAMETRIC_BASE_URL)",
-          "type": "string"
+        "base_url": {
+          "description": "This enrollment's LAMETRIC_BASE_URL value (same format as LAMETRIC_BASE_URL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's LAMETRIC_BASIC value (same format as LAMETRIC_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's LAMETRIC_BASIC value (same format as LAMETRIC_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "base_url_secret",
-        "basic_secret"
+        "base_url",
+        "basic"
       ],
       "type": "object"
     }

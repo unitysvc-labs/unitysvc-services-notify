@@ -12,7 +12,7 @@
       "Authorization": "${ customer_secrets.SPARKPOST_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "${ customer_secrets.{{ params.apikey_secret }} }"
+      "Authorization": "{{ params.apikey }}"
     },
     "gateway_field_mapping": {
       "content": {
@@ -41,7 +41,7 @@
     },
     "gateway_field_mapping_plus": {
       "content": {
-        "from": "${ customer_secrets.{{ params.from_email_secret }} }",
+        "from": "{{ params.from_email }}",
         "html": {
           "@map": "@msg.is_html",
           "values": {
@@ -59,7 +59,7 @@
       "recipients": [
         {
           "address": {
-            "email": "${ customer_secrets.{{ params.to_email_secret }} }"
+            "email": "{{ params.to_email }}"
           }
         }
       ]
@@ -80,10 +80,10 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey_secret": "SPARKPOST_APIKEY",
+      "apikey": "${ secrets.SPARKPOST_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_email_secret": "SPARKPOST_FROM_EMAIL",
-      "to_email_secret": "SPARKPOST_TO_EMAIL"
+      "from_email": "${ secrets.SPARKPOST_FROM_EMAIL }",
+      "to_email": "${ secrets.SPARKPOST_TO_EMAIL }"
     },
     "summary": "Send an email to your own SparkPost destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "sparkpost://noreply@example.com/abcdef0123456789",
@@ -91,23 +91,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's SPARKPOST_APIKEY value (same format as SPARKPOST_APIKEY)",
-          "type": "string"
+        "apikey": {
+          "description": "This enrollment's SPARKPOST_APIKEY value (same format as SPARKPOST_APIKEY). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_email_secret": {
-          "description": "Name of the customer secret holding this enrollment's SPARKPOST_FROM_EMAIL value (same format as SPARKPOST_FROM_EMAIL)",
-          "type": "string"
+        "from_email": {
+          "description": "This enrollment's SPARKPOST_FROM_EMAIL value (same format as SPARKPOST_FROM_EMAIL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_email_secret": {
-          "description": "Name of the customer secret holding this enrollment's SPARKPOST_TO_EMAIL value (same format as SPARKPOST_TO_EMAIL)",
-          "type": "string"
+        "to_email": {
+          "description": "This enrollment's SPARKPOST_TO_EMAIL value (same format as SPARKPOST_TO_EMAIL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "to_email_secret",
-        "from_email_secret",
-        "apikey_secret"
+        "to_email",
+        "from_email",
+        "apikey"
       ],
       "type": "object"
     }

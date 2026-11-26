@@ -15,7 +15,7 @@
     "gateway_price_description": "Free — direct to your Ryver incoming webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/ryver/application/webhook/demotoken",
     "gateway_url": "${ customer_secrets.RYVER_BASE_URL }/application/webhook/${ customer_secrets.RYVER_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/application/webhook/${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_url_plus": "{{ params.base_url }}/application/webhook/{{ params.token }}",
     "logo": "https://api.iconify.design/mdi:forum.svg?color=%23F58220",
     "msg_capabilities": {
       "formats": [
@@ -26,9 +26,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "base_url_secret": "RYVER_BASE_URL",
-      "token_secret": "RYVER_TOKEN"
+      "base_url": "${ secrets.RYVER_BASE_URL }",
+      "token": "${ secrets.RYVER_TOKEN }"
     },
     "summary": "Send a notification to your own Ryver destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "ryver://myorg/ABC123DEF456GHI",
@@ -36,18 +35,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "base_url_secret": {
-          "description": "Name of the customer secret holding this enrollment's RYVER_BASE_URL value (same format as RYVER_BASE_URL)",
-          "type": "string"
+        "base_url": {
+          "description": "This enrollment's RYVER_BASE_URL value (same format as RYVER_BASE_URL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Ryver token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's Ryver token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "base_url_secret",
-        "token_secret"
+        "base_url",
+        "token"
       ],
       "type": "object"
     }

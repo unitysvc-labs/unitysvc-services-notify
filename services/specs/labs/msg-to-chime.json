@@ -15,7 +15,7 @@
     "gateway_price_description": "Free — direct to your Amazon Chime incoming webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/chime/incomingwebhooks/demo123?token=demo123",
     "gateway_url": "${ customer_secrets._CHIME_WEBHOOK_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.CHIME_WEBHOOK_ID }?token=${ customer_secrets.CHIME_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets._CHIME_WEBHOOK_BASE ?? https://hooks.chime.aws }/incomingwebhooks/${ customer_secrets.{{ params.webhook_id_secret }} }?token=${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_url_plus": "${ customer_secrets._CHIME_WEBHOOK_BASE ?? https://hooks.chime.aws }/incomingwebhooks/{{ params.webhook_id }}?token={{ params.token }}",
     "logo": "https://api.iconify.design/logos:amazon-chime.svg",
     "msg_capabilities": {
       "formats": [
@@ -27,8 +27,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_secret": "CHIME_TOKEN",
-      "webhook_id_secret": "CHIME_WEBHOOK_ID"
+      "token": "${ secrets.CHIME_TOKEN }",
+      "webhook_id": "${ secrets.CHIME_WEBHOOK_ID }"
     },
     "summary": "Send a notification to your own Amazon Chime room by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "chime://chimewebhookidxyz123/chimetokenxyz123",
@@ -36,18 +36,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Amazon Chime token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's Amazon Chime token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "webhook_id_secret": {
-          "description": "Name of the customer secret holding this enrollment's Amazon Chime webhook id",
-          "type": "string"
+        "webhook_id": {
+          "description": "This enrollment's Amazon Chime webhook id. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "webhook_id_secret",
-        "token_secret"
+        "webhook_id",
+        "token"
       ],
       "type": "object"
     }

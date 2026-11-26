@@ -14,7 +14,7 @@
       "visibility": "public"
     },
     "gateway_field_mapping_plus": {
-      "i": "${ customer_secrets.{{ params.token_secret }} }",
+      "i": "{{ params.token }}",
       "text": "@msg.body",
       "visibility": "public"
     },
@@ -34,7 +34,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_secret": "MISSKEY_TOKEN"
+      "token": "${ secrets.MISSKEY_TOKEN }"
     },
     "summary": "Send a notification to your own Misskey instance by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "misskeys://misskeytokenxyz123@notify.example.com",
@@ -42,13 +42,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Misskey token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's Misskey token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "token_secret"
+        "token"
       ],
       "type": "object"
     }

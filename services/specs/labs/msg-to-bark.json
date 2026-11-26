@@ -17,7 +17,7 @@
     },
     "gateway_field_mapping_plus": {
       "body": "@msg.body",
-      "device_key": "${ customer_secrets.{{ params.device_key_secret }} }",
+      "device_key": "{{ params.device_key }}",
       "image": "@msg.image_url",
       "title": "@msg.title",
       "url": "@msg.link"
@@ -38,7 +38,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "device_key_secret": "BARK_DEVICE_KEY"
+      "device_key": "${ secrets.BARK_DEVICE_KEY }"
     },
     "summary": "Send a push notification to your own Bark device by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "bark://hostname.example.com/DeviceKey1",
@@ -46,13 +46,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "device_key_secret": {
-          "description": "Name of the customer secret holding this enrollment's Bark device key",
-          "type": "string"
+        "device_key": {
+          "description": "This enrollment's Bark device key. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "device_key_secret"
+        "device_key"
       ],
       "type": "object"
     }

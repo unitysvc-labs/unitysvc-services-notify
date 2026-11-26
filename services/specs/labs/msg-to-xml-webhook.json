@@ -12,7 +12,7 @@
     "gateway_price_description": "Free — direct to your XML webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/xml",
     "gateway_url": "${ customer_secrets.XML_WEBHOOK_URL }",
-    "gateway_url_plus": "${ customer_secrets.{{ params.url_secret }} }",
+    "gateway_url_plus": "{{ params.url }}",
     "logo": "https://api.iconify.design/mdi:xml.svg?color=%23FF9A3E",
     "msg_capabilities": {
       "formats": [
@@ -24,7 +24,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "url_secret": "XML_WEBHOOK_URL"
+      "url": "${ secrets.XML_WEBHOOK_URL }"
     },
     "summary": "Send a notification to your own XML Webhook destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "xmls://notify.example.com",
@@ -32,13 +32,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "url_secret": {
-          "description": "Name of the customer secret holding this enrollment's XML webhook URL",
-          "type": "string"
+        "url": {
+          "description": "This enrollment's XML webhook URL. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "url_secret"
+        "url"
       ],
       "type": "object"
     }

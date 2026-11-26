@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.TWILIO_SMS_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "Body": "@msg.body",
@@ -21,15 +21,15 @@
     },
     "gateway_field_mapping_plus": {
       "Body": "@msg.body",
-      "From": "${ customer_secrets.{{ params.from_secret }} }",
-      "To": "${ customer_secrets.{{ params.to_secret }} }"
+      "From": "{{ params.from }}",
+      "To": "{{ params.to }}"
     },
     "gateway_output_format": "encoded",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Twilio destinations, direct",
     "gateway_price_description": "Free — direct to your Twilio number",
     "gateway_test_local_url": "https://ACdeadbeefdeadbeef:dkry5cjqx4bi@mock.unitysvc.dev/twilio/2010-04-01/Accounts/ACdeadbeefdeadbeef/Messages.json",
     "gateway_url": "${ customer_secrets._TWILIO_SMS_API_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/${ customer_secrets.TWILIO_SMS_ACCOUNT_SID }/Messages.json",
-    "gateway_url_plus": "${ customer_secrets._TWILIO_SMS_API_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/${ customer_secrets.{{ params.account_sid_secret }} }/Messages.json",
+    "gateway_url_plus": "${ customer_secrets._TWILIO_SMS_API_BASE ?? https://api.twilio.com }/2010-04-01/Accounts/{{ params.account_sid }}/Messages.json",
     "logo": "https://api.iconify.design/logos:twilio-icon.svg",
     "msg_capabilities": {
       "formats": [
@@ -40,11 +40,11 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "account_sid_secret": "TWILIO_SMS_ACCOUNT_SID",
+      "account_sid": "${ secrets.TWILIO_SMS_ACCOUNT_SID }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic_secret": "TWILIO_SMS_BASIC",
-      "from_secret": "TWILIO_SMS_FROM",
-      "to_secret": "TWILIO_SMS_TO"
+      "basic": "${ secrets.TWILIO_SMS_BASIC }",
+      "from": "${ secrets.TWILIO_SMS_FROM }",
+      "to": "${ secrets.TWILIO_SMS_TO }"
     },
     "summary": "Send a notification to your own Twilio destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "twilio://ACdeadbeefdeadbeef:dkry5cjqx4bi@+15551234567",
@@ -52,28 +52,36 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "account_sid_secret": {
-          "description": "Name of the customer secret holding this enrollment's Twilio account sid",
-          "type": "string"
+        "account_sid": {
+          "description": "This enrollment's Twilio account sid. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's TWILIO_SMS_BASIC value (same format as TWILIO_SMS_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's TWILIO_SMS_BASIC value (same format as TWILIO_SMS_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_secret": {
-          "description": "Name of the customer secret holding this enrollment's TWILIO_SMS_FROM value (same format as TWILIO_SMS_FROM)",
-          "type": "string"
+        "from": {
+          "description": "This enrollment's TWILIO_SMS_FROM value (same format as TWILIO_SMS_FROM). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's TWILIO_SMS_TO value (same format as TWILIO_SMS_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's TWILIO_SMS_TO value (same format as TWILIO_SMS_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "account_sid_secret",
-        "to_secret",
-        "from_secret",
-        "basic_secret"
+        "account_sid",
+        "to",
+        "from",
+        "basic"
       ],
       "type": "object"
     }

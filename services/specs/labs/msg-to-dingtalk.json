@@ -22,7 +22,7 @@
     "gateway_price_description": "Free — direct to your DingTalk robot webhook",
     "gateway_test_local_url": "https://mock.unitysvc.dev/dingtalk/robot/send?access_token=demo123",
     "gateway_url": "${ customer_secrets._DINGTALK_BASE ?? https://oapi.dingtalk.com }/robot/send?access_token=${ customer_secrets.DINGTALK_ACCESS_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets._DINGTALK_BASE ?? https://oapi.dingtalk.com }/robot/send?access_token=${ customer_secrets.{{ params.token_secret }} }",
+    "gateway_url_plus": "${ customer_secrets._DINGTALK_BASE ?? https://oapi.dingtalk.com }/robot/send?access_token={{ params.token }}",
     "logo": "https://api.iconify.design/ant-design:dingtalk-circle-filled.svg?color=%231677FF",
     "msg_capabilities": {
       "formats": [
@@ -34,7 +34,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_secret": "DINGTALK_TOKEN"
+      "token": "${ secrets.DINGTALK_TOKEN }"
     },
     "summary": "Send a notification to your own DingTalk destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "dingtalk://dkry5cjqx4bi/",
@@ -42,13 +42,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's DingTalk access token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's DingTalk access token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "token_secret"
+        "token"
       ],
       "type": "object"
     }

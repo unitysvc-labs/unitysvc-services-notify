@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.BULKVS_SMS_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "From": "${ customer_secrets.BULKVS_SMS_FROM_PHONE }",
@@ -20,9 +20,9 @@
       "To": "${ customer_secrets.BULKVS_SMS_TO }"
     },
     "gateway_field_mapping_plus": {
-      "From": "${ customer_secrets.{{ params.from_phone_secret }} }",
+      "From": "{{ params.from_phone }}",
       "Message": "@msg.body",
-      "To": "${ customer_secrets.{{ params.to_secret }} }"
+      "To": "{{ params.to }}"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment BulkVS destinations, direct",
     "gateway_price_description": "Free — direct to BulkVS messageSend",
@@ -40,9 +40,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic_secret": "BULKVS_SMS_BASIC",
-      "from_phone_secret": "BULKVS_SMS_FROM_PHONE",
-      "to_secret": "BULKVS_SMS_TO"
+      "basic": "${ secrets.BULKVS_SMS_BASIC }",
+      "from_phone": "${ secrets.BULKVS_SMS_FROM_PHONE }",
+      "to": "${ secrets.BULKVS_SMS_TO }"
     },
     "summary": "Send an SMS to your own BulkVS account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "bulkvs://bulkvs_smsuser:bulkvs_smspass@+15551234567/+15551234567",
@@ -50,23 +50,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's BULKVS_SMS_BASIC value (same format as BULKVS_SMS_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's BULKVS_SMS_BASIC value (same format as BULKVS_SMS_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_phone_secret": {
-          "description": "Name of the customer secret holding this enrollment's BulkVS from phone",
-          "type": "string"
+        "from_phone": {
+          "description": "This enrollment's BulkVS from phone. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's BULKVS_SMS_TO value (same format as BULKVS_SMS_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's BULKVS_SMS_TO value (same format as BULKVS_SMS_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "from_phone_secret",
-        "to_secret",
-        "basic_secret"
+        "from_phone",
+        "to",
+        "basic"
       ],
       "type": "object"
     }

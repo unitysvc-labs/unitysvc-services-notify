@@ -16,7 +16,7 @@
     "gateway_price_description": "Free — direct to your Chanify sender token",
     "gateway_test_local_url": "https://mock.unitysvc.dev/chanify/v1/sender/demo123/",
     "gateway_url": "${ customer_secrets._CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.CHANIFY_TOKEN }/",
-    "gateway_url_plus": "${ customer_secrets._CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/${ customer_secrets.{{ params.token_secret }} }/",
+    "gateway_url_plus": "${ customer_secrets._CHANIFY_BASE ?? https://api.chanify.net }/v1/sender/{{ params.token }}/",
     "logo": "https://raw.githubusercontent.com/chanify/chanify-ios/main/iOS/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-iTunes.png",
     "msg_capabilities": {
       "formats": [
@@ -28,7 +28,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_secret": "CHANIFY_TOKEN"
+      "token": "${ secrets.CHANIFY_TOKEN }"
     },
     "summary": "Send a notification to your own Chanify destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "chanify://DKRY5CJQX4BI",
@@ -36,13 +36,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's Chanify token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's Chanify token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "token_secret"
+        "token"
       ],
       "type": "object"
     }

@@ -12,7 +12,7 @@
     },
     "gateway_test_local_url": "https://mock.unitysvc.dev/gchat/v1/spaces/googlechatorg/messages?key=googlechatwebhookkeyxyz123&token=googlechatwebhooktokenxyz123",
     "gateway_url": "${ customer_secrets.GOOGLECHAT_WEBHOOK_URL }",
-    "gateway_url_plus": "${ customer_secrets.{{ params.webhook_url_secret }} }",
+    "gateway_url_plus": "{{ params.webhook_url }}",
     "logo": "https://cdn.simpleicons.org/googlechat/34A853",
     "msg_capabilities": {
       "formats": [
@@ -24,7 +24,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "webhook_url_secret": "GOOGLECHAT_WEBHOOK_URL"
+      "webhook_url": "${ secrets.GOOGLECHAT_WEBHOOK_URL }"
     },
     "summary": "Send a notification to your own Google Chat destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "gchat://googlechatorg/googlechatwebhookkeyxyz123/googlechatwebhooktokenxyz123",
@@ -32,13 +32,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "webhook_url_secret": {
-          "description": "Name of the customer secret holding this enrollment's Google Chat webhook URL",
-          "type": "string"
+        "webhook_url": {
+          "description": "This enrollment's Google Chat webhook URL. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "webhook_url_secret"
+        "webhook_url"
       ],
       "type": "object"
     }

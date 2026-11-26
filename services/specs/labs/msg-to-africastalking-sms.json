@@ -12,7 +12,7 @@
       "apiKey": "${ customer_secrets.AFRICASTALKING_SMS_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "apiKey": "${ customer_secrets.{{ params.apikey_secret }} }"
+      "apiKey": "{{ params.apikey }}"
     },
     "gateway_field_mapping": {
       "from": "${ customer_secrets.AFRICASTALKING_SMS_FROM }",
@@ -21,10 +21,10 @@
       "username": "${ customer_secrets.AFRICASTALKING_SMS_USERNAME }"
     },
     "gateway_field_mapping_plus": {
-      "from": "${ customer_secrets.{{ params.from_secret }} }",
+      "from": "{{ params.from }}",
       "message": "@msg.body",
-      "to": "${ customer_secrets.{{ params.to_secret }} }",
-      "username": "${ customer_secrets.{{ params.username_secret }} }"
+      "to": "{{ params.to }}",
+      "username": "{{ params.username }}"
     },
     "gateway_output_format": "encoded",
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment Africa's Talking destinations, direct",
@@ -42,11 +42,11 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey_secret": "AFRICASTALKING_SMS_APIKEY",
+      "apikey": "${ secrets.AFRICASTALKING_SMS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_secret": "AFRICASTALKING_SMS_FROM",
-      "to_secret": "AFRICASTALKING_SMS_TO",
-      "username_secret": "AFRICASTALKING_SMS_USERNAME"
+      "from": "${ secrets.AFRICASTALKING_SMS_FROM }",
+      "to": "${ secrets.AFRICASTALKING_SMS_TO }",
+      "username": "${ secrets.AFRICASTALKING_SMS_USERNAME }"
     },
     "summary": "Send an SMS to your own Africa's Talking account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "atalk://DKRY5CJQX4BI@DKRY5CJQX4BI/+15551234567",
@@ -54,28 +54,36 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's Africa's Talking apikey",
-          "type": "string"
+        "apikey": {
+          "description": "This enrollment's Africa's Talking apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "from_secret": {
-          "description": "Name of the customer secret holding this enrollment's AFRICASTALKING_SMS_FROM value (same format as AFRICASTALKING_SMS_FROM)",
-          "type": "string"
+        "from": {
+          "description": "This enrollment's AFRICASTALKING_SMS_FROM value (same format as AFRICASTALKING_SMS_FROM). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "to_secret": {
-          "description": "Name of the customer secret holding this enrollment's AFRICASTALKING_SMS_TO value (same format as AFRICASTALKING_SMS_TO)",
-          "type": "string"
+        "to": {
+          "description": "This enrollment's AFRICASTALKING_SMS_TO value (same format as AFRICASTALKING_SMS_TO). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "username_secret": {
-          "description": "Name of the customer secret holding this enrollment's AFRICASTALKING_SMS_USERNAME value (same format as AFRICASTALKING_SMS_USERNAME)",
-          "type": "string"
+        "username": {
+          "description": "This enrollment's AFRICASTALKING_SMS_USERNAME value (same format as AFRICASTALKING_SMS_USERNAME). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "username_secret",
-        "to_secret",
-        "from_secret",
-        "apikey_secret"
+        "username",
+        "to",
+        "from",
+        "apikey"
       ],
       "type": "object"
     }

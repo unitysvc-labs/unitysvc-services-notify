@@ -16,7 +16,7 @@
     "gateway_price_description": "Free — direct to your PagerTree integration endpoint",
     "gateway_test_local_url": "https://mock.unitysvc.dev/pagertree/integration/demo123",
     "gateway_url": "${ customer_secrets._PAGERTREE_BASE ?? https://pagertree.com }/integration/${ customer_secrets.PAGERTREE_TOKEN }",
-    "gateway_url_plus": "${ customer_secrets._PAGERTREE_BASE ?? https://pagertree.com }/integration/${ customer_secrets.{{ params.integration_secret }} }",
+    "gateway_url_plus": "${ customer_secrets._PAGERTREE_BASE ?? https://pagertree.com }/integration/{{ params.integration }}",
     "logo": "https://api.iconify.design/mdi:tree-outline.svg?color=%232CADE3",
     "msg_capabilities": {
       "formats": [
@@ -28,7 +28,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "integration_secret": "PAGERTREE_INTEGRATION"
+      "integration": "${ secrets.PAGERTREE_INTEGRATION }"
     },
     "summary": "Send a notification to your own PagerTree destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pagertree://int_abc1234567",
@@ -36,13 +36,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "integration_secret": {
-          "description": "Name of the customer secret holding this enrollment's PagerTree integration token",
-          "type": "string"
+        "integration": {
+          "description": "This enrollment's PagerTree integration token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "integration_secret"
+        "integration"
       ],
       "type": "object"
     }

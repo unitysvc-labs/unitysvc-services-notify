@@ -12,7 +12,7 @@
       "Authorization": "Basic ${ customer_secrets.DAPNET_BASIC }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "Basic ${ customer_secrets.{{ params.basic_secret }} }"
+      "Authorization": "Basic {{ params.basic }}"
     },
     "gateway_field_mapping": {
       "callSignNames": [
@@ -26,12 +26,12 @@
     },
     "gateway_field_mapping_plus": {
       "callSignNames": [
-        "${ customer_secrets.{{ params.callsign_secret }} }"
+        "{{ params.callsign }}"
       ],
       "emergency": false,
       "text": "@msg.body",
       "transmitterGroupNames": [
-        "${ customer_secrets.{{ params.transmitter_group_secret }} }"
+        "{{ params.transmitter_group }}"
       ]
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment DAPNET destinations, direct",
@@ -50,9 +50,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic_secret": "DAPNET_BASIC",
-      "callsign_secret": "DAPNET_CALLSIGN",
-      "transmitter_group_secret": "DAPNET_TRANSMITTER_GROUP"
+      "basic": "${ secrets.DAPNET_BASIC }",
+      "callsign": "${ secrets.DAPNET_CALLSIGN }",
+      "transmitter_group": "${ secrets.DAPNET_TRANSMITTER_GROUP }"
     },
     "summary": "Send a notification to your own DAPNET destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "dapnet://dapnetuser:dapnetpass@ab1cd",
@@ -60,23 +60,29 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "basic_secret": {
-          "description": "Name of the customer secret holding this enrollment's DAPNET_BASIC value (same format as DAPNET_BASIC)",
-          "type": "string"
+        "basic": {
+          "description": "This enrollment's DAPNET_BASIC value (same format as DAPNET_BASIC). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "callsign_secret": {
-          "description": "Name of the customer secret holding this enrollment's DAPNET_CALLSIGN value (same format as DAPNET_CALLSIGN)",
-          "type": "string"
+        "callsign": {
+          "description": "This enrollment's DAPNET_CALLSIGN value (same format as DAPNET_CALLSIGN). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "transmitter_group_secret": {
-          "description": "Name of the customer secret holding this enrollment's DAPNET_TRANSMITTER_GROUP value (same format as DAPNET_TRANSMITTER_GROUP)",
-          "type": "string"
+        "transmitter_group": {
+          "description": "This enrollment's DAPNET_TRANSMITTER_GROUP value (same format as DAPNET_TRANSMITTER_GROUP). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "callsign_secret",
-        "transmitter_group_secret",
-        "basic_secret"
+        "callsign",
+        "transmitter_group",
+        "basic"
       ],
       "type": "object"
     }

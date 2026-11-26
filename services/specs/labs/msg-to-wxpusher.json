@@ -17,11 +17,11 @@
       ]
     },
     "gateway_field_mapping_plus": {
-      "appToken": "${ customer_secrets.{{ params.token_secret }} }",
+      "appToken": "{{ params.token }}",
       "content": "@msg.body",
       "contentType": 1,
       "uids": [
-        "${ customer_secrets.{{ params.targets_secret }} }"
+        "{{ params.targets }}"
       ]
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment WxPusher destinations, direct",
@@ -40,8 +40,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "targets_secret": "WXPUSHER_TARGETS",
-      "token_secret": "WXPUSHER_TOKEN"
+      "targets": "${ secrets.WXPUSHER_TARGETS }",
+      "token": "${ secrets.WXPUSHER_TOKEN }"
     },
     "summary": "Send a notification to your own WxPusher destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "wxpusher://AT_abcdef0123456789/UID_xxxxxxxx",
@@ -49,18 +49,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "targets_secret": {
-          "description": "Name of the customer secret holding this enrollment's WxPusher targets",
-          "type": "string"
+        "targets": {
+          "description": "This enrollment's WxPusher targets. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "token_secret": {
-          "description": "Name of the customer secret holding this enrollment's WxPusher token",
-          "type": "string"
+        "token": {
+          "description": "This enrollment's WxPusher token. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "token_secret",
-        "targets_secret"
+        "token",
+        "targets"
       ],
       "type": "object"
     }

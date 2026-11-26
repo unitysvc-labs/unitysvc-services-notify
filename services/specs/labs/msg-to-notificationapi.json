@@ -19,7 +19,7 @@
     "gateway_price_description": "Free — direct to NotificationAPI sender endpoint",
     "gateway_test_local_url": "https://mock.unitysvc.dev/notificationapi/democlientid/sender",
     "gateway_url": "${ customer_secrets._NOTIFICATIONAPI_BASE ?? https://api.notificationapi.com }/${ customer_secrets.NOTIFICATIONAPI_CLIENT_ID }/sender",
-    "gateway_url_plus": "${ customer_secrets._NOTIFICATIONAPI_BASE ?? https://api.notificationapi.com }/${ customer_secrets.{{ params.client_id_secret }} }/sender",
+    "gateway_url_plus": "${ customer_secrets._NOTIFICATIONAPI_BASE ?? https://api.notificationapi.com }/{{ params.client_id }}/sender",
     "logo": "https://www.notificationapi.com/images/pingram/pingram-favicon-dark.svg",
     "msg_capabilities": {
       "formats": [
@@ -31,7 +31,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "client_id_secret": "NOTIFICATIONAPI_CLIENT_ID"
+      "client_id": "${ secrets.NOTIFICATIONAPI_CLIENT_ID }"
     },
     "summary": "Send a notification to your own NotificationAPI destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "napi://notificationapiclientidxyz123/notificationapiclientsecretxyz123/userid123",
@@ -39,13 +39,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "client_id_secret": {
-          "description": "Name of the customer secret holding this enrollment's NotificationAPI client id",
-          "type": "string"
+        "client_id": {
+          "description": "This enrollment's NotificationAPI client id. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "client_id_secret"
+        "client_id"
       ],
       "type": "object"
     }

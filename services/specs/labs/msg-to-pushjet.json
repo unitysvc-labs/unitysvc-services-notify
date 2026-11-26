@@ -16,7 +16,7 @@
     "gateway_price_description": "Free — direct to your own Pushjet server",
     "gateway_test_local_url": "https://mock.unitysvc.dev/pushjet/message?secret=demo123",
     "gateway_url": "${ customer_secrets.PUSHJET_BASE_URL }/message?secret=${ customer_secrets.PUSHJET_SECRET_KEY }",
-    "gateway_url_plus": "${ customer_secrets.{{ params.base_url_secret }} }/message?secret=${ customer_secrets.{{ params.secret_key_secret }} }",
+    "gateway_url_plus": "{{ params.base_url }}/message?secret={{ params.secret_key }}",
     "logo": "https://raw.githubusercontent.com/Pushjet/Pushjet-Android/master/app/src/main/res/drawable-xxhdpi/ic_launcher.png",
     "msg_capabilities": {
       "formats": [
@@ -27,9 +27,8 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "base_url_secret": "PUSHJET_BASE_URL",
-      "secret_key_secret": "PUSHJET_SECRET_KEY"
+      "base_url": "${ secrets.PUSHJET_BASE_URL }",
+      "secret_key": "${ secrets.PUSHJET_SECRET_KEY }"
     },
     "summary": "Send a notification to your own Pushjet destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pjet://hostname.example.com/secretkey123",
@@ -37,18 +36,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "base_url_secret": {
-          "description": "Name of the customer secret holding this enrollment's PUSHJET_BASE_URL value (same format as PUSHJET_BASE_URL)",
-          "type": "string"
+        "base_url": {
+          "description": "This enrollment's PUSHJET_BASE_URL value (same format as PUSHJET_BASE_URL). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "secret_key_secret": {
-          "description": "Name of the customer secret holding this enrollment's Pushjet secret key",
-          "type": "string"
+        "secret_key": {
+          "description": "This enrollment's Pushjet secret key. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "base_url_secret",
-        "secret_key_secret"
+        "base_url",
+        "secret_key"
       ],
       "type": "object"
     }

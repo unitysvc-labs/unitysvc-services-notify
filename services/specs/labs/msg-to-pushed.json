@@ -15,8 +15,8 @@
       "target_type": "app"
     },
     "gateway_field_mapping_plus": {
-      "app_key": "${ customer_secrets.{{ params.app_key_secret }} }",
-      "app_secret": "${ customer_secrets.{{ params.app_secret_secret }} }",
+      "app_key": "{{ params.app_key }}",
+      "app_secret": "{{ params.app_secret }}",
       "content": "@msg.body",
       "target_type": "app"
     },
@@ -35,8 +35,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "app_key_secret": "PUSHED_APP_KEY",
-      "app_secret_secret": "PUSHED_APP_SECRET",
+      "app_key": "${ secrets.PUSHED_APP_KEY }",
+      "app_secret": "${ secrets.PUSHED_APP_SECRET }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "status": "deprecated",
@@ -46,18 +46,22 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "app_key_secret": {
-          "description": "Name of the customer secret holding this enrollment's Pushed app key",
-          "type": "string"
+        "app_key": {
+          "description": "This enrollment's Pushed app key. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         },
-        "app_secret_secret": {
-          "description": "Name of the customer secret holding this enrollment's Pushed app secret",
-          "type": "string"
+        "app_secret": {
+          "description": "This enrollment's Pushed app secret. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "app_key_secret",
-        "app_secret_secret"
+        "app_key",
+        "app_secret"
       ],
       "type": "object"
     }

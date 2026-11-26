@@ -12,7 +12,7 @@
       "X-API-Key": "${ customer_secrets.TECHULUS_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "X-API-Key": "${ customer_secrets.{{ params.apikey_secret }} }"
+      "X-API-Key": "{{ params.apikey }}"
     },
     "gateway_field_mapping": {
       "body": "@msg.body",
@@ -33,7 +33,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey_secret": "TECHULUS_APIKEY",
+      "apikey": "${ secrets.TECHULUS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Techulus Push destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -42,13 +42,15 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey_secret": {
-          "description": "Name of the customer secret holding this enrollment's Techulus Push apikey",
-          "type": "string"
+        "apikey": {
+          "description": "This enrollment's Techulus Push apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
+          "format": "password",
+          "type": "string",
+          "writeOnly": true
         }
       },
       "required": [
-        "apikey_secret"
+        "apikey"
       ],
       "type": "object"
     }
