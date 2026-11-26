@@ -47,8 +47,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "bot_token": "${ secrets.TELEGRAM_BOT_TOKEN }",
-      "chat_id": "${ secrets.TELEGRAM_CHAT_ID }"
+      "bot_token": "${ customer_secrets.TELEGRAM_BOT_TOKEN }",
+      "chat_id": "${ customer_secrets.TELEGRAM_CHAT_ID }"
     },
     "summary": "Send a notification to your own Telegram destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "tgram://123456:aaaaaaaaaaaaaaa/4567",

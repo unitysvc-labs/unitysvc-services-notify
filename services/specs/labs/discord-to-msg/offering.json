@@ -79,7 +79,7 @@
           "type": "object"
         },
         "testing_defaults": {
-          "webhook_url": "${ secrets.DISCORD_WEBHOOK_URL }"
+          "webhook_url": "${ customer_secrets.DISCORD_WEBHOOK_URL }"
         }
       },
       "payload_format": "msg",

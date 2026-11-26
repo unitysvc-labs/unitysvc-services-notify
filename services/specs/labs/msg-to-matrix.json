@@ -30,9 +30,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "room": "${ secrets.MATRIX_ROOM }",
-      "token": "${ secrets.MATRIX_TOKEN }",
-      "txn": "${ secrets.MATRIX_TXN }"
+      "room": "${ customer_secrets.MATRIX_ROOM }",
+      "token": "${ customer_secrets.MATRIX_TOKEN }",
+      "txn": "${ customer_secrets.MATRIX_TXN }"
     },
     "summary": "Send a notification to your own Matrix room by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "matrix://user:pass@hostname.example.com/#room",

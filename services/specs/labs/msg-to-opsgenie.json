@@ -33,7 +33,7 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.OPSGENIE_APIKEY }",
+      "apikey": "${ customer_secrets.OPSGENIE_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Opsgenie destination by posting a simple `msg` request to the UnitySVC gateway.",

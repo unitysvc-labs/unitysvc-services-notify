@@ -28,7 +28,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "secret": "${ secrets.SIGNL4_SECRET }"
+      "secret": "${ customer_secrets.SIGNL4_SECRET }"
     },
     "summary": "Send a notification to your own SIGNL4 destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "signl4://signl4secretxyz123",

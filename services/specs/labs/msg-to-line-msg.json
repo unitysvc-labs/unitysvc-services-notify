@@ -44,8 +44,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "targets": "${ secrets.LINE_MSG_TARGETS }",
-      "token": "${ secrets.LINE_MSG_TOKEN }"
+      "targets": "${ customer_secrets.LINE_MSG_TARGETS }",
+      "token": "${ customer_secrets.LINE_MSG_TOKEN }"
     },
     "summary": "Send a notification to your own LINE destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "line://demotoken123456/UserOrGroupId1",

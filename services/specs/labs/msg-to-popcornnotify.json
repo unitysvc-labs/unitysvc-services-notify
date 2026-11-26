@@ -33,7 +33,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "recipients": "${ secrets.POPCORNNOTIFY_RECIPIENTS }"
+      "recipients": "${ customer_secrets.POPCORNNOTIFY_RECIPIENTS }"
     },
     "status": "deprecated",
     "summary": "Send a notification to your own PopcornNotify destination by posting a simple `msg` request to the UnitySVC gateway.",

@@ -27,7 +27,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token": "${ secrets.FLOCK_TOKEN }"
+      "token": "${ customer_secrets.FLOCK_TOKEN }"
     },
     "summary": "Send a notification to your own Flock destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "flock://dkry5cjqx4bi",

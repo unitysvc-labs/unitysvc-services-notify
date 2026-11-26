@@ -40,9 +40,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic": "${ secrets.BULKVS_SMS_BASIC }",
-      "from_phone": "${ secrets.BULKVS_SMS_FROM_PHONE }",
-      "to": "${ secrets.BULKVS_SMS_TO }"
+      "basic": "${ customer_secrets.BULKVS_SMS_BASIC }",
+      "from_phone": "${ customer_secrets.BULKVS_SMS_FROM_PHONE }",
+      "to": "${ customer_secrets.BULKVS_SMS_TO }"
     },
     "summary": "Send an SMS to your own BulkVS account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "bulkvs://bulkvs_smsuser:bulkvs_smspass@+15551234567/+15551234567",

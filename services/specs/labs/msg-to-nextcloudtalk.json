@@ -32,9 +32,9 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "${ secrets.NEXTCLOUDTALK_BASE_URL }",
-      "basic": "${ secrets.NEXTCLOUDTALK_BASIC }",
-      "roomid": "${ secrets.NEXTCLOUDTALK_ROOMID }"
+      "base_url": "${ customer_secrets.NEXTCLOUDTALK_BASE_URL }",
+      "basic": "${ customer_secrets.NEXTCLOUDTALK_BASIC }",
+      "roomid": "${ customer_secrets.NEXTCLOUDTALK_ROOMID }"
     },
     "summary": "Send a notification to your own Nextcloud Talk destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "nctalks://nextcloudtalkuser:nextcloudtalkpass@notify.example.com/nextcloudtalktargetroomidxyz123",

@@ -27,9 +27,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token_a": "${ secrets.SLACK_TOKEN_A }",
-      "token_b": "${ secrets.SLACK_TOKEN_B }",
-      "token_c": "${ secrets.SLACK_TOKEN_C }"
+      "token_a": "${ customer_secrets.SLACK_TOKEN_A }",
+      "token_b": "${ customer_secrets.SLACK_TOKEN_B }",
+      "token_c": "${ customer_secrets.SLACK_TOKEN_C }"
     },
     "summary": "Send a notification to your own Slack destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "slack://TokenA/TokenB/TokenC",

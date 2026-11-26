@@ -28,8 +28,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "${ secrets.NEXTCLOUD_BASE_URL }",
-      "target": "${ secrets.NEXTCLOUD_TARGET }"
+      "base_url": "${ customer_secrets.NEXTCLOUD_BASE_URL }",
+      "target": "${ customer_secrets.NEXTCLOUD_TARGET }"
     },
     "summary": "Send a notification to your own Nextcloud server by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "nclouds://notify.example.com/nextcloudtargetuserxyz123",

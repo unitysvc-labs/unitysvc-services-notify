@@ -35,8 +35,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "${ secrets.PARSEPLATFORM_BASE_URL }",
-      "master_key": "${ secrets.PARSEPLATFORM_MASTER_KEY }"
+      "base_url": "${ customer_secrets.PARSEPLATFORM_BASE_URL }",
+      "master_key": "${ customer_secrets.PARSEPLATFORM_MASTER_KEY }"
     },
     "summary": "Send a notification to your own Parse Platform destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "parseps://parseplatformappidxyz123:parseplatformmasterkeyxyz123@notify.example.com",

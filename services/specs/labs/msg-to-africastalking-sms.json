@@ -42,11 +42,11 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.AFRICASTALKING_SMS_APIKEY }",
+      "apikey": "${ customer_secrets.AFRICASTALKING_SMS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from": "${ secrets.AFRICASTALKING_SMS_FROM }",
-      "to": "${ secrets.AFRICASTALKING_SMS_TO }",
-      "username": "${ secrets.AFRICASTALKING_SMS_USERNAME }"
+      "from": "${ customer_secrets.AFRICASTALKING_SMS_FROM }",
+      "to": "${ customer_secrets.AFRICASTALKING_SMS_TO }",
+      "username": "${ customer_secrets.AFRICASTALKING_SMS_USERNAME }"
     },
     "summary": "Send an SMS to your own Africa's Talking account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "atalk://DKRY5CJQX4BI@DKRY5CJQX4BI/+15551234567",

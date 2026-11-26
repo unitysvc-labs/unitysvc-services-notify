@@ -27,8 +27,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token": "${ secrets.CHIME_TOKEN }",
-      "webhook_id": "${ secrets.CHIME_WEBHOOK_ID }"
+      "token": "${ customer_secrets.CHIME_TOKEN }",
+      "webhook_id": "${ customer_secrets.CHIME_WEBHOOK_ID }"
     },
     "summary": "Send a notification to your own Amazon Chime room by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "chime://chimewebhookidxyz123/chimetokenxyz123",

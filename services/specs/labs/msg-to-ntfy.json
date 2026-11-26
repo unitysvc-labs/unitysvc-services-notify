@@ -62,7 +62,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "topic": "${ secrets.NTFY_TOPIC }"
+      "topic": "${ customer_secrets.NTFY_TOPIC }"
     },
     "summary": "Send a notification to your own ntfy destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "ntfy://hostname.example.com/mytopic",

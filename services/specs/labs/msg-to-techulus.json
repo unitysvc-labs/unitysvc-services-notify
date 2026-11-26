@@ -33,7 +33,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.TECHULUS_APIKEY }",
+      "apikey": "${ customer_secrets.TECHULUS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Techulus Push destination by posting a simple `msg` request to the UnitySVC gateway.",

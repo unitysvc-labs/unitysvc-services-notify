@@ -48,8 +48,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic": "${ secrets.CLICKSEND_SMS_BASIC }",
-      "to": "${ secrets.CLICKSEND_SMS_TO }"
+      "basic": "${ customer_secrets.CLICKSEND_SMS_BASIC }",
+      "to": "${ customer_secrets.CLICKSEND_SMS_TO }"
     },
     "summary": "Send an SMS to your own ClickSend account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "clicksend://clicksend_smsuser:clicksend_smsapikeyxyz123@+15551234567",

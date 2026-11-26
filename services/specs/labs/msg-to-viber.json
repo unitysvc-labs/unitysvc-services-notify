@@ -39,9 +39,9 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "auth_token": "${ secrets.VIBER_AUTH_TOKEN }",
+      "auth_token": "${ customer_secrets.VIBER_AUTH_TOKEN }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "receiver": "${ secrets.VIBER_RECEIVER }"
+      "receiver": "${ customer_secrets.VIBER_RECEIVER }"
     },
     "summary": "Send a notification to your own Viber destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "viber://vibertokenxyz123/vibertarget",

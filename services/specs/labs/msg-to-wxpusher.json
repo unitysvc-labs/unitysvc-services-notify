@@ -40,8 +40,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "targets": "${ secrets.WXPUSHER_TARGETS }",
-      "token": "${ secrets.WXPUSHER_TOKEN }"
+      "targets": "${ customer_secrets.WXPUSHER_TARGETS }",
+      "token": "${ customer_secrets.WXPUSHER_TOKEN }"
     },
     "summary": "Send a notification to your own WxPusher destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "wxpusher://AT_abcdef0123456789/UID_xxxxxxxx",

@@ -55,8 +55,8 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "base_url": "${ secrets.GOTIFY_BASE_URL }",
-      "token": "${ secrets.GOTIFY_TOKEN }"
+      "base_url": "${ customer_secrets.GOTIFY_BASE_URL }",
+      "token": "${ customer_secrets.GOTIFY_TOKEN }"
     },
     "summary": "Send a notification to your own Gotify server by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "gotify://hostname.example.com/AbCdEfGhIjKlMnO",

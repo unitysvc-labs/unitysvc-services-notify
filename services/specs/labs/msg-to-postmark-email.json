@@ -65,9 +65,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_email": "${ secrets.POSTMARK_FROM_EMAIL }",
-      "server_token": "${ secrets.POSTMARK_SERVER_TOKEN }",
-      "to_email": "${ secrets.POSTMARK_TO_EMAIL }"
+      "from_email": "${ customer_secrets.POSTMARK_FROM_EMAIL }",
+      "server_token": "${ customer_secrets.POSTMARK_SERVER_TOKEN }",
+      "to_email": "${ customer_secrets.POSTMARK_TO_EMAIL }"
     },
     "summary": "Send a notification to your own Postmark Email destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "postmark://abcdef0123456789:noreply@example.com",

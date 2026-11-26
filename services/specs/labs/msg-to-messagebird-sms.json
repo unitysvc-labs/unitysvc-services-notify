@@ -43,10 +43,10 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.MESSAGEBIRD_SMS_APIKEY }",
+      "apikey": "${ customer_secrets.MESSAGEBIRD_SMS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from": "${ secrets.MESSAGEBIRD_SMS_FROM }",
-      "to": "${ secrets.MESSAGEBIRD_SMS_TO }"
+      "from": "${ customer_secrets.MESSAGEBIRD_SMS_FROM }",
+      "to": "${ customer_secrets.MESSAGEBIRD_SMS_TO }"
     },
     "summary": "Send an SMS notification to your own MessageBird destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "msgbird://abcdefghij0123456789abcde/15551234567",

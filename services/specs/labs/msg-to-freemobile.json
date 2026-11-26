@@ -34,8 +34,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "password": "${ secrets.FREEMOBILE_PASSWORD }",
-      "user": "${ secrets.FREEMOBILE_USER }"
+      "password": "${ customer_secrets.FREEMOBILE_PASSWORD }",
+      "user": "${ customer_secrets.FREEMOBILE_USER }"
     },
     "summary": "Send a notification to your own Free-Mobile destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "freemobile://freemobileuser@freemobilepass",

@@ -32,7 +32,7 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "access_token": "${ secrets.STREAMLABS_ACCESS_TOKEN }",
+      "access_token": "${ customer_secrets.STREAMLABS_ACCESS_TOKEN }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Streamlabs destination by posting a simple `msg` request to the UnitySVC gateway.",

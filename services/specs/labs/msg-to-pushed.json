@@ -35,8 +35,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "app_key": "${ secrets.PUSHED_APP_KEY }",
-      "app_secret": "${ secrets.PUSHED_APP_SECRET }",
+      "app_key": "${ customer_secrets.PUSHED_APP_KEY }",
+      "app_secret": "${ customer_secrets.PUSHED_APP_SECRET }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "status": "deprecated",

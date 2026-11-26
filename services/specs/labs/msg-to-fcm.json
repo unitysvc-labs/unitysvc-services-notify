@@ -43,9 +43,9 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.FCM_APIKEY }",
+      "apikey": "${ customer_secrets.FCM_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "to": "${ secrets.FCM_TO }"
+      "to": "${ customer_secrets.FCM_TO }"
     },
     "status": "deprecated",
     "summary": "Send a notification to your own Firebase Cloud Messaging destination by posting a simple `msg` request to the UnitySVC gateway.",

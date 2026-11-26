@@ -39,7 +39,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic": "${ secrets.KUMULOS_BASIC }"
+      "basic": "${ customer_secrets.KUMULOS_BASIC }"
     },
     "status": "deprecated",
     "summary": "Send a notification to your own Kumulos destination by posting a simple `msg` request to the UnitySVC gateway.",

@@ -28,7 +28,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token": "${ secrets.SPUGPUSH_TOKEN }"
+      "token": "${ customer_secrets.SPUGPUSH_TOKEN }"
     },
     "summary": "Send a notification to your own SpugPush destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "spugpush://dkryFMT07elszGNU18fmtAHOV29gnuBI",

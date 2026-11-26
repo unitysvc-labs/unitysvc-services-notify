@@ -76,10 +76,10 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.BREVO_APIKEY }",
+      "apikey": "${ customer_secrets.BREVO_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_email": "${ secrets.BREVO_FROM_EMAIL }",
-      "to_email": "${ secrets.BREVO_TO_EMAIL }"
+      "from_email": "${ customer_secrets.BREVO_FROM_EMAIL }",
+      "to_email": "${ customer_secrets.BREVO_TO_EMAIL }"
     },
     "summary": "Send an email through your own Brevo account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "brevo://abcdef0123456789:noreply@example.com",

@@ -64,10 +64,10 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.SMTP2GO_EMAIL_APIKEY }",
+      "apikey": "${ customer_secrets.SMTP2GO_EMAIL_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from": "${ secrets.SMTP2GO_FROM }",
-      "to": "${ secrets.SMTP2GO_TO }"
+      "from": "${ customer_secrets.SMTP2GO_FROM }",
+      "to": "${ customer_secrets.SMTP2GO_TO }"
     },
     "summary": "Send an email to your own SMTP2Go destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "smtp2go://smtp2go_emailuser@notify.example.com/smtp2go_emailapikeyxyz123/",

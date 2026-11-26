@@ -66,10 +66,10 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic": "${ secrets.MAILGUN_EMAIL_BASIC }",
-      "from": "${ secrets.MAILGUN_EMAIL_FROM }",
-      "host": "${ secrets.MAILGUN_EMAIL_HOST }",
-      "to": "${ secrets.MAILGUN_EMAIL_TO }"
+      "basic": "${ customer_secrets.MAILGUN_EMAIL_BASIC }",
+      "from": "${ customer_secrets.MAILGUN_EMAIL_FROM }",
+      "host": "${ customer_secrets.MAILGUN_EMAIL_HOST }",
+      "to": "${ customer_secrets.MAILGUN_EMAIL_TO }"
     },
     "summary": "Send an email notification through your own Mailgun account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "mailgun://mailgun_emailuser@notify.example.com/mailgun_emailapikeyxyz123/",

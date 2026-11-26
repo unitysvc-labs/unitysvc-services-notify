@@ -40,8 +40,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "${ secrets.LAMETRIC_BASE_URL }",
-      "basic": "${ secrets.LAMETRIC_BASIC }"
+      "base_url": "${ customer_secrets.LAMETRIC_BASE_URL }",
+      "basic": "${ customer_secrets.LAMETRIC_BASIC }"
     },
     "summary": "Send a notification to your own LaMetric device by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "lametrics://lametricapikeyxyz123@notify.example.com",

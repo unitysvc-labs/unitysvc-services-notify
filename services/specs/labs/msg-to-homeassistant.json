@@ -29,8 +29,8 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "accesstoken": "${ secrets.HOMEASSISTANT_ACCESSTOKEN }",
-      "base_url": "${ secrets.HOMEASSISTANT_BASE_URL }"
+      "accesstoken": "${ customer_secrets.HOMEASSISTANT_ACCESSTOKEN }",
+      "base_url": "${ customer_secrets.HOMEASSISTANT_BASE_URL }"
     },
     "summary": "Send a notification to your own HomeAssistant instance by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "hassios://notify.example.com/homeassistantaccesstokenxyz123",

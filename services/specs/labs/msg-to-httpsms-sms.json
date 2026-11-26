@@ -39,10 +39,10 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.HTTPSMS_SMS_APIKEY }",
+      "apikey": "${ customer_secrets.HTTPSMS_SMS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_phone": "${ secrets.HTTPSMS_SMS_FROM_PHONE }",
-      "to_phone": "${ secrets.HTTPSMS_SMS_TO_PHONE }"
+      "from_phone": "${ customer_secrets.HTTPSMS_SMS_FROM_PHONE }",
+      "to_phone": "${ customer_secrets.HTTPSMS_SMS_TO_PHONE }"
     },
     "summary": "Send a notification to your own httpSMS destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "httpsms://httpsms_smsapikeyxyz123@+15551234567/+15551234567",

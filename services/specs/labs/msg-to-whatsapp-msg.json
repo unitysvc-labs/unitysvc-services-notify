@@ -42,9 +42,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_phone_id": "${ secrets.WHATSAPP_MSG_FROM_PHONE_ID }",
-      "to": "${ secrets.WHATSAPP_MSG_TO }",
-      "token": "${ secrets.WHATSAPP_MSG_TOKEN }"
+      "from_phone_id": "${ customer_secrets.WHATSAPP_MSG_FROM_PHONE_ID }",
+      "to": "${ customer_secrets.WHATSAPP_MSG_TO }",
+      "token": "${ customer_secrets.WHATSAPP_MSG_TOKEN }"
     },
     "summary": "Send a notification to your own WhatsApp destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "whatsapp://token123abc@1234567890/15551234567",

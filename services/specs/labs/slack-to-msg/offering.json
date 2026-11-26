@@ -88,7 +88,7 @@
           "type": "object"
         },
         "testing_defaults": {
-          "token": "${ secrets.SLACK_OUTGOING_TOKEN }"
+          "token": "${ customer_secrets.SLACK_OUTGOING_TOKEN }"
         }
       },
       "payload_format": "msg",

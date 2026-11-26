@@ -29,7 +29,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token": "${ secrets.MASTODON_TOKEN }"
+      "token": "${ customer_secrets.MASTODON_TOKEN }"
     },
     "summary": "Send a notification to your own Mastodon instance by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "mastodons://mastodontokenxyz123@notify.example.com",

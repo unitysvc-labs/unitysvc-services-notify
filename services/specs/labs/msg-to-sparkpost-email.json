@@ -80,10 +80,10 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.SPARKPOST_APIKEY }",
+      "apikey": "${ customer_secrets.SPARKPOST_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_email": "${ secrets.SPARKPOST_FROM_EMAIL }",
-      "to_email": "${ secrets.SPARKPOST_TO_EMAIL }"
+      "from_email": "${ customer_secrets.SPARKPOST_FROM_EMAIL }",
+      "to_email": "${ customer_secrets.SPARKPOST_TO_EMAIL }"
     },
     "summary": "Send an email to your own SparkPost destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "sparkpost://noreply@example.com/abcdef0123456789",

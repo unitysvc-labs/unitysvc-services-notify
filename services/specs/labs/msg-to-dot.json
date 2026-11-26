@@ -28,9 +28,9 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.DOT_APIKEY }",
+      "apikey": "${ customer_secrets.DOT_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "device_id": "${ secrets.DOT_DEVICE_ID }"
+      "device_id": "${ customer_secrets.DOT_DEVICE_ID }"
     },
     "summary": "Send a notification to your own DOT destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "dot://dotapikeyxyz123@dotdevice/",

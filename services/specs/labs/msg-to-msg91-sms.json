@@ -49,10 +49,10 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "authkey": "${ secrets.MSG91_SMS_AUTHKEY }",
+      "authkey": "${ customer_secrets.MSG91_SMS_AUTHKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "targets": "${ secrets.MSG91_SMS_TARGETS }",
-      "template": "${ secrets.MSG91_SMS_TEMPLATE }"
+      "targets": "${ customer_secrets.MSG91_SMS_TARGETS }",
+      "template": "${ customer_secrets.MSG91_SMS_TEMPLATE }"
     },
     "summary": "Send an SMS notification to your own MSG91 destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "msg91://dkry5cjqx4bi@dkry5cjqx4bi/+15551234567",

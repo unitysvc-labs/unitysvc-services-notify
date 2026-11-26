@@ -30,7 +30,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "pushkey": "${ secrets.PUSHDEER_PUSHKEY }"
+      "pushkey": "${ customer_secrets.PUSHDEER_PUSHKEY }"
     },
     "summary": "Send a notification to your own PushDeer destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pushdeers://dkry5cjqx4bi",

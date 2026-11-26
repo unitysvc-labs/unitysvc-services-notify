@@ -80,10 +80,10 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.SENDGRID_EMAIL_APIKEY }",
+      "apikey": "${ customer_secrets.SENDGRID_EMAIL_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from": "${ secrets.SENDGRID_FROM }",
-      "to": "${ secrets.SENDGRID_TO }"
+      "from": "${ customer_secrets.SENDGRID_FROM }",
+      "to": "${ customer_secrets.SENDGRID_TO }"
     },
     "summary": "Send a notification to your own SendGrid email destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "sendgrid://abcdef0123456789:noreply@example.com",

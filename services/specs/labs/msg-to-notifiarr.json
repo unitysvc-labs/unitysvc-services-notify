@@ -43,7 +43,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.NOTIFIARR_APIKEY }",
+      "apikey": "${ customer_secrets.NOTIFIARR_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Notifiarr destination by posting a simple `msg` request to the UnitySVC gateway.",

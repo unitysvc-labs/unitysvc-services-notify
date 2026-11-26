@@ -64,10 +64,10 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.RESEND_EMAIL_APIKEY }",
+      "apikey": "${ customer_secrets.RESEND_EMAIL_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_email": "${ secrets.RESEND_FROM_EMAIL }",
-      "to_email": "${ secrets.RESEND_TO_EMAIL }"
+      "from_email": "${ customer_secrets.RESEND_FROM_EMAIL }",
+      "to_email": "${ customer_secrets.RESEND_TO_EMAIL }"
     },
     "summary": "Send a notification to your own Resend email destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "resend://re_abcdef0123456789:noreply@example.com",

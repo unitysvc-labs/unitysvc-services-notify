@@ -55,8 +55,8 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.ONESIGNAL_APIKEY }",
-      "app": "${ secrets.ONESIGNAL_APP }",
+      "apikey": "${ customer_secrets.ONESIGNAL_APIKEY }",
+      "app": "${ customer_secrets.ONESIGNAL_APP }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own OneSignal destination by posting a simple `msg` request to the UnitySVC gateway.",

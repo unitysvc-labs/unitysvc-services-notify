@@ -24,7 +24,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "webhook_url": "${ secrets.GOOGLECHAT_WEBHOOK_URL }"
+      "webhook_url": "${ customer_secrets.GOOGLECHAT_WEBHOOK_URL }"
     },
     "summary": "Send a notification to your own Google Chat destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "gchat://googlechatorg/googlechatwebhookkeyxyz123/googlechatwebhooktokenxyz123",

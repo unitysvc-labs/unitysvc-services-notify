@@ -50,9 +50,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic": "${ secrets.DAPNET_BASIC }",
-      "callsign": "${ secrets.DAPNET_CALLSIGN }",
-      "transmitter_group": "${ secrets.DAPNET_TRANSMITTER_GROUP }"
+      "basic": "${ customer_secrets.DAPNET_BASIC }",
+      "callsign": "${ customer_secrets.DAPNET_CALLSIGN }",
+      "transmitter_group": "${ customer_secrets.DAPNET_TRANSMITTER_GROUP }"
     },
     "summary": "Send a notification to your own DAPNET destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "dapnet://dapnetuser:dapnetpass@ab1cd",

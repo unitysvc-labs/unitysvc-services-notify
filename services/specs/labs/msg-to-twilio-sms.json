@@ -40,11 +40,11 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "account_sid": "${ secrets.TWILIO_SMS_ACCOUNT_SID }",
+      "account_sid": "${ customer_secrets.TWILIO_SMS_ACCOUNT_SID }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic": "${ secrets.TWILIO_SMS_BASIC }",
-      "from": "${ secrets.TWILIO_SMS_FROM }",
-      "to": "${ secrets.TWILIO_SMS_TO }"
+      "basic": "${ customer_secrets.TWILIO_SMS_BASIC }",
+      "from": "${ customer_secrets.TWILIO_SMS_FROM }",
+      "to": "${ customer_secrets.TWILIO_SMS_TO }"
     },
     "summary": "Send a notification to your own Twilio destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "twilio://ACdeadbeefdeadbeef:dkry5cjqx4bi@+15551234567",

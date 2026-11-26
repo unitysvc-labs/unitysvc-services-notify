@@ -42,8 +42,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "routing_key": "${ secrets.PAGERDUTY_ROUTING_KEY }",
-      "source": "${ secrets.PAGERDUTY_SOURCE }"
+      "routing_key": "${ customer_secrets.PAGERDUTY_ROUTING_KEY }",
+      "source": "${ customer_secrets.PAGERDUTY_SOURCE }"
     },
     "summary": "Send a notification to your own PagerDuty destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pagerduty://integ123key@apikey456",

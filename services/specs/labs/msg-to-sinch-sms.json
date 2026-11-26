@@ -39,11 +39,11 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "api_token": "${ secrets.SINCH_SMS_API_TOKEN }",
+      "api_token": "${ customer_secrets.SINCH_SMS_API_TOKEN }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from_phone": "${ secrets.SINCH_SMS_FROM_PHONE }",
-      "service_plan_id": "${ secrets.SINCH_SMS_SERVICE_PLAN_ID }",
-      "to_phone": "${ secrets.SINCH_SMS_TO_PHONE }"
+      "from_phone": "${ customer_secrets.SINCH_SMS_FROM_PHONE }",
+      "service_plan_id": "${ customer_secrets.SINCH_SMS_SERVICE_PLAN_ID }",
+      "to_phone": "${ customer_secrets.SINCH_SMS_TO_PHONE }"
     },
     "summary": "Send a notification to your own Sinch SMS destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "sinch://d4b2907e5c3a:d4b2907e5c3a@+15551234567",

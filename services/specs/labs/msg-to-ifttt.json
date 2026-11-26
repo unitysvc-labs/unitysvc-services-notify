@@ -29,8 +29,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "event": "${ secrets.IFTTT_EVENT }",
-      "webhook_id": "${ secrets.IFTTT_WEBHOOK_ID }"
+      "event": "${ customer_secrets.IFTTT_EVENT }",
+      "webhook_id": "${ customer_secrets.IFTTT_WEBHOOK_ID }"
     },
     "summary": "Send a notification to your own IFTTT destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "ifttt://iftttwebhookidxyz123/iftttevent",

@@ -31,7 +31,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "client_id": "${ secrets.NOTIFICATIONAPI_CLIENT_ID }"
+      "client_id": "${ customer_secrets.NOTIFICATIONAPI_CLIENT_ID }"
     },
     "summary": "Send a notification to your own NotificationAPI destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "napi://notificationapiclientidxyz123/notificationapiclientsecretxyz123/userid123",

@@ -35,7 +35,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "privatekey": "${ secrets.PUSHSAFER_PRIVATEKEY }"
+      "privatekey": "${ customer_secrets.PUSHSAFER_PRIVATEKEY }"
     },
     "summary": "Send a notification to your own Pushsafer destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "psafers://pushsaferprivatekeyxyz123",

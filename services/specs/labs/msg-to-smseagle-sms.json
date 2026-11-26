@@ -37,9 +37,9 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "${ secrets.SMSEAGLE_SMS_BASE_URL }",
-      "targets": "${ secrets.SMSEAGLE_SMS_TARGETS }",
-      "token": "${ secrets.SMSEAGLE_SMS_TOKEN }"
+      "base_url": "${ customer_secrets.SMSEAGLE_SMS_BASE_URL }",
+      "targets": "${ customer_secrets.SMSEAGLE_SMS_TARGETS }",
+      "token": "${ customer_secrets.SMSEAGLE_SMS_TOKEN }"
     },
     "summary": "Send a notification to your own SMS Eagle device by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "smseagles://smseagle_smstokenxyz123@notify.example.com/+15551234567",

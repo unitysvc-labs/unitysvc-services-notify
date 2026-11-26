@@ -26,8 +26,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "${ secrets.RYVER_BASE_URL }",
-      "token": "${ secrets.RYVER_TOKEN }"
+      "base_url": "${ customer_secrets.RYVER_BASE_URL }",
+      "token": "${ customer_secrets.RYVER_TOKEN }"
     },
     "summary": "Send a notification to your own Ryver destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "ryver://myorg/ABC123DEF456GHI",

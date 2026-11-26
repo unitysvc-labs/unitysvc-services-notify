@@ -28,7 +28,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "integration": "${ secrets.PAGERTREE_INTEGRATION }"
+      "integration": "${ customer_secrets.PAGERTREE_INTEGRATION }"
     },
     "summary": "Send a notification to your own PagerTree destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pagertree://int_abc1234567",

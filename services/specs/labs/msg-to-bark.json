@@ -38,7 +38,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "device_key": "${ secrets.BARK_DEVICE_KEY }"
+      "device_key": "${ customer_secrets.BARK_DEVICE_KEY }"
     },
     "summary": "Send a push notification to your own Bark device by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "bark://hostname.example.com/DeviceKey1",

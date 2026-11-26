@@ -27,8 +27,8 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "base_url": "${ secrets.PUSHJET_BASE_URL }",
-      "secret_key": "${ secrets.PUSHJET_SECRET_KEY }"
+      "base_url": "${ customer_secrets.PUSHJET_BASE_URL }",
+      "secret_key": "${ customer_secrets.PUSHJET_SECRET_KEY }"
     },
     "summary": "Send a notification to your own Pushjet destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pjet://hostname.example.com/secretkey123",

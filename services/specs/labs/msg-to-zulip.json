@@ -35,9 +35,9 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base": "${ secrets.ZULIP_BASE_URL }",
+      "base": "${ customer_secrets.ZULIP_BASE_URL }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic": "${ secrets.ZULIP_BASIC }"
+      "basic": "${ customer_secrets.ZULIP_BASIC }"
     },
     "summary": "Send a notification to your own Zulip destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "zulip://DKRY5CJQX4BI@DKRY5CJQX4BI/DKRY5CJQX4BIPW3AHOV29GNU18FMT07E",

@@ -28,9 +28,9 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ secrets.VICTOROPS_APIKEY }",
+      "apikey": "${ customer_secrets.VICTOROPS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "routing_key": "${ secrets.VICTOROPS_ROUTING_KEY }"
+      "routing_key": "${ customer_secrets.VICTOROPS_ROUTING_KEY }"
     },
     "summary": "Send a notification to your own Splunk On-Call destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "victorops://routingkey@apikey123abc",

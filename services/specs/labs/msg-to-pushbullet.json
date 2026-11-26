@@ -34,7 +34,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "accesstoken": "${ secrets.PUSHBULLET_ACCESSTOKEN }",
+      "accesstoken": "${ customer_secrets.PUSHBULLET_ACCESSTOKEN }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Pushbullet destination by posting a simple `msg` request to the UnitySVC gateway.",

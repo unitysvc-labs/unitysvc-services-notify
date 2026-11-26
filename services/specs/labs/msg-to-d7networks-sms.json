@@ -56,9 +56,9 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from": "${ secrets.D7NETWORKS_SMS_FROM }",
-      "to": "${ secrets.D7NETWORKS_SMS_TO }",
-      "token": "${ secrets.D7NETWORKS_SMS_TOKEN }"
+      "from": "${ customer_secrets.D7NETWORKS_SMS_FROM }",
+      "to": "${ customer_secrets.D7NETWORKS_SMS_TO }",
+      "token": "${ customer_secrets.D7NETWORKS_SMS_TOKEN }"
     },
     "summary": "Send an SMS to your own D7 Networks account by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "d7sms://d7networks_smstokenxyz123@+15551234567",

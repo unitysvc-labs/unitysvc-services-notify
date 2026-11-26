@@ -32,8 +32,8 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "base_url": "${ secrets.JIRA_BASE_URL }",
-      "basic": "${ secrets.JIRA_BASIC }"
+      "base_url": "${ customer_secrets.JIRA_BASE_URL }",
+      "basic": "${ customer_secrets.JIRA_BASIC }"
     },
     "summary": "Send a notification to your own Jira instance by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "jira://jiraapikeyxyz123",

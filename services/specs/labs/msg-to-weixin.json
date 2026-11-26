@@ -13,8 +13,8 @@
     "logo": "https://cdn.simpleicons.org/wechat/07C160",
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "host": "${ secrets.WEIXIN_GATEWAY_HOST }",
-      "token": "${ secrets.WEIXIN_WEBHOOK_TOKEN }"
+      "host": "${ customer_secrets.WEIXIN_GATEWAY_HOST }",
+      "token": "${ customer_secrets.WEIXIN_WEBHOOK_TOKEN }"
     },
     "summary": "Send a notification to your own Weixin account by posting a simple `msg` request to the UnitySVC gateway, delivered through your Weixin iLink Gateway instance.",
     "test_apprise_url": "jsons://wechat-gateway.example.com/webhook/demo-webhook-token?:message=text",

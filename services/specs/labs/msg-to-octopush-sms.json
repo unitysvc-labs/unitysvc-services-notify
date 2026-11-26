@@ -51,11 +51,11 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "api_key": "${ secrets.OCTOPUSH_SMS_API_KEY }",
-      "api_login": "${ secrets.OCTOPUSH_SMS_API_LOGIN }",
+      "api_key": "${ customer_secrets.OCTOPUSH_SMS_API_KEY }",
+      "api_login": "${ customer_secrets.OCTOPUSH_SMS_API_LOGIN }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "from": "${ secrets.OCTOPUSH_SMS_FROM }",
-      "to": "${ secrets.OCTOPUSH_SMS_TO }"
+      "from": "${ customer_secrets.OCTOPUSH_SMS_FROM }",
+      "to": "${ customer_secrets.OCTOPUSH_SMS_TO }"
     },
     "summary": "Send an SMS to your own Octopush destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "octopush://octopush_sms@example.com/octopush_smsapikeyxyz123/+15551234567",

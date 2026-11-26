@@ -41,10 +41,10 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "basic": "${ secrets.EXOTEL_SMS_BASIC }",
-      "from": "${ secrets.EXOTEL_SMS_FROM }",
-      "sid": "${ secrets.EXOTEL_SMS_SID }",
-      "to": "${ secrets.EXOTEL_SMS_TO }"
+      "basic": "${ customer_secrets.EXOTEL_SMS_BASIC }",
+      "from": "${ customer_secrets.EXOTEL_SMS_FROM }",
+      "sid": "${ customer_secrets.EXOTEL_SMS_SID }",
+      "to": "${ customer_secrets.EXOTEL_SMS_TO }"
     },
     "summary": "Send a notification to your own Exotel destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "exotel://exotel_smssidxyz123:exotel_smstokenxyz123@+15551234567",

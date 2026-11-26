@@ -50,8 +50,8 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "token": "${ secrets.PUSHOVER_TOKEN }",
-      "user_key": "${ secrets.PUSHOVER_USER_KEY }"
+      "token": "${ customer_secrets.PUSHOVER_TOKEN }",
+      "user_key": "${ customer_secrets.PUSHOVER_USER_KEY }"
     },
     "summary": "Send a notification to your own Pushover destination by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "pover://userkey123@apptoken456",

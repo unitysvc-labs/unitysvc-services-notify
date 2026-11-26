@@ -31,7 +31,7 @@
     },
     "ops_testing_parameters": {
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
-      "webhook_url": "${ secrets.MSTEAMS_WEBHOOK_URL }"
+      "webhook_url": "${ customer_secrets.MSTEAMS_WEBHOOK_URL }"
     },
     "summary": "Send a notification to your own Microsoft Teams channel by posting a simple `msg` request to the UnitySVC gateway.",
     "test_apprise_url": "workflows://hostname.example.com/workflowid/AbCdEfGhSignature",
