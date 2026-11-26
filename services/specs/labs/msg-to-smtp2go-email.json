@@ -29,7 +29,7 @@
       ]
     },
     "gateway_field_mapping_plus": {
-      "api_key": "{{ params.apikey }}",
+      "api_key": "{{ params.api_key }}",
       "html_body": {
         "@map": "@msg.is_html",
         "values": {
@@ -64,7 +64,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ customer_secrets.SMTP2GO_EMAIL_APIKEY }",
+      "api_key": "${ customer_secrets.SMTP2GO_EMAIL_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from": "${ customer_secrets.SMTP2GO_FROM }",
       "to": "${ customer_secrets.SMTP2GO_TO }"
@@ -75,7 +75,7 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey": {
+        "api_key": {
           "description": "This enrollment's SMTP2Go apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
           "format": "password",
           "type": "string",
@@ -95,7 +95,7 @@
         }
       },
       "required": [
-        "apikey",
+        "api_key",
         "from",
         "to"
       ],

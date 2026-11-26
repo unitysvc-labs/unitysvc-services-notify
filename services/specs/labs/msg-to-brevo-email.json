@@ -12,7 +12,7 @@
       "api-key": "${ customer_secrets.BREVO_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "api-key": "{{ params.apikey }}"
+      "api-key": "{{ params.api_key }}"
     },
     "gateway_field_mapping": {
       "htmlContent": {
@@ -76,7 +76,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ customer_secrets.BREVO_APIKEY }",
+      "api_key": "${ customer_secrets.BREVO_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_email": "${ customer_secrets.BREVO_FROM_EMAIL }",
       "to_email": "${ customer_secrets.BREVO_TO_EMAIL }"
@@ -87,7 +87,7 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey": {
+        "api_key": {
           "description": "This enrollment's BREVO_APIKEY value (same format as BREVO_APIKEY). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
           "format": "password",
           "type": "string",
@@ -107,9 +107,9 @@
         }
       },
       "required": [
+        "api_key",
         "from_email",
-        "to_email",
-        "apikey"
+        "to_email"
       ],
       "type": "object"
     }

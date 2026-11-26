@@ -12,7 +12,7 @@
       "Authorization": "${ customer_secrets.SPARKPOST_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "{{ params.apikey }}"
+      "Authorization": "{{ params.api_key }}"
     },
     "gateway_field_mapping": {
       "content": {
@@ -80,7 +80,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ customer_secrets.SPARKPOST_APIKEY }",
+      "api_key": "${ customer_secrets.SPARKPOST_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_email": "${ customer_secrets.SPARKPOST_FROM_EMAIL }",
       "to_email": "${ customer_secrets.SPARKPOST_TO_EMAIL }"
@@ -91,7 +91,7 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey": {
+        "api_key": {
           "description": "This enrollment's SPARKPOST_APIKEY value (same format as SPARKPOST_APIKEY). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
           "format": "password",
           "type": "string",
@@ -111,9 +111,9 @@
         }
       },
       "required": [
-        "to_email",
+        "api_key",
         "from_email",
-        "apikey"
+        "to_email"
       ],
       "type": "object"
     }

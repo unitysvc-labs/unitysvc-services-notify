@@ -12,7 +12,7 @@
       "Authorization": "GenieKey ${ customer_secrets.OPSGENIE_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "GenieKey {{ params.apikey }}"
+      "Authorization": "GenieKey {{ params.api_key }}"
     },
     "gateway_field_mapping": {
       "description": "@msg.body",
@@ -33,7 +33,7 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey": "${ customer_secrets.OPSGENIE_APIKEY }",
+      "api_key": "${ customer_secrets.OPSGENIE_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own Opsgenie destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -42,7 +42,7 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey": {
+        "api_key": {
           "description": "This enrollment's Opsgenie apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
           "format": "password",
           "type": "string",
@@ -50,7 +50,7 @@
         }
       },
       "required": [
-        "apikey"
+        "api_key"
       ],
       "type": "object"
     }

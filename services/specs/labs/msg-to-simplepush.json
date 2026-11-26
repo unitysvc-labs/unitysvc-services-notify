@@ -13,7 +13,7 @@
       "msg": "@msg.body"
     },
     "gateway_field_mapping_plus": {
-      "key": "{{ params.apikey }}",
+      "key": "{{ params.api_key }}",
       "msg": "@msg.body"
     },
     "gateway_plus_price_description": "$0.001 per message — extra per-enrollment SimplePush destinations, direct",
@@ -31,7 +31,7 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey": "${ customer_secrets.SIMPLEPUSH_APIKEY }",
+      "api_key": "${ customer_secrets.SIMPLEPUSH_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify"
     },
     "summary": "Send a notification to your own SimplePush destination by posting a simple `msg` request to the UnitySVC gateway.",
@@ -40,7 +40,7 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey": {
+        "api_key": {
           "description": "This enrollment's SimplePush apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
           "format": "password",
           "type": "string",
@@ -48,7 +48,7 @@
         }
       },
       "required": [
-        "apikey"
+        "api_key"
       ],
       "type": "object"
     }

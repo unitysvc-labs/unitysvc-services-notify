@@ -12,7 +12,7 @@
       "X-API-Key": "${ customer_secrets.HTTPSMS_SMS_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "X-API-Key": "{{ params.apikey }}"
+      "X-API-Key": "{{ params.api_key }}"
     },
     "gateway_field_mapping": {
       "content": "@msg.body",
@@ -39,7 +39,7 @@
       "title": false
     },
     "ops_testing_parameters": {
-      "apikey": "${ customer_secrets.HTTPSMS_SMS_APIKEY }",
+      "api_key": "${ customer_secrets.HTTPSMS_SMS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "from_phone": "${ customer_secrets.HTTPSMS_SMS_FROM_PHONE }",
       "to_phone": "${ customer_secrets.HTTPSMS_SMS_TO_PHONE }"
@@ -50,7 +50,7 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey": {
+        "api_key": {
           "description": "This enrollment's httpSMS apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
           "format": "password",
           "type": "string",
@@ -70,9 +70,9 @@
         }
       },
       "required": [
+        "api_key",
         "from_phone",
-        "to_phone",
-        "apikey"
+        "to_phone"
       ],
       "type": "object"
     }

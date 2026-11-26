@@ -12,7 +12,7 @@
       "Authorization": "key=${ customer_secrets.FCM_APIKEY }"
     },
     "gateway_extra_headers_plus": {
-      "Authorization": "key={{ params.apikey }}"
+      "Authorization": "key={{ params.api_key }}"
     },
     "gateway_field_mapping": {
       "notification": {
@@ -43,7 +43,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ customer_secrets.FCM_APIKEY }",
+      "api_key": "${ customer_secrets.FCM_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "to": "${ customer_secrets.FCM_TO }"
     },
@@ -54,7 +54,7 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey": {
+        "api_key": {
           "description": "This enrollment's Firebase Cloud Messaging apikey. Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
           "format": "password",
           "type": "string",
@@ -68,8 +68,8 @@
         }
       },
       "required": [
-        "to",
-        "apikey"
+        "api_key",
+        "to"
       ],
       "type": "object"
     }

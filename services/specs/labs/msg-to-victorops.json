@@ -17,7 +17,7 @@
     "gateway_price_description": "Free — direct to your Splunk On-Call REST endpoint",
     "gateway_test_local_url": "https://mock.unitysvc.dev/victorops/integrations/generic/apikey123abc/alert/routingkey",
     "gateway_url": "${ customer_secrets._VICTOROPS_BASE ?? https://alert.victorops.com }/integrations/generic/${ customer_secrets.VICTOROPS_APIKEY }/alert/${ customer_secrets.VICTOROPS_ROUTING_KEY }",
-    "gateway_url_plus": "${ customer_secrets._VICTOROPS_BASE ?? https://alert.victorops.com }/integrations/generic/{{ params.apikey }}/alert/{{ params.routing_key }}",
+    "gateway_url_plus": "${ customer_secrets._VICTOROPS_BASE ?? https://alert.victorops.com }/integrations/generic/{{ params.api_key }}/alert/{{ params.routing_key }}",
     "logo": "https://cdn.simpleicons.org/splunk/65A637",
     "msg_capabilities": {
       "formats": [
@@ -28,7 +28,7 @@
       "title": true
     },
     "ops_testing_parameters": {
-      "apikey": "${ customer_secrets.VICTOROPS_APIKEY }",
+      "api_key": "${ customer_secrets.VICTOROPS_APIKEY }",
       "base_url": "https://mock.unitysvc.dev/apprise/notify",
       "routing_key": "${ customer_secrets.VICTOROPS_ROUTING_KEY }"
     },
@@ -38,7 +38,7 @@
     "transformer_channel_exists": true,
     "user_parameters_schema": {
       "properties": {
-        "apikey": {
+        "api_key": {
           "description": "This enrollment's Splunk On-Call API key (api_id path segment). Paste it or pick one of your secrets; it is kept as a secret and not shown again.",
           "format": "password",
           "type": "string",
@@ -52,8 +52,8 @@
         }
       },
       "required": [
-        "routing_key",
-        "apikey"
+        "api_key",
+        "routing_key"
       ],
       "type": "object"
     }
